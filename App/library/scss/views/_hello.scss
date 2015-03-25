@@ -1,0 +1,21 @@
+#frame > .view.hello {
+	background: rgb(14, 32, 56);
+	
+	.container {
+		@include flexbox();
+		@include align-items(flex-end);
+		min-height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		
+		.item {
+			@include flex(1);
+			font: normal normal normal 34px/#{$f-1-l-h} $f-1;
+			color: white;
+			text-align: center;
+			padding: 110px;
+		}
+	}
+}

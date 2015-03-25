@@ -1,3 +1,34 @@
 #frame > .view.intro {
-	//background: rgb(40, 40, 40);
+	background: url(../images/pano-splash-backdrop.png) no-repeat center / cover;
+	text-align: center;
+	padding: 20px;
+	
+	img[src*="pg-logo.png"] {
+		width: 350px;
+	}
+	
+	img[src*="pano-logo.png"] {
+		width: 500px;
+		margin: 150px 0 40px 0;
+	}
+	
+	img[src*="pano-byline.png"] {
+		width: 275px;
+	}
+	
+	img[src*="ibm-logo.png"] {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		padding: 20px;
+	}
+	
+	p {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding: 20px;
+		text-align: left;
+		color: white;
+	}
 }
