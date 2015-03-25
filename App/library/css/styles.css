@@ -765,3 +765,55 @@ body {
       color: white;
       text-align: center;
       padding: 110px; }
+
+#frame > .view.select {
+  background: #1c416f;
+  color: white; }
+  #frame > .view.select h1 {
+    font: normal normal normal 36px/1.4em "Open Sans", sans-serif;
+    text-align: center;
+    margin: 75px 0; }
+  #frame > .view.select ul.people {
+    list-style: none;
+    max-width: 530px;
+    margin: 0 auto; }
+    #frame > .view.select ul.people li {
+      background: #6397c4;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer; }
+      #frame > .view.select ul.people li:hover {
+        background: #508bbd; }
+      #frame > .view.select ul.people li:nth-child(n+2) {
+        margin-top: 70px; }
+      #frame > .view.select ul.people li > * {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1; }
+      #frame > .view.select ul.people li .picture img {
+        width: 115px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        display: block; }
+      #frame > .view.select ul.people li .general h2 {
+        font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
+        padding: 0 0 10px 0; }
+      #frame > .view.select ul.people li .general h3 {
+        font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
+      #frame > .view.select ul.people li .details {
+        font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
+        #frame > .view.select ul.people li .details > * {
+          padding: 0 0 0 20px; }
+        #frame > .view.select ul.people li .details .check.available {
+          background: url(../images/check.svg) no-repeat left center/15px 15px; }

@@ -11,13 +11,49 @@
 		<meta name="robots" content="index, follow" />
 		<meta name="viewport" content="width=device-width, user-scalable=0" />
 		<link rel="stylesheet" href="library/css/styles.css" />
-		<script src="library/js/jquery-1.11.0.min.js"></script>
-		<script src="library/js/scripts.js"></script>
 	</head>
 	<body>
 		<div id="frame">
 			
-			<div class="view intro" style="display: block;">
+			<div class="view select" style="display: block;">
+				<h1>Select a Persona</h1>
+				<ul class="people">
+					<li>
+						<div class="picture">
+							<img src="library/images/person-1.jpg" />
+						</div>
+						<div class="general">
+							<h2>John S.</h2>
+							<h3>Detroit</h3>
+						</div>
+						<div class="details">
+							<div class="age">34</div>
+							<div class="sex">Male</div>
+							<div class="check available genetics">Genetics Available</div>
+							<div class="check available fitness">Fitness Device Active</div>
+							<div class="check available gps">GPS Tracking</div>
+						</div>
+					</li>
+					<li>
+						<div class="picture">
+							<img src="library/images/person-1.jpg" />
+						</div>
+						<div class="general">
+							<h2>John S.</h2>
+							<h3>Detroit</h3>
+						</div>
+						<div class="details">
+							<div class="age">34</div>
+							<div class="sex">Male</div>
+							<div class="check available genetics">Genetics Available</div>
+							<div class="check available fitness">Fitness Device Active</div>
+							<div class="check available gps">GPS Tracking</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="view intro" style="display: none;">
 				<img src="library/images/pg-logo.png" /><br />
 				<img src="library/images/pano-logo.png" /><br />
 				<img src="library/images/pano-byline.png" />
@@ -45,6 +81,11 @@
 					</div>
 				</div>
 			</div>
+			
+			<script src="library/js/jquery-1.11.0.min.js"></script>
+			<script src="library/js/underscore-min.js"></script>
+			<script src="library/js/backbone-min.js"></script>
+			<script src="library/js/app.js"></script>
 			
 		</div>
 	</body>
