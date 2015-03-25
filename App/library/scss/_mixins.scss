@@ -1,0 +1,86 @@
+@mixin linear-gradient($a...) {
+	background: -moz-linear-gradient($a);
+	background: -webkit-linear-gradient($a);
+	background: -o-linear-gradient($a);
+	background: -ms-linear-gradient($a);
+	background: linear-gradient($a);
+}
+
+@mixin filter($a...) {
+	-moz-filter: $a;
+	-webkit-filter: $a;
+	-o-filter: $a;
+	-ms-filter: $a;
+	filter: $a;
+}
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flex-wrap($a...) {
+	-webkit-flex-wrap: $a;
+	flex-wrap: $a;
+}
+
+@mixin flex($a...) {
+  -webkit-box-flex: $a;
+  -moz-box-flex: $a;
+  -webkit-flex: $a;
+  -ms-flex: $a;
+  flex: $a;
+}
+
+@mixin order($a...) {
+  -webkit-box-ordinal-group: $a;  
+  -moz-box-ordinal-group: $a;     
+  -ms-flex-order: $a;     
+  -webkit-order: $a;  
+  order: $a;
+}
+
+@mixin align-items($a...) {
+	-webkit-align-items: $a;
+	-ms-flex-align: $a;
+	align-items: $a;
+}
+
+@mixin justify-content($a...) {
+	-webkit-justify-content: $a;
+	-ms-flex-pack: $a;
+	justify-content: $a;
+}
+
+@mixin column-count($a...) {
+	-webkit-column-count: $a;
+	-moz-column-count: $a;
+	column-count: $a;
+}
+
+@mixin column-gap($a...) {
+	-webkit-column-gap: $a;
+	-moz-column-gap: $a;
+	column-gap: $a;
+}
+
+@mixin column-rule($a...) {
+	-webkit-column-rule: $a;
+	-moz-column-rule: $a;
+	column-rule: $a;
+}
+
+@mixin columns($a...) {
+	-webkit-columns: $a;
+	-moz-columns: $a;
+	columns: $a;
+}
+
+@mixin column-break-inside($a...) {
+	-webkit-column-break-inside: $a;
+	page-break-inside: $a;
+	break-inside: $a;
+}
