@@ -638,7 +638,7 @@
   src: local('Open Sans Extrabold Italic'), local('OpenSans-ExtraboldItalic'), url(http://fonts.gstatic.com/s/opensans/v10/PRmiXeptR36kaC0GEAetxmPkvcX8kXDzy1NrkNCBkJ4.woff2) format('woff2');
   unicode-range: U0 0FF, U131, U152 -153, U2C6, U2DA, U2DC, U2000 -206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
 
-/* Grey				*/
+/* Blue				*/
 /* Green				*/
 /* Font 1			*/
 /* Font 1 Height	*/
@@ -781,57 +781,7 @@ body {
     list-style: none;
     max-width: 530px;
     margin: 0 auto; }
-    #frame > .view.select ul.people li {
-      cursor: pointer; }
-      #frame > .view.select ul.people li.person {
-        background: #6397c4;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        min-height: 165px; }
-        #frame > .view.select ul.people li.person > * {
-          -webkit-box-flex: 1;
-          -moz-box-flex: 1;
-          -webkit-flex: 1;
-          -ms-flex: 1;
-          flex: 1; }
-        #frame > .view.select ul.people li.person .picture img {
-          width: 115px;
-          border: 5px solid rgba(255, 255, 255, 0.3);
-          border-radius: 8px;
-          display: block; }
-        #frame > .view.select ul.people li.person .general h2 {
-          font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
-          padding: 0 0 10px 0; }
-        #frame > .view.select ul.people li.person .general h3 {
-          font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
-        #frame > .view.select ul.people li.person .details {
-          font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
-          #frame > .view.select ul.people li.person .details > * {
-            padding: 0 0 0 20px; }
-          #frame > .view.select ul.people li.person .details .check.available {
-            background: url(../images/check.svg) no-repeat left center/15px 15px; }
-      #frame > .view.select ul.people li:hover {
-        background: #508bbd; }
-      #frame > .view.select ul.people li:nth-child(n+2) {
-        margin-top: 70px; }
-
-#frame > .view.conversation {
-  background: #1c416f;
-  color: white;
-  padding: 20px 0 0 0; }
-  #frame > .view.conversation div {
-    max-width: 530px;
-    margin: 0 auto; }
-    #frame > .view.conversation div.person {
+    #frame > .view.select ul.people li .person {
       background: #6397c4;
       display: -webkit-box;
       display: -moz-box;
@@ -844,55 +794,184 @@ body {
       padding: 15px;
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.5);
-      min-height: 165px; }
-      #frame > .view.conversation div.person > * {
+      height: 160px;
+      width: 530px; }
+      #frame > .view.select ul.people li .person > * {
         -webkit-box-flex: 1;
         -moz-box-flex: 1;
         -webkit-flex: 1;
         -ms-flex: 1;
         flex: 1; }
-      #frame > .view.conversation div.person .picture img {
-        width: 115px;
+      #frame > .view.select ul.people li .person .picture {
+        margin-left: 3px; }
+        #frame > .view.select ul.people li .person .picture img {
+          width: 125px;
+          border: 5px solid rgba(255, 255, 255, 0.3);
+          border-radius: 8px;
+          display: block; }
+      #frame > .view.select ul.people li .person .general h2 {
+        font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
+        padding: 0 0 10px 0; }
+      #frame > .view.select ul.people li .person .general h3 {
+        font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
+      #frame > .view.select ul.people li .person .details {
+        font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
+        #frame > .view.select ul.people li .person .details > * {
+          padding: 0 0 0 20px; }
+        #frame > .view.select ul.people li .person .details .check.available {
+          background: url(../images/check.svg) no-repeat left center/15px 15px; }
+    #frame > .view.select ul.people li .person {
+      cursor: pointer; }
+      #frame > .view.select ul.people li .person:hover {
+        background: #508bbd; }
+      #frame > .view.select ul.people li .person:nth-child(n+2) {
+        margin-top: 70px; }
+
+#frame > .view.conversation {
+  background: #1c416f;
+  color: white;
+  padding: 20px 0 0 0; }
+  #frame > .view.conversation:before {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -384px;
+    width: 768px;
+    height: 220px;
+    background: linear-gradient(to bottom, #1c416f 0%, #1c416f 70%, rgba(28, 65, 111, 0) 100%);
+    content: ""; }
+  #frame > .view.conversation ul.messages {
+    padding: 190px 119px 115px 25px; }
+    #frame > .view.conversation ul.messages li {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      width: 100%; }
+      #frame > .view.conversation ul.messages li:nth-child(n+2) {
+        margin-top: 20px; }
+      #frame > .view.conversation ul.messages li .picture {
+        height: 70px;
+        width: 70px;
+        margin-right: 25px;
+        -webkit-box-flex: 0 0 auto;
+        -moz-box-flex: 0 0 auto;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto; }
+        #frame > .view.conversation ul.messages li .picture img {
+          width: 100%; }
+      #frame > .view.conversation ul.messages li .text {
+        font: normal normal normal 20px/1.4em "Open Sans", sans-serif;
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        padding: 20px 25px;
+        border-radius: 8px; }
+      #frame > .view.conversation ul.messages li.user .picture {
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 5px; }
+      #frame > .view.conversation ul.messages li.user .text {
+        background: #519678; }
+      #frame > .view.conversation ul.messages li.system .text {
+        background: rgba(255, 255, 255, 0.4); }
+  #frame > .view.conversation .person {
+    background: #6397c4;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    height: 160px;
+    width: 530px; }
+    #frame > .view.conversation .person > * {
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1; }
+    #frame > .view.conversation .person .picture {
+      margin-left: 3px; }
+      #frame > .view.conversation .person .picture img {
+        width: 125px;
         border: 5px solid rgba(255, 255, 255, 0.3);
         border-radius: 8px;
         display: block; }
-      #frame > .view.conversation div.person .general h2 {
-        font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
-        padding: 0 0 10px 0; }
-      #frame > .view.conversation div.person .general h3 {
-        font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
-      #frame > .view.conversation div.person .details {
-        font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
-        #frame > .view.conversation div.person .details > * {
-          padding: 0 0 0 20px; }
-        #frame > .view.conversation div.person .details .check.available {
-          background: url(../images/check.svg) no-repeat left center/15px 15px; }
-  #frame > .view.conversation .back {
-    cursor: pointer;
-    position: absolute;
+    #frame > .view.conversation .person .general h2 {
+      font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
+      padding: 0 0 10px 0; }
+    #frame > .view.conversation .person .general h3 {
+      font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
+    #frame > .view.conversation .person .details {
+      font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
+      #frame > .view.conversation .person .details > * {
+        padding: 0 0 0 20px; }
+      #frame > .view.conversation .person .details .check.available {
+        background: url(../images/check.svg) no-repeat left center/15px 15px; }
+  #frame > .view.conversation .person {
     top: 20px;
-    left: 25px;
-    width: 70px;
-    padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    background: #81abe0;
-    border-radius: 10px; }
-    #frame > .view.conversation .back img {
-      width: 100%; }
-  #frame > .view.conversation .refresh {
+    position: fixed;
+    left: 50%;
+    margin-left: -265px; }
+  #frame > .view.conversation .side-button {
     cursor: pointer;
-    position: absolute;
-    top: 110px;
-    left: 25px;
+    position: fixed;
+    left: 50%;
+    margin-left: -359px;
     width: 70px;
+    height: 70px;
     padding: 5px;
     border: 1px solid rgba(255, 255, 255, 0.5);
-    background: #d1f0d5;
     border-radius: 10px; }
-    #frame > .view.conversation .refresh img {
+    #frame > .view.conversation .side-button img {
       width: 100%; }
+    #frame > .view.conversation .side-button.back {
+      top: 20px;
+      background: #81abe0; }
+      #frame > .view.conversation .side-button.back:hover {
+        background: #5890d6; }
+    #frame > .view.conversation .side-button.refresh {
+      top: 110px;
+      background: #d1f0d5; }
+      #frame > .view.conversation .side-button.refresh:hover {
+        background: #abe3b2; }
   #frame > .view.conversation footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
-    left: 0;
-    width: 100%; }
+    left: 50%;
+    margin-left: -384px;
+    width: 768px;
+    padding: 10px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    background: #122946; }
+    #frame > .view.conversation footer textarea {
+      resize: none;
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
+      -webkit-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      margin: 0 10px 0 0;
+      border-radius: 8px 0 0 8px;
+      font: normal normal normal 20px/1.4em "Open Sans", sans-serif;
+      padding: 10px 15px; }
+    #frame > .view.conversation footer button {
+      -webkit-box-flex: 0 0 auto;
+      -moz-box-flex: 0 0 auto;
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      border-radius: 0 8px 8px 0; }

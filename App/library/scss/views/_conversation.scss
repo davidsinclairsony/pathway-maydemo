@@ -1,54 +1,31 @@
 #frame > .view.conversation {
-	background: rgb(28, 65, 111);
+	background: $c-1;
 	color: white;
 	padding: 20px 0 0 0;
 	
-	div {
-		max-width: 530px;
-		margin: 0 auto;
-		@import "parts/card";
+	&:before {
+		position: fixed;
+		top: 0;
+		left: 50%;
+		margin-left: -384px;
+		width: 768px;
+		height: 220px;
+		background: linear-gradient(to bottom, $c-1 0%, $c-1 70%, transparentize($c-1, 1) 100%);
+		content: "";
 	}
 	
-	.back {
-		cursor: pointer;
-		position: absolute;
+	@import "partials/conversation-messages";
+	
+	@import "partials/person";
+	
+	.person {
 		top: 20px;
-		left: 25px;
-		width: 70px;
-		padding: 5px;
-		border: 1px solid rgba(255, 255, 255, 0.5);
-		background: rgb(129, 171, 224);
-		border-radius: 10px;
-		
-		img {
-			width: 100%;
-		}
+		position: fixed;
+		left: 50%;
+		margin-left: -265px;
 	}
 	
-	.refresh {
-		cursor: pointer;
-		position: absolute;
-		top: 110px;
-		left: 25px;
-		width: 70px;
-		padding: 5px;
-		border: 1px solid rgba(255, 255, 255, 0.5);
-		background: rgb(209, 240, 213);
-		border-radius: 10px;
-		
-		img {
-			width: 100%;
-		}
-	}
+	@import "partials/conversation-side-button";
 	
-	footer {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		
-		input {
-			
-		}
-	}
+	@import "partials/conversation-footer";
 }

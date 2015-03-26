@@ -1,0 +1,33 @@
+.side-button {
+	cursor: pointer;
+	position: fixed;
+	left: 50%;
+	margin-left: -359px;
+	width: 70px;
+	height: 70px;
+	padding: 5px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
+	
+	img {
+		width: 100%;
+	}
+	
+	&.back {
+		top: 20px;
+		background: rgb(129, 171, 224);
+		
+		&:hover {
+			background: darken(rgb(129, 171, 224), 10%);
+		}
+	}
+	
+	&.refresh {
+		top: 110px;
+		background: rgb(209, 240, 213);
+		
+		&:hover {
+			background: darken(rgb(209, 240, 213), 10%);
+		}
+	}
+}
