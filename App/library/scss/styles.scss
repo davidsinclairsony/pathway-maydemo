@@ -1,5 +1,6 @@
 @import "fonts";
 @import "mixins";
+@import "animations";
 
 /* Blue				*/ $c-1: rgb(28, 65, 111);
 /* Green				*/ $c-2: #3a5235;
@@ -107,5 +108,4 @@ body {
 
 @import "views/intro";
 @import "views/hello";
-@import "views/select";
-@import "views/conversation";
+@import "views/personas";

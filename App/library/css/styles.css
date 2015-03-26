@@ -638,6 +638,76 @@
   src: local('Open Sans Extrabold Italic'), local('OpenSans-ExtraboldItalic'), url(http://fonts.gstatic.com/s/opensans/v10/PRmiXeptR36kaC0GEAetxmPkvcX8kXDzy1NrkNCBkJ4.woff2) format('woff2');
   unicode-range: U0 0FF, U131, U152 -153, U2C6, U2DA, U2DC, U2000 -206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
 
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-ms-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-o-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
+@-moz-keyframes fadeOut {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
+@-ms-keyframes fadeOut {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
+@-o-keyframes fadeOut {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
+@keyframes fadeOut {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
 /* Blue				*/
 /* Green				*/
 /* Font 1			*/
@@ -720,28 +790,69 @@ body {
       background: #3aaf4a; }
 
 #frame > .view.intro {
-  background: url(../images/pano-splash-backdrop.png) no-repeat center/cover;
   text-align: center;
-  padding: 20px; }
+  padding: 20px;
+  background: black; }
+  #frame > .view.intro > * {
+    opacity: 0; }
+  #frame > .view.intro:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: url(../images/pano-splash-backdrop.png) no-repeat center/cover;
+    -webkit-animation: fadeIn 1s linear 3s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 3s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 3s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 3s 1 normal forwards;
+    animation: fadeIn 1s linear 3s 1 normal forwards; }
   #frame > .view.intro img[src*="pg-logo.png"] {
-    width: 350px; }
+    width: 350px;
+    -webkit-animation: fadeIn 1s linear 3.5s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 3.5s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 3.5s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 3.5s 1 normal forwards;
+    animation: fadeIn 1s linear 3.5s 1 normal forwards; }
   #frame > .view.intro img[src*="pano-logo.png"] {
     width: 500px;
-    margin: 150px 0 40px 0; }
+    margin: 150px 0 40px 0;
+    -webkit-animation: fadeIn 1s linear 1s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 1s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 1s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 1s 1 normal forwards;
+    animation: fadeIn 1s linear 1s 1 normal forwards; }
   #frame > .view.intro img[src*="pano-byline.png"] {
-    width: 275px; }
+    width: 275px;
+    -webkit-animation: fadeIn 1s linear 2s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 2s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 2s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 2s 1 normal forwards;
+    animation: fadeIn 1s linear 2s 1 normal forwards; }
   #frame > .view.intro img[src*="ibm-logo.png"] {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding: 20px; }
+    padding: 20px;
+    -webkit-animation: fadeIn 1s linear 4s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 4s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 4s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 4s 1 normal forwards;
+    animation: fadeIn 1s linear 4s 1 normal forwards; }
   #frame > .view.intro p {
     position: absolute;
     bottom: 0;
     right: 0;
     padding: 20px;
     text-align: left;
-    color: white; }
+    color: white;
+    -webkit-animation: fadeIn 1s linear 4s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 4s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 4s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 4s 1 normal forwards;
+    animation: fadeIn 1s linear 4s 1 normal forwards; }
 
 #frame > .view.hello {
   background: #0e2038; }
@@ -769,89 +880,122 @@ body {
       color: white;
       text-align: center;
       padding: 110px; }
+      #frame > .view.hello .container .item p:nth-child(n+2) {
+        margin-top: 40px; }
+      #frame > .view.hello .container .item p:nth-child(1) {
+        opacity: 0;
+        -webkit-animation: fadeIn 1s linear -0.5s 1 normal forwards;
+        -moz-animation: fadeIn 1s linear -0.5s 1 normal forwards;
+        -ms-animation: fadeIn 1s linear -0.5s 1 normal forwards;
+        -o-animation: fadeIn 1s linear -0.5s 1 normal forwards;
+        animation: fadeIn 1s linear -0.5s 1 normal forwards; }
+      #frame > .view.hello .container .item p:nth-child(2) {
+        opacity: 0;
+        -webkit-animation: fadeIn 1s linear 1s 1 normal forwards;
+        -moz-animation: fadeIn 1s linear 1s 1 normal forwards;
+        -ms-animation: fadeIn 1s linear 1s 1 normal forwards;
+        -o-animation: fadeIn 1s linear 1s 1 normal forwards;
+        animation: fadeIn 1s linear 1s 1 normal forwards; }
+      #frame > .view.hello .container .item p:nth-child(3) {
+        opacity: 0;
+        -webkit-animation: fadeIn 1s linear 2.5s 1 normal forwards;
+        -moz-animation: fadeIn 1s linear 2.5s 1 normal forwards;
+        -ms-animation: fadeIn 1s linear 2.5s 1 normal forwards;
+        -o-animation: fadeIn 1s linear 2.5s 1 normal forwards;
+        animation: fadeIn 1s linear 2.5s 1 normal forwards; }
+      #frame > .view.hello .container .item p:nth-child(4) {
+        opacity: 0;
+        -webkit-animation: fadeIn 1s linear 4s 1 normal forwards;
+        -moz-animation: fadeIn 1s linear 4s 1 normal forwards;
+        -ms-animation: fadeIn 1s linear 4s 1 normal forwards;
+        -o-animation: fadeIn 1s linear 4s 1 normal forwards;
+        animation: fadeIn 1s linear 4s 1 normal forwards; }
+      #frame > .view.hello .container .item p:nth-child(5) {
+        opacity: 0;
+        -webkit-animation: fadeIn 1s linear 5.5s 1 normal forwards;
+        -moz-animation: fadeIn 1s linear 5.5s 1 normal forwards;
+        -ms-animation: fadeIn 1s linear 5.5s 1 normal forwards;
+        -o-animation: fadeIn 1s linear 5.5s 1 normal forwards;
+        animation: fadeIn 1s linear 5.5s 1 normal forwards; }
 
-#frame > .view.select {
+#frame > .view.personas {
   background: #1c416f;
   color: white; }
-  #frame > .view.select h1 {
+  #frame > .view.personas * {
+    transition: 1s; }
+  #frame > .view.personas h1 {
     font: normal normal normal 36px/1.4em "Open Sans", sans-serif;
     text-align: center;
-    margin: 75px 0; }
-  #frame > .view.select ul.people {
+    margin: 75px 0;
+    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
+    animation: fadeIn 1s linear 0s 1 normal forwards; }
+  #frame > .view.personas ul.people {
     list-style: none;
     max-width: 530px;
-    margin: 0 auto; }
-    #frame > .view.select ul.people li .person {
-      background: #6397c4;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-align-items: center;
-      -ms-flex-align: center;
-      align-items: center;
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      height: 160px;
-      width: 530px; }
-      #frame > .view.select ul.people li .person > * {
-        -webkit-box-flex: 1;
-        -moz-box-flex: 1;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1; }
-      #frame > .view.select ul.people li .person .picture {
-        margin-left: 3px; }
-        #frame > .view.select ul.people li .person .picture img {
-          width: 125px;
-          border: 5px solid rgba(255, 255, 255, 0.3);
-          border-radius: 8px;
-          display: block; }
-      #frame > .view.select ul.people li .person .general h2 {
-        font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
-        padding: 0 0 10px 0; }
-      #frame > .view.select ul.people li .person .general h3 {
-        font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
-      #frame > .view.select ul.people li .person .details {
-        font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
-        #frame > .view.select ul.people li .person .details > * {
-          padding: 0 0 0 20px; }
-        #frame > .view.select ul.people li .person .details .check.available {
-          background: url(../images/check.svg) no-repeat left center/15px 15px; }
-    #frame > .view.select ul.people li .person {
-      cursor: pointer; }
-      #frame > .view.select ul.people li .person:hover {
-        background: #508bbd; }
-      #frame > .view.select ul.people li .person:nth-child(n+2) {
-        margin-top: 70px; }
-
-#frame > .view.conversation {
-  background: #1c416f;
-  color: white;
-  padding: 20px 0 0 0; }
-  #frame > .view.conversation:before {
     position: fixed;
-    top: 0;
+    top: 200px;
     left: 50%;
-    margin-left: -384px;
-    width: 768px;
-    height: 220px;
-    background: linear-gradient(to bottom, #1c416f 0%, #1c416f 70%, rgba(28, 65, 111, 0) 100%);
-    content: ""; }
-  #frame > .view.conversation ul.messages {
-    padding: 190px 119px 115px 25px; }
-    #frame > .view.conversation ul.messages li {
+    margin-left: -265px; }
+    #frame > .view.personas ul.people li {
+      -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
+      -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
+      -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
+      -o-animation: fadeIn 1s linear 0s 1 normal forwards;
+      animation: fadeIn 1s linear 0s 1 normal forwards; }
+      #frame > .view.personas ul.people li .person {
+        background: #6397c4;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        height: 160px;
+        width: 530px; }
+        #frame > .view.personas ul.people li .person > * {
+          -webkit-box-flex: 1;
+          -moz-box-flex: 1;
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1; }
+        #frame > .view.personas ul.people li .person .picture {
+          margin-left: 3px; }
+          #frame > .view.personas ul.people li .person .picture img {
+            width: 125px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            display: block; }
+        #frame > .view.personas ul.people li .person .general h2 {
+          font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
+          padding: 0 0 10px 0; }
+        #frame > .view.personas ul.people li .person .general h3 {
+          font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
+        #frame > .view.personas ul.people li .person .details {
+          font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
+          #frame > .view.personas ul.people li .person .details > * {
+            padding: 0 0 0 20px; }
+          #frame > .view.personas ul.people li .person .details .check.available {
+            background: url(../images/check.svg) no-repeat left center/15px 15px; }
+  #frame > .view.personas ul.messages {
+    padding: 220px 119px 115px 25px; }
+    #frame > .view.personas ul.messages li {
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
       width: 100%; }
-      #frame > .view.conversation ul.messages li:nth-child(n+2) {
+      #frame > .view.personas ul.messages li:nth-child(n+2) {
         margin-top: 20px; }
-      #frame > .view.conversation ul.messages li .picture {
+      #frame > .view.personas ul.messages li .picture {
         height: 70px;
         width: 70px;
         margin-right: 25px;
@@ -860,9 +1004,9 @@ body {
         -webkit-flex: 0 0 auto;
         -ms-flex: 0 0 auto;
         flex: 0 0 auto; }
-        #frame > .view.conversation ul.messages li .picture img {
+        #frame > .view.personas ul.messages li .picture img {
           width: 100%; }
-      #frame > .view.conversation ul.messages li .text {
+      #frame > .view.personas ul.messages li .text {
         font: normal normal normal 20px/1.4em "Open Sans", sans-serif;
         -webkit-box-flex: 1;
         -moz-box-flex: 1;
@@ -871,107 +1015,151 @@ body {
         flex: 1;
         padding: 20px 25px;
         border-radius: 8px; }
-      #frame > .view.conversation ul.messages li.user .picture {
+      #frame > .view.personas ul.messages li.user .picture {
         border: 3px solid rgba(255, 255, 255, 0.3);
         border-radius: 5px; }
-      #frame > .view.conversation ul.messages li.user .text {
+      #frame > .view.personas ul.messages li.user .text {
         background: #519678; }
-      #frame > .view.conversation ul.messages li.system .text {
+      #frame > .view.personas ul.messages li.system .text {
         background: rgba(255, 255, 255, 0.4); }
-  #frame > .view.conversation .person {
-    background: #6397c4;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    height: 160px;
-    width: 530px; }
-    #frame > .view.conversation .person > * {
-      -webkit-box-flex: 1;
-      -moz-box-flex: 1;
-      -webkit-flex: 1;
-      -ms-flex: 1;
-      flex: 1; }
-    #frame > .view.conversation .person .picture {
-      margin-left: 3px; }
-      #frame > .view.conversation .person .picture img {
-        width: 125px;
-        border: 5px solid rgba(255, 255, 255, 0.3);
-        border-radius: 8px;
-        display: block; }
-    #frame > .view.conversation .person .general h2 {
-      font: normal normal normal 24px/1.4em "Open Sans", sans-serif;
-      padding: 0 0 10px 0; }
-    #frame > .view.conversation .person .general h3 {
-      font: normal normal normal 18px/1.4em "Open Sans", sans-serif; }
-    #frame > .view.conversation .person .details {
-      font: normal normal normal 14px/1.4em "Open Sans", sans-serif; }
-      #frame > .view.conversation .person .details > * {
-        padding: 0 0 0 20px; }
-      #frame > .view.conversation .person .details .check.available {
-        background: url(../images/check.svg) no-repeat left center/15px 15px; }
-  #frame > .view.conversation .person {
+  #frame > .view.personas .side {
+    position: fixed;
+    left: 50%;
     top: 20px;
-    position: fixed;
-    left: 50%;
-    margin-left: -265px; }
-  #frame > .view.conversation .side-button {
-    cursor: pointer;
-    position: fixed;
-    left: 50%;
-    margin-left: -359px;
-    width: 70px;
-    height: 70px;
-    padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 10px; }
-    #frame > .view.conversation .side-button img {
-      width: 100%; }
-    #frame > .view.conversation .side-button.back {
-      top: 20px;
-      background: #81abe0; }
-      #frame > .view.conversation .side-button.back:hover {
-        background: #5890d6; }
-    #frame > .view.conversation .side-button.refresh {
-      top: 110px;
-      background: #d1f0d5; }
-      #frame > .view.conversation .side-button.refresh:hover {
-        background: #abe3b2; }
-  #frame > .view.conversation footer {
+    margin-left: -359px; }
+    #frame > .view.personas .side div {
+      cursor: pointer;
+      width: 70px;
+      height: 70px;
+      padding: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 10px; }
+      #frame > .view.personas .side div img {
+        width: 100%; }
+      #frame > .view.personas .side div.back {
+        background: #81abe0; }
+        #frame > .view.personas .side div.back:hover {
+          background: #5890d6; }
+      #frame > .view.personas .side div.refresh {
+        background: #d1f0d5;
+        margin-top: 20px; }
+        #frame > .view.personas .side div.refresh:hover {
+          background: #abe3b2; }
+  #frame > .view.personas footer {
     position: fixed;
     bottom: 0;
     left: 50%;
     margin-left: -384px;
     width: 768px;
     padding: 10px;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
     background: #122946; }
-    #frame > .view.conversation footer textarea {
-      resize: none;
-      -webkit-box-flex: 1;
-      -moz-box-flex: 1;
-      -webkit-flex: 1;
-      -ms-flex: 1;
-      flex: 1;
-      margin: 0 10px 0 0;
-      border-radius: 8px 0 0 8px;
-      font: normal normal normal 20px/1.4em "Open Sans", sans-serif;
-      padding: 10px 15px; }
-    #frame > .view.conversation footer button {
-      -webkit-box-flex: 0 0 auto;
-      -moz-box-flex: 0 0 auto;
-      -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      border-radius: 0 8px 8px 0; }
+    #frame > .view.personas footer div {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; }
+      #frame > .view.personas footer div textarea {
+        resize: none;
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        margin: 0 10px 0 0;
+        border-radius: 8px 0 0 8px;
+        font: normal normal normal 20px/1.4em "Open Sans", sans-serif;
+        padding: 10px 15px; }
+      #frame > .view.personas footer div button {
+        -webkit-box-flex: 0 0 auto;
+        -moz-box-flex: 0 0 auto;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        border-radius: 0 8px 8px 0; }
+  #frame > .view.personas > * {
+    display: none; }
+  #frame > .view.personas.select .people, #frame > .view.personas.select h1 {
+    display: block; }
+  #frame > .view.personas.select ul li:nth-child(n+2) {
+    margin-top: 70px; }
+  #frame > .view.personas.select ul li .person {
+    cursor: pointer; }
+    #frame > .view.personas.select ul li .person:hover {
+      background: #508bbd; }
+  #frame > .view.personas.conversation .people {
+    display: block;
+    top: 20px; }
+    #frame > .view.personas.conversation .people li:not(.selected) {
+      @-webkit-keyframes hidePerson {
+        from {
+          opacity: 1;
+          height: 160px; }
+
+        to {
+          opacity: 0;
+          height: 0; } }
+
+      @-moz-keyframes hidePerson {
+        from {
+          opacity: 1;
+          height: 160px; }
+
+        to {
+          opacity: 0;
+          height: 0; } }
+
+      @-ms-keyframes hidePerson {
+        from {
+          opacity: 1;
+          height: 160px; }
+
+        to {
+          opacity: 0;
+          height: 0; } }
+
+      @-o-keyframes hidePerson {
+        from {
+          opacity: 1;
+          height: 160px; }
+
+        to {
+          opacity: 0;
+          height: 0; } }
+
+      @keyframes hidePerson {
+        from {
+          opacity: 1;
+          height: 160px; }
+
+        to {
+          opacity: 0;
+          height: 0; } }
+
+      -webkit-animation: hidePerson 1s linear 0s 1 normal forwards;
+      -moz-animation: hidePerson 1s linear 0s 1 normal forwards;
+      -ms-animation: hidePerson 1s linear 0s 1 normal forwards;
+      -o-animation: hidePerson 1s linear 0s 1 normal forwards;
+      animation: hidePerson 1s linear 0s 1 normal forwards; }
+  #frame > .view.personas.conversation .messages, #frame > .view.personas.conversation .side, #frame > .view.personas.conversation footer {
+    display: block;
+    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
+    animation: fadeIn 1s linear 0s 1 normal forwards; }
+  #frame > .view.personas.conversation .messages li {
+    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
+    animation: fadeIn 1s linear 0s 1 normal forwards; }
+  #frame > .view.personas.conversation:before {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -384px;
+    width: 768px;
+    height: 220px;
+    background: linear-gradient(to bottom, #1c416f 0%, #1c416f 80%, rgba(28, 65, 111, 0) 100%);
+    content: ""; }

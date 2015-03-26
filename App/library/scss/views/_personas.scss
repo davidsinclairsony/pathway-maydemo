@@ -1,0 +1,108 @@
+#frame > .view.personas {
+	background: rgb(28, 65, 111);
+	color: white;
+	
+	* {
+		transition: 1s;
+	}
+	
+	h1 {
+		font: normal normal normal 36px/#{$f-1-l-h} $f-1;
+		text-align: center;
+		margin: 75px 0;
+		@include animation(fadeIn 1s linear 0s 1 normal forwards);
+	}
+	
+	ul.people {
+		list-style: none;
+		max-width: 530px;
+		position: fixed;
+		top: 200px;
+		left: 50%;
+		margin-left: -265px;
+		
+		li {
+			@import "partials/person";
+			@include animation(fadeIn 1s linear 0s 1 normal forwards);
+		}
+	}
+	
+	@import "partials/messages";
+	
+	@import "partials/side";
+	
+	@import "partials/footer";
+	
+	& > * {
+		display: none;
+	}
+	
+	&.select {
+		.people,
+		h1 {
+			display: block;
+		}
+		
+		ul {
+			li {
+				&:nth-child(n + 2) {
+					margin-top: 70px;
+				}
+				
+				.person {
+					cursor: pointer;
+	
+					&:hover {
+						background: darken(rgb(99, 151, 196), 5%);
+					}
+				}
+			}
+		}
+	}
+	
+	&.conversation {
+		.people {
+			display: block;
+			top: 20px;
+			
+			li:not(.selected) {
+				@include keyframes(hidePerson) {
+					from {
+						opacity: 1;
+						height: 160px;
+					}
+					to {
+						opacity: 0;
+						height: 0;
+					}
+				}
+				
+				@include animation(hidePerson 1s linear 0s 1 normal forwards);
+			}
+		}
+		
+		.messages,
+		.side,
+		footer {
+			display: block;
+			@include animation(fadeIn 1s linear 0s 1 normal forwards);
+		}
+		
+		.messages {
+			li {
+				@include animation(fadeIn 1s linear 0s 1 normal forwards);
+			}
+		}
+		
+		&:before {
+			position: fixed;
+			top: 0;
+			left: 50%;
+			margin-left: -384px;
+			width: 768px;
+			height: 220px;
+			background: linear-gradient(to bottom, $c-1 0%, $c-1 80%, transparentize($c-1, 1) 100%);
+			content: "";
+		}
+	}
+}

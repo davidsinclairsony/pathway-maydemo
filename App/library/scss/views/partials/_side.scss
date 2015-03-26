@@ -1,0 +1,36 @@
+.side {
+	position: fixed;
+	left: 50%;
+	top: 20px;
+	margin-left: -359px;
+	
+	div {
+		cursor: pointer;
+		width: 70px;
+		height: 70px;
+		padding: 5px;
+		border: 1px solid rgba(255, 255, 255, 0.5);
+		border-radius: 10px;
+		
+		img {
+			width: 100%;
+		}
+		
+		&.back {
+			background: rgb(129, 171, 224);
+			
+			&:hover {
+				background: darken(rgb(129, 171, 224), 10%);
+			}
+		}
+		
+		&.refresh {
+			background: rgb(209, 240, 213);
+			margin-top: 20px;
+			
+			&:hover {
+				background: darken(rgb(209, 240, 213), 10%);
+			}
+		}
+	}
+}

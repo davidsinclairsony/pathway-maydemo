@@ -16,6 +16,20 @@
 			color: white;
 			text-align: center;
 			padding: 110px;
+			
+			p {
+				&:nth-child(n + 2) {
+					margin-top: 40px;
+				}
+				
+				$paragraphs: 6;
+				@for $i from 1 to $paragraphs {
+					&:nth-child(#{$i}) {
+						opacity: 0;
+						@include animation(fadeIn 1s linear #{($i * 1.5) - 2}s 1 normal forwards);
+					}
+				}
+			}
 		}
 	}
 }
