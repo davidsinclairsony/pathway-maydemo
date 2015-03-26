@@ -1,7 +1,7 @@
 {
 	"people": [
 		{
-			"picture": "person-1.jpg"
+			"picture": "person-1.jpg",
 			"name": "John S.",
 			"location": "Detroit, MI",
 			"age": 34,
@@ -13,7 +13,7 @@
 			}
 		},
 		{
-			"picture": "person-2.jpg"
+			"picture": "person-2.jpg",
 			"name": "Rebecca M.",
 			"location": "Arlington, VT",
 			"age": 27,
@@ -25,7 +25,7 @@
 			}
 		},
 		{
-			"picture": "person-3.jpg"
+			"picture": "person-3.jpg",
 			"name": "Ruben M.",
 			"location": "Sacramento, CA",
 			"age": 32,

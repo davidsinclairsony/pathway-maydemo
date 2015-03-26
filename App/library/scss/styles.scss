@@ -89,6 +89,12 @@ body {
 		padding: 10px 30px;
 	}
 	
+	&.medium {
+		border-radius: 8px;
+		font: normal normal normal 20px/#{$f-1-l-h} $f-1;
+		padding: 10px 30px;
+	}
+	
 	&.green {
 	   background: rgb(52, 156, 66);
 	   color: white;
@@ -102,3 +108,4 @@ body {
 @import "views/intro";
 @import "views/hello";
 @import "views/select";
+@import "views/conversation";

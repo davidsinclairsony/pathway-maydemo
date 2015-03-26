@@ -15,26 +15,35 @@
 	<body>
 		<div id="frame">
 			
-			<div class="view select" style="display: block;">
+			<div class="view conversation" style="display: block;">
+				<div class="person">
+					<div class="picture">
+						<img src="library/images/person-1.jpg" />
+					</div>
+					<div class="general">
+						<h2>John S.</h2>
+						<h3>Detroit</h3>
+					</div>
+					<div class="details">
+						<div class="age">34</div>
+						<div class="sex">Male</div>
+						<div class="check available genetics">Genetics Available</div>
+						<div class="check available fitness">Fitness Device Active</div>
+						<div class="check available gps">GPS Tracking</div>
+					</div>
+				</div>
+				<div class="back"><img src="library/images/arrow.svg" /></div>
+				<div class="refresh"><img src="library/images/refresh.svg" /></div>
+				<footer>
+					<input type="text" name="question" placeholder="Type a question" />
+					<button class="medium green button">Ask Panorama</button>
+				</footer>
+			</div>
+			
+			<div class="view select" style="display: none;">
 				<h1>Select a Persona</h1>
 				<ul class="people">
-					<li>
-						<div class="picture">
-							<img src="library/images/person-1.jpg" />
-						</div>
-						<div class="general">
-							<h2>John S.</h2>
-							<h3>Detroit</h3>
-						</div>
-						<div class="details">
-							<div class="age">34</div>
-							<div class="sex">Male</div>
-							<div class="check available genetics">Genetics Available</div>
-							<div class="check available fitness">Fitness Device Active</div>
-							<div class="check available gps">GPS Tracking</div>
-						</div>
-					</li>
-					<li>
+					<li class="person">
 						<div class="picture">
 							<img src="library/images/person-1.jpg" />
 						</div>
@@ -83,8 +92,8 @@
 			</div>
 			
 			<script src="library/js/jquery-1.11.0.min.js"></script>
-			<script src="library/js/underscore-min.js"></script>
-			<script src="library/js/backbone-min.js"></script>
+			<script src="library/js/underscore.js"></script>
+			<script src="library/js/backbone.js"></script>
 			<script src="library/js/app.js"></script>
 			
 		</div>

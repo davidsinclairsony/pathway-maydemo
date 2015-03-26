@@ -1,9 +1,11 @@
 (function($) {
-	
 	$(function() {
-		$.getJSON("library/js/people.js", function(json) {
+		
+		var jqxhr = $.getJSON("library/js/people.js", function() {
 			
+		}).fail(function() {
+			console.log("Could not load people files.");
 		});
+		
 	});
-	
 })(jQuery);
