@@ -1,0 +1,15 @@
+> header {
+	position: fixed;
+	top: 40px;
+	left: 50%;
+	margin-left: -384px;
+	width: 768px;
+	text-align: center;
+	@include animation(fadeIn 1s linear 0s 1 normal forwards);
+	
+	img {
+		height: 25px;
+		display: block;
+		margin: 0 auto;
+	}
+}

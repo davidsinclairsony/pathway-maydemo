@@ -1,0 +1,42 @@
+.button {
+	cursor: pointer;
+	
+	&.large {
+		border-radius: 8px;
+		font: normal normal normal 26px/#{$f-1-l-h} $f-1;
+		padding: 10px 30px;
+	}
+	
+	&.medium {
+		border-radius: 8px;
+		font: normal normal normal 20px/#{$f-1-l-h} $f-1;
+		padding: 5px 15px;
+	}
+	
+	&.blue {
+		background: $c-1;
+		color: white;
+		
+		&:hover {
+			background: lighten($c-1, 5%);
+		}
+	}
+	
+	&.green {
+		background: $c-2;
+		color: white;
+		
+		&:hover {
+			background: lighten($c-2, 5%);
+		}
+	}
+	
+	&.orange {
+		background: $c-3;
+		color: white;
+		
+		&:hover {
+			background: lighten($c-3, 5%);
+		}
+	}
+}

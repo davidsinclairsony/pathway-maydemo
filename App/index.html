@@ -10,61 +10,110 @@
 		<meta name="keywords" content="Panorama" />
 		<meta name="robots" content="index, follow" />
 		<meta name="viewport" content="width=device-width, user-scalable=0" />
-		<link rel="stylesheet" href="library/css/styles.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+		
+		<!-- Favicons Start -->
+		<link rel="apple-touch-icon" sizes="57x57" href="images/favicons/apple-touch-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="images/favicons/apple-touch-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="images/favicons/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="images/favicons/apple-touch-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="images/favicons/apple-touch-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="images/favicons/apple-touch-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="images/favicons/apple-touch-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="images/favicons/apple-touch-icon-152x152.png">
+		<link rel="icon" type="image/png" href="images/favicons/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="images/favicons/favicon-96x96.png" sizes="96x96">
+		<link rel="icon" type="image/png" href="images/favicons/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="images/favicons/manifest.json">
+		<link rel="shortcut icon" href="images/favicons/favicon.ico">
+		<meta name="msapplication-TileColor" content="#2b5797">
+		<meta name="msapplication-TileImage" content="images/favicons/mstile-144x144.png">
+		<meta name="msapplication-config" content="images/favicons/browserconfig.xml">
+		<meta name="theme-color" content="#060047">
+		<!-- Favicons End -->
 	</head>
 	<body>
 		<div id="frame">
 			
-			<div class="view personas select" style="display: block;">
-				<h1>Select a Persona</h1>
+			<button class="refresh"><img src="images/refresh.svg" /></button>
+			
+			<div class="view main selecting" style="display: block;">
+				<header>
+					<img src="images/logos/panorama.png" />
+				</header>
 				
 				<ul class="people">
 					<li>
 						<div class="person">
-							<div class="picture">
-								<img src="library/images/person-1.jpg" />
-							</div>
-							<div class="general">
+							<header>
 								<h2>John S.</h2>
-								<h3>Detroit</h3>
-							</div>
-							<div class="details">
-								<div class="age">34</div>
-								<div class="sex">Male</div>
-								<div class="check available genetics">Genetics Available</div>
-								<div class="check available fitness">Fitness Device Active</div>
-								<div class="check available gps">GPS Tracking</div>
-							</div>
+								<div class="location">Detroit, MI</div>
+								<aside>
+									<div class="sex">Male</div>
+									<div><span class="age">34</span> years old</div>
+								</aside>
+							</header>
+							<main>
+								<div class="picture">
+									<img src="images/people/person-1.jpg" />
+								</div>
+								<div class="sources">
+									<ul>
+										<li class="done available">
+											<div class="chiclet icon-dna"></div>
+											<span>Genetics</span>
+										</li>
+										<li class="done available">
+											<div class="chiclet icon-location"></div>
+											<span>GPS</span>
+										</li>
+										<li class="done">
+											<div class="chiclet icon-md-info"></div>
+											<span>Health Data</span>
+										</li>
+										<li class="waiting">
+											<div class="chiclet icon-fit-bit"></div>
+											<span>Fitness Data</span>
+										</li>
+										<li class="waiting">
+											<div class="chiclet icon-facebook-squared"></div>
+											<span>Personal Info</span>
+										</li>
+										<li class="waiting">
+											<div class="chiclet icon-ehr"></div>
+											<span>E.H.R.</span>
+										</li>
+									</ul>
+								</div>
+							</main>
 						</div>
 					</li>
 					
 				</ul>
 				
-				<ul class="messages">
+				<ul class="messages" style="display: none;">
 					<li class="system">
-						<div class="picture"><img src="library/images/blue-sphere-default.png" /></div>
+						<div class="picture"><img src="images/blue-sphere-default.png" /></div>
 						<div class="text">
 							How may I help you?
 						</div>
 					</li>
 					<li class="user">
-						<div class="picture"><img src="library/images/person-1.jpg" /></div>
+						<div class="picture"><img src="images/person-1.jpg" /></div>
 						<div class="text">
 							What are my chances of having a heart attack?
 						</div>
 					</li>
 				</ul>
 				
-				<div class="side">
-					<div class="back"><img src="library/images/arrow.svg" /></div>
-					<div class="refresh"><img src="library/images/refresh.svg" /></div>
+				<div class="lower">
+					<button class="ask button blue medium">Ask Another Question</button>
+					<button class="how button orange medium">How does it know?</button>
 				</div>
 				
 				<footer>
-					<div>
-						<textarea name="question" placeholder="Type a question"></textarea>
-						<button class="medium green button">Ask Panorama</button>
-					</div>
+					<img src="images/logos/ibm.png" />
+					<img src="images/logos/pg.png" />
 				</footer>
 			</div>
 			
@@ -81,10 +130,10 @@
 			</div>
 			
 			<div class="view intro" style="display: none;">
-				<img src="library/images/pg-logo.png" /><br />
-				<img src="library/images/pano-logo.png" /><br />
-				<img src="library/images/pano-byline.png" />
-				<img src="library/images/ibm-logo.png" />
+				<img src="images/logos/pg.png" /><br />
+				<img src="images/logos/panorama.png" /><br />
+				<img src="images/logos/panorama-byline.png" />
+				<img src="images/logos/ibm.png" />
 				<p>
 					Dr. Michael Nova MD<br />
 					Chief Innovation Officer<br />
@@ -93,10 +142,11 @@
 				</p>
 			</div>
 			
-			<script src="library/js/jquery-1.11.0.min.js"></script>
-			<script src="library/js/underscore.js"></script>
-			<script src="library/js/backbone.js"></script>
-			<script src="library/js/app.js"></script>
+			<script src="js/jquery-1.11.0.min.js"></script>
+			<script src="js/jquery.touchSwipe.js"></script>
+			<script src="js/underscore.js"></script>
+			<script src="js/backbone.js"></script>
+			<script src="js/app.js"></script>
 			
 		</div>
 	</body>

@@ -1,0 +1,21 @@
+.lower {
+	position: fixed;
+	bottom: 60px;
+	left: 50%;
+	margin-left: -384px;
+	padding: 20px;
+	width: 768px;
+	text-align: center;
+	@include animation(fadeIn 1s linear 0s 1 normal forwards);
+	
+	button {
+		&.ask {
+			left: 0;
+			margin-right: 20px;
+		}
+		
+		&.how {
+			right: 0;
+		}
+	}
+}

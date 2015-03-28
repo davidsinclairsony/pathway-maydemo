@@ -1,0 +1,30 @@
+@include keyframes(fadeIn) {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+@include keyframes(fadeOut) {
+	0% {opacity: 1;}
+	100% {opacity: 0;}
+}
+
+@include keyframes(spinner) {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+@include keyframes(spinOut) {
+	0% {transform: rotate(0deg) scale(1, 1);}
+	100% {transform: rotate(360deg) scale(0, 0);}
+}
+
+@include keyframes(pop) {
+	0% {transform: scale(0, 0);}
+	50% {transform: scale(2, 2);}
+	100% {transform: scale(1, 1);}
+}
+
+@include keyframes(crumbToNormal) {
+	0% {transform: scale(0, 0);}
+	100% {transform: scale(1, 1);}
+}

@@ -1,0 +1,25 @@
+> footer {
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	margin-left: -384px;
+	width: 768px;
+	height: 60px;
+	@include animation(fadeIn 1s linear 0s 1 normal forwards);
+
+	img {
+		display: block;
+		position: absolute;
+		top: 0;
+		height: 100%;
+		padding: 15px;
+		
+		&[src*="ibm.png"] {
+			left: 0;
+		}
+		
+		&[src*="pg.png"] {
+			right: 0;
+		}
+	}
+}

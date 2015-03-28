@@ -1,0 +1,195 @@
+/* Global Styles
+------------------------------ */
+body {background-color:#000; color:#fff; font-family:"Trebuchet MS", Helvetica, sans-serif;}
+a {outline:none; text-decoration:none}
+.clearfix:after {visibility:hidden; display:block; font-size:0; content:" "; clear:both; height:0}
+.hidden {display:none}
+.absolute {position:absolute}
+.animated {display:block}
+
+
+/* Buttons
+------------------------------ */
+.btn {background-color:#ddd; border-radius:5px; color:#fff; display:inline-block; padding:10px 20px; transition:background-color .25s}
+
+.btn.blue {background-color:#2980B9}
+.btn.blue.active {background-color:#74B7E0}
+
+.btn.orange {background-color:#E67E22}
+.btn.orange.active {background-color:#ED9C55}
+
+.btn.green {background-color:#277531}
+.btn.green.active {background-color:#6AC972}
+
+
+/* Header
+------------------------------ */
+#hdr {padding:20px 30px}
+#hdr a {border:1px solid #fff; color:#ccc; border-radius:5px; display:inline-block; margin-top:20px; padding:6px 5px}
+
+
+/* Layout
+------------------------------ */
+#page {z-index:100;}
+#page {background:url('../img/background.png') 0 bottom no-repeat #000; margin:0 auto; height:1024px; position:relative; width:768px}
+#page .splash {background:url('../img/splash.png') 0 bottom no-repeat; background-size:768px 1024px; height:10004px; width:768px; padding:0; position:absolute; left:0; bottom:0;}
+
+#copyright {color:#fff; display:block; top:840px; padding:30px; position:fixed; left:10%; width:80%; text-align:center; z-index:9999}
+#contactinfo {color:#fff; display:block; top:940px; padding:30px; position:fixed; left:10%; width:80%; text-align:center; z-index:9999}
+#content {padding:30px}
+
+
+/* Welcome
+------------------------------ */
+.welcome {height:100%; margin:0; text-align:center}
+.welcome h1 {display:none; font-size:36px; margin-top:100px}
+.welcome p {display:none; font-size:30px; line-height:1.2; margin:100px auto 0; width:75%}
+.welcome .btn {display:none; font-size:30px; margin-top:100px}
+.welcome .tm {font-size:12px; vertical-align:top}
+
+
+/* Questions
+------------------------------ */
+.questions {font-size:24px; margin-top:50px}
+.questions header {margin-bottom:40px}
+
+/* Question List */
+.question-list li {display:none; max-width:728px; width:100%}
+.question-list li + li {margin-top:20px}
+.question-list li a {background-color:#fff; border-radius:10px; color:#333; display:inline-block; padding:15px 30px; max-width:708px; width:100%}
+
+/* Hidden */
+.questions.hide li, .questions.hide header {display:none}
+.questions.hide li:nth-child(1) {display:block}
+
+/* Question Actions */
+#question-actions {display:none; position:absolute; padding:0 30px; bottom:70px; width:100%}
+#question-actions a.btn {font-size:20px; text-align:center; width:48%}
+#question-actions a.btn:nth-child(1) {background-color:#2980b9; float:left}
+#question-actions a.btn:nth-child(2) {background-color:#e67e22; float:right}
+
+
+/* Answers
+------------------------------ */
+.answer-con {max-height:560px; overflow-y:auto}
+.answers {font-size:22px; padding:30px}
+.answers .question {background-color:#fff; border-radius:10px; color:#333; display:inline-block; font-size:24px; padding:15px 30px; margin:0 0 30px; max-width:708px; width:100%}
+.answer {background-color:rgba(255,255,255,.2); border-radius:10px; display:none; font-size:16px; font-weight:300; line-height:1.4; padding:20px}
+.answer + .answer {margin-top:15px}
+.answer a {color:#fff; text-decoration: underline}
+.answer-updated {color: #07a507; }
+
+/* Confidence */
+.confidence .rating {float:left; overflow:hidden; white-space:nowrap}
+.confidence .percent {float:left; margin-left:10px}
+
+
+/* Data Sources
+------------------------------ */
+.data-sources {margin-bottom:20px}
+.data-sources ul {display:inline-block; min-height:45px; width:90px}
+.data-sources ul li {display:none; float:left; font-size:12px; line-height:1.2; padding:5px; position:relative; width:70px; text-align:center}
+.data-sources ul li:first-child {display:block; font-size:18px; line-height:1.2; margin-right:35px; padding-bottom:8px; padding-top:8px; text-align:right; width:100px}
+.data-sources ul:first-child {background-color:rgba(255,255,255, 0.2); border-radius:10px; height:64px}
+.data-sources .spinner {margin:5px auto 0}
+
+/* Icons */
+.chicklet {display:none; font-size:45px; position:relative}
+.data-sources .disabled, .chicklet.disabled {color:#fff; opacity:.3}
+
+.chicklet + .spinner {border-width:2px; display:none; position:absolute; bottom:5px; right:5px; height:15px; width:15px}
+
+
+/* Loading Icons
+------------------------------ */
+.spinner {border-radius:50%; border:3px solid #fff; border-bottom-color:transparent; border-right-color:transparent; display:block; height:40px; width:40px}
+.spinner {animation-name:spinner; animation-duration:1s; animation-iteration-count:infinite; animation-timing-function:linear; -webkit-animation-name:spinner; -webkit-animation-duration:1s; -webkit-animation-iteration-count:infinite; -webkit-animation-timing-function:linear}
+.spinner.fade {animation-name:spinOut; animation-duration:1s; animation-iteration-count:1; animation-timing-function:linear; -webkit-animation-name:spinOut; -webkit-animation-duration:1s; -webkit-animation-iteration-count:1; -webkit-animation-timing-function:linear}
+
+/* Pop
+------------------------------ */
+.pop {animation-name:pop; animation-duration:.5s; animation-iteration-count:1; animation-timing-function:linear; -webkit-animation-name:pop; -webkit-animation-duration:.5s; -webkit-animation-iteration-count:1; -webkit-animation-timing-function:linear}
+
+
+/* Icons
+------------------------------- */
+.icon-apple {color:#3498db}
+.icon-applewatch {color:#16a085}
+.icon-dna {color:#e74c3c}
+.icon-facebook-squared {color:#527EC4}
+.icon-fit-bit {color:#9b59b6}
+.icon-ehr {color:#d35400}
+.icon-location {color:#f1c40f}
+.icon-medkit {color:#2ecc71}
+.icon-md-info {color:#2ecc71}
+.icon-star {color:#f1c40f}
+
+
+/* Modal
+------------------------------ */
+#modal {background-color:#f9f9f9; border-radius:10px; color:#444; display:none; position:absolute; left:5%; top:30px; width:90%; z-index:5000}
+#modal header {color:#2980b9; font-size:36px; padding:20px; text-align:center}
+#modal header .tm {font-size:14px; vertical-align:top}
+#modal section {font-size:26px; padding:30px}
+#modal footer {margin-top:90px; text-align:center}
+#modal footer a {color:#3399cc; display:block; padding:30px}
+#modal p, #modal ul {line-height:1.4; margin-bottom:20px}
+#modal li:first-letter {text-transform:capitalize;}
+#modal ul {list-style-type:disc; list-style-position:inside; margin-left:30px}
+#modal .close {background-color:#2980b9; color:#fff; display:inline-block; margin:0 auto 30px; padding:15px 60px}
+
+/* Overlay */
+#modal-overlay {background-color:rgba(0,0,0,.5); height:100%; left:0; position:absolute; top:0; width:100%; z-index:4900}
+
+
+/* Alert
+------------------------------ */
+#alert {background-color:#fff; border-radius:10px; color:#444; font-size:20px; position:absolute; padding:30px; left:35%; text-align:center; top:25%; width:30%; z-index:9000}
+#alert .msg {margin-bottom:30px}
+#alert .btn {background-color:#ddd; color:#444;}
+
+
+/* Notification
+------------------------------ */
+#notification {background-color:rgba(0,0,0,.5); border-radius:10px; color:#fff; float:right; font-size:10px; height:50px; margin-top:20px; padding:10px 15px 0; width:200px;}
+#notification:hover {cursor:default}
+
+#notification .icon-fit-bit {font-size:30px; margin-right:10px}
+#notification .msg {font-size:14px; width:115px}
+
+#notification .animated, #notification .msg {display:inline-block; vertical-align:middle}
+
+
+/* Animations
+------------------------------ */
+@keyframes spinner {
+    0%   {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+}
+
+@-webkit-keyframes spinner {
+    0%   {-webkit-transform: rotate(0deg)}
+    100% {-webkit-transform: rotate(360deg)}
+}
+
+@keyframes spinOut {
+    0%   {transform: rotate(0deg) scale(1,1)}
+    100% {transform: rotate(360deg) scale(0,0)}
+}
+
+@-webkit-keyframes spinOut {
+    0%   {-webkit-transform: rotate(0deg) scale(1,1)}
+    100% {-webkit-transform: rotate(360deg) scale(0,0)}
+}
+
+@keyframes pop {
+    0%   {transform:scale(0,0)}
+    50%  {transform:scale(2,2)}
+    100% {transform:scale(1,1)}
+}
+
+@-webkit-keyframes pop {
+    0%   {-webkit-transform:scale(0,0)}
+    50%  {-webkit-transform:scale(2,2)}
+    100% {-webkit-transform:scale(1,1)}
+}
