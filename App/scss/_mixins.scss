@@ -118,3 +118,8 @@
 	-o-animation-fill-mode: #{$a};
 	animation-fill-mode: #{$a};
 }
+
+@mixin transform($a...) {
+	-webkit-transform: $a;
+	transform: $a;
+}

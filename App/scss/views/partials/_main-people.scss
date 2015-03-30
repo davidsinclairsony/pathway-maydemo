@@ -9,21 +9,19 @@ div.people {
 	
 	> ul {
 		list-style: none;
-		position: relative;
+		position: absolute;
+		top: 0;
+		left: 84px;
+		white-space: nowrap;
+		font-size: 0;
 	
 		> li {
 			display: inline-block;
-			top: 0;
-			position: absolute;
 			width: 600px;
 			color: white;
 			
-			// Accommodate for 6 people
-			$people: 7;
-			@for $i from 1 to $people {
-				&:nth-child(#{$i}) {
-					left: #{(($i - 1) * 640) + 84}px;
-				}
+			&:nth-child(n + 2) {
+				margin-left: 40px;
 			}
 			
 			.person {
@@ -82,10 +80,9 @@ div.people {
 								
 								&:after {
 									border-radius: 50%;
-									border: 3px solid #fff;
+									border: 3px solid white;
 									border-bottom-color: transparent;
 									border-right-color: transparent;
-									display: block;
 									height: 40px;
 									width: 40px;
 									content: "";
@@ -102,7 +99,7 @@ div.people {
 								
 								.chiclet {
 									font-size: 45px;
-									transform: scale(0, 0);
+									@include transform(scale(0, 0));
 									position: relative;
 									z-index: 1;
 								}
@@ -146,7 +143,7 @@ div.people {
 									
 									&:not(.available) {
 										.chiclet {
-											transform: scale(1, 1);
+											@include transform(scale(1, 1));
 											@include animation(fadeIn 1s linear 0s 1 normal forwards);
 											color: rgba(255, 255, 255, .3);
 										}
