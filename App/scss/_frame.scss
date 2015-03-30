@@ -28,16 +28,16 @@
 	
 	button.refresh {
 		position: fixed;
-		top: 40px;
+		top: 10px;
 		left: 50%;
-		margin-left: -344px;
+		margin-left: -374px;
 		background: none;
 		z-index: 10;
 		cursor: pointer;
 		
 		img {
 			height: 25px;
-			opacity: .2;
+			opacity: .1;
 		}
 	}
 }

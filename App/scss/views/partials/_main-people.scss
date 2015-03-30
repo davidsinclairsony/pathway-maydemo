@@ -1,5 +1,4 @@
-ul.people {
-	list-style: none;
+div.people {
 	position: fixed;
 	top: 105px;
 	left: 50%;
@@ -8,143 +7,149 @@ ul.people {
 	width: 100%;
 	@include animation(fadeIn 1s linear 0s 1 normal forwards);
 	
-	> li {
-		display: inline-block;
-		top: 0;
-		position: absolute;
-		width: 600px;
-		color: white;
-		
-		&:nth-child(1) {
-			left: 84px;
-		}
-		
-		&:nth-child(2) {
-			left: -556px;
-		}
-		
-		&:nth-child(3) {
-			left: 724px;
-		}
-		
-		.person {
-			header {
-				background: rgba(255, 255, 255, .3);
-				padding: 10px 20px;
-				border-radius: 8px 8px 0 0;
-				position: relative;
-				
-				h2 {
-					font: normal normal 300 20px/#{$f-1-l-h} $f-1;
-				}
-				
-				div {
-					opacity: .7;
-					font: normal normal 300 14px/#{$f-1-l-h} $f-1;
-				}
-				
-				aside {
-					position: absolute;
-					top: 9px;
-					right: 0;
-					padding: 10px 20px;
+	> ul {
+		list-style: none;
+		position: relative;
+	
+		> li {
+			display: inline-block;
+			top: 0;
+			position: absolute;
+			width: 600px;
+			color: white;
+			
+			// Accommodate for 6 people
+			$people: 7;
+			@for $i from 1 to $people {
+				&:nth-child(#{$i}) {
+					left: #{(($i - 1) * 640) + 84}px;
 				}
 			}
 			
-			main {
-				@include flexbox();
-				padding: 20px 0 13px 20px;
-				background: rgba(255, 255, 255, .2);
-				border-radius: 0 0 8px 8px;
-				
-				.picture {
-					width: 66px;
-					@include flex(0 0 auto);
+			.person {
+				header {
+					background: rgba(255, 255, 255, .3);
+					padding: 10px 20px;
+					border-radius: 8px 8px 0 0;
+					position: relative;
 					
-					img {
-						width: 100%;
-						border-radius: 4px;
-						display: block;
+					h2 {
+						font: normal normal 300 20px/#{$f-1-l-h} $f-1;
+					}
+					
+					div {
+						opacity: .7;
+						font: normal normal 300 14px/#{$f-1-l-h} $f-1;
+					}
+					
+					aside {
+						position: absolute;
+						top: 9px;
+						right: 0;
+						padding: 10px 20px;
 					}
 				}
-
-				.sources {
-					@include flex(1);
-					padding: 0 0 0 10px;
+				
+				main {
+					@include flexbox();
+					padding: 20px 0 13px 20px;
+					background: rgba(255, 255, 255, .2);
+					border-radius: 0 0 8px 8px;
 					
-					ul {
-						list-style: none;
-						@include flexbox();
+					.picture {
+						width: 66px;
+						@include flex(0 0 auto);
 						
-						li {
-							@include flex(1);
-							text-align: center;
-							position: relative;
+						img {
+							width: 100%;
+							border-radius: 4px;
+							display: block;
+						}
+					}
+	
+					.sources {
+						@include flex(1);
+						padding: 0 0 0 10px;
+						
+						ul {
+							list-style: none;
+							@include flexbox();
 							
-							&:after {
-								border-radius: 50%;
-								border: 3px solid #fff;
-								border-bottom-color: transparent;
-								border-right-color: transparent;
-								display: block;
-								height: 40px;
-								width: 40px;
-								content: "";
-								position: absolute;
-								top: 0;
-								left: 20px;
-								z-index: 0;
-							}
-							
-							&:last-child {
-								width: 78px;
-								@include flex(0 0 auto);
-							}
-							
-							.chiclet {
-								font-size: 45px;
-								transform: scale(0, 0);
+							li {
+								@include flex(1);
+								text-align: center;
 								position: relative;
-								z-index: 1;
-							}
-							
-							span {
-								display: block;
-								padding-top: 5px;
-								font-size: 12px;
-							}
-							
-							&.waiting {
+								
 								&:after {
-									@include animation(spinner 1s linear 0s infinite normal forwards);
-								}
-							}
-							
-							&.done {
-								&:after {
-									@include animation(spinOut 1s linear 0s 1 normal forwards);
+									border-radius: 50%;
+									border: 3px solid #fff;
+									border-bottom-color: transparent;
+									border-right-color: transparent;
+									display: block;
+									height: 40px;
+									width: 40px;
+									content: "";
+									position: absolute;
+									top: 0;
+									left: 20px;
+									z-index: 0;
 								}
 								
-								&.available {
-									.chiclet {
-										@include animation(pop .5s linear 0s 1 normal forwards);
-										
-										&.icon-dna {color:#e74c3c;}
-										&.icon-facebook-squared {color:#527EC4}
-										&.icon-fit-bit {color:#9b59b6}
-										&.icon-ehr {color:#d35400}
-										&.icon-location {color:#f1c40f}
-										&.icon-medkit {color:#2ecc71}
-										&.icon-md-info {color:#2ecc71}
-										&.icon-star {color:#f1c40f}
+								&:last-child {
+									width: 78px;
+									@include flex(0 0 auto);
+								}
+								
+								.chiclet {
+									font-size: 45px;
+									transform: scale(0, 0);
+									position: relative;
+									z-index: 1;
+								}
+								
+								span {
+									display: block;
+									padding-top: 5px;
+									font-size: 12px;
+									color: rgba(255, 255, 255, .3);
+								}
+								
+								&.waiting {
+									&:after {
+										@include animation(spinner .5s linear 0s infinite normal forwards);
 									}
 								}
 								
-								&:not(.available) {
-									color: rgba(255, 255, 255, .3);
+								&.done {
+									&:after {
+										@include animation(spinOut .5s linear 0s 1 normal forwards);
+									}
 									
-									.chiclet {
-										@include animation(crumbToNormal .125s linear 0s 1 normal forwards);
+									&.available {
+										.chiclet {
+											@include animation(pop .5s linear 0s 1 normal forwards);
+											
+											&.icon-dna {color:#e74c3c;}
+											&.icon-facebook-squared {color:#527EC4}
+											&.icon-fit-bit {color:#9b59b6}
+											&.icon-ehr {color:#d35400}
+											&.icon-location {color:#f1c40f}
+											&.icon-medkit {color:#2ecc71}
+											&.icon-md-info {color:#2ecc71}
+											&.icon-star {color:#f1c40f}
+										}
+										
+										span {
+											color: white;
+										}
+									}
+									
+									&:not(.available) {
+										.chiclet {
+											transform: scale(1, 1);
+											@include animation(fadeIn 1s linear 0s 1 normal forwards);
+											color: rgba(255, 255, 255, .3);
+										}
 									}
 								}
 							}

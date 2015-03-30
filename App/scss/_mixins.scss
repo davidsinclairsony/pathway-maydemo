@@ -103,7 +103,7 @@
 	}
 }
 
-@mixin animation($a) {
+@mixin animation($a...) {
 	-webkit-animation: #{$a};
 	-moz-animation: #{$a};
 	-ms-animation: #{$a};
@@ -111,7 +111,7 @@
 	animation: #{$a};
 }
 
-@mixin animation-fill-mode($a) {
+@mixin animation-fill-mode($a...) {
 	-webkit-animation-fill-mode: #{$a};
 	-moz-animation-fill-mode: #{$a};
 	-ms-animation-fill-mode: #{$a};

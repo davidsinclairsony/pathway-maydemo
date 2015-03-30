@@ -937,6 +937,41 @@
   100% {
     transform: rotate(360deg) scale(0, 0); } }
 
+@-webkit-keyframes spinOut {
+  0% {
+    transform: rotate(0deg) scale(1, 1); }
+
+  100% {
+    transform: rotate(360deg) scale(0, 0); } }
+
+@-moz-keyframes spinOut {
+  0% {
+    transform: rotate(0deg) scale(1, 1); }
+
+  100% {
+    transform: rotate(360deg) scale(0, 0); } }
+
+@-ms-keyframes spinOut {
+  0% {
+    transform: rotate(0deg) scale(1, 1); }
+
+  100% {
+    transform: rotate(360deg) scale(0, 0); } }
+
+@-o-keyframes spinOut {
+  0% {
+    transform: rotate(0deg) scale(1, 1); }
+
+  100% {
+    transform: rotate(360deg) scale(0, 0); } }
+
+@keyframes spinOut {
+  0% {
+    transform: rotate(0deg) scale(1, 1); }
+
+  100% {
+    transform: rotate(360deg) scale(0, 0); } }
+
 @-webkit-keyframes pop {
   0% {
     transform: scale(0, 0); }
@@ -1079,15 +1114,15 @@ body {
     z-index: 1; }
   #frame button.refresh {
     position: fixed;
-    top: 40px;
+    top: 10px;
     left: 50%;
-    margin-left: -344px;
+    margin-left: -374px;
     background: none;
     z-index: 10;
     cursor: pointer; }
     #frame button.refresh img {
       height: 25px;
-      opacity: 0.2; }
+      opacity: 0.1; }
 
 .button {
   cursor: pointer; }
@@ -1277,8 +1312,7 @@ body {
       height: 25px;
       display: block;
       margin: 0 auto; }
-  #frame > .view.main ul.people {
-    list-style: none;
+  #frame > .view.main div.people {
     position: fixed;
     top: 105px;
     left: 50%;
@@ -1290,146 +1324,158 @@ body {
     -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
     -o-animation: fadeIn 1s linear 0s 1 normal forwards;
     animation: fadeIn 1s linear 0s 1 normal forwards; }
-    #frame > .view.main ul.people > li {
-      display: inline-block;
-      top: 0;
-      position: absolute;
-      width: 600px;
-      color: white; }
-      #frame > .view.main ul.people > li:nth-child(1) {
-        left: 84px; }
-      #frame > .view.main ul.people > li:nth-child(2) {
-        left: -556px; }
-      #frame > .view.main ul.people > li:nth-child(3) {
-        left: 724px; }
-      #frame > .view.main ul.people > li .person header {
-        background: rgba(255, 255, 255, 0.3);
-        padding: 10px 20px;
-        border-radius: 8px 8px 0 0;
-        position: relative; }
-        #frame > .view.main ul.people > li .person header h2 {
-          font: normal normal 300 20px/1.4em "Open Sans", sans-serif; }
-        #frame > .view.main ul.people > li .person header div {
-          opacity: 0.7;
-          font: normal normal 300 14px/1.4em "Open Sans", sans-serif; }
-        #frame > .view.main ul.people > li .person header aside {
-          position: absolute;
-          top: 9px;
-          right: 0;
-          padding: 10px 20px; }
-      #frame > .view.main ul.people > li .person main {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        padding: 20px 0 13px 20px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 0 0 8px 8px; }
-        #frame > .view.main ul.people > li .person main .picture {
-          width: 66px;
-          -webkit-box-flex: 0 0 auto;
-          -moz-box-flex: 0 0 auto;
-          -webkit-flex: 0 0 auto;
-          -ms-flex: 0 0 auto;
-          flex: 0 0 auto; }
-          #frame > .view.main ul.people > li .person main .picture img {
-            width: 100%;
-            border-radius: 4px;
-            display: block; }
-        #frame > .view.main ul.people > li .person main .sources {
-          -webkit-box-flex: 1;
-          -moz-box-flex: 1;
-          -webkit-flex: 1;
-          -ms-flex: 1;
-          flex: 1;
-          padding: 0 0 0 10px; }
-          #frame > .view.main ul.people > li .person main .sources ul {
-            list-style: none;
-            display: -webkit-box;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            display: flex; }
-            #frame > .view.main ul.people > li .person main .sources ul li {
-              -webkit-box-flex: 1;
-              -moz-box-flex: 1;
-              -webkit-flex: 1;
-              -ms-flex: 1;
-              flex: 1;
-              text-align: center;
-              position: relative; }
-              #frame > .view.main ul.people > li .person main .sources ul li:after {
-                border-radius: 50%;
-                border: 3px solid #fff;
-                border-bottom-color: transparent;
-                border-right-color: transparent;
-                display: block;
-                height: 40px;
-                width: 40px;
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 20px;
-                z-index: 0; }
-              #frame > .view.main ul.people > li .person main .sources ul li:last-child {
-                width: 78px;
-                -webkit-box-flex: 0 0 auto;
-                -moz-box-flex: 0 0 auto;
-                -webkit-flex: 0 0 auto;
-                -ms-flex: 0 0 auto;
-                flex: 0 0 auto; }
-              #frame > .view.main ul.people > li .person main .sources ul li .chiclet {
-                font-size: 45px;
-                transform: scale(0, 0);
-                position: relative;
-                z-index: 1; }
-              #frame > .view.main ul.people > li .person main .sources ul li span {
-                display: block;
-                padding-top: 5px;
-                font-size: 12px; }
-              #frame > .view.main ul.people > li .person main .sources ul li.waiting:after {
-                -webkit-animation: spinner 1s linear 0s infinite normal forwards;
-                -moz-animation: spinner 1s linear 0s infinite normal forwards;
-                -ms-animation: spinner 1s linear 0s infinite normal forwards;
-                -o-animation: spinner 1s linear 0s infinite normal forwards;
-                animation: spinner 1s linear 0s infinite normal forwards; }
-              #frame > .view.main ul.people > li .person main .sources ul li.done:after {
-                -webkit-animation: spinOut 1s linear 0s 1 normal forwards;
-                -moz-animation: spinOut 1s linear 0s 1 normal forwards;
-                -ms-animation: spinOut 1s linear 0s 1 normal forwards;
-                -o-animation: spinOut 1s linear 0s 1 normal forwards;
-                animation: spinOut 1s linear 0s 1 normal forwards; }
-              #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet {
-                -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
-                -moz-animation: pop 0.5s linear 0s 1 normal forwards;
-                -ms-animation: pop 0.5s linear 0s 1 normal forwards;
-                -o-animation: pop 0.5s linear 0s 1 normal forwards;
-                animation: pop 0.5s linear 0s 1 normal forwards; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-dna {
-                  color: #e74c3c; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-facebook-squared {
-                  color: #527EC4; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-fit-bit {
-                  color: #9b59b6; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-ehr {
-                  color: #d35400; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-location {
-                  color: #f1c40f; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-medkit {
-                  color: #2ecc71; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-md-info {
-                  color: #2ecc71; }
-                #frame > .view.main ul.people > li .person main .sources ul li.done.available .chiclet.icon-star {
-                  color: #f1c40f; }
-              #frame > .view.main ul.people > li .person main .sources ul li.done:not(.available) {
-                color: rgba(255, 255, 255, 0.3); }
-                #frame > .view.main ul.people > li .person main .sources ul li.done:not(.available) .chiclet {
-                  -webkit-animation: crumbToNormal 0.125s linear 0s 1 normal forwards;
-                  -moz-animation: crumbToNormal 0.125s linear 0s 1 normal forwards;
-                  -ms-animation: crumbToNormal 0.125s linear 0s 1 normal forwards;
-                  -o-animation: crumbToNormal 0.125s linear 0s 1 normal forwards;
-                  animation: crumbToNormal 0.125s linear 0s 1 normal forwards; }
+    #frame > .view.main div.people > ul {
+      list-style: none;
+      position: relative; }
+      #frame > .view.main div.people > ul > li {
+        display: inline-block;
+        top: 0;
+        position: absolute;
+        width: 600px;
+        color: white; }
+        #frame > .view.main div.people > ul > li:nth-child(1) {
+          left: 84px; }
+        #frame > .view.main div.people > ul > li:nth-child(2) {
+          left: 724px; }
+        #frame > .view.main div.people > ul > li:nth-child(3) {
+          left: 1364px; }
+        #frame > .view.main div.people > ul > li:nth-child(4) {
+          left: 2004px; }
+        #frame > .view.main div.people > ul > li:nth-child(5) {
+          left: 2644px; }
+        #frame > .view.main div.people > ul > li:nth-child(6) {
+          left: 3284px; }
+        #frame > .view.main div.people > ul > li .person header {
+          background: rgba(255, 255, 255, 0.3);
+          padding: 10px 20px;
+          border-radius: 8px 8px 0 0;
+          position: relative; }
+          #frame > .view.main div.people > ul > li .person header h2 {
+            font: normal normal 300 20px/1.4em "Open Sans", sans-serif; }
+          #frame > .view.main div.people > ul > li .person header div {
+            opacity: 0.7;
+            font: normal normal 300 14px/1.4em "Open Sans", sans-serif; }
+          #frame > .view.main div.people > ul > li .person header aside {
+            position: absolute;
+            top: 9px;
+            right: 0;
+            padding: 10px 20px; }
+        #frame > .view.main div.people > ul > li .person main {
+          display: -webkit-box;
+          display: -moz-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          padding: 20px 0 13px 20px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 0 0 8px 8px; }
+          #frame > .view.main div.people > ul > li .person main .picture {
+            width: 66px;
+            -webkit-box-flex: 0 0 auto;
+            -moz-box-flex: 0 0 auto;
+            -webkit-flex: 0 0 auto;
+            -ms-flex: 0 0 auto;
+            flex: 0 0 auto; }
+            #frame > .view.main div.people > ul > li .person main .picture img {
+              width: 100%;
+              border-radius: 4px;
+              display: block; }
+          #frame > .view.main div.people > ul > li .person main .sources {
+            -webkit-box-flex: 1;
+            -moz-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            padding: 0 0 0 10px; }
+            #frame > .view.main div.people > ul > li .person main .sources ul {
+              list-style: none;
+              display: -webkit-box;
+              display: -moz-box;
+              display: -ms-flexbox;
+              display: -webkit-flex;
+              display: flex; }
+              #frame > .view.main div.people > ul > li .person main .sources ul li {
+                -webkit-box-flex: 1;
+                -moz-box-flex: 1;
+                -webkit-flex: 1;
+                -ms-flex: 1;
+                flex: 1;
+                text-align: center;
+                position: relative; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li:after {
+                  border-radius: 50%;
+                  border: 3px solid #fff;
+                  border-bottom-color: transparent;
+                  border-right-color: transparent;
+                  display: block;
+                  height: 40px;
+                  width: 40px;
+                  content: "";
+                  position: absolute;
+                  top: 0;
+                  left: 20px;
+                  z-index: 0; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li:last-child {
+                  width: 78px;
+                  -webkit-box-flex: 0 0 auto;
+                  -moz-box-flex: 0 0 auto;
+                  -webkit-flex: 0 0 auto;
+                  -ms-flex: 0 0 auto;
+                  flex: 0 0 auto; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li .chiclet {
+                  font-size: 45px;
+                  transform: scale(0, 0);
+                  position: relative;
+                  z-index: 1; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li span {
+                  display: block;
+                  padding-top: 5px;
+                  font-size: 12px;
+                  color: rgba(255, 255, 255, 0.3); }
+                #frame > .view.main div.people > ul > li .person main .sources ul li.waiting:after {
+                  -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
+                  -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
+                  -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
+                  -o-animation: spinner 0.5s linear 0s infinite normal forwards;
+                  animation: spinner 0.5s linear 0s infinite normal forwards; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li.done:after {
+                  -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                  -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                  -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                  -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                  animation: spinOut 0.5s linear 0s 1 normal forwards; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet {
+                  -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
+                  -moz-animation: pop 0.5s linear 0s 1 normal forwards;
+                  -ms-animation: pop 0.5s linear 0s 1 normal forwards;
+                  -o-animation: pop 0.5s linear 0s 1 normal forwards;
+                  animation: pop 0.5s linear 0s 1 normal forwards; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-dna {
+                    color: #e74c3c; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-facebook-squared {
+                    color: #527EC4; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-fit-bit {
+                    color: #9b59b6; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-ehr {
+                    color: #d35400; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-location {
+                    color: #f1c40f; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-medkit {
+                    color: #2ecc71; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-md-info {
+                    color: #2ecc71; }
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-star {
+                    color: #f1c40f; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li.done.available span {
+                  color: white; }
+                #frame > .view.main div.people > ul > li .person main .sources ul li.done:not(.available) .chiclet {
+                  transform: scale(1, 1);
+                  -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
+                  -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
+                  -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
+                  -o-animation: fadeIn 1s linear 0s 1 normal forwards;
+                  animation: fadeIn 1s linear 0s 1 normal forwards;
+                  color: rgba(255, 255, 255, 0.3); }
   #frame > .view.main .lower {
     position: fixed;
     bottom: 60px;
