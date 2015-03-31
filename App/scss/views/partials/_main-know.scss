@@ -1,0 +1,68 @@
+> .know {
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 768px;
+	height: 100%;
+	overflow-y: scroll;
+	padding: 80px;
+	background: rgba(0, 0, 0, .975);
+	color: white;
+	@include flex-direction(column);
+	@include align-items(center);
+	@include justify-content(center);
+	display: none;
+
+	> div {
+		color: white;
+		font: normal normal 300 20px/#{$f-1-l-h} $f-1;
+		@include flex(0 1 auto);
+		
+		header {
+			font: normal normal normal 30px/#{$f-1-l-h} $f-1;
+			border-radius: 8px 8px 0 0;
+			background: rgba(255, 255, 255, .3);
+			padding: 20px 40px;
+			
+			sup {
+				font: normal normal normal 10px/#{$f-1-l-h} $f-1;
+			}
+		}
+		
+		section {
+			background: rgba(255, 255, 255, .2);
+			padding: 40px;
+
+			ul {
+				margin-left: 2em;
+				margin-top: 5px;
+				
+				li {
+					margin-top: 5px;
+				}
+			}
+			
+			p:nth-child(n + 2) {
+				margin-top: 20px;
+			}
+		}
+		
+		footer {
+			background: rgba(255, 255, 255, .2);
+			text-align: center;
+			border-radius: 0 0 8px 8px;
+			padding: 0 40px 40px 40px;
+		}
+	}
+	
+	&.on {
+		@include flexbox();
+		@include animation(show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards);
+	}
+	
+	&.off {
+		@include flexbox();
+		@include animation(fadeOut .5s linear 0s 1 normal forwards, hide 0s linear .5s 1 normal forwards);
+	}
+}

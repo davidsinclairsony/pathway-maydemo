@@ -55,6 +55,12 @@
 	justify-content: $a;
 }
 
+@mixin flex-direction($a...) {
+	-webkit-justify-content: $a;
+	-ms-flex-pack: $a;
+	justify-content: $a;
+}
+
 @mixin column-count($a...) {
 	-webkit-column-count: $a;
 	-moz-column-count: $a;

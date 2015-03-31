@@ -1258,8 +1258,8 @@ body {
     left: 0;
     z-index: 1; }
   #frame button.refresh {
-    position: fixed;
-    top: 10px;
+    position: absolute;
+    top: 40px;
     left: 50%;
     margin-left: -374px;
     background: none;
@@ -1667,20 +1667,96 @@ body {
     padding: 15px 20px;
     border-radius: 8px;
     color: white;
-    -webkit-overflow-scrolling: touch; }
-  #frame > .view.main.digesting > .response {
-    opacity: 0;
-    -webkit-animation: fadeIn 1s linear 1s 1 normal forwards;
-    -moz-animation: fadeIn 1s linear 1s 1 normal forwards;
-    -ms-animation: fadeIn 1s linear 1s 1 normal forwards;
-    -o-animation: fadeIn 1s linear 1s 1 normal forwards;
-    animation: fadeIn 1s linear 1s 1 normal forwards; }
-  #frame > .view.main.selecting > .response {
-    -webkit-animation: fadeOut 1s linear 1s 1 normal forwards;
-    -moz-animation: fadeOut 1s linear 1s 1 normal forwards;
-    -ms-animation: fadeOut 1s linear 1s 1 normal forwards;
-    -o-animation: fadeOut 1s linear 1s 1 normal forwards;
-    animation: fadeOut 1s linear 1s 1 normal forwards; }
+    font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
+    -webkit-overflow-scrolling: touch;
+    display: none; }
+    #frame > .view.main > .response.on {
+      display: block;
+      -webkit-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      -moz-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      -ms-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards; }
+    #frame > .view.main > .response.off {
+      display: block;
+      -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      -o-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards; }
+  #frame > .view.main > .know {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 768px;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 80px;
+    background: rgba(0, 0, 0, 0.975);
+    color: white;
+    -webkit-justify-content: column;
+    -ms-flex-pack: column;
+    justify-content: column;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    display: none; }
+    #frame > .view.main > .know > div {
+      color: white;
+      font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
+      -webkit-box-flex: 0 1 auto;
+      -moz-box-flex: 0 1 auto;
+      -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+      flex: 0 1 auto; }
+      #frame > .view.main > .know > div header {
+        font: normal normal normal 30px/1.4em "Open Sans", sans-serif;
+        border-radius: 8px 8px 0 0;
+        background: rgba(255, 255, 255, 0.3);
+        padding: 20px 40px; }
+        #frame > .view.main > .know > div header sup {
+          font: normal normal normal 10px/1.4em "Open Sans", sans-serif; }
+      #frame > .view.main > .know > div section {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 40px; }
+        #frame > .view.main > .know > div section ul {
+          margin-left: 2em;
+          margin-top: 5px; }
+          #frame > .view.main > .know > div section ul li {
+            margin-top: 5px; }
+        #frame > .view.main > .know > div section p:nth-child(n+2) {
+          margin-top: 20px; }
+      #frame > .view.main > .know > div footer {
+        background: rgba(255, 255, 255, 0.2);
+        text-align: center;
+        border-radius: 0 0 8px 8px;
+        padding: 0 40px 40px 40px; }
+    #frame > .view.main > .know.on {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      -moz-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      -ms-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
+      animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards; }
+    #frame > .view.main > .know.off {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      -o-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
+      animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards; }
   #frame > .view.main .lower {
     position: absolute;
     bottom: 60px;

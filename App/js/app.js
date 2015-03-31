@@ -3,24 +3,42 @@
 		
 		// Functionality for testing
 		(function() {
+			// Load in people & answers
 			var jqxhr = $.getJSON("js/people.js", function() {
 				console.log("People files loaded.");
 			}).fail(function() {
 				console.log("Could not load people files.");
 			});
 			
+			// Reload everything
 			$("#frame button.refresh").on("click", function() {
 				location.reload();
 			});
 			
+			// Show reponse & hide nswers
 			$("#frame .view.main.selecting .questions ul li").on("click", function() {
 				$("#frame .view.main.selecting").removeClass("selecting").addClass("digesting");
 				$(this).addClass("active");
+				$("#frame .view.main .response").removeClass("off").addClass("on");
 			});
 			
+			//Show questions & hide response
 			$("#frame .lower button.ask").on("click", function() {
 				$("#frame .view.main.digesting").removeClass("digesting").addClass("selecting");
 				$("#frame .view.main .questions ul li.active").removeClass("active");
+				
+				var $response = $("#frame .view.main .response");
+				if($response.css("display") != "none") {
+					$response.removeClass("on").addClass("off");
+				}
+			});
+			
+			// How does it know button
+			$("#frame .lower button.how").on("click", function() {
+				$("#frame .view.main .know").addClass("on").removeClass("off");
+			});
+			$("#frame .know button.close").on("click", function() {
+				$("#frame .view.main .know").addClass("off").removeClass("on");
 			});
 		})();
 		
@@ -88,12 +106,12 @@
 							originalLeft += 640;
 						}
 						
-						$list.animate({left: originalLeft}, "fast", "easeOutBounce");
+						$list.animate({left: originalLeft}, "fast", "linear");
 					}
 					
 					// Swipe under threshhold
 					if(phase == "cancel") {
-						$list.animate({left: originalLeft}, "fast", "easeOutBounce");
+						$list.animate({left: originalLeft}, "fast", "linear");
 					}
 				},
 				triggerOnTouchEnd: false,
