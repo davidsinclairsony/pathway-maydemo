@@ -1,5 +1,5 @@
 #frame > .view.main {
-	@include linear-gradient(to bottom, #12204f 0%,#052a38 37%,#131933 100%);
+	@include linear-gradient(to bottom, #12204f 0%, #052a38 37%, #131933 100%);
 	/*background: black;
 	&:before{
 		@include linear-gradient(to bottom, #22294c 0%,#052e3a 49%,#150b3a 100%);
@@ -14,16 +14,8 @@
 	
 	@import "partials/main-header";
 	@import "partials/main-people";
+	@import "partials/main-questions";
+	@import "partials/main-response";
 	@import "partials/main-lower";
 	@import "partials/main-footer";
-	
-	&.selecting {
-		.lower {
-			//display: none;
-		}
-	}
-	
-	&.digesting {
-		
-	}
 }

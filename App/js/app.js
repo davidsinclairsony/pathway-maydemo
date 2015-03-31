@@ -1,20 +1,33 @@
 (function($) {
 	$(function() {
 		
-		var jqxhr = $.getJSON("js/people.js", function() {
-			console.log("People files loaded.");
-		}).fail(function() {
-			console.log("Could not load people files.");
-		});
-		
-		$("#frame button.refresh").on("click", function() {
-			location.reload();
-		});
+		// Functionality for testing
+		(function() {
+			var jqxhr = $.getJSON("js/people.js", function() {
+				console.log("People files loaded.");
+			}).fail(function() {
+				console.log("Could not load people files.");
+			});
+			
+			$("#frame button.refresh").on("click", function() {
+				location.reload();
+			});
+			
+			$("#frame .view.main.selecting .questions ul li").on("click", function() {
+				$("#frame .view.main.selecting").removeClass("selecting").addClass("digesting");
+				$(this).addClass("active");
+			});
+			
+			$("#frame .lower button.ask").on("click", function() {
+				$("#frame .view.main.digesting").removeClass("digesting").addClass("selecting");
+				$("#frame .view.main .questions ul li.active").removeClass("active");
+			});
+		})();
 		
 		// Randomly set sources to available after 2s
 		(function() {
-			var findRandomSources = function() {
-				$("#frame .view.main.selecting .people .person .sources ul li").each(function() {
+			var randomSources = function() {
+				$("#frame .view.main .people .person .sources ul li").each(function() {
 					var $this = $(this);
 					
 					if(Math.round(Math.random())) {
@@ -25,20 +38,20 @@
 				});
 			};
 			
-			setTimeout(findRandomSources, 1000);
+			setTimeout(randomSources, 1000);
 		})();
 		
 		// Allow swiping between people
 		(function() {
-			var $peopleList = $("#frame .view.main .people > ul");
-			var peopleListOriginalPositionLeft = $peopleList.position().left;
-			var peopleListEdges = {
+			var $list = $("#frame .view.main .people > ul");
+			var originalLeft = $list.position().left;
+			var edges = {
 				"left": 84,
-				"right": ($peopleList.find("> li").length - 1) * -640 + 84
+				"right": ($list.find("> li").length - 1) * -640 + 84
 			};
 			var startingX;
 
-			$("#frame .view.main").swipe({
+			$list.swipe({
 				swipeStatus: function(event, phase, direction, distance) {
 					// Swipe initials
 					if(phase == "start") {
@@ -47,54 +60,44 @@
 					
 					// Swipe in motion, move objects accordingly
 					if(phase == "move") {
-						var newPositionLeft = event.pageX - startingX + peopleListOriginalPositionLeft;
-						$("#frame .view.main .people > ul").offset({left: newPositionLeft});
+						var newPosition = event.pageX - startingX + originalLeft;
+						$("#frame .view.main .people > ul").offset({left: newPosition});
 					}
 					
 					// Swipe over threshhold
 					if(phase == "end") {
 						// Check if at bounds and update the original position
-						
-						console.log(peopleListOriginalPositionLeft);
-						console.log(peopleListEdges.left);
-						console.log(peopleListEdges.right);
-						console.log("---");
-						
-						var setNewPosition = function() {
-							if(direction == "left") {
-								peopleListOriginalPositionLeft -= 640;
-							} else if(direction == "right") {
-								newPositionLeft = peopleListOriginalPositionLeft += 640;
-							}
-						}
-						
 						if(
-							peopleListOriginalPositionLeft < peopleListEdges.left &&
-							peopleListOriginalPositionLeft > peopleListEdges.right
+							originalLeft < edges.left &&
+							originalLeft > edges.right
 						) {
-							setNewPosition();
+							if(direction == "left") {
+								originalLeft -= 640;
+							} else if(direction == "right") {
+								originalLeft += 640;
+							}
 						} else if(
-							peopleListOriginalPositionLeft == peopleListEdges.left &&
+							originalLeft == edges.left &&
 							direction == "left"
 						) {
-							setNewPosition();
+							originalLeft -= 640;
 						} else if(
-							peopleListOriginalPositionLeft == peopleListEdges.right &&
+							originalLeft == edges.right &&
 							direction == "right"
 						) {
-							setNewPosition();
+							originalLeft += 640;
 						}
 						
-						$peopleList.animate({left: peopleListOriginalPositionLeft}, "fast", "easeOutBounce");
+						$list.animate({left: originalLeft}, "fast", "easeOutBounce");
 					}
 					
 					// Swipe under threshhold
 					if(phase == "cancel") {
-						$peopleList.animate({left: peopleListOriginalPositionLeft}, "fast", "easeOutBounce");
+						$list.animate({left: originalLeft}, "fast", "easeOutBounce");
 					}
 				},
 				triggerOnTouchEnd: false,
-				threshold: 300
+				threshold: 250
 			});
 		})();
 		

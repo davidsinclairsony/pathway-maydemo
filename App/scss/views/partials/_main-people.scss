@@ -1,11 +1,11 @@
 div.people {
-	position: fixed;
+	position: absolute;
 	top: 105px;
 	left: 50%;
 	margin-left: -384px;
-	display: block;
 	width: 100%;
 	@include animation(fadeIn 1s linear 0s 1 normal forwards);
+	
 	
 	> ul {
 		list-style: none;
@@ -14,7 +14,7 @@ div.people {
 		left: 84px;
 		white-space: nowrap;
 		font-size: 0;
-	
+		
 		> li {
 			display: inline-block;
 			width: 600px;

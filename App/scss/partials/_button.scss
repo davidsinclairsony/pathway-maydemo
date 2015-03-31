@@ -16,27 +16,15 @@
 	&.blue {
 		background: $c-1;
 		color: white;
-		
-		&:hover {
-			background: lighten($c-1, 5%);
-		}
 	}
 	
 	&.green {
 		background: $c-2;
 		color: white;
-		
-		&:hover {
-			background: lighten($c-2, 5%);
-		}
 	}
 	
 	&.orange {
 		background: $c-3;
 		color: white;
-		
-		&:hover {
-			background: lighten($c-3, 5%);
-		}
 	}
 }
