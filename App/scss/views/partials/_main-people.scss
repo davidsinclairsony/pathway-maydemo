@@ -11,7 +11,7 @@ div.people {
 		list-style: none;
 		position: absolute;
 		top: 0;
-		left: 84px;
+		left: -556px;
 		white-space: nowrap;
 		font-size: 0;
 		
@@ -127,13 +127,11 @@ div.people {
 											@include animation(pop .5s linear 0s 1 normal forwards);
 											
 											&.icon-dna {color:#e74c3c;}
-											&.icon-facebook-squared {color:#527EC4}
-											&.icon-fit-bit {color:#9b59b6}
-											&.icon-ehr {color:#d35400}
-											&.icon-location {color:#f1c40f}
-											&.icon-medkit {color:#2ecc71}
-											&.icon-md-info {color:#2ecc71}
-											&.icon-star {color:#f1c40f}
+											&.icon-fit-bit {color:#9b59b6;}
+											&.icon-ehr {color:#d35400;}
+											&.icon-direction {color:#f1c40f;}
+											&.icon-medkit {color:#527EC4;}
+											&.icon-md-info {color:#2ecc71;}
 										}
 										
 										span {

@@ -1,7 +1,6 @@
+// Functionality for testing
 (function($) {
 	$(function() {
-		
-		// Functionality for testing
 		(function() {
 			// Load in people & answers
 			var jqxhr = $.getJSON("js/people.js", function() {
@@ -118,6 +117,5 @@
 				threshold: 250
 			});
 		})();
-		
 	});
 })(jQuery);

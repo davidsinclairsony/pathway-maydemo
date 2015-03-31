@@ -1,162 +1,3 @@
-@font-face {
-  font-family: 'fontello';
-  src: url('../fonts/fontello.eot?46828173');
-  src: url('../fonts/fontello.eot?46828173#iefix') format('embedded-opentype'), url('../fonts/fontello.woff?46828173') format('woff'), url('../fonts/fontello.ttf?46828173') format('truetype'), url('../fonts/fontello.svg?46828173#fontello') format('svg');
-  font-weight: normal;
-  font-style: normal; }
-
-[class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "fontello";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: 0.2em;
-  text-align: center;
-  /* opacity: .8; */
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: 0.2em;
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
-
-.icon-apple:before {
-  content: '\e800'; }
-
-/* '' */
-.icon-location:before {
-  content: '\e801'; }
-
-/* '' */
-.icon-medkit:before {
-  content: '\e802'; }
-
-/* '' */
-.icon-dna:before {
-  content: '\e803'; }
-
-/* '' */
-.icon-cw:before {
-  content: '\e804'; }
-
-/* '' */
-.icon-stethoscope:before {
-  content: '\e805'; }
-
-/* '' */
-.icon-ehr:before {
-  content: '\e806'; }
-
-/* '' */
-.icon-applewatch:before {
-  content: '\e807'; }
-
-/* '' */
-.icon-fit-bit:before {
-  content: '\e808'; }
-
-/* '' */
-.icon-md-info:before {
-  content: '\e809'; }
-
-/* '' */
-.icon-star:before {
-  content: '\e80a'; }
-
-/* '' */
-.icon-star-empty:before {
-  content: '\e80b'; }
-
-/* '' */
-.icon-star-half:before {
-  content: '\e80c'; }
-
-/* '' */
-.icon-star-half-alt:before {
-  content: '\e80d'; }
-
-/* '' */
-.icon-facebook-squared:before {
-  content: '\e80e'; }
-
-/* '' */
-.icon-android:before {
-  content: '\e80f'; }
-
-/* '' */
-.icon-gplus-squared:before {
-  content: '\e810'; }
-
-/* '' */
-.icon-twitter-squared:before {
-  content: '\e811'; }
-
-/* '' */
-.icon-ok:before {
-  content: '\e812'; }
-
-/* '' */
-.icon-ok-circled:before {
-  content: '\e813'; }
-
-/* '' */
-.icon-ok-circled2:before {
-  content: '\e814'; }
-
-/* '' */
-.icon-ok-squared:before {
-  content: '\e815'; }
-
-/* '' */
-.icon-users:before {
-  content: '\e816'; }
-
-/* '' */
-.icon-male:before {
-  content: '\e817'; }
-
-/* '' */
-.icon-female:before {
-  content: '\e818'; }
-
-/* '' */
-.icon-child:before {
-  content: '\e819'; }
-
-/* '' */
-.icon-mail:before {
-  content: '\e81a'; }
-
-/* '' */
-.icon-mail-alt:before {
-  content: '\e81b'; }
-
-/* '' */
-.icon-heart:before {
-  content: '\e81c'; }
-
-/* '' */
-.icon-heart-empty:before {
-  content: '\e81d'; }
-
-/* '' */
-.icon-search:before {
-  content: '\e81e'; }
-
-/* '' */
-.icon-cog:before {
-  content: '\e81f'; }
-
-/* '' */
 /* cyrillic-ext */
 @font-face {
   font-family: 'Open Sans';
@@ -797,6 +638,71 @@
   src: local('Open Sans Extrabold Italic'), local('OpenSans-ExtraboldItalic'), url(http://fonts.gstatic.com/s/opensans/v10/PRmiXeptR36kaC0GEAetxmPkvcX8kXDzy1NrkNCBkJ4.woff2) format('woff2');
   unicode-range: U0 0FF, U131, U152 -153, U2C6, U2DA, U2DC, U2000 -206F, U2074, U20AC, U2212, U2215, UE0FF, UEFFD, UF000; }
 
+@font-face {
+  font-family: 'fontello';
+  src: url('../fonts/fontello.eot?15966690');
+  src: url('../fonts/fontello.eot?15966690#iefix') format('embedded-opentype'), url('../fonts/fontello.woff?15966690') format('woff'), url('../fonts/fontello.ttf?15966690') format('truetype'), url('../font/fontello.svg?15966690#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal; }
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?15966690#fontello') format('svg');
+  }
+}
+*/
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: 0.2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
+
+.icon-direction:before {
+  content: '\e800'; }
+
+/* '' */
+.icon-medkit:before {
+  content: '\e801'; }
+
+/* '' */
+.icon-fit-bit:before {
+  content: '\e802'; }
+
+/* '' */
+.icon-dna:before {
+  content: '\e803'; }
+
+/* '' */
+.icon-ehr:before {
+  content: '\e804'; }
+
+/* '' */
+.icon-md-info:before {
+  content: '\e805'; }
+
+/* '' */
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0; }
@@ -1261,7 +1167,7 @@ body {
     position: absolute;
     top: 40px;
     left: 50%;
-    margin-left: -374px;
+    margin-left: -378.5px;
     background: none;
     z-index: 10;
     cursor: pointer; }
@@ -1466,7 +1372,7 @@ body {
       list-style: none;
       position: absolute;
       top: 0;
-      left: 84px;
+      left: -556px;
       white-space: nowrap;
       font-size: 0; }
       #frame > .view.main div.people > ul > li {
@@ -1582,20 +1488,16 @@ body {
                   animation: pop 0.5s linear 0s 1 normal forwards; }
                   #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-dna {
                     color: #e74c3c; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-facebook-squared {
-                    color: #527EC4; }
                   #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-fit-bit {
                     color: #9b59b6; }
                   #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-ehr {
                     color: #d35400; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-location {
+                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-direction {
                     color: #f1c40f; }
                   #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-medkit {
-                    color: #2ecc71; }
+                    color: #527EC4; }
                   #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-md-info {
                     color: #2ecc71; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-star {
-                    color: #f1c40f; }
                 #frame > .view.main div.people > ul > li .person main .sources ul li.done.available span {
                   color: white; }
                 #frame > .view.main div.people > ul > li .person main .sources ul li.done:not(.available) .chiclet {
