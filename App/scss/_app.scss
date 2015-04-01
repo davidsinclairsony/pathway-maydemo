@@ -1,4 +1,4 @@
-#frame {
+#app {
 	width: 768px;
 	min-height: 1004px;
 	margin: 0 auto;
@@ -24,20 +24,5 @@
 		top: 0;
 		left: 0;
 		z-index: 1;
-	}
-	
-	button.refresh {
-		position: absolute;
-		top: 40px;
-		left: 50%;
-		margin-left: -378.5px;
-		background: none;
-		z-index: 10;
-		cursor: pointer;
-		
-		img {
-			height: 25px;
-			opacity: .1;
-		}
 	}
 }

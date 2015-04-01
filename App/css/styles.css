@@ -1138,16 +1138,16 @@ body {
   background: #111111; }
 
 ::selection {
-  background: rgba(58, 82, 53, 0.2); }
+  background: rgba(52, 156, 66, 0.2); }
 
-#frame {
+#app {
   width: 768px;
   min-height: 1004px;
   margin: 0 auto;
   background: black;
   position: relative;
   overflow: hidden; }
-  #frame:after {
+  #app:after {
     position: absolute;
     top: 1004px;
     left: 0;
@@ -1156,24 +1156,13 @@ body {
     background: rgba(255, 255, 255, 0.1);
     content: "";
     z-index: 10; }
-  #frame > .view {
+  #app > .view {
     min-height: 100%;
     width: 100%;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1; }
-  #frame button.refresh {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    margin-left: -378.5px;
-    background: none;
-    z-index: 10;
-    cursor: pointer; }
-    #frame button.refresh img {
-      height: 25px;
-      opacity: 0.1; }
 
 .button {
   cursor: pointer; }
@@ -1189,19 +1178,31 @@ body {
     background: #2980b9;
     color: white; }
   .button.green {
-    background: #3a5235;
+    background: #349c42;
     color: white; }
   .button.orange {
     background: #e67e22;
     color: white; }
 
-#frame > .view.intro {
+#app > .refresh {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  margin-left: -378.5px;
+  background: none;
+  z-index: 10;
+  cursor: pointer; }
+  #app > .refresh img {
+    height: 25px;
+    opacity: 0.1; }
+
+#app > .view.intro {
   text-align: center;
   padding: 20px;
   background: black; }
-  #frame > .view.intro > * {
+  #app > .view.intro > * {
     opacity: 0; }
-  #frame > .view.intro:before {
+  #app > .view.intro:before {
     position: absolute;
     top: 0;
     left: 0;
@@ -1215,14 +1216,14 @@ body {
     -ms-animation: fadeIn 1s linear 3s 1 normal forwards;
     -o-animation: fadeIn 1s linear 3s 1 normal forwards;
     animation: fadeIn 1s linear 3s 1 normal forwards; }
-  #frame > .view.intro img[src*="pg.png"] {
+  #app > .view.intro img[src*="pg.png"] {
     width: 350px;
     -webkit-animation: fadeIn 1s linear 3.5s 1 normal forwards;
     -moz-animation: fadeIn 1s linear 3.5s 1 normal forwards;
     -ms-animation: fadeIn 1s linear 3.5s 1 normal forwards;
     -o-animation: fadeIn 1s linear 3.5s 1 normal forwards;
     animation: fadeIn 1s linear 3.5s 1 normal forwards; }
-  #frame > .view.intro img[src*="panorama.png"] {
+  #app > .view.intro img[src*="panorama.png"] {
     width: 500px;
     margin: 150px 0 40px 0;
     -webkit-animation: fadeIn 1s linear 1s 1 normal forwards;
@@ -1230,14 +1231,14 @@ body {
     -ms-animation: fadeIn 1s linear 1s 1 normal forwards;
     -o-animation: fadeIn 1s linear 1s 1 normal forwards;
     animation: fadeIn 1s linear 1s 1 normal forwards; }
-  #frame > .view.intro img[src*="panorama-byline.png"] {
+  #app > .view.intro img[src*="panorama-byline.png"] {
     width: 275px;
     -webkit-animation: fadeIn 1s linear 2s 1 normal forwards;
     -moz-animation: fadeIn 1s linear 2s 1 normal forwards;
     -ms-animation: fadeIn 1s linear 2s 1 normal forwards;
     -o-animation: fadeIn 1s linear 2s 1 normal forwards;
     animation: fadeIn 1s linear 2s 1 normal forwards; }
-  #frame > .view.intro img[src*="ibm.png"] {
+  #app > .view.intro img[src*="ibm.png"] {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1247,7 +1248,7 @@ body {
     -ms-animation: fadeIn 1s linear 4s 1 normal forwards;
     -o-animation: fadeIn 1s linear 4s 1 normal forwards;
     animation: fadeIn 1s linear 4s 1 normal forwards; }
-  #frame > .view.intro p {
+  #app > .view.intro p {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -1260,9 +1261,9 @@ body {
     -o-animation: fadeIn 1s linear 4s 1 normal forwards;
     animation: fadeIn 1s linear 4s 1 normal forwards; }
 
-#frame > .view.hello {
+#app > .view.hello {
   background: #0e2038; }
-  #frame > .view.hello .container {
+  #app > .view.hello .container {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -1276,7 +1277,7 @@ body {
     position: absolute;
     top: 0;
     left: 0; }
-    #frame > .view.hello .container .item {
+    #app > .view.hello .container .item {
       -webkit-box-flex: 1;
       -moz-box-flex: 1;
       -webkit-flex: 1;
@@ -1286,37 +1287,37 @@ body {
       color: white;
       text-align: center;
       padding: 110px; }
-      #frame > .view.hello .container .item p:nth-child(n+2) {
+      #app > .view.hello .container .item p:nth-child(n+2) {
         margin-top: 40px; }
-      #frame > .view.hello .container .item p:nth-child(1) {
+      #app > .view.hello .container .item p:nth-child(1) {
         opacity: 0;
         -webkit-animation: fadeIn 1s linear -0.5s 1 normal forwards;
         -moz-animation: fadeIn 1s linear -0.5s 1 normal forwards;
         -ms-animation: fadeIn 1s linear -0.5s 1 normal forwards;
         -o-animation: fadeIn 1s linear -0.5s 1 normal forwards;
         animation: fadeIn 1s linear -0.5s 1 normal forwards; }
-      #frame > .view.hello .container .item p:nth-child(2) {
+      #app > .view.hello .container .item p:nth-child(2) {
         opacity: 0;
         -webkit-animation: fadeIn 1s linear 1s 1 normal forwards;
         -moz-animation: fadeIn 1s linear 1s 1 normal forwards;
         -ms-animation: fadeIn 1s linear 1s 1 normal forwards;
         -o-animation: fadeIn 1s linear 1s 1 normal forwards;
         animation: fadeIn 1s linear 1s 1 normal forwards; }
-      #frame > .view.hello .container .item p:nth-child(3) {
+      #app > .view.hello .container .item p:nth-child(3) {
         opacity: 0;
         -webkit-animation: fadeIn 1s linear 2.5s 1 normal forwards;
         -moz-animation: fadeIn 1s linear 2.5s 1 normal forwards;
         -ms-animation: fadeIn 1s linear 2.5s 1 normal forwards;
         -o-animation: fadeIn 1s linear 2.5s 1 normal forwards;
         animation: fadeIn 1s linear 2.5s 1 normal forwards; }
-      #frame > .view.hello .container .item p:nth-child(4) {
+      #app > .view.hello .container .item p:nth-child(4) {
         opacity: 0;
         -webkit-animation: fadeIn 1s linear 4s 1 normal forwards;
         -moz-animation: fadeIn 1s linear 4s 1 normal forwards;
         -ms-animation: fadeIn 1s linear 4s 1 normal forwards;
         -o-animation: fadeIn 1s linear 4s 1 normal forwards;
         animation: fadeIn 1s linear 4s 1 normal forwards; }
-      #frame > .view.hello .container .item p:nth-child(5) {
+      #app > .view.hello .container .item p:nth-child(5) {
         opacity: 0;
         -webkit-animation: fadeIn 1s linear 5.5s 1 normal forwards;
         -moz-animation: fadeIn 1s linear 5.5s 1 normal forwards;
@@ -1324,7 +1325,7 @@ body {
         -o-animation: fadeIn 1s linear 5.5s 1 normal forwards;
         animation: fadeIn 1s linear 5.5s 1 normal forwards; }
 
-#frame > .view.main {
+#app > .view.main {
   background: -moz-linear-gradient(to bottom, #12204f 0%, #052a38 37%, #131933 100%);
   background: -webkit-linear-gradient(to bottom, #12204f 0%, #052a38 37%, #131933 100%);
   background: -o-linear-gradient(to bottom, #12204f 0%, #052a38 37%, #131933 100%);
@@ -1341,7 +1342,7 @@ body {
 		content: "";
 		opacity: 1;
 	}*/ }
-  #frame > .view.main > header {
+  #app > .view.main > header {
     position: absolute;
     top: 40px;
     left: 50%;
@@ -1353,11 +1354,11 @@ body {
     -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
     -o-animation: fadeIn 1s linear 0s 1 normal forwards;
     animation: fadeIn 1s linear 0s 1 normal forwards; }
-    #frame > .view.main > header img {
+    #app > .view.main > header img {
       height: 25px;
       display: block;
       margin: 0 auto; }
-  #frame > .view.main div.people {
+  #app > .view.main div.people {
     position: absolute;
     top: 105px;
     left: 50%;
@@ -1368,35 +1369,35 @@ body {
     -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
     -o-animation: fadeIn 1s linear 0s 1 normal forwards;
     animation: fadeIn 1s linear 0s 1 normal forwards; }
-    #frame > .view.main div.people > ul {
+    #app > .view.main div.people > ul {
       list-style: none;
       position: absolute;
       top: 0;
       left: -556px;
       white-space: nowrap;
       font-size: 0; }
-      #frame > .view.main div.people > ul > li {
+      #app > .view.main div.people > ul > li {
         display: inline-block;
         width: 600px;
         color: white; }
-        #frame > .view.main div.people > ul > li:nth-child(n+2) {
+        #app > .view.main div.people > ul > li:nth-child(n+2) {
           margin-left: 40px; }
-        #frame > .view.main div.people > ul > li .person header {
+        #app > .view.main div.people > ul > li .person header {
           background: rgba(255, 255, 255, 0.3);
           padding: 10px 20px;
           border-radius: 8px 8px 0 0;
           position: relative; }
-          #frame > .view.main div.people > ul > li .person header h2 {
+          #app > .view.main div.people > ul > li .person header h2 {
             font: normal normal 300 20px/1.4em "Open Sans", sans-serif; }
-          #frame > .view.main div.people > ul > li .person header div {
+          #app > .view.main div.people > ul > li .person header div {
             opacity: 0.7;
             font: normal normal 300 14px/1.4em "Open Sans", sans-serif; }
-          #frame > .view.main div.people > ul > li .person header aside {
+          #app > .view.main div.people > ul > li .person header aside {
             position: absolute;
             top: 9px;
             right: 0;
             padding: 10px 20px; }
-        #frame > .view.main div.people > ul > li .person main {
+        #app > .view.main div.people > ul > li .person main {
           display: -webkit-box;
           display: -moz-box;
           display: -ms-flexbox;
@@ -1405,32 +1406,32 @@ body {
           padding: 20px 0 13px 20px;
           background: rgba(255, 255, 255, 0.2);
           border-radius: 0 0 8px 8px; }
-          #frame > .view.main div.people > ul > li .person main .picture {
+          #app > .view.main div.people > ul > li .person main .picture {
             width: 66px;
             -webkit-box-flex: 0 0 auto;
             -moz-box-flex: 0 0 auto;
             -webkit-flex: 0 0 auto;
             -ms-flex: 0 0 auto;
             flex: 0 0 auto; }
-            #frame > .view.main div.people > ul > li .person main .picture img {
+            #app > .view.main div.people > ul > li .person main .picture img {
               width: 100%;
               border-radius: 4px;
               display: block; }
-          #frame > .view.main div.people > ul > li .person main .sources {
+          #app > .view.main div.people > ul > li .person main .sources {
             -webkit-box-flex: 1;
             -moz-box-flex: 1;
             -webkit-flex: 1;
             -ms-flex: 1;
             flex: 1;
             padding: 0 0 0 10px; }
-            #frame > .view.main div.people > ul > li .person main .sources ul {
+            #app > .view.main div.people > ul > li .person main .sources ul {
               list-style: none;
               display: -webkit-box;
               display: -moz-box;
               display: -ms-flexbox;
               display: -webkit-flex;
               display: flex; }
-              #frame > .view.main div.people > ul > li .person main .sources ul li {
+              #app > .view.main div.people > ul > li .person main .sources ul li {
                 -webkit-box-flex: 1;
                 -moz-box-flex: 1;
                 -webkit-flex: 1;
@@ -1438,7 +1439,7 @@ body {
                 flex: 1;
                 text-align: center;
                 position: relative; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li:after {
+                #app > .view.main div.people > ul > li .person main .sources ul li:after {
                   border-radius: 50%;
                   border: 3px solid white;
                   border-bottom-color: transparent;
@@ -1450,57 +1451,57 @@ body {
                   top: 0;
                   left: 20px;
                   z-index: 0; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li:last-child {
+                #app > .view.main div.people > ul > li .person main .sources ul li:last-child {
                   width: 78px;
                   -webkit-box-flex: 0 0 auto;
                   -moz-box-flex: 0 0 auto;
                   -webkit-flex: 0 0 auto;
                   -ms-flex: 0 0 auto;
                   flex: 0 0 auto; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li .chiclet {
+                #app > .view.main div.people > ul > li .person main .sources ul li .chiclet {
                   font-size: 45px;
                   -webkit-transform: scale(0, 0);
                   transform: scale(0, 0);
                   position: relative;
                   z-index: 1; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li span {
+                #app > .view.main div.people > ul > li .person main .sources ul li span {
                   display: block;
                   padding-top: 5px;
                   font-size: 12px;
                   color: rgba(255, 255, 255, 0.3); }
-                #frame > .view.main div.people > ul > li .person main .sources ul li.waiting:after {
+                #app > .view.main div.people > ul > li .person main .sources ul li.waiting:after {
                   -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
                   -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
                   -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
                   -o-animation: spinner 0.5s linear 0s infinite normal forwards;
                   animation: spinner 0.5s linear 0s infinite normal forwards; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li.done:after {
+                #app > .view.main div.people > ul > li .person main .sources ul li.done:after {
                   -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
                   -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
                   -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
                   -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
                   animation: spinOut 0.5s linear 0s 1 normal forwards; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet {
+                #app > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet {
                   -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
                   -moz-animation: pop 0.5s linear 0s 1 normal forwards;
                   -ms-animation: pop 0.5s linear 0s 1 normal forwards;
                   -o-animation: pop 0.5s linear 0s 1 normal forwards;
                   animation: pop 0.5s linear 0s 1 normal forwards; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-dna {
+                  #app > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-dna {
                     color: #e74c3c; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-fit-bit {
+                  #app > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-fit-bit {
                     color: #9b59b6; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-ehr {
+                  #app > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-ehr {
                     color: #d35400; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-direction {
+                  #app > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-direction {
                     color: #f1c40f; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-medkit {
+                  #app > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-medkit {
                     color: #527EC4; }
-                  #frame > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-md-info {
+                  #app > .view.main div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-md-info {
                     color: #2ecc71; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li.done.available span {
+                #app > .view.main div.people > ul > li .person main .sources ul li.done.available span {
                   color: white; }
-                #frame > .view.main div.people > ul > li .person main .sources ul li.done:not(.available) .chiclet {
+                #app > .view.main div.people > ul > li .person main .sources ul li.done:not(.available) .chiclet {
                   -webkit-transform: scale(1, 1);
                   transform: scale(1, 1);
                   -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
@@ -1509,17 +1510,17 @@ body {
                   -o-animation: fadeIn 1s linear 0s 1 normal forwards;
                   animation: fadeIn 1s linear 0s 1 normal forwards;
                   color: rgba(255, 255, 255, 0.3); }
-  #frame > .view.main > .questions {
+  #app > .view.main > .questions {
     position: absolute;
     top: 287px;
     left: 50%;
     margin-left: -300px;
     width: 600px; }
-    #frame > .view.main > .questions ul {
+    #app > .view.main > .questions ul {
       list-style: none;
       width: 100%;
       position: relative; }
-      #frame > .view.main > .questions ul li {
+      #app > .view.main > .questions ul li {
         display: block;
         border-radius: 8px;
         font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
@@ -1535,29 +1536,29 @@ body {
         -ms-animation: fadeIn 1s linear 0s 1 normal forwards, show 0s linear 0s 1 normal forwards;
         -o-animation: fadeIn 1s linear 0s 1 normal forwards, show 0s linear 0s 1 normal forwards;
         animation: fadeIn 1s linear 0s 1 normal forwards, show 0s linear 0s 1 normal forwards; }
-        #frame > .view.main > .questions ul li:nth-child(1) {
+        #app > .view.main > .questions ul li:nth-child(1) {
           top: 30px; }
-        #frame > .view.main > .questions ul li:nth-child(2) {
+        #app > .view.main > .questions ul li:nth-child(2) {
           top: 88px; }
-        #frame > .view.main > .questions ul li:nth-child(3) {
+        #app > .view.main > .questions ul li:nth-child(3) {
           top: 146px; }
-        #frame > .view.main > .questions ul li:nth-child(4) {
+        #app > .view.main > .questions ul li:nth-child(4) {
           top: 204px; }
-        #frame > .view.main > .questions ul li:nth-child(5) {
+        #app > .view.main > .questions ul li:nth-child(5) {
           top: 262px; }
-        #frame > .view.main > .questions ul li:nth-child(6) {
+        #app > .view.main > .questions ul li:nth-child(6) {
           top: 320px; }
-        #frame > .view.main > .questions ul li:nth-child(7) {
+        #app > .view.main > .questions ul li:nth-child(7) {
           top: 378px; }
-  #frame > .view.main.digesting > .questions ul li.active {
+  #app > .view.main.digesting > .questions ul li.active {
     top: 0; }
-  #frame > .view.main.digesting > .questions ul li:not(.active) {
+  #app > .view.main.digesting > .questions ul li:not(.active) {
     -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
     -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
     -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
     -o-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
     animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards; }
-  #frame > .view.main > .response {
+  #app > .view.main > .response {
     position: absolute;
     top: 345px;
     left: 50%;
@@ -1572,21 +1573,21 @@ body {
     font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
     -webkit-overflow-scrolling: touch;
     display: none; }
-    #frame > .view.main > .response.on {
+    #app > .view.main > .response.on {
       display: block;
       -webkit-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
       -moz-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
       -ms-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
       -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
       animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards; }
-    #frame > .view.main > .response.off {
+    #app > .view.main > .response.off {
       display: block;
       -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
       -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
       -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
       -o-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
       animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards; }
-  #frame > .view.main > .know {
+  #app > .view.main > .know {
     position: absolute;
     z-index: 10;
     top: 0;
@@ -1607,7 +1608,7 @@ body {
     -ms-flex-pack: center;
     justify-content: center;
     display: none; }
-    #frame > .view.main > .know > div {
+    #app > .view.main > .know > div {
       color: white;
       font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
       -webkit-box-flex: 0 1 auto;
@@ -1615,29 +1616,29 @@ body {
       -webkit-flex: 0 1 auto;
       -ms-flex: 0 1 auto;
       flex: 0 1 auto; }
-      #frame > .view.main > .know > div header {
+      #app > .view.main > .know > div header {
         font: normal normal normal 30px/1.4em "Open Sans", sans-serif;
         border-radius: 8px 8px 0 0;
         background: rgba(255, 255, 255, 0.3);
         padding: 20px 40px; }
-        #frame > .view.main > .know > div header sup {
+        #app > .view.main > .know > div header sup {
           font: normal normal normal 10px/1.4em "Open Sans", sans-serif; }
-      #frame > .view.main > .know > div section {
+      #app > .view.main > .know > div section {
         background: rgba(255, 255, 255, 0.2);
         padding: 40px; }
-        #frame > .view.main > .know > div section ul {
+        #app > .view.main > .know > div section ul {
           margin-left: 2em;
           margin-top: 5px; }
-          #frame > .view.main > .know > div section ul li {
+          #app > .view.main > .know > div section ul li {
             margin-top: 5px; }
-        #frame > .view.main > .know > div section p:nth-child(n+2) {
+        #app > .view.main > .know > div section p:nth-child(n+2) {
           margin-top: 20px; }
-      #frame > .view.main > .know > div footer {
+      #app > .view.main > .know > div footer {
         background: rgba(255, 255, 255, 0.2);
         text-align: center;
         border-radius: 0 0 8px 8px;
         padding: 0 40px 40px 40px; }
-    #frame > .view.main > .know.on {
+    #app > .view.main > .know.on {
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
@@ -1648,7 +1649,7 @@ body {
       -ms-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
       -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
       animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards; }
-    #frame > .view.main > .know.off {
+    #app > .view.main > .know.off {
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
@@ -1659,7 +1660,7 @@ body {
       -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
       -o-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
       animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards; }
-  #frame > .view.main .lower {
+  #app > .view.main .lower {
     position: absolute;
     bottom: 60px;
     left: 50%;
@@ -1672,12 +1673,12 @@ body {
     -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
     -o-animation: fadeIn 1s linear 0s 1 normal forwards;
     animation: fadeIn 1s linear 0s 1 normal forwards; }
-    #frame > .view.main .lower button.ask {
+    #app > .view.main .lower button.ask {
       left: 0;
       margin-right: 20px; }
-    #frame > .view.main .lower button.how {
+    #app > .view.main .lower button.how {
       right: 0; }
-  #frame > .view.main > footer {
+  #app > .view.main > footer {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -1689,13 +1690,13 @@ body {
     -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
     -o-animation: fadeIn 1s linear 0s 1 normal forwards;
     animation: fadeIn 1s linear 0s 1 normal forwards; }
-    #frame > .view.main > footer img {
+    #app > .view.main > footer img {
       display: block;
       position: absolute;
       top: 0;
       height: 100%;
       padding: 15px; }
-      #frame > .view.main > footer img[src*="ibm.png"] {
+      #app > .view.main > footer img[src*="ibm.png"] {
         left: 0; }
-      #frame > .view.main > footer img[src*="pg.png"] {
+      #app > .view.main > footer img[src*="pg.png"] {
         right: 0; }

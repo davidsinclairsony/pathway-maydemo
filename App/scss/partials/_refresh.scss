@@ -1,0 +1,14 @@
+#app > .refresh {
+	position: absolute;
+	top: 40px;
+	left: 50%;
+	margin-left: -378.5px;
+	background: none;
+	z-index: 10;
+	cursor: pointer;
+	
+	img {
+		height: 25px;
+		opacity: .1;
+	}
+}
