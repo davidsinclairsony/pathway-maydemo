@@ -1,6 +1,4 @@
-$(function() {
-	console.log("-");
-	
+(function() {
 	// ------------------------------------
 	//	Models
 	
@@ -25,6 +23,44 @@ $(function() {
 		},
 		refresh: function() {
 			window.location.replace("/");
+		},
+		goTo: function(view) {
+			var previous = this.currentView || null;
+			var next = view;
+			
+			if(previous) {
+				previous.transitionOut(function () {
+					previous.remove();
+				});
+			}
+			console.log(this.$el.find(".refresh"));
+			this.$el.$(".refresh");
+			//this.transitionIn.call(next);
+			//this.currentView = next;
+		},
+		transitionIn: function(callback) {
+			var view = this;
+			
+			var transitionIn = function () {
+				view.$el.addClass('is-visible');
+				view.$el.one('transitionend', function () {
+					if (_.isFunction(callback)) {
+						callback();
+					}
+				})
+			};
+			
+			_.delay(transitionIn, 20);
+		},
+		transitionOut: function(callback) {
+			var view = this;
+			
+			view.$el.removeClass('is-visible');
+			view.$el.one('transitionend', function () {
+				if (_.isFunction(callback)) {
+					callback();
+				};
+			});
 		}
 	});
 	
@@ -35,7 +71,7 @@ $(function() {
 			
 			self.render();
 			
-			// When the last element finishes animating
+			// Fire event when animations end
 			self.$el.one(
 				"webkitAnimationEnd oanimationend msAnimationEnd animationend",
 				"p",
@@ -88,7 +124,10 @@ $(function() {
 			'*error': 'error'
 		},
 		intro: function() {
-			console.log("home");
+			console.log("intro");
+			var view = new IntroView();
+			app.instance.goTo(view);
+			
 		},
 		hello: function() {
 			console.log("hello");
@@ -101,10 +140,24 @@ $(function() {
 		}
 	});
 	
-	var app = new AppView();
-	var router = new Router();
-	Backbone.history.start({pushState: true});
+	// ------------------------------------
+	//	Setup
 	
+	window.app = {
+		Views: {},
+		Extensions: {},
+		Router: null,
+		initialize: function() {
+			this.instance = new AppView();
+			this.Router = new Router();
+			Backbone.history.start({pushState: true});
+		}
+	};
 	
+	// ------------------------------------
+	//	Initiation
 	
-});
+	$(function() {
+		window.app.initialize();
+	});
+} ());
