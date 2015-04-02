@@ -46,48 +46,65 @@
 			// Start tracking
 			Backbone.history.start({pushState: true});
 		},
+		
 		el: "#app",
+		
 		events: {
 			"click .refresh": "refresh"
 		},
+		
 		refresh: function() {
+			// For resetting everything
 			window.location.replace("/");
 		},
+		
 		goTo: function(view) {
+			// Transition from current view to new
 			var previous = this.currentView || null;
 			var next = view;
 
 			if(previous) {
-				this.transitionOut.call(previous, function () {
+				this.cssAnimate.call(previous, "fadeOut", function () {
 					previous.remove();
+					console.log("previous is out");
 				});
 			}
-			
+
 			this.$el.append(next.$el);
-			this.transitionIn.call(next);
+			this.cssAnimate.call(next, "fadeIn", function() {
+				next.$el.removeClass("fadeIn");
+				console.log("next is in");
+			});
 			this.currentView = next;
 		},
-		transitionIn: function(callback) {
-			this.$el.addClass("fadeIn");
-			this.$el.one('transitionend', function () {
-				if (_.isFunction(callback)) {
-					callback();
-				}
-			});
-		},
-		transitionOut: function(callback) {
-			var view = this;
+		
+		cssAnimate: function(cssClass, callback) {
+			// Add class for animating and executes callback
+			var self = this;
 			
-			view.$el.removeClass("fadeIn").addClass("fadeOut");
-			view.$el.one(
-				"webkitAnimationEnd oanimationend msAnimationEnd animationend",
-				function () {
-					console.log("ended");
-					if (_.isFunction(callback)) {
-						callback();
+			// Checks if correct animation has ended
+			var setAnimationListener = function() {
+				self.$el.one(
+					"webkitAnimationEnd oanimationend msAnimationEnd animationend",
+					function(e) {
+						if(
+							e.originalEvent.animationName == cssClass &&
+							e.target === e.currentTarget
+						) {
+							console.log("-----");console.log(e);console.log("-----");
+							
+							if (_.isFunction(callback)) {
+								callback();
+							}
+						} else {
+							setAnimationListener();
+						}
 					}
-				}
-			);
+				);
+			}
+			
+			self.$el.addClass(cssClass);
+			setAnimationListener();
 		}
 	});
 	
@@ -98,7 +115,7 @@
 			
 			self.render();
 			
-			// Fire event when animations end
+			// Fire event when last animation ends
 			self.$el.one(
 				"webkitAnimationEnd oanimationend msAnimationEnd animationend",
 				"p",
@@ -159,4 +176,11 @@
 		// Pretty much the controller
 		window.app = new AppView();
 	});
+	
+	$(".testing").on(
+		"webkitAnimationEnd oanimationend msAnimationEnd animationend",
+		function () {
+			console.log("some other element");
+		}
+	);
 } ());

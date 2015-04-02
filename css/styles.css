@@ -1163,6 +1163,18 @@ body {
     top: 0;
     left: 0;
     z-index: 1; }
+  #app .fadeIn {
+    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
+    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
+    animation: fadeIn 1s linear 0s 1 normal forwards; }
+  #app .fadeOut {
+    -webkit-animation: fadeOut 5s linear 0s 1 normal forwards;
+    -moz-animation: fadeOut 5s linear 0s 1 normal forwards;
+    -ms-animation: fadeOut 5s linear 0s 1 normal forwards;
+    -o-animation: fadeOut 5s linear 0s 1 normal forwards;
+    animation: fadeOut 5s linear 0s 1 normal forwards; }
 
 .button {
   cursor: pointer; }
@@ -1262,7 +1274,7 @@ body {
     animation: fadeIn 1s linear 4s 1 normal forwards; }
 
 #app > .view.hello {
-  background: #0e2038; }
+  background: rgba(14, 32, 56, 0.5); }
   #app > .view.hello .container {
     display: -webkit-box;
     display: -moz-box;
