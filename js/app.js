@@ -17,7 +17,36 @@
 	//	Views
 	
 	var AppView = Backbone.View.extend({
-		el: $("#app"),
+		initialize: function() {
+			var self = this;
+			
+			// Make templating look cooler
+			_.templateSettings = {interpolate: /\{\{(.+?)\}\}/g};
+			
+			// Start router with predefined routes
+			this.router = new Router();
+			
+			// Route actions
+			this.router.on('route:intro', function() {
+				var view = new IntroView();
+				self.goTo(view);
+				
+				// Listen for end of view
+				this.listenTo(view, "end", function() {
+					var view = new HelloView();
+					self.goTo(view);
+				});
+			});
+			
+			this.router.on('route:hello', function() {
+				var view = new HelloView();
+				self.goTo(view);
+			});
+			
+			// Start tracking
+			Backbone.history.start({pushState: true});
+		},
+		el: "#app",
 		events: {
 			"click .refresh": "refresh"
 		},
@@ -27,40 +56,38 @@
 		goTo: function(view) {
 			var previous = this.currentView || null;
 			var next = view;
-			
+
 			if(previous) {
-				previous.transitionOut(function () {
+				this.transitionOut.call(previous, function () {
 					previous.remove();
 				});
 			}
-			console.log(this.$el.find(".refresh"));
-			this.$el.$(".refresh");
-			//this.transitionIn.call(next);
-			//this.currentView = next;
+			
+			this.$el.append(next.$el);
+			this.transitionIn.call(next);
+			this.currentView = next;
 		},
 		transitionIn: function(callback) {
-			var view = this;
-			
-			var transitionIn = function () {
-				view.$el.addClass('is-visible');
-				view.$el.one('transitionend', function () {
-					if (_.isFunction(callback)) {
-						callback();
-					}
-				})
-			};
-			
-			_.delay(transitionIn, 20);
+			this.$el.addClass("fadeIn");
+			this.$el.one('transitionend', function () {
+				if (_.isFunction(callback)) {
+					callback();
+				}
+			});
 		},
 		transitionOut: function(callback) {
 			var view = this;
 			
-			view.$el.removeClass('is-visible');
-			view.$el.one('transitionend', function () {
-				if (_.isFunction(callback)) {
-					callback();
-				};
-			});
+			view.$el.removeClass("fadeIn").addClass("fadeOut");
+			view.$el.one(
+				"webkitAnimationEnd oanimationend msAnimationEnd animationend",
+				function () {
+					console.log("ended");
+					if (_.isFunction(callback)) {
+						callback();
+					}
+				}
+			);
 		}
 	});
 	
@@ -122,42 +149,14 @@
 			"hello": "hello",
 			"conversation": "conversation",
 			'*error': 'error'
-		},
-		intro: function() {
-			console.log("intro");
-			var view = new IntroView();
-			app.instance.goTo(view);
-			
-		},
-		hello: function() {
-			console.log("hello");
-		},
-		conversation: function() {
-			console.log("conversation");
-		},
-		error: function() {
-			console.log("error");
 		}
 	});
-	
-	// ------------------------------------
-	//	Setup
-	
-	window.app = {
-		Views: {},
-		Extensions: {},
-		Router: null,
-		initialize: function() {
-			this.instance = new AppView();
-			this.Router = new Router();
-			Backbone.history.start({pushState: true});
-		}
-	};
 	
 	// ------------------------------------
 	//	Initiation
 	
 	$(function() {
-		window.app.initialize();
+		// Pretty much the controller
+		window.app = new AppView();
 	});
 } ());
