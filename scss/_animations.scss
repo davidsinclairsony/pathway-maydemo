@@ -1,3 +1,11 @@
+.fadeIn {
+	@include animation(fadeIn .5s linear 0s 1 normal forwards);
+}
+
+.fadeOut {
+	@include animation(fadeOut .5s linear 0s 1 normal forwards);
+}
+
 @include keyframes(fadeIn) {
 	0% {opacity: 0;}
 	100% {opacity: 1;}

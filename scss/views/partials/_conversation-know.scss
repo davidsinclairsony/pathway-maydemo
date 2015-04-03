@@ -58,7 +58,7 @@
 	
 	&.on {
 		@include flexbox();
-		@include animation(show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards);
+		@include animation(show 0s linear 0s 1 normal forwards, fadeIn .5s linear 0s 1 normal forwards);
 	}
 	
 	&.off {

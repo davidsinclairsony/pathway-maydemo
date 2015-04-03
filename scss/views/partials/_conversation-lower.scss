@@ -6,7 +6,6 @@
 	padding: 20px;
 	width: 768px;
 	text-align: center;
-	@include animation(fadeIn 1s linear 0s 1 normal forwards);
 	
 	button {
 		&.ask {

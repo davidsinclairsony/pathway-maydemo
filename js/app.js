@@ -2,17 +2,14 @@
 	// ------------------------------------
 	//	Models
 	
-	// Person model
-	var Person = Backbone.Model.extend({});
-	
-	// People collection
-	var People = Backbone.Collection.extend({
-		model: Person,
-		localStorage: new Backbone.LocalStorage("maydemo-backbone")
+	var Question = Backbone.Model.extend({
+		
 	});
 	
-	var people = new People();
-
+	var Questions = Backbone.Collection.extend({
+		model: Question
+	});
+	
 	// ------------------------------------
 	//	Views
 	
@@ -78,7 +75,7 @@
 				});
 			}
 
-			this.$el.append(next.$el);
+			this.$el.append(next.el);
 			this.cssAnimate.call(next, "fadeIn", function() {
 				next.$el.removeClass("fadeIn");
 			});
@@ -130,7 +127,7 @@
 		render: function() {
 			var self = this;
 
-			$.get("templates/intro.html", function(data) {
+			$.get("/templates/intro.html", function(data) {
 				self.$el.html(data);
 			}, 'html');
 			
@@ -146,13 +143,14 @@
 			self.render();
 			
 			// Button to end
-			self.$el.one("click", "button", function() {self.trigger("end");}
-			);
+			self.$el.one("click", "button", function() {
+				self.trigger("end");
+			});
 		},
 		render: function() {
 			var self = this;
 
-			$.get("templates/hello.html", function(data) {
+			$.get("/templates/hello.html", function(data) {
 				self.$el.html(data);
 			}, 'html');
 			
@@ -163,22 +161,61 @@
 	var ConversationView = Backbone.View.extend({
 		className: "view conversation selecting",
 		initialize: function() {
-			var self = this;
+			this.render();
 			
-			self.render();
+			// Child views
+			this.questions = new QuestionsView();
+			this.$el.append(this.questions.el);
+			
 		},
 		render: function() {
 			var self = this;
 
-			$.get("templates/conversation.html", function(data) {
-				self.$el.html(data);
+			$.get("/templates/conversation.html", function(data) {
+				self.$el.append(data);
 			}, 'html');
 			
 			return self;
 		},
 		events: {
+			"click .ask": "showQuestions",
+			"click .how, footer .close": "howToggler"
+		},
+		howToggler: function() {
+			var $know = this.$(".know");
 			
+			$know.toggleClass("off", $know.hasClass("on"));
+			$know.toggleClass("on", !$know.hasClass("on"));
 		}
+	});
+	
+	var QuestionsView = Backbone.View.extend({
+		className: "questions",
+		initialize: function() {
+			var self = this;
+			
+			$.getJSON("/js/json/questions.js", function(data) {
+				self.questions = new Questions(data);
+				this.render();
+			});
+		},
+		render: function() {
+			Todos.each(this.addOne, this);
+			
+			return self;
+		},
+	});
+	
+	var QuestionView = Backbone.View.extend({
+		tag: "li",
+		template: _.template("{{text}}"),
+		initialize: function() {
+			this.render();
+		},
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		},
 	});
 	
 	// ------------------------------------

@@ -4,7 +4,6 @@ div.people {
 	left: 50%;
 	margin-left: -384px;
 	width: 100%;
-	@include animation(fadeIn 1s linear 0s 1 normal forwards);
 	
 	
 	> ul {

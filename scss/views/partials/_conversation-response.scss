@@ -13,14 +13,4 @@
 	font: normal normal 300 20px/#{$f-1-l-h} $f-1;
 	-webkit-overflow-scrolling: touch;
 	display: none;
-	
-	&.on {
-		display: block;
-		@include animation(show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards);
-	}
-	
-	&.off {
-		display: block;
-		@include animation(fadeOut .5s linear 0s 1 normal forwards, hide 0s linear .5s 1 normal forwards);
-	}
 }

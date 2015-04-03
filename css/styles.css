@@ -703,6 +703,20 @@
   content: '\e805'; }
 
 /* '' */
+.fadeIn {
+  -webkit-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  animation: fadeIn 0.5s linear 0s 1 normal forwards; }
+
+.fadeOut {
+  -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards;
+  -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards;
+  -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards;
+  -o-animation: fadeOut 0.5s linear 0s 1 normal forwards;
+  animation: fadeOut 0.5s linear 0s 1 normal forwards; }
+
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0; }
@@ -1163,18 +1177,6 @@ body {
     top: 0;
     left: 0;
     z-index: 1; }
-  #app .fadeOut {
-    -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards;
-    -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards;
-    -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards;
-    -o-animation: fadeOut 0.5s linear 0s 1 normal forwards;
-    animation: fadeOut 0.5s linear 0s 1 normal forwards; }
-  #app .fadeIn {
-    -webkit-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-    -moz-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-    -ms-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-    -o-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-    animation: fadeIn 0.5s linear 0s 1 normal forwards; }
 
 .button {
   cursor: pointer; }
@@ -1360,12 +1362,7 @@ body {
     left: 50%;
     margin-left: -384px;
     width: 768px;
-    text-align: center;
-    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
-    animation: fadeIn 1s linear 0s 1 normal forwards; }
+    text-align: center; }
     #app > .view.conversation > header img {
       height: 25px;
       display: block;
@@ -1375,12 +1372,7 @@ body {
     top: 105px;
     left: 50%;
     margin-left: -384px;
-    width: 100%;
-    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
-    animation: fadeIn 1s linear 0s 1 normal forwards; }
+    width: 100%; }
     #app > .view.conversation div.people > ul {
       list-style: none;
       position: absolute;
@@ -1585,20 +1577,6 @@ body {
     font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
     -webkit-overflow-scrolling: touch;
     display: none; }
-    #app > .view.conversation > .response.on {
-      display: block;
-      -webkit-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      -moz-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      -ms-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards; }
-    #app > .view.conversation > .response.off {
-      display: block;
-      -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
-      -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
-      -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
-      -o-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
-      animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards; }
   #app > .view.conversation > .know {
     position: absolute;
     z-index: 10;
@@ -1656,11 +1634,11 @@ body {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      -webkit-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      -moz-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      -ms-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards;
-      animation: show 0s linear 0s 1 normal forwards, fadeIn 1s linear 0s 1 normal forwards; }
+      -webkit-animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
+      -moz-animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
+      -ms-animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
+      -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
+      animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards; }
     #app > .view.conversation > .know.off {
       display: -webkit-box;
       display: -moz-box;
@@ -1679,12 +1657,7 @@ body {
     margin-left: -384px;
     padding: 20px;
     width: 768px;
-    text-align: center;
-    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
-    animation: fadeIn 1s linear 0s 1 normal forwards; }
+    text-align: center; }
     #app > .view.conversation .lower button.ask {
       left: 0;
       margin-right: 20px; }
@@ -1696,12 +1669,7 @@ body {
     left: 50%;
     margin-left: -384px;
     width: 768px;
-    height: 60px;
-    -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
-    -o-animation: fadeIn 1s linear 0s 1 normal forwards;
-    animation: fadeIn 1s linear 0s 1 normal forwards; }
+    height: 60px; }
     #app > .view.conversation > footer img {
       display: block;
       position: absolute;
