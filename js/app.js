@@ -18,9 +18,6 @@
 		initialize: function() {
 			var self = this;
 			
-			// Make templating look cooler
-			_.templateSettings = {interpolate: /\{\{(.+?)\}\}/g};
-			
 			// Start router with predefined routes
 			this.router = new Router();
 			
@@ -196,23 +193,41 @@
 			
 			$.getJSON("/js/json/questions.js", function(data) {
 				self.questions = new Questions(data);
-				this.render();
+				self.views = [];
+				
+				// Create question views
+				self.questions.each(function(model) {
+					self.views.push(new QuestionView({
+						model: model
+					}));
+				});
+				
+				self.render();
 			});
 		},
 		render: function() {
-			Todos.each(this.addOne, this);
+			this.$el.empty();
+			
+			var container = document.createDocumentFragment();
+			// Render each question and add at end
+			_.each(this.views, function(view) {
+				container.appendChild(view.el);
+			});
+			
+			this.$el.append(container);
 			
 			return self;
 		},
 	});
 	
 	var QuestionView = Backbone.View.extend({
-		tag: "li",
-		template: _.template("{{text}}"),
+		tagName: "li",
+		template: _.template("<%- text %>"),
 		initialize: function() {
 			this.render();
 		},
 		render: function() {
+			console.log(this.model.toJSON());
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		},
