@@ -26,11 +26,11 @@
 		z-index: 1;
 	}
 	
-	.fadeIn {
-		@include animation(fadeIn 1s linear 0s 1 normal forwards);
+	.fadeOut {
+		@include animation(fadeOut .5s linear 0s 1 normal forwards);
 	}
 	
-	.fadeOut {
-		@include animation(fadeOut 5s linear 0s 1 normal forwards);
+	.fadeIn {
+		@include animation(fadeIn .5s linear 0s 1 normal forwards);
 	}
 }

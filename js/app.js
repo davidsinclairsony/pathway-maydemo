@@ -63,17 +63,16 @@
 			var previous = this.currentView || null;
 			var next = view;
 
+			// Hide the current view
 			if(previous) {
 				this.cssAnimate.call(previous, "fadeOut", function () {
 					previous.remove();
-					console.log("previous is out");
 				});
 			}
 
 			this.$el.append(next.$el);
 			this.cssAnimate.call(next, "fadeIn", function() {
 				next.$el.removeClass("fadeIn");
-				console.log("next is in");
 			});
 			this.currentView = next;
 		},
@@ -82,17 +81,16 @@
 			// Add class for animating and executes callback
 			var self = this;
 			
-			// Checks if correct animation has ended
+			// Sets a new listener
 			var setAnimationListener = function() {
 				self.$el.one(
 					"webkitAnimationEnd oanimationend msAnimationEnd animationend",
 					function(e) {
+						// Check if event is significant
 						if(
 							e.originalEvent.animationName == cssClass &&
 							e.target === e.currentTarget
 						) {
-							console.log("-----");console.log(e);console.log("-----");
-							
 							if (_.isFunction(callback)) {
 								callback();
 							}
