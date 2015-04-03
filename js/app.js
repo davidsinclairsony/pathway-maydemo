@@ -17,6 +17,7 @@
 	//	Views
 	
 	var AppView = Backbone.View.extend({
+		el: "#app",
 		initialize: function() {
 			var self = this;
 			
@@ -27,37 +28,44 @@
 			this.router = new Router();
 			
 			// Route actions
-			this.router.on('route:intro', function() {
+			this.router.on("route:intro", function() {
 				var view = new IntroView();
+				
 				self.goTo(view);
 				
 				// Listen for end of view
-				this.listenTo(view, "end", function() {
-					var view = new HelloView();
-					self.goTo(view);
+				self.listenTo(view, "end", function() {
+					self.router.navigate("hello", {trigger: true});
 				});
 			});
 			
-			this.router.on('route:hello', function() {
+			this.router.on("route:hello", function() {
 				var view = new HelloView();
+				
+				self.goTo(view);
+				
+				// Listen for end of view
+				self.listenTo(view, "end", function() {
+					self.router.navigate("conversation", {trigger: true});
+				});
+			});
+			
+			this.router.on("route:conversation", function() {
+				var view = new ConversationView();
+				
 				self.goTo(view);
 			});
 			
 			// Start tracking
 			Backbone.history.start({pushState: true});
 		},
-		
-		el: "#app",
-		
 		events: {
 			"click .refresh": "refresh"
 		},
-		
 		refresh: function() {
 			// For resetting everything
 			window.location.replace("/");
 		},
-		
 		goTo: function(view) {
 			// Transition from current view to new
 			var previous = this.currentView || null;
@@ -76,7 +84,6 @@
 			});
 			this.currentView = next;
 		},
-		
 		cssAnimate: function(cssClass, callback) {
 			// Add class for animating and executes callback
 			var self = this;
@@ -137,6 +144,10 @@
 			var self = this;
 			
 			self.render();
+			
+			// Button to end
+			self.$el.one("click", "button", function() {self.trigger("end");}
+			);
 		},
 		render: function() {
 			var self = this;
@@ -146,12 +157,27 @@
 			}, 'html');
 			
 			return self;
+		}
+	});
+	
+	var ConversationView = Backbone.View.extend({
+		className: "view conversation selecting",
+		initialize: function() {
+			var self = this;
+			
+			self.render();
+		},
+		render: function() {
+			var self = this;
+
+			$.get("templates/conversation.html", function(data) {
+				self.$el.html(data);
+			}, 'html');
+			
+			return self;
 		},
 		events: {
-			"click button": "end"
-		},
-		end: function() {
-			this.trigger("end");
+			
 		}
 	});
 	
