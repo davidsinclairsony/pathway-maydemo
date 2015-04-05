@@ -1,10 +1,14 @@
 (function() {
+	// Mustache style templating
+	_.templateSettings = {interpolate: /\{\{(.+?)\}\}/g};
+	
 	// ------------------------------------
 	//	Models
 	
-	var Question = Backbone.Model.extend({
-		
-	});
+	var Question = Backbone.Model.extend({});
+	
+	// ------------------------------------
+	//	Collections
 	
 	var Questions = Backbone.Collection.extend({
 		model: Question
@@ -100,7 +104,7 @@
 						}
 					}
 				);
-			}
+			};
 			
 			self.$el.addClass(cssClass);
 			setAnimationListener();
@@ -163,7 +167,7 @@
 			// Child views
 			this.questions = new QuestionsView();
 			this.$el.append(this.questions.el);
-			
+			this.listenTo(this.questions, "digesting", this.switchToDigesting);
 		},
 		render: function() {
 			var self = this;
@@ -176,18 +180,30 @@
 		},
 		events: {
 			"click .ask": "showQuestions",
-			"click .how, footer .close": "howToggler"
+			"click .how, footer .close": "howToggler",
+			"questionShown": "getResponse",
+			"questionHid": "hideResponse"
 		},
 		howToggler: function() {
 			var $know = this.$(".know");
 			
 			$know.toggleClass("off", $know.hasClass("on"));
 			$know.toggleClass("on", !$know.hasClass("on"));
+		},
+		getResponse: function() {
+			console.log("get res");
+		},
+		hideResponse: function() {
+			console.log("hide res");
+		},
+		showQuestions: function() {
+			this.questions.toggleState();
 		}
 	});
 	
 	var QuestionsView = Backbone.View.extend({
 		className: "questions",
+		tagName: "ul",
 		initialize: function() {
 			var self = this;
 			
@@ -197,9 +213,7 @@
 				
 				// Create question views
 				self.questions.each(function(model) {
-					self.views.push(new QuestionView({
-						model: model
-					}));
+					self.views.push(new QuestionView({model: model}));
 				});
 				
 				self.render();
@@ -209,6 +223,7 @@
 			this.$el.empty();
 			
 			var container = document.createDocumentFragment();
+			
 			// Render each question and add at end
 			_.each(this.views, function(view) {
 				container.appendChild(view.el);
@@ -218,19 +233,89 @@
 			
 			return self;
 		},
+		events: {
+			"questionClicked": "questionClicked"
+		},
+		questionClicked: function(event, objects) {
+			// Save view that was selected
+			this.selectedQuestion = objects.selectedQuestion;
+			
+			// Toggle state of view
+			this.toggleState();
+		},
+		toggleState: function() {
+			var self = this;
+
+			// Determine current state
+			if(this.selected !== true) {
+				this.selected = true;
+				
+				// Bubble up the event
+				this.$el.trigger("questionShown");
+				
+// make these into new functions, like questionSelected: ... and questionDeselected: ..
+				_.each(this.views, function(view) {
+					if(view == self.selectedQuestion) {
+						// Save current offset
+						var currentOffset = self.selectedQuestion.$el.offset();
+						
+						self.selectedQuestion.$el.css("position", "absolute");
+						
+						// Save desired offset
+						var desiredOffset = self.selectedQuestion.$el.offset();
+						
+						// Reset positioning and move question
+						self.selectedQuestion.$el
+							.css("position", "relative")
+							.animate({top: desiredOffset.top - currentOffset.top}, 500, "linear")
+						;
+					} else {
+						// Hide all other questions
+						window.app.cssAnimate.call(view, "fadeOut", function () {
+							view.$el.removeClass("fadeOut");
+							view.$el.css("visibility", "hidden");
+						});
+					}
+				});
+			} else {
+				this.selected = false;
+				
+				// Bubble up the event
+				this.$el.trigger("questionHid");
+				
+				_.each(this.views, function(view) {
+					if(view == self.selectedQuestion) {
+						// Move question back
+						self.selectedQuestion.$el.animate({top: 0}, 500, "linear");
+					} else {
+						view.$el.css("visibility", "visible");
+						
+						// Reveal other questions
+						window.app.cssAnimate.call(view, "fadeIn", function () {
+							view.$el.removeClass("fadeIn");
+						});
+					}
+				});
+			}
+		}
 	});
 	
 	var QuestionView = Backbone.View.extend({
 		tagName: "li",
-		template: _.template("<%- text %>"),
+		template: _.template("{{ text }}"),
 		initialize: function() {
 			this.render();
 		},
 		render: function() {
-			console.log(this.model.toJSON());
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		},
+		events: {
+			"click": "clicked"
+		},
+		clicked: function() {
+			this.$el.trigger("questionClicked", {selectedQuestion: this});
+		}
 	});
 	
 	// ------------------------------------
@@ -252,11 +337,4 @@
 		// Pretty much the controller
 		window.app = new AppView();
 	});
-	
-	$(".testing").on(
-		"webkitAnimationEnd oanimationend msAnimationEnd animationend",
-		function () {
-			console.log("some other element");
-		}
-	);
 } ());

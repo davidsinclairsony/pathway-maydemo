@@ -1,5 +1,5 @@
 #app > .view.hello {
-	background: rgba(14, 32, 56, .5);
+	background: rgb(14, 32, 56);
 	
 	.container {
 		@include flexbox();

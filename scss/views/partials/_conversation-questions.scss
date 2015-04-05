@@ -1,50 +1,22 @@
-> .questions {
+> ul.questions {
 	position: absolute;
 	top: 287px;
 	left: 50%;
 	margin-left: -300px;
 	width: 600px;
+	list-style: none;
 	
-	ul {
-		list-style: none;
-		width: 100%;
+	li {
+		border-radius: 8px;
+		font: normal normal 300 20px/#{$f-1-l-h} $f-1;
+		padding: 10px 20px;
+		background: rgba(255, 255, 255, .3);
+		color: white;
 		position: relative;
+		top: 0;
 		
-		li {
-			display: block;
-			border-radius: 8px;
-			font: normal normal 300 20px/#{$f-1-l-h} $f-1;
-			padding: 10px 20px;
-			background: rgba(255, 255, 255, .3);
-			color: white;
-			width: 100%;
-			position: absolute;
-			left: 0;
-			transition: 1s;
-			@include animation(fadeIn 1s linear 0s 1 normal forwards, show 0s linear 0s 1 normal forwards);
-			
-			$questions: 8;
-			@for $i from 1 to $questions {
-				&:nth-child(#{$i}) {
-					top: #{(($i - 1) * 48) + (($i - 1) * 10) + 30}px;
-				}
-			}
-		}
-	}
-}
-
-&.digesting {
-	> .questions {
-		ul {
-			li {
-				&.active {
-					top: 0;
-				}
-				
-				&:not(.active) {
-					@include animation(fadeOut .5s linear 0s 1 normal forwards, hide 0s linear .5s 1 normal forwards);
-				}
-			}
+		&:nth-last-child(n + 2) {
+			margin-bottom: 10px;
 		}
 	}
 }
