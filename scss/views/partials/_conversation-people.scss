@@ -1,149 +1,139 @@
-div.people {
+ul.people {
 	position: absolute;
 	top: 105px;
-	left: 50%;
-	margin-left: -384px;
-	width: 100%;
+	list-style: none;
+	left: -556px;
+	white-space: nowrap;
+	font-size: 0;
 	
-	> ul {
-		list-style: none;
-		position: absolute;
-		top: 0;
-		left: -556px;
-		white-space: nowrap;
-		font-size: 0;
+	> li {
+		display: inline-block;
+		width: 600px;
+		color: white;
 		
-		> li {
-			display: inline-block;
-			width: 600px;
-			color: white;
+		&:nth-child(n + 2) {
+			margin-left: 40px;
+		}
+		
+		header {
+			background: rgba(255, 255, 255, .3);
+			padding: 10px 20px;
+			border-radius: 8px 8px 0 0;
+			position: relative;
 			
-			&:nth-child(n + 2) {
-				margin-left: 40px;
+			h2 {
+				font: normal normal 300 20px/#{$f-1-l-h} $f-1;
 			}
 			
-			.person {
-				header {
-					background: rgba(255, 255, 255, .3);
-					padding: 10px 20px;
-					border-radius: 8px 8px 0 0;
-					position: relative;
-					
-					h2 {
-						font: normal normal 300 20px/#{$f-1-l-h} $f-1;
-					}
-					
-					div {
-						opacity: .7;
-						font: normal normal 300 14px/#{$f-1-l-h} $f-1;
-					}
-					
-					aside {
-						position: absolute;
-						top: 9px;
-						right: 0;
-						padding: 10px 20px;
-					}
-				}
+			div {
+				opacity: .7;
+				font: normal normal 300 14px/#{$f-1-l-h} $f-1;
+			}
+			
+			aside {
+				position: absolute;
+				top: 9px;
+				right: 0;
+				padding: 10px 20px;
+			}
+		}
+		
+		main {
+			@include flexbox();
+			padding: 20px 0 13px 20px;
+			background: rgba(255, 255, 255, .2);
+			border-radius: 0 0 8px 8px;
+			
+			.picture {
+				width: 66px;
+				@include flex(0 0 auto);
 				
-				main {
+				img {
+					width: 100%;
+					border-radius: 4px;
+					display: block;
+				}
+			}
+
+			.sources {
+				@include flex(1);
+				padding: 0 0 0 10px;
+				
+				ul {
+					list-style: none;
 					@include flexbox();
-					padding: 20px 0 13px 20px;
-					background: rgba(255, 255, 255, .2);
-					border-radius: 0 0 8px 8px;
 					
-					.picture {
-						width: 66px;
-						@include flex(0 0 auto);
-						
-						img {
-							width: 100%;
-							border-radius: 4px;
-							display: block;
-						}
-					}
-	
-					.sources {
+					li {
 						@include flex(1);
-						padding: 0 0 0 10px;
+						text-align: center;
+						position: relative;
 						
-						ul {
-							list-style: none;
-							@include flexbox();
+						&:after {
+							border-radius: 50%;
+							border: 3px solid white;
+							border-bottom-color: transparent;
+							border-right-color: transparent;
+							height: 40px;
+							width: 40px;
+							content: "";
+							position: absolute;
+							top: 0;
+							left: 20px;
+							z-index: 0;
+						}
+						
+						&:last-child {
+							width: 78px;
+							@include flex(0 0 auto);
+						}
+						
+						.chiclet {
+							font-size: 45px;
+							@include transform(scale(0, 0));
+							position: relative;
+							z-index: 1;
+						}
+						
+						span {
+							display: block;
+							padding-top: 5px;
+							font-size: 12px;
+							color: rgba(255, 255, 255, .3);
+						}
+						
+						&.waiting {
+							&:after {
+								@include animation(spinner .5s linear 0s infinite normal forwards);
+							}
+						}
+						
+						&.done {
+							&:after {
+								@include animation(spinOut .5s linear 0s 1 normal forwards);
+							}
 							
-							li {
-								@include flex(1);
-								text-align: center;
-								position: relative;
-								
-								&:after {
-									border-radius: 50%;
-									border: 3px solid white;
-									border-bottom-color: transparent;
-									border-right-color: transparent;
-									height: 40px;
-									width: 40px;
-									content: "";
-									position: absolute;
-									top: 0;
-									left: 20px;
-									z-index: 0;
-								}
-								
-								&:last-child {
-									width: 78px;
-									@include flex(0 0 auto);
-								}
-								
+							&.available {
 								.chiclet {
-									font-size: 45px;
-									@include transform(scale(0, 0));
-									position: relative;
-									z-index: 1;
+									@include animation(pop .5s linear 0s 1 normal forwards);
+									
+									&.icon-dna {color:#e74c3c;}
+									&.icon-fit-bit {color:#9b59b6;}
+									&.icon-ehr {color:#d35400;}
+									&.icon-direction {color:#f1c40f;}
+									&.icon-medkit {color:#527EC4;}
+									&.icon-md-info {color:#2ecc71;}
 								}
 								
 								span {
-									display: block;
-									padding-top: 5px;
-									font-size: 12px;
+									color: white;
+								}
+							}
+							
+							&:not(.available) {
+								.chiclet {
+									@include transform(scale(1, 1));
+									@include animation(fadeIn 1s linear 0s 1 normal forwards);
 									color: rgba(255, 255, 255, .3);
-								}
-								
-								&.waiting {
-									&:after {
-										@include animation(spinner .5s linear 0s infinite normal forwards);
-									}
-								}
-								
-								&.done {
-									&:after {
-										@include animation(spinOut .5s linear 0s 1 normal forwards);
-									}
-									
-									&.available {
-										.chiclet {
-											@include animation(pop .5s linear 0s 1 normal forwards);
-											
-											&.icon-dna {color:#e74c3c;}
-											&.icon-fit-bit {color:#9b59b6;}
-											&.icon-ehr {color:#d35400;}
-											&.icon-direction {color:#f1c40f;}
-											&.icon-medkit {color:#527EC4;}
-											&.icon-md-info {color:#2ecc71;}
-										}
-										
-										span {
-											color: white;
-										}
-									}
-									
-									&:not(.available) {
-										.chiclet {
-											@include transform(scale(1, 1));
-											@include animation(fadeIn 1s linear 0s 1 normal forwards);
-											color: rgba(255, 255, 255, .3);
-										}
-									}
 								}
 							}
 						}

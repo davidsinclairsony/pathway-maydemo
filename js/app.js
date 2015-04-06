@@ -5,13 +5,19 @@
 	// ------------------------------------
 	//	Models
 	
-	var Question = Backbone.Model.extend({});
+	var QuestionModel = Backbone.Model.extend({});
+	
+	var PersonModel = Backbone.Model.extend({});
 	
 	// ------------------------------------
 	//	Collections
 	
-	var Questions = Backbone.Collection.extend({
-		model: Question
+	var QuestionsCollection = Backbone.Collection.extend({
+		model: QuestionModel
+	});
+	
+	var PeopleCollection = Backbone.Collection.extend({
+		model: PersonModel
 	});
 	
 	// ------------------------------------
@@ -27,31 +33,31 @@
 			
 			// Route actions
 			this.router.on("route:intro", function() {
-				var view = new IntroView();
+				var introView = new IntroView();
 				
-				self.goTo(view);
+				self.goTo(introView);
 				
 				// Listen for end of view
-				self.listenTo(view, "end", function() {
+				self.listenTo(introView, "end", function() {
 					self.router.navigate("hello", {trigger: true});
 				});
 			});
 			
 			this.router.on("route:hello", function() {
-				var view = new HelloView();
+				var helloView = new HelloView();
 				
-				self.goTo(view);
+				self.goTo(helloView);
 				
 				// Listen for end of view
-				self.listenTo(view, "end", function() {
+				self.listenTo(helloView, "end", function() {
 					self.router.navigate("conversation", {trigger: true});
 				});
 			});
 			
 			this.router.on("route:conversation", function() {
-				var view = new ConversationView();
+				var conversationView = new ConversationView();
 				
-				self.goTo(view);
+				self.goTo(conversationView);
 			});
 			
 			// Start tracking
@@ -130,7 +136,7 @@
 
 			$.get("/templates/intro.html", function(data) {
 				self.$el.html(data);
-			}, 'html');
+			});
 			
 			return self;
 		}
@@ -153,7 +159,7 @@
 
 			$.get("/templates/hello.html", function(data) {
 				self.$el.html(data);
-			}, 'html');
+			});
 			
 			return self;
 		}
@@ -165,26 +171,30 @@
 			this.render();
 			
 			// Child views
-			this.questions = new QuestionsView();
-			this.$el.append(this.questions.el);
+			this.peopleView = new PeopleView();
+			this.$el.append(this.peopleView.el);
 			
-			this.response = new ResponseView();
-			this.$el.append(this.response.el);
+			this.questionsView = new QuestionsView();
+			this.$el.append(this.questionsView.el);
+			
+			this.responseView = new ResponseView();
+			this.$el.append(this.responseView.el);
 		},
 		render: function() {
 			var self = this;
 
 			$.get("/templates/conversation.html", function(data) {
 				self.$el.append(data);
-			}, 'html');
+			});
 			
 			return self;
 		},
 		events: {
 			"click .ask": "askAnotherQuestion",
 			"click .how, footer .close": "howToggler",
-			"hidAllExceptSelectedQuestion": "prepareResponse",
-			"revealedAllQuestions": "hideResponse"
+			"hidAllExceptSelectedQuestion": "prepareForResponse",
+			"revealedAllQuestions": "hideResponse",
+			"dataSourced": "getAndShowResponse"
 		},
 		howToggler: function() {
 			var $know = this.$(".know");
@@ -193,13 +203,28 @@
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
 		askAnotherQuestion: function() {
-			this.questions.revealAllQuestions();
+			this.questionsView.revealAllQuestions();
 		},
-		prepareResponse: function() {
-			this.response.revealResponse(this.questions.selectedQuestion);
+		prepareForResponse: function() {
+			this.responseView.prepare(this.questionsView.selectedQuestion);
+			
+			// This will start the chiclets loading
+			//this.peeople.selectedPerson.obtainData();
+			
+			// For testing purposes
+			var self = this;
+			setTimeout(function() {
+				//self.getAndShowResponse();
+			}, 500);
+		},
+		getAndShowResponse: function() {
+			this.responseView.getAndShow(
+				this.peopleView.selectedPerson,
+				this.questionsView.selectedQuestion
+			);
 		},
 		hideResponse: function() {
-			this.response.hideResponse(this.questions.selectedQuestion);
+			this.responseView.hideResponse();
 		}
 	});
 	
@@ -210,11 +235,11 @@
 			var self = this;
 			
 			$.getJSON("/js/json/questions.js", function(data) {
-				self.questions = new Questions(data);
+				self.questionsCollection = new QuestionsCollection(data);
 				self.views = [];
 				
 				// Create question views
-				self.questions.each(function(model) {
+				self.questionsCollection.each(function(model) {
 					self.views.push(new QuestionView({model: model}));
 				});
 				
@@ -335,14 +360,16 @@
 			return this;
 		},
 		setToLoading: function() {
-			this.$el.html('<div class="spinner loading"><div></div></div>');
+			this.$el.addClass("spinner");
 		},
-		revealResponse: function(answer) {
+		// make a reveal loading and reveal response, so that went chiclets loading we just wait
+		// the reveal response function will not show unless ajax request done and chiclet done
+		prepare: function(answer) {
 			var self = this;
 			
 			// Adjust size of answer area based on question size
 			var top = answer.$el.parent().offset().top + answer.$el.outerHeight() + 10;
-			var height = 550 - answer.$el.outerHeight() 
+			var height = 520 - answer.$el.outerHeight();
 			
 			self.$el.css({
 				display: "block",
@@ -353,20 +380,27 @@
 			window.app.cssAnimate.call(self.$el, "fadeIn", function () {
 				self.$el.removeClass("fadeIn");
 			});
+		},
+		getAndShow: function(person, question) {
+			var self = this;
+			
+			requestData = "sdsd"; // Whatever needs sending
 			
 			// Get the answer
 			var ajax = $.getJSON(
-				"/js/json/answers.js",
-				answer.model.attributes,
+				"/js/json/answer.js",
+				requestData,
 				function(data) {
-					// Add in answer
-					self.$el.append(data[0].people[0]);
+					self.$el.append(data.text[0]);
+					console.log(data);
 				}
-			).fail(function() {
-				self.$el.append("Sorry, Watson is currently unreachable.");
+			).fail(function(data) {
+				self.$el.append("Sorry, the server is currently unreachable.");
+				console.log(data);
 			})
 			.always(function() {
 				// Gracefully hide spinner
+// make spinner load from classes!
 				self.$(".spinner").toggleClass("loading");
 				
 				window.app.cssAnimate.call(self.$(".spinner"), "done", function () {
@@ -381,6 +415,62 @@
 				self.$el.removeClass("fadeOut").css("display", "none");
 				self.setToLoading();
 			});
+		}
+	});
+	
+	var PeopleView = Backbone.View.extend({
+		className: "people",
+		tagName: "ul",
+		initialize: function() {
+			var self = this;
+			
+			$.getJSON("/js/json/people.js", function(data) {
+				self.peopleCollection = new PeopleCollection(data);
+				self.views = [];
+				
+				// Create person views
+				self.peopleCollection.each(function(model) {
+					self.views.push(new PersonView({model: model}));
+				});
+				
+				self.render();
+			});
+		},
+		render: function() {
+			this.$el.empty();
+			
+			var container = document.createDocumentFragment();
+
+			// Render each person and add at end
+			_.each(this.views, function(view) {
+				container.appendChild(view.el);
+			});
+			
+			this.$el.append(container);
+			
+			return self;
+		}
+	});
+	
+	var PersonView = Backbone.View.extend({
+		tagName: "li",
+		initialize: function() {
+			var self = this;
+			
+			$.get("/templates/conversation/people/person.html", function(data) {
+				self.template = _.template(data);
+				self.render();
+			});
+		},
+		render: function() {
+			this.$el.html(this.template(this.model.toJSON()));
+			return this;
+		},
+		events: {
+			"click": "clicked"
+		},
+		clicked: function() {
+			console.log("yow!!");
 		}
 	});
 	

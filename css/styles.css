@@ -1368,156 +1368,150 @@ body {
       height: 25px;
       display: block;
       margin: 0 auto; }
-  #app > .view.conversation div.people {
+  #app > .view.conversation ul.people {
     position: absolute;
     top: 105px;
-    left: 50%;
-    margin-left: -384px;
-    width: 100%; }
-    #app > .view.conversation div.people > ul {
-      list-style: none;
-      position: absolute;
-      top: 0;
-      left: -556px;
-      white-space: nowrap;
-      font-size: 0; }
-      #app > .view.conversation div.people > ul > li {
-        display: inline-block;
-        width: 600px;
-        color: white; }
-        #app > .view.conversation div.people > ul > li:nth-child(n+2) {
-          margin-left: 40px; }
-        #app > .view.conversation div.people > ul > li .person header {
-          background: rgba(255, 255, 255, 0.3);
-          padding: 10px 20px;
-          border-radius: 8px 8px 0 0;
-          position: relative; }
-          #app > .view.conversation div.people > ul > li .person header h2 {
-            font: normal normal 300 20px/1.4em "Open Sans", sans-serif; }
-          #app > .view.conversation div.people > ul > li .person header div {
-            opacity: 0.7;
-            font: normal normal 300 14px/1.4em "Open Sans", sans-serif; }
-          #app > .view.conversation div.people > ul > li .person header aside {
-            position: absolute;
-            top: 9px;
-            right: 0;
-            padding: 10px 20px; }
-        #app > .view.conversation div.people > ul > li .person main {
-          display: -webkit-box;
-          display: -moz-box;
-          display: -ms-flexbox;
-          display: -webkit-flex;
-          display: flex;
-          padding: 20px 0 13px 20px;
-          background: rgba(255, 255, 255, 0.2);
-          border-radius: 0 0 8px 8px; }
-          #app > .view.conversation div.people > ul > li .person main .picture {
-            width: 66px;
-            -webkit-box-flex: 0 0 auto;
-            -moz-box-flex: 0 0 auto;
-            -webkit-flex: 0 0 auto;
-            -ms-flex: 0 0 auto;
-            flex: 0 0 auto; }
-            #app > .view.conversation div.people > ul > li .person main .picture img {
-              width: 100%;
-              border-radius: 4px;
-              display: block; }
-          #app > .view.conversation div.people > ul > li .person main .sources {
-            -webkit-box-flex: 1;
-            -moz-box-flex: 1;
-            -webkit-flex: 1;
-            -ms-flex: 1;
-            flex: 1;
-            padding: 0 0 0 10px; }
-            #app > .view.conversation div.people > ul > li .person main .sources ul {
-              list-style: none;
-              display: -webkit-box;
-              display: -moz-box;
-              display: -ms-flexbox;
-              display: -webkit-flex;
-              display: flex; }
-              #app > .view.conversation div.people > ul > li .person main .sources ul li {
-                -webkit-box-flex: 1;
-                -moz-box-flex: 1;
-                -webkit-flex: 1;
-                -ms-flex: 1;
-                flex: 1;
-                text-align: center;
-                position: relative; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li:after {
-                  border-radius: 50%;
-                  border: 3px solid white;
-                  border-bottom-color: transparent;
-                  border-right-color: transparent;
-                  height: 40px;
-                  width: 40px;
-                  content: "";
-                  position: absolute;
-                  top: 0;
-                  left: 20px;
-                  z-index: 0; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li:last-child {
-                  width: 78px;
-                  -webkit-box-flex: 0 0 auto;
-                  -moz-box-flex: 0 0 auto;
-                  -webkit-flex: 0 0 auto;
-                  -ms-flex: 0 0 auto;
-                  flex: 0 0 auto; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li .chiclet {
-                  font-size: 45px;
-                  -webkit-transform: scale(0, 0);
-                  transform: scale(0, 0);
-                  position: relative;
-                  z-index: 1; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li span {
-                  display: block;
-                  padding-top: 5px;
-                  font-size: 12px;
-                  color: rgba(255, 255, 255, 0.3); }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li.waiting:after {
-                  -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
-                  -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
-                  -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
-                  -o-animation: spinner 0.5s linear 0s infinite normal forwards;
-                  animation: spinner 0.5s linear 0s infinite normal forwards; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li.done:after {
-                  -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
-                  -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
-                  -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
-                  -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
-                  animation: spinOut 0.5s linear 0s 1 normal forwards; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available .chiclet {
-                  -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
-                  -moz-animation: pop 0.5s linear 0s 1 normal forwards;
-                  -ms-animation: pop 0.5s linear 0s 1 normal forwards;
-                  -o-animation: pop 0.5s linear 0s 1 normal forwards;
-                  animation: pop 0.5s linear 0s 1 normal forwards; }
-                  #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-dna {
-                    color: #e74c3c; }
-                  #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-fit-bit {
-                    color: #9b59b6; }
-                  #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-ehr {
-                    color: #d35400; }
-                  #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-direction {
-                    color: #f1c40f; }
-                  #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-medkit {
-                    color: #527EC4; }
-                  #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available .chiclet.icon-md-info {
-                    color: #2ecc71; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li.done.available span {
-                  color: white; }
-                #app > .view.conversation div.people > ul > li .person main .sources ul li.done:not(.available) .chiclet {
-                  -webkit-transform: scale(1, 1);
-                  transform: scale(1, 1);
-                  -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
-                  -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
-                  -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
-                  -o-animation: fadeIn 1s linear 0s 1 normal forwards;
-                  animation: fadeIn 1s linear 0s 1 normal forwards;
-                  color: rgba(255, 255, 255, 0.3); }
+    list-style: none;
+    left: -556px;
+    white-space: nowrap;
+    font-size: 0; }
+    #app > .view.conversation ul.people > li {
+      display: inline-block;
+      width: 600px;
+      color: white; }
+      #app > .view.conversation ul.people > li:nth-child(n+2) {
+        margin-left: 40px; }
+      #app > .view.conversation ul.people > li header {
+        background: rgba(255, 255, 255, 0.3);
+        padding: 10px 20px;
+        border-radius: 8px 8px 0 0;
+        position: relative; }
+        #app > .view.conversation ul.people > li header h2 {
+          font: normal normal 300 20px/1.4em "Open Sans", sans-serif; }
+        #app > .view.conversation ul.people > li header div {
+          opacity: 0.7;
+          font: normal normal 300 14px/1.4em "Open Sans", sans-serif; }
+        #app > .view.conversation ul.people > li header aside {
+          position: absolute;
+          top: 9px;
+          right: 0;
+          padding: 10px 20px; }
+      #app > .view.conversation ul.people > li main {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        padding: 20px 0 13px 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 0 0 8px 8px; }
+        #app > .view.conversation ul.people > li main .picture {
+          width: 66px;
+          -webkit-box-flex: 0 0 auto;
+          -moz-box-flex: 0 0 auto;
+          -webkit-flex: 0 0 auto;
+          -ms-flex: 0 0 auto;
+          flex: 0 0 auto; }
+          #app > .view.conversation ul.people > li main .picture img {
+            width: 100%;
+            border-radius: 4px;
+            display: block; }
+        #app > .view.conversation ul.people > li main .sources {
+          -webkit-box-flex: 1;
+          -moz-box-flex: 1;
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          padding: 0 0 0 10px; }
+          #app > .view.conversation ul.people > li main .sources ul {
+            list-style: none;
+            display: -webkit-box;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex; }
+            #app > .view.conversation ul.people > li main .sources ul li {
+              -webkit-box-flex: 1;
+              -moz-box-flex: 1;
+              -webkit-flex: 1;
+              -ms-flex: 1;
+              flex: 1;
+              text-align: center;
+              position: relative; }
+              #app > .view.conversation ul.people > li main .sources ul li:after {
+                border-radius: 50%;
+                border: 3px solid white;
+                border-bottom-color: transparent;
+                border-right-color: transparent;
+                height: 40px;
+                width: 40px;
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 20px;
+                z-index: 0; }
+              #app > .view.conversation ul.people > li main .sources ul li:last-child {
+                width: 78px;
+                -webkit-box-flex: 0 0 auto;
+                -moz-box-flex: 0 0 auto;
+                -webkit-flex: 0 0 auto;
+                -ms-flex: 0 0 auto;
+                flex: 0 0 auto; }
+              #app > .view.conversation ul.people > li main .sources ul li .chiclet {
+                font-size: 45px;
+                -webkit-transform: scale(0, 0);
+                transform: scale(0, 0);
+                position: relative;
+                z-index: 1; }
+              #app > .view.conversation ul.people > li main .sources ul li span {
+                display: block;
+                padding-top: 5px;
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.3); }
+              #app > .view.conversation ul.people > li main .sources ul li.waiting:after {
+                -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
+                -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
+                -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
+                -o-animation: spinner 0.5s linear 0s infinite normal forwards;
+                animation: spinner 0.5s linear 0s infinite normal forwards; }
+              #app > .view.conversation ul.people > li main .sources ul li.done:after {
+                -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
+                animation: spinOut 0.5s linear 0s 1 normal forwards; }
+              #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet {
+                -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
+                -moz-animation: pop 0.5s linear 0s 1 normal forwards;
+                -ms-animation: pop 0.5s linear 0s 1 normal forwards;
+                -o-animation: pop 0.5s linear 0s 1 normal forwards;
+                animation: pop 0.5s linear 0s 1 normal forwards; }
+                #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-dna {
+                  color: #e74c3c; }
+                #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-fit-bit {
+                  color: #9b59b6; }
+                #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-ehr {
+                  color: #d35400; }
+                #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-direction {
+                  color: #f1c40f; }
+                #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-medkit {
+                  color: #527EC4; }
+                #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-md-info {
+                  color: #2ecc71; }
+              #app > .view.conversation ul.people > li main .sources ul li.done.available span {
+                color: white; }
+              #app > .view.conversation ul.people > li main .sources ul li.done:not(.available) .chiclet {
+                -webkit-transform: scale(1, 1);
+                transform: scale(1, 1);
+                -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
+                -moz-animation: fadeIn 1s linear 0s 1 normal forwards;
+                -ms-animation: fadeIn 1s linear 0s 1 normal forwards;
+                -o-animation: fadeIn 1s linear 0s 1 normal forwards;
+                animation: fadeIn 1s linear 0s 1 normal forwards;
+                color: rgba(255, 255, 255, 0.3); }
   #app > .view.conversation > ul.questions {
     position: absolute;
-    top: 287px;
+    top: 317px;
     left: 50%;
     margin-left: -300px;
     width: 600px;

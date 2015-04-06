@@ -21,12 +21,12 @@
 		"age": 27,
 		"sex": "Female",
 		"data": {
-			"genetics": true,
-			"gps": false,
+			"genetics": false,
+			"gps": true,
 			"health": true,
-			"fitness": true,
+			"fitness": false,
 			"personal": false,
-			"ehr": false
+			"ehr": true
 		}
 	},
 	{
@@ -37,11 +37,11 @@
 		"sex": "Male",
 		"data": {
 			"genetics": true,
-			"gps": false,
-			"health": false,
+			"gps": true,
+			"health": true,
 			"fitness": false,
 			"personal": true,
-			"ehr": true
+			"ehr": false
 		}
 	}
 ]

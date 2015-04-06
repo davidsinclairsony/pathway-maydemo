@@ -1,11 +1,11 @@
 [
 	{
 		"text": "How much exercise should I get today?",
-		"type": "textAndMap"
+		"type": "textAndLocations"
 	},
 	{
 		"text": "What restaurants nearby serve food within my diet plan?",
-		"type": "textAndMap"
+		"type": "textAndLocations"
 	},
 	{
 		"text": "What kinds of foods should I eat?",
