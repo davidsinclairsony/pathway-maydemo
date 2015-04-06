@@ -167,7 +167,9 @@
 			// Child views
 			this.questions = new QuestionsView();
 			this.$el.append(this.questions.el);
-			this.listenTo(this.questions, "digesting", this.switchToDigesting);
+			
+			this.response = new ResponseView();
+			this.$el.append(this.response.el);
 		},
 		render: function() {
 			var self = this;
@@ -194,10 +196,10 @@
 			this.questions.revealAllQuestions();
 		},
 		prepareResponse: function() {
-			console.log("get res");
+			this.response.revealResponse(this.questions.selectedQuestion);
 		},
 		hideResponse: function() {
-			console.log("hide res");
+			this.response.hideResponse(this.questions.selectedQuestion);
 		}
 	});
 	
@@ -318,6 +320,52 @@
 		},
 		clicked: function() {
 			this.$el.trigger("questionClicked", {selectedQuestion: this});
+		}
+	});
+	
+	var ResponseView = Backbone.View.extend({
+		className: "response",
+		initialize: function() {
+			this.render();
+			this.setToLoading();
+		},
+		render: function() {
+			this.setToLoading();
+			this.$el.css("display", "none");
+			return this;
+		},
+		setToLoading: function() {
+			this.$el.html('<div class="loading"><div></div></div>');
+		},
+		revealResponse: function(answer) {
+			var self = this;
+			
+			// Adjust size of answer area based on question size
+			var top = answer.$el.parent().offset().top + answer.$el.outerHeight() + 10;
+			var height = 550 - answer.$el.outerHeight() 
+			
+			self.$el.css({
+				display: "block",
+				top: top,
+				height: height
+			});
+			
+			window.app.cssAnimate.call(self, "fadeIn", function () {
+				self.$el.removeClass("fadeIn");
+			});
+			
+			// Get the answer
+			setTimeout(function() {
+				self.$el.html("The question: " + answer.model.attributes.text);
+			}, 2000);
+		},
+		hideResponse: function() {
+			var self = this;
+			
+			window.app.cssAnimate.call(self, "fadeOut", function () {
+				self.$el.removeClass("fadeOut").css("display", "none");
+				self.setToLoading();
+			});
 		}
 	});
 	

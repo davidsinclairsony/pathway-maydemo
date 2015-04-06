@@ -8,6 +8,10 @@
 		"type": "textAndMap"
 	},
 	{
+		"text": "What restaurants nearby serve food within my diet plan?",
+		"type": "textAndMap"
+	},
+	{
 		"text": "What kinds of foods should I eat?",
 		"type": "text"
 	},

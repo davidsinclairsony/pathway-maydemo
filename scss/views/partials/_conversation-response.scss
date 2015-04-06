@@ -1,10 +1,8 @@
 > .response {
 	position: absolute;
-	top: 345px;
 	left: 50%;
 	margin-left: -300px;
 	width: 600px;
-	height: 502px;
 	overflow-y: scroll;
 	background: rgba(255, 255, 255, .3);
 	padding: 15px 20px;
@@ -12,5 +10,22 @@
 	color: white;
 	font: normal normal 300 20px/#{$f-1-l-h} $f-1;
 	-webkit-overflow-scrolling: touch;
-	display: none;
+	
+	.loading {
+		@include flexbox();
+		@include align-items(center);
+		@include justify-content(center);
+		height: 100%;
+		
+		div {
+			border-radius: 50%;
+			border: 3px solid white;
+			border-bottom-color: transparent;
+			border-right-color: transparent;
+			height: 40px;
+			width: 40px;
+			@include animation(spinner .5s linear 0s infinite normal forwards);
+		}
+		
+	}
 }

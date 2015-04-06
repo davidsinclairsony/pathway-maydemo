@@ -1534,19 +1534,41 @@ body {
         margin-bottom: 10px; }
   #app > .view.conversation > .response {
     position: absolute;
-    top: 345px;
     left: 50%;
     margin-left: -300px;
     width: 600px;
-    height: 502px;
     overflow-y: scroll;
     background: rgba(255, 255, 255, 0.3);
     padding: 15px 20px;
     border-radius: 8px;
     color: white;
     font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
-    -webkit-overflow-scrolling: touch;
-    display: none; }
+    -webkit-overflow-scrolling: touch; }
+    #app > .view.conversation > .response .loading {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      height: 100%; }
+      #app > .view.conversation > .response .loading div {
+        border-radius: 50%;
+        border: 3px solid white;
+        border-bottom-color: transparent;
+        border-right-color: transparent;
+        height: 40px;
+        width: 40px;
+        -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
+        -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
+        -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
+        -o-animation: spinner 0.5s linear 0s infinite normal forwards;
+        animation: spinner 0.5s linear 0s infinite normal forwards; }
   #app > .view.conversation > .know {
     position: absolute;
     z-index: 10;

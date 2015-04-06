@@ -49,6 +49,12 @@
 	align-items: $a;
 }
 
+@mixin align-content($a...) {
+	-webkit-align-content: $a;
+	-ms-flex-content: $a;
+	align-content: $a;
+}
+
 @mixin justify-content($a...) {
 	-webkit-justify-content: $a;
 	-ms-flex-pack: $a;
