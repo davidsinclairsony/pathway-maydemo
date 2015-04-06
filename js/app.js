@@ -179,10 +179,10 @@
 			return self;
 		},
 		events: {
-			"click .ask": "showQuestions",
+			"click .ask": "askAnotherQuestion",
 			"click .how, footer .close": "howToggler",
-			"questionShown": "getResponse",
-			"questionHid": "hideResponse"
+			"hidAllExceptSelectedQuestion": "prepareResponse",
+			"revealedAllQuestions": "hideResponse"
 		},
 		howToggler: function() {
 			var $know = this.$(".know");
@@ -190,14 +190,14 @@
 			$know.toggleClass("off", $know.hasClass("on"));
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
-		getResponse: function() {
+		askAnotherQuestion: function() {
+			this.questions.revealAllQuestions();
+		},
+		prepareResponse: function() {
 			console.log("get res");
 		},
 		hideResponse: function() {
 			console.log("hide res");
-		},
-		showQuestions: function() {
-			this.questions.toggleState();
 		}
 	});
 	
@@ -237,56 +237,59 @@
 			"questionClicked": "questionClicked"
 		},
 		questionClicked: function(event, objects) {
-			// Save view that was selected
-			this.selectedQuestion = objects.selectedQuestion;
-			
-			// Toggle state of view
-			this.toggleState();
-		},
-		toggleState: function() {
-			var self = this;
-
-			// Determine current state
-			if(this.selected !== true) {
-				this.selected = true;
+			if(!this.selectedQuestion) {
+				// Save view that was selected
+				this.selectedQuestion = objects.selectedQuestion;
 				
-				// Bubble up the event
-				this.$el.trigger("questionShown");
-				
-// make these into new functions, like questionSelected: ... and questionDeselected: ..
-				_.each(this.views, function(view) {
-					if(view == self.selectedQuestion) {
-						// Save current offset
-						var currentOffset = self.selectedQuestion.$el.offset();
-						
-						self.selectedQuestion.$el.css("position", "absolute");
-						
-						// Save desired offset
-						var desiredOffset = self.selectedQuestion.$el.offset();
-						
-						// Reset positioning and move question
-						self.selectedQuestion.$el
-							.css("position", "relative")
-							.animate({top: desiredOffset.top - currentOffset.top}, 500, "linear")
-						;
-					} else {
-						// Hide all other questions
-						window.app.cssAnimate.call(view, "fadeOut", function () {
-							view.$el.removeClass("fadeOut");
-							view.$el.css("visibility", "hidden");
-						});
-					}
-				});
+				this.hideAllExceptSelectedQuestion();
 			} else {
-				this.selected = false;
-				
+				this.revealAllQuestions();
+			}
+		},
+		hideAllExceptSelectedQuestion: function() {
+			var self = this;
+			
+			// Bubble up the event
+			self.$el.trigger("hidAllExceptSelectedQuestion");
+			
+			_.each(this.views, function(view) {
+				if(view == self.selectedQuestion) {
+					// Save current offset
+					var currentOffset = self.selectedQuestion.$el.offset();
+					
+					self.selectedQuestion.$el.css("position", "absolute");
+					
+					// Save desired offset
+					var desiredOffset = self.selectedQuestion.$el.offset();
+					
+					// Reset positioning and move question
+					self.selectedQuestion.$el
+						.css("position", "relative")
+						.animate({top: desiredOffset.top - currentOffset.top}, 500, "linear")
+					;
+				} else {
+					// Hide all other questions
+					window.app.cssAnimate.call(view, "fadeOut", function () {
+						view.$el.removeClass("fadeOut");
+						view.$el.css("visibility", "hidden");
+					});
+				}
+			});
+		},
+		revealAllQuestions: function() {
+			var self = this;
+			
+			if(self.selectedQuestion) {
 				// Bubble up the event
-				this.$el.trigger("questionHid");
+				self.$el.trigger("revealedAllQuestions");
 				
 				_.each(this.views, function(view) {
 					if(view == self.selectedQuestion) {
 						// Move question back
 						self.selectedQuestion.$el.animate({top: 0}, 500, "linear");
+	
+						// Clear out the selected quetion
+						self.selectedQuestion = null;
 					} else {
 						view.$el.css("visibility", "visible");
 						
