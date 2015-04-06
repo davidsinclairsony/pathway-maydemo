@@ -71,24 +71,24 @@
 
 			// Hide the current view
 			if(previous) {
-				this.cssAnimate.call(previous, "fadeOut", function () {
+				this.cssAnimate.call(previous.$el, "fadeOut", function () {
 					previous.remove();
 				});
 			}
 
 			this.$el.append(next.el);
-			this.cssAnimate.call(next, "fadeIn", function() {
+			this.cssAnimate.call(next.$el, "fadeIn", function() {
 				next.$el.removeClass("fadeIn");
 			});
 			this.currentView = next;
 		},
 		cssAnimate: function(cssClass, callback) {
 			// Add class for animating and executes callback
-			var self = this;
+			var $self = this;
 			
 			// Sets a new listener
 			var setAnimationListener = function() {
-				self.$el.one(
+				$self.one(
 					"webkitAnimationEnd oanimationend msAnimationEnd animationend",
 					function(e) {
 						// Check if event is significant
@@ -106,7 +106,7 @@
 				);
 			};
 			
-			self.$el.addClass(cssClass);
+			$self.addClass(cssClass);
 			setAnimationListener();
 		}
 	});
@@ -271,7 +271,7 @@
 					;
 				} else {
 					// Hide all other questions
-					window.app.cssAnimate.call(view, "fadeOut", function () {
+					window.app.cssAnimate.call(view.$el, "fadeOut", function () {
 						view.$el.removeClass("fadeOut");
 						view.$el.css("visibility", "hidden");
 					});
@@ -296,7 +296,7 @@
 						view.$el.css("visibility", "visible");
 						
 						// Reveal other questions
-						window.app.cssAnimate.call(view, "fadeIn", function () {
+						window.app.cssAnimate.call(view.$el, "fadeIn", function () {
 							view.$el.removeClass("fadeIn");
 						});
 					}
@@ -335,7 +335,7 @@
 			return this;
 		},
 		setToLoading: function() {
-			this.$el.html('<div class="loading"><div></div></div>');
+			this.$el.html('<div class="spinner loading"><div></div></div>');
 		},
 		revealResponse: function(answer) {
 			var self = this;
@@ -350,19 +350,34 @@
 				height: height
 			});
 			
-			window.app.cssAnimate.call(self, "fadeIn", function () {
+			window.app.cssAnimate.call(self.$el, "fadeIn", function () {
 				self.$el.removeClass("fadeIn");
 			});
 			
 			// Get the answer
-			setTimeout(function() {
-				self.$el.html("The question: " + answer.model.attributes.text);
-			}, 2000);
+			var ajax = $.getJSON(
+				"/js/json/answers.js",
+				answer.model.attributes,
+				function(data) {
+					// Add in answer
+					self.$el.append(data[0].people[0]);
+				}
+			).fail(function() {
+				self.$el.append("Sorry, Watson is currently unreachable.");
+			})
+			.always(function() {
+				// Gracefully hide spinner
+				self.$(".spinner").toggleClass("loading");
+				
+				window.app.cssAnimate.call(self.$(".spinner"), "done", function () {
+					self.$(".spinner").removeClass("spinOut");
+				});
+			});
 		},
 		hideResponse: function() {
 			var self = this;
 			
-			window.app.cssAnimate.call(self, "fadeOut", function () {
+			window.app.cssAnimate.call(self.$el, "fadeOut", function () {
 				self.$el.removeClass("fadeOut").css("display", "none");
 				self.setToLoading();
 			});
