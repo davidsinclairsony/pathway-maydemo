@@ -3,43 +3,57 @@
 	left: 50%;
 	margin-left: -300px;
 	width: 600px;
-	overflow-y: scroll;
+	overflow: hidden;
 	background: rgba(255, 255, 255, .3);
 	padding: 15px 20px;
 	border-radius: 8px;
 	color: white;
 	font: normal normal 300 20px/#{$f-1-l-h} $f-1;
-	-webkit-overflow-scrolling: touch;
 	
-	.spinner {
-		@include flexbox();
-		@include align-items(center);
-		@include justify-content(center);
-		height: 100%;
-		width: 100%;
+	&:after {
+		border-radius: 50%;
+		border: 3px solid white;
+		border-bottom-color: transparent;
+		border-right-color: transparent;
+		height: 40px;
+		width: 40px;
+		content: "";
 		position: absolute;
-		top: 0;
-		left: 0;
-		
-		div {
-			border-radius: 50%;
-			border: 3px solid white;
-			border-bottom-color: transparent;
-			border-right-color: transparent;
-			height: 40px;
-			width: 40px;
+		top: 50%;
+		left: 50%;
+		margin: -20px 0 0 -20px;
+		z-index: 0;
+	}
+	
+	&.waiting {
+		&:after {
+			@include animation(spinner .5s linear 0s infinite normal forwards);
 		}
+	}
+	
+	&.done {
+		&:after {
+			@include animation(spinOut .5s linear 0s 1 normal forwards);
+		}
+	}
+	
+	main {
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+		height: 100%;
 		
-		&.loading {
-			div {
-				@include animation(spinner .5s linear 0s infinite normal forwards);
+		p {
+			&:nth-child(n + 2) {
+				margin-top: 20px;
 			}
 		}
+	}
+	
+	&.map {
+		padding-bottom: 250px;
 		
-		&.done {
-			div {
-				@include animation(spinOut .5s linear 0s 1 normal forwards);
-			}
+		#map {
+			
 		}
 	}
 }

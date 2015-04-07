@@ -1531,49 +1531,45 @@ body {
     left: 50%;
     margin-left: -300px;
     width: 600px;
-    overflow-y: scroll;
+    overflow: hidden;
     background: rgba(255, 255, 255, 0.3);
     padding: 15px 20px;
     border-radius: 8px;
     color: white;
-    font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
-    -webkit-overflow-scrolling: touch; }
-    #app > .view.conversation > .response .spinner {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-align-items: center;
-      -ms-flex-align: center;
-      align-items: center;
-      -webkit-justify-content: center;
-      -ms-flex-pack: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
+    font: normal normal 300 20px/1.4em "Open Sans", sans-serif; }
+    #app > .view.conversation > .response:after {
+      border-radius: 50%;
+      border: 3px solid white;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      height: 40px;
+      width: 40px;
+      content: "";
       position: absolute;
-      top: 0;
-      left: 0; }
-      #app > .view.conversation > .response .spinner div {
-        border-radius: 50%;
-        border: 3px solid white;
-        border-bottom-color: transparent;
-        border-right-color: transparent;
-        height: 40px;
-        width: 40px; }
-      #app > .view.conversation > .response .spinner.loading div {
-        -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
-        -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
-        -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
-        -o-animation: spinner 0.5s linear 0s infinite normal forwards;
-        animation: spinner 0.5s linear 0s infinite normal forwards; }
-      #app > .view.conversation > .response .spinner.done div {
-        -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
-        -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
-        -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
-        -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
-        animation: spinOut 0.5s linear 0s 1 normal forwards; }
+      top: 50%;
+      left: 50%;
+      margin: -20px 0 0 -20px;
+      z-index: 0; }
+    #app > .view.conversation > .response.waiting:after {
+      -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
+      -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
+      -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
+      -o-animation: spinner 0.5s linear 0s infinite normal forwards;
+      animation: spinner 0.5s linear 0s infinite normal forwards; }
+    #app > .view.conversation > .response.done:after {
+      -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
+      -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
+      -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
+      -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
+      animation: spinOut 0.5s linear 0s 1 normal forwards; }
+    #app > .view.conversation > .response main {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      height: 100%; }
+      #app > .view.conversation > .response main p:nth-child(n+2) {
+        margin-top: 20px; }
+    #app > .view.conversation > .response.map {
+      padding-bottom: 250px; }
   #app > .view.conversation > .know {
     position: absolute;
     z-index: 10;

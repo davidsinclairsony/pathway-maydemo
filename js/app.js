@@ -166,7 +166,7 @@
 	});
 	
 	var ConversationView = Backbone.View.extend({
-		className: "view conversation selecting",
+		className: "view conversation",
 		initialize: function() {
 			this.render();
 			
@@ -214,17 +214,17 @@
 			// For testing purposes
 			var self = this;
 			setTimeout(function() {
-				//self.getAndShowResponse();
+				self.getAndShowResponse();
 			}, 500);
 		},
 		getAndShowResponse: function() {
-			this.responseView.getAndShow(
+			this.responseView.get(
 				this.peopleView.selectedPerson,
 				this.questionsView.selectedQuestion
 			);
 		},
 		hideResponse: function() {
-			this.responseView.hideResponse();
+			this.responseView.hide();
 		}
 	});
 	
@@ -360,10 +360,13 @@
 			return this;
 		},
 		setToLoading: function() {
-			this.$el.addClass("spinner");
+			this.$el
+				.empty()
+				.addClass("waiting")
+				.removeClass("done")
+				.removeClass("map")
+			;
 		},
-		// make a reveal loading and reveal response, so that went chiclets loading we just wait
-		// the reveal response function will not show unless ajax request done and chiclet done
 		prepare: function(answer) {
 			var self = this;
 			
@@ -381,34 +384,64 @@
 				self.$el.removeClass("fadeIn");
 			});
 		},
-		getAndShow: function(person, question) {
+		get: function(person, question) {
 			var self = this;
 			
 			requestData = "sdsd"; // Whatever needs sending
 			
 			// Get the answer
 			var ajax = $.getJSON(
-				"/js/json/answer.js",
+				"/js/json/answer-1.js",
 				requestData,
 				function(data) {
-					self.$el.append(data.text[0]);
-					console.log(data);
+					self.show(data);
 				}
 			).fail(function(data) {
-				self.$el.append("Sorry, the server is currently unreachable.");
-				console.log(data);
-			})
-			.always(function() {
-				// Gracefully hide spinner
-// make spinner load from classes!
-				self.$(".spinner").toggleClass("loading");
+				var error = {
+					"text": [
+						"Sorry, the server is currently unreachable."
+					]
+				};
 				
-				window.app.cssAnimate.call(self.$(".spinner"), "done", function () {
-					self.$(".spinner").removeClass("spinOut");
-				});
+				self.show(error)
 			});
 		},
-		hideResponse: function() {
+		show: function(data) {
+			var self = this;
+			
+			// Gracefully hide spinner
+			self.$el.removeClass("waiting");
+			
+			window.app.cssAnimate.call(self.$el, "done", function () {
+				self.$(".spinner").removeClass("spinOut");
+			});
+			
+			// Add in all text
+			if(data.text) {
+				var container = document.createDocumentFragment();
+			
+				container.appendChild(document.createElement("main"));
+			
+				_.each(data.text, function(text) {
+					var p = document.createElement("p");
+					p.innerHTML = text;
+					
+					container.childNodes[0].appendChild(p);
+				});
+				
+				self.$el.append(container);
+			} else {
+				
+			}
+			
+			// Show map if locations are available
+			if(data.locations) {
+				self.$el.addClass("map");
+				
+				
+			}
+		},
+		hide: function() {
 			var self = this;
 			
 			window.app.cssAnimate.call(self.$el, "fadeOut", function () {
