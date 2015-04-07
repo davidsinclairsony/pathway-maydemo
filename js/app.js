@@ -1,4 +1,4 @@
-(function() {
+(function($) {
 	// Mustache style templating
 	_.templateSettings = {interpolate: /\{\{(.+?)\}\}/g};
 	
@@ -421,7 +421,7 @@
 				var container = document.createDocumentFragment();
 			
 				container.appendChild(document.createElement("main"));
-			
+				
 				_.each(data.text, function(text) {
 					var p = document.createElement("p");
 					p.innerHTML = text;
@@ -430,15 +430,42 @@
 				});
 				
 				self.$el.append(container);
-			} else {
 				
+				// This div is used for fade effect on scrolling text
+				var overlay = document.createElement("div");
+				overlay.className = "overlay";
+				self.$el.append(overlay);
+			} else {
+				self.$el.append("<main><p>Sorry, data is unavailable at this time.</p></main>");
 			}
 			
 			// Show map if locations are available
 			if(data.locations) {
 				self.$el.addClass("map");
+				self.$el.append("<div class='container'><div id='map'></div></div>");
 				
+				var markers = [];
 				
+				_.each(data.locations, function(location) {
+					
+					
+					markers.push("sdd");
+				});
+				
+				function initialize() {
+					var mapOptions = {
+						center: { lat: -34.397, lng: 150.644},
+						zoom: 8
+					};
+					console.log(1);
+					var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+				}
+				
+				initialize();
+				
+				$.getJSON("/js/json/map.js", function(data) {
+					
+				});
 			}
 		},
 		hide: function() {
@@ -526,4 +553,4 @@
 		// Pretty much the controller
 		window.app = new AppView();
 	});
-} ());
+})(jQuery);

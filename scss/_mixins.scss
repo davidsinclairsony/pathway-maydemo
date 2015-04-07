@@ -98,37 +98,37 @@
 }
 
 @mixin keyframes($a...) {
-	@-webkit-keyframes $a {
+	@-webkit-keyframes #{$a} {
 		@content;
 	}
-	@-moz-keyframes $a {
+	@-moz-keyframes #{$a} {
 		@content;
 	}
-	@-ms-keyframes $a {
+	@-ms-keyframes #{$a} {
 		@content;
 	}
-	@-o-keyframes $a {
+	@-o-keyframes #{$a} {
 		@content;
 	}
-	@keyframes $a {
+	@keyframes #{$a} {
 		@content;
 	}
 }
 
 @mixin animation($a...) {
-	-webkit-animation: #{$a};
-	-moz-animation: #{$a};
-	-ms-animation: #{$a};
-	-o-animation: #{$a};
-	animation: #{$a};
+	-webkit-animation: $a;
+	-moz-animation: $a;
+	-ms-animation: $a;
+	-o-animation: $a;
+	animation: $a;
 }
 
 @mixin animation-fill-mode($a...) {
-	-webkit-animation-fill-mode: #{$a};
-	-moz-animation-fill-mode: #{$a};
-	-ms-animation-fill-mode: #{$a};
-	-o-animation-fill-mode: #{$a};
-	animation-fill-mode: #{$a};
+	-webkit-animation-fill-mode: $a;
+	-moz-animation-fill-mode: $a;
+	-ms-animation-fill-mode: $a;
+	-o-animation-fill-mode: $a;
+	animation-fill-mode: $a;
 }
 
 @mixin transform($a...) {
