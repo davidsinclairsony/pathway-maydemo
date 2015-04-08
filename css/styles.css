@@ -1840,6 +1840,16 @@ body {
   border-radius: 0 0 4px 4px;
   overflow: hidden;
 }
+/* line 111, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .title {
+  font: normal normal bold 16px/1.4em "Open Sans", sans-serif;
+  color: black;
+}
+/* line 116, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .description {
+  font: normal normal 300 16px/1.4em "Open Sans", sans-serif;
+  color: black;
+}
 /* line 1, ../scss/views/partials/_conversation-know.scss */
 #app > .view.conversation > .know {
   position: absolute;

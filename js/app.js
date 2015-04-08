@@ -444,27 +444,57 @@
 				self.$el.addClass("map");
 				self.$el.append("<div class='container'><div id='map'></div></div>");
 				
-				var markers = [];
-				
-				_.each(data.locations, function(location) {
+				$.getJSON("/js/json/map.js", function(styles) {
+					var styledMap = new google.maps.StyledMapType(
+						styles,
+						{name: "Styled"}
+					);
 					
-					
-					markers.push("sdd");
-				});
-				
-				function initialize() {
 					var mapOptions = {
-						center: { lat: -34.397, lng: 150.644},
-						zoom: 8
+						mapTypeControlOptions: {
+							mapTypeIds: [google.maps.MapTypeId.ROADMAP, "map_style"]
+						}
 					};
-					console.log(1);
-					var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-				}
-				
-				initialize();
-				
-				$.getJSON("/js/json/map.js", function(data) {
 					
+					var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+					
+					map.mapTypes.set("map_style", styledMap);
+					map.setMapTypeId("map_style");
+					
+					var bounds = new google.maps.LatLngBounds();
+					var infowindow = new google.maps.InfoWindow();  
+					
+					// Add markers
+					for (i = 0; i < data.locations.length; i++) {
+						// Format title
+						var title =
+							"<div class='title'>" + data.locations[i].title + "</div>" +
+							"<div class='description'>" + data.locations[i].description + "</div>"
+						;
+						
+						var marker = new google.maps.Marker({
+							position: new google.maps.LatLng(
+								data.locations[i].coordinates.lattitude,
+								data.locations[i].coordinates.longitude
+							),
+							map: map,
+							title: title,
+							visible: true
+						});
+						
+						//extend the bounds to include each marker's position
+						bounds.extend(marker.position);
+						
+						google.maps.event.addListener(marker, "click", (function(marker, i) {
+							return function() {
+								console.log(marker);
+								infowindow.setContent(marker.title);
+								infowindow.open(map, marker);
+							}
+						})(marker, i));
+					}
+					
+					map.fitBounds(bounds);
 				});
 			}
 		},
