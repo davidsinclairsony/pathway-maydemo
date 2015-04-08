@@ -66,37 +66,64 @@
 			left: 0;
 			width: inherit;
 			height: 20px;
-			@include linear-gradient(to bottom, rgba(82, 101, 113, 1) 60%, rgba(82, 101, 113, 0) 100%);
+			@include linear-gradient(to bottom, rgba(82, 101, 113, 1) 70%, rgba(82, 101, 113, 0) 100%);
 			border-radius: 8px 8px 0 0;
 		}
 		
 		&:after {
 			content: "";
 			position: absolute;
-			bottom: 0;
+			bottom: 0px;
 			left: 0;
 			width: inherit;
-			height: 40px;
+			height: 60px;
 			@include linear-gradient(to top, rgba(82, 101, 113, 1) 40%, rgba(82, 101, 113, 0) 100%);
 			border-radius: 0 0 8px 8px;
 		}
 	}
 	
+	footer {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		text-align: right;
+		padding: 0 15px 12px 0;
+		
+		div {
+			display: inline-block;
+			font-size: 16px;
+			color: white;
+			
+			&.clicked {
+				&.icon-thumbs-up {
+					color: $c-2;
+				}
+				
+				&.icon-thumbs-down {
+					color: $c-4;
+				}
+			}
+		}
+	}
+	
 	&.map {
-		padding-bottom: 315px;
+		padding-bottom: 285px;
 		
 		.overlay {
 			&:after {
-				bottom: 315px;
+				bottom: 287px;
+				height: 40px;
+				@include linear-gradient(to top, rgba(82, 101, 113, 1) 40%, rgba(82, 101, 113, 0) 100%);
 			}
 		}
 		
 		.container {
 			position: absolute;
-			bottom: 0;
+			bottom: 35px;
 			left: 0;
 			width: 100%;
-			height: 335px;
+			height: 270px;
 			padding: 18px 20px;
 			
 			#map {
@@ -106,16 +133,15 @@
 				overflow: hidden;
 				
 				.gm-style .gm-style-iw {
+					line-height: 1em;
+					color: black;
 					
-					
-					.title {
-						font: normal normal bold 16px/#{$f-1-l-h} $f-1;
-						color: black;
+					* {
+						font: normal normal 300 16px/#{$f-1-l-h} $f-1;
 					}
 					
-					.description {
-						font: normal normal 300 16px/#{$f-1-l-h} $f-1;
-						color: black;
+					.title {
+						font-weight: bold;
 					}
 				}
 			}

@@ -1,3 +1,94 @@
+@font-face {
+  font-family: 'fontello';
+  src: url("../fonts/fontello.eot?45161154");
+  src: url("../fonts/fontello.eot?45161154#iefix") format("embedded-opentype"), url("../fonts/fontello.woff?45161154") format("woff"), url("../fonts/fontello.ttf?45161154") format("truetype"), url("../fonts/fontello.svg?45161154#fontello") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?45161154#fontello') format('svg');
+  }
+}
+*/
+/* line 22, ../scss/_fonts.scss */
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+/* line 53, ../scss/_fonts.scss */
+.icon-direction:before {
+  content: '\e800';
+}
+
+/* '' */
+/* line 54, ../scss/_fonts.scss */
+.icon-thumbs-up:before {
+  content: '\e801';
+}
+
+/* '' */
+/* line 55, ../scss/_fonts.scss */
+.icon-fit-bit:before {
+  content: '\e802';
+}
+
+/* '' */
+/* line 56, ../scss/_fonts.scss */
+.icon-dna:before {
+  content: '\e803';
+}
+
+/* '' */
+/* line 57, ../scss/_fonts.scss */
+.icon-ehr:before {
+  content: '\e804';
+}
+
+/* '' */
+/* line 58, ../scss/_fonts.scss */
+.icon-md-info:before {
+  content: '\e805';
+}
+
+/* '' */
+/* line 59, ../scss/_fonts.scss */
+.icon-thumbs-down:before {
+  content: '\e806';
+}
+
+/* '' */
+/* line 60, ../scss/_fonts.scss */
+.icon-info:before {
+  content: '\e807';
+}
+
+/* '' */
 /* cyrillic-ext */
 @font-face {
   font-family: 'Open Sans';
@@ -638,85 +729,6 @@
   src: local("Open Sans Extrabold Italic"), local("OpenSans-ExtraboldItalic"), url(http://fonts.gstatic.com/s/opensans/v10/PRmiXeptR36kaC0GEAetxmPkvcX8kXDzy1NrkNCBkJ4.woff2) format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
-@font-face {
-  font-family: 'fontello';
-  src: url("../fonts/fontello.eot?15966690");
-  src: url("../fonts/fontello.eot?15966690#iefix") format("embedded-opentype"), url("../fonts/fontello.woff?15966690") format("woff"), url("../fonts/fontello.ttf?15966690") format("truetype"), url("../font/fontello.svg?15966690#fontello") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
-/*
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: 'fontello';
-    src: url('../font/fontello.svg?15966690#fontello') format('svg');
-  }
-}
-*/
-/* line 663, ../scss/_fonts.scss */
-[class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "fontello";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
-  /* opacity: .8; */
-  /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
-  /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
-}
-
-/* line 694, ../scss/_fonts.scss */
-.icon-direction:before {
-  content: '\e800';
-}
-
-/* '' */
-/* line 695, ../scss/_fonts.scss */
-.icon-medkit:before {
-  content: '\e801';
-}
-
-/* '' */
-/* line 696, ../scss/_fonts.scss */
-.icon-fit-bit:before {
-  content: '\e802';
-}
-
-/* '' */
-/* line 697, ../scss/_fonts.scss */
-.icon-dna:before {
-  content: '\e803';
-}
-
-/* '' */
-/* line 698, ../scss/_fonts.scss */
-.icon-ehr:before {
-  content: '\e804';
-}
-
-/* '' */
-/* line 699, ../scss/_fonts.scss */
-.icon-md-info:before {
-  content: '\e805';
-}
-
-/* '' */
 /* line 1, ../scss/_animations.scss */
 .fadeIn {
   -webkit-animation: fadeIn 0.5s linear 0s 1 normal forwards;
@@ -1186,7 +1198,7 @@
     transform: scale(1, 1);
   }
 }
-/* line 23, ../scss/styles.scss */
+/* line 25, ../scss/styles.scss */
 .testing-testing {
   box-shadow: inset 0 1px 0 0 yellow, inset -1px 0 0 0 red, inset 0 -1px 0 0 blue, inset 1px 0 0 0 green;
   font: italic small-caps bold 24px/1.4em "Open Sans", sans-serif;
@@ -1207,7 +1219,7 @@
   animation: fadeIn 1s linear 0s 1 normal forwards;
 }
 
-/* line 43, ../scss/styles.scss */
+/* line 45, ../scss/styles.scss */
 * {
   box-sizing: border-box;
   border: 0;
@@ -1215,13 +1227,13 @@
   padding: 0;
 }
 
-/* line 50, ../scss/styles.scss */
+/* line 52, ../scss/styles.scss */
 body {
   font: normal normal 300 16px/1.4em "Open Sans", sans-serif;
   background: #111111;
 }
 
-/* line 55, ../scss/styles.scss */
+/* line 57, ../scss/styles.scss */
 ::selection {
   background: rgba(52, 156, 66, 0.2);
 }
@@ -1676,7 +1688,7 @@ body {
   color: #f1c40f;
 }
 /* line 123, ../scss/views/partials/_conversation-people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-medkit {
+#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-info {
   color: #527EC4;
 }
 /* line 124, ../scss/views/partials/_conversation-people.scss */
@@ -1720,6 +1732,38 @@ body {
 /* line 18, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li:nth-last-child(n + 2) {
   margin-bottom: 10px;
+}
+/* line 22, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li:focus {
+  background: red;
+}
+/* line 26, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom {
+  text-align: center;
+}
+/* line 29, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom textarea {
+  width: 100%;
+  background: none;
+  resize: none;
+  display: block;
+  font: italic normal 300 20px/1.4em "Open Sans", sans-serif;
+  color: white;
+  height: 28px;
+  transition: 1s;
+}
+/* line 40, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom button {
+  display: none;
+}
+/* line 45, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom.focused textarea {
+  font-style: normal;
+  height: 100px;
+}
+/* line 50, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom.focused button {
+  display: inline-block;
 }
 /* line 1, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response {
@@ -1794,21 +1838,21 @@ body {
   left: 0;
   width: inherit;
   height: 20px;
-  background: -moz-linear-gradient(to bottom, #526571 60%, rgba(82, 101, 113, 0) 100%);
-  background: -webkit-linear-gradient(to bottom, #526571 60%, rgba(82, 101, 113, 0) 100%);
-  background: -o-linear-gradient(to bottom, #526571 60%, rgba(82, 101, 113, 0) 100%);
-  background: -ms-linear-gradient(to bottom, #526571 60%, rgba(82, 101, 113, 0) 100%);
-  background: linear-gradient(to bottom, #526571 60%, rgba(82, 101, 113, 0) 100%);
+  background: -moz-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
+  background: -webkit-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
+  background: -o-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
+  background: -ms-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
+  background: linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
   border-radius: 8px 8px 0 0;
 }
 /* line 73, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response .overlay:after {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   width: inherit;
-  height: 40px;
+  height: 60px;
   background: -moz-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
   background: -webkit-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
   background: -o-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
@@ -1817,38 +1861,70 @@ body {
   border-radius: 0 0 8px 8px;
 }
 /* line 85, ../scss/views/partials/_conversation-response.scss */
-#app > .view.conversation > .response.map {
-  padding-bottom: 315px;
-}
-/* line 89, ../scss/views/partials/_conversation-response.scss */
-#app > .view.conversation > .response.map .overlay:after {
-  bottom: 315px;
-}
-/* line 94, ../scss/views/partials/_conversation-response.scss */
-#app > .view.conversation > .response.map .container {
+#app > .view.conversation > .response footer {
+  width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
+  text-align: right;
+  padding: 0 15px 12px 0;
+}
+/* line 93, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response footer div {
+  display: inline-block;
+  font-size: 16px;
+  color: white;
+}
+/* line 99, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response footer div.clicked.icon-thumbs-up {
+  color: #349c42;
+}
+/* line 103, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response footer div.clicked.icon-thumbs-down {
+  color: #9c3434;
+}
+/* line 110, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map {
+  padding-bottom: 285px;
+}
+/* line 114, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map .overlay:after {
+  bottom: 287px;
+  height: 40px;
+  background: -moz-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
+  background: -webkit-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
+  background: -o-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
+  background: -ms-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
+  background: linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
+}
+/* line 121, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map .container {
+  position: absolute;
+  bottom: 35px;
+  left: 0;
   width: 100%;
-  height: 335px;
+  height: 270px;
   padding: 18px 20px;
 }
-/* line 102, ../scss/views/partials/_conversation-response.scss */
+/* line 129, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container #map {
   width: 100%;
   height: 100%;
   border-radius: 0 0 4px 4px;
   overflow: hidden;
 }
-/* line 111, ../scss/views/partials/_conversation-response.scss */
-#app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .title {
-  font: normal normal bold 16px/1.4em "Open Sans", sans-serif;
+/* line 135, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw {
+  line-height: 1em;
   color: black;
 }
-/* line 116, ../scss/views/partials/_conversation-response.scss */
-#app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .description {
+/* line 139, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw * {
   font: normal normal 300 16px/1.4em "Open Sans", sans-serif;
-  color: black;
+}
+/* line 143, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .title {
+  font-weight: bold;
 }
 /* line 1, ../scss/views/partials/_conversation-know.scss */
 #app > .view.conversation > .know {

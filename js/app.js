@@ -247,16 +247,24 @@
 			});
 		},
 		render: function() {
-			this.$el.empty();
+			var self = this;
+			
+			self.$el.empty();
 			
 			var container = document.createDocumentFragment();
 			
 			// Render each question and add at end
-			_.each(this.views, function(view) {
+			_.each(self.views, function(view) {
 				container.appendChild(view.el);
 			});
 			
-			this.$el.append(container);
+			// Add in inputted question
+			var li = document.createElement("li");
+			li.className = "custom";
+			li.innerHTML = "<textarea placeholder='Enter a question'></textarea><button class='button medium green'>Ask</button>";
+			container.appendChild(li);
+			
+			self.$el.append(container);
 			
 			return self;
 		},
@@ -453,7 +461,9 @@
 					var mapOptions = {
 						mapTypeControlOptions: {
 							mapTypeIds: [google.maps.MapTypeId.ROADMAP, "map_style"]
-						}
+						},
+						mapTypeControl: false,
+						streetViewControl: false,
 					};
 					
 					var map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -467,10 +477,14 @@
 					// Add markers
 					for (i = 0; i < data.locations.length; i++) {
 						// Format title
-						var title =
-							"<div class='title'>" + data.locations[i].title + "</div>" +
-							"<div class='description'>" + data.locations[i].description + "</div>"
-						;
+						var content = "";
+						
+						if(data.locations[i].title) {
+							content = "<div class='title'>" + data.locations[i].title + "</div>";
+						}
+						if(data.locations[i].description) {
+							content += "<div class='description'>" + data.locations[i].description + "</div>";
+						}
 						
 						var marker = new google.maps.Marker({
 							position: new google.maps.LatLng(
@@ -478,7 +492,7 @@
 								data.locations[i].coordinates.longitude
 							),
 							map: map,
-							title: title,
+							title: content,
 							visible: true
 						});
 						
@@ -497,6 +511,12 @@
 					map.fitBounds(bounds);
 				});
 			}
+			
+			// Add in thumbs up and down
+			$.get("/templates/conversation/response/footer.html", function(data) {
+				self.$el.append(data);
+				console.log(data);
+			});
 		},
 		hide: function() {
 			var self = this;
