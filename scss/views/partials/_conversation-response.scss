@@ -92,16 +92,22 @@
 		
 		div {
 			display: inline-block;
-			font-size: 16px;
-			color: white;
+			
+			&:before {
+				border-radius: 1em;
+				font-size: 16px;
+				color: white;
+				transition: .5s;
+				padding: 5px;
+			}
 			
 			&.clicked {
-				&.icon-thumbs-up {
-					color: $c-2;
+				&.icon-thumbs-up:before {
+					background: $c-2;
 				}
 				
-				&.icon-thumbs-down {
-					color: $c-4;
+				&.icon-thumbs-down:before {
+					background: $c-4;
 				}
 			}
 		}

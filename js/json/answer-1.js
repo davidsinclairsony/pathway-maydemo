@@ -19,5 +19,13 @@
 				"longitude": "-117.2102594"
 			}
 		}
-	]
+	],
+	"data": {
+		"genetics": false,
+		"gps": true,
+		"health": true,
+		"fitness": false,
+		"personal": false,
+		"ehr": true
+	}
 }

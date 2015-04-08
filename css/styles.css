@@ -1872,22 +1872,28 @@ body {
 /* line 93, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response footer div {
   display: inline-block;
+}
+/* line 96, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response footer div:before {
+  border-radius: 1em;
   font-size: 16px;
   color: white;
+  transition: .5s;
+  padding: 5px;
 }
-/* line 99, ../scss/views/partials/_conversation-response.scss */
-#app > .view.conversation > .response footer div.clicked.icon-thumbs-up {
-  color: #349c42;
+/* line 105, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response footer div.clicked.icon-thumbs-up:before {
+  background: #349c42;
 }
-/* line 103, ../scss/views/partials/_conversation-response.scss */
-#app > .view.conversation > .response footer div.clicked.icon-thumbs-down {
-  color: #9c3434;
+/* line 109, ../scss/views/partials/_conversation-response.scss */
+#app > .view.conversation > .response footer div.clicked.icon-thumbs-down:before {
+  background: #9c3434;
 }
-/* line 110, ../scss/views/partials/_conversation-response.scss */
+/* line 116, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map {
   padding-bottom: 285px;
 }
-/* line 114, ../scss/views/partials/_conversation-response.scss */
+/* line 120, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .overlay:after {
   bottom: 287px;
   height: 40px;
@@ -1897,7 +1903,7 @@ body {
   background: -ms-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
   background: linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
 }
-/* line 121, ../scss/views/partials/_conversation-response.scss */
+/* line 127, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container {
   position: absolute;
   bottom: 35px;
@@ -1906,23 +1912,23 @@ body {
   height: 270px;
   padding: 18px 20px;
 }
-/* line 129, ../scss/views/partials/_conversation-response.scss */
+/* line 135, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container #map {
   width: 100%;
   height: 100%;
   border-radius: 0 0 4px 4px;
   overflow: hidden;
 }
-/* line 135, ../scss/views/partials/_conversation-response.scss */
+/* line 141, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw {
   line-height: 1em;
   color: black;
 }
-/* line 139, ../scss/views/partials/_conversation-response.scss */
+/* line 145, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw * {
   font: normal normal 300 16px/1.4em "Open Sans", sans-serif;
 }
-/* line 143, ../scss/views/partials/_conversation-response.scss */
+/* line 149, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .title {
   font-weight: bold;
 }

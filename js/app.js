@@ -367,6 +367,13 @@
 			this.$el.css("display", "none");
 			return this;
 		},
+		events: {
+			"click footer div": "markRated"
+		},
+		markRated: function(e) {
+			$(e.currentTarget).parent().find("div").removeClass("clicked");
+			$(e.currentTarget).addClass("clicked");
+		},
 		setToLoading: function() {
 			this.$el
 				.empty()
@@ -395,7 +402,11 @@
 		get: function(person, question) {
 			var self = this;
 			
-			requestData = "sdsd"; // Whatever needs sending
+			// To be sent to API
+			var requestData = {
+				"id": 1,
+				"question": question.model.attributes.text
+			};
 			
 			// Get the answer
 			var ajax = $.getJSON(
@@ -501,7 +512,6 @@
 						
 						google.maps.event.addListener(marker, "click", (function(marker, i) {
 							return function() {
-								console.log(marker);
 								infowindow.setContent(marker.title);
 								infowindow.open(map, marker);
 							}
@@ -515,7 +525,6 @@
 			// Add in thumbs up and down
 			$.get("/templates/conversation/response/footer.html", function(data) {
 				self.$el.append(data);
-				console.log(data);
 			});
 		},
 		hide: function() {
