@@ -745,7 +745,6 @@
   -ms-animation: fadeOut 0.5s linear 0s 1 normal forwards;
   -o-animation: fadeOut 0.5s linear 0s 1 normal forwards;
   animation: fadeOut 0.5s linear 0s 1 normal forwards;
-  color: red;
 }
 
 @-webkit-keyframes fadeIn {
@@ -1270,7 +1269,7 @@ body {
 
 /* line 1, ../scss/partials/_button.scss */
 .button {
-  cursor: pointer;
+  color: white;
 }
 /* line 4, ../scss/partials/_button.scss */
 .button.large {
@@ -1287,17 +1286,18 @@ body {
 /* line 16, ../scss/partials/_button.scss */
 .button.blue {
   background: #2980b9;
-  color: white;
 }
-/* line 21, ../scss/partials/_button.scss */
+/* line 20, ../scss/partials/_button.scss */
 .button.green {
   background: #349c42;
-  color: white;
 }
-/* line 26, ../scss/partials/_button.scss */
+/* line 24, ../scss/partials/_button.scss */
 .button.orange {
   background: #e67e22;
-  color: white;
+}
+/* line 28, ../scss/partials/_button.scss */
+.button.red {
+  background: #9c3434;
 }
 
 /* line 1, ../scss/partials/_refresh.scss */
@@ -1723,7 +1723,7 @@ body {
 #app > .view.conversation > ul.questions li {
   border-radius: 8px;
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
-  padding: 10px 20px;
+  padding: 15px 20px;
   background: rgba(255, 255, 255, 0.3);
   color: white;
   position: relative;
@@ -1739,29 +1739,35 @@ body {
 }
 /* line 26, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom {
-  text-align: center;
+  height: 58px;
+  transition: .5s;
 }
-/* line 29, ../scss/views/partials/_conversation-questions.scss */
-#app > .view.conversation > ul.questions li.custom textarea {
+/* line 30, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom input {
   width: 100%;
   background: none;
   resize: none;
   display: block;
-  font: italic normal 300 20px/1.4em "Open Sans", sans-serif;
+  font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
   color: white;
-  height: 28px;
   transition: 1s;
 }
 /* line 40, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom button {
-  display: none;
+  position: absolute;
+  height: auto;
+  left: 20px;
+  bottom: 18px;
 }
-/* line 45, ../scss/views/partials/_conversation-questions.scss */
-#app > .view.conversation > ul.questions li.custom.focused textarea {
-  font-style: normal;
-  height: 100px;
+/* line 47, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom.focused {
+  height: 113px;
 }
 /* line 50, ../scss/views/partials/_conversation-questions.scss */
+#app > .view.conversation > ul.questions li.custom.focused input {
+  margin-bottom: 10px;
+}
+/* line 54, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom.focused button {
   display: inline-block;
 }

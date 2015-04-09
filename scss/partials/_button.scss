@@ -1,5 +1,5 @@
 .button {
-	cursor: pointer;
+	color: white;
 	
 	&.large {
 		border-radius: 8px;
@@ -15,16 +15,17 @@
 	
 	&.blue {
 		background: $c-1;
-		color: white;
 	}
 	
 	&.green {
 		background: $c-2;
-		color: white;
 	}
 	
 	&.orange {
 		background: $c-3;
-		color: white;
+	}
+	
+	&.red {
+		background: $c-4;
 	}
 }

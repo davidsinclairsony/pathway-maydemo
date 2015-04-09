@@ -9,7 +9,7 @@
 	li {
 		border-radius: 8px;
 		font: normal normal 300 20px/#{$f-1-l-h} $f-1;
-		padding: 10px 20px;
+		padding: 15px 20px;
 		background: rgba(255, 255, 255, .3);
 		color: white;
 		position: relative;
@@ -24,27 +24,31 @@
 		}
 	
 		&.custom {
-			text-align: center;
+			height: 58px;
+			transition: .5s;
 			
-			textarea {
+			input {
 				width: 100%;
 				background: none;
 				resize: none;
 				display: block;
-				font: italic normal 300 20px/#{$f-1-l-h} $f-1;
+				font: normal normal 300 20px/#{$f-1-l-h} $f-1;
 				color: white;
-				height: 28px;
 				transition: 1s;
 			}
 			
 			button {
-				display: none;
+				position: absolute;
+				height: auto;
+				left: 20px;
+				bottom: 18px;
 			}
 			
 			&.focused {
-				textarea {
-					font-style: normal;
-					height: 100px;
+				height: 113px;
+				
+				input {
+					margin-bottom: 10px;
 				}
 				
 				button {

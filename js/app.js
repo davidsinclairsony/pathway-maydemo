@@ -210,8 +210,7 @@
 			
 			// This will start the chiclets loading
 			//this.peeople.selectedPerson.obtainData();
-			
-			// For testing purposes
+			// ...but for now/testing purposes...
 			var self = this;
 			setTimeout(function() {
 				self.getAndShowResponse();
@@ -243,6 +242,11 @@
 					self.views.push(new QuestionView({model: model}));
 				});
 				
+				// Add in custom view
+				var customQuestionView = new CustomQuestionView({model: new QuestionModel()});
+				
+				self.views.push(customQuestionView);
+				
 				self.render();
 			});
 		},
@@ -258,12 +262,6 @@
 				container.appendChild(view.el);
 			});
 			
-			// Add in inputted question
-			var li = document.createElement("li");
-			li.className = "custom";
-			li.innerHTML = "<textarea placeholder='Enter a question'></textarea><button class='button medium green'>Ask</button>";
-			container.appendChild(li);
-			
 			self.$el.append(container);
 			
 			return self;
@@ -273,9 +271,8 @@
 		},
 		questionClicked: function(event, objects) {
 			if(!this.selectedQuestion) {
-				// Save view that was selected
+				// Save view and hide others
 				this.selectedQuestion = objects.selectedQuestion;
-				
 				this.hideAllExceptSelectedQuestion();
 			} else {
 				this.revealAllQuestions();
@@ -356,6 +353,80 @@
 		}
 	});
 	
+	var CustomQuestionView = Backbone.View.extend({
+		tagName: "li",
+		className: "custom",
+		status: "empty",
+		initialize: function() {
+			this.render();
+		},
+		render: function() {
+			var self = this;
+			
+			$.get("/templates/conversation/questions/custom.html", function(data) {
+				self.$el.append(data);
+				self.input = self.$("input");
+				self.button = self.$("button");
+				self.button.css("display", "none");
+			});
+			
+			return this;
+		},
+		events: {
+			"click": "routeClick"
+		},
+		routeClick: function(e) {
+			if($(e.target).is(this.button) && this.input.val() != "") {
+				this.ask();
+			} else {
+				switch(this.status) {
+					case "empty":
+						this.getReadyForInput();
+						break;
+					case "selected":
+						this.$el.trigger("questionClicked", {selectedQuestion: this});
+						this.status = "empty";
+						this.input.val("");
+						break;
+				}
+			}
+		},
+		getReadyForInput: function() {
+			var self = this;
+			
+			self.input.prop("readonly", false).focus();
+			
+			// Animate if not already done
+			if(!self.$el.hasClass("focused")) {
+				self.$el.addClass("focused");
+				self.button.css("display", "inline-block");
+
+				window.app.cssAnimate.call(self.button, "fadeIn", function () {
+					self.button.removeClass("fadeIn");
+				});
+			}
+		},
+		ask: function() {
+			var self = this;
+			
+			// Update status
+			self.status = "selected";
+			
+			// Save data to moodel
+			self.model.set({"text": self.input.val()});
+			
+			// Disable editing and shrink view
+			self.input.prop("readonly", true);
+			self.$el.removeClass("focused");
+			window.app.cssAnimate.call(self.button, "fadeOut", function () {
+				self.button.removeClass("fadeOut").css("display", "none");
+				
+				// When done hiding, fire event to parent
+				self.$el.trigger("questionClicked", {selectedQuestion: self});
+			});
+		}
+	});
+	
 	var ResponseView = Backbone.View.extend({
 		className: "response",
 		initialize: function() {
@@ -384,13 +455,13 @@
 		},
 		prepare: function(answer) {
 			var self = this;
-			
+
 			// Adjust size of answer area based on question size
 			var top = answer.$el.parent().offset().top + answer.$el.outerHeight() + 10;
 			var height = 520 - answer.$el.outerHeight();
 			
 			self.$el.css({
-				display: "block",
+				//display: "block",
 				top: top,
 				height: height
 			});
@@ -401,11 +472,11 @@
 		},
 		get: function(person, question) {
 			var self = this;
-			
+
 			// To be sent to API
 			var requestData = {
 				"id": 1,
-				"question": question.model.attributes.text
+				"question": question.model.get("text")
 			};
 			
 			// Get the answer

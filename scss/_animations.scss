@@ -4,7 +4,6 @@
 
 .fadeOut {
 	@include animation(fadeOut .5s linear 0s 1 normal forwards);
-	color: red;
 }
 
 @include keyframes(fadeIn) {
