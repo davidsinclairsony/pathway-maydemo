@@ -1,6 +1,10 @@
 (function($) {
 	// Mustache style templating
-	_.templateSettings = {interpolate: /\{\{(.+?)\}\}/g};
+	_.templateSettings = {
+		evaluate: /\{\{#([\s\S]+?)\}\}/g,
+		interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,
+		escape: /\{\{\{([\s\S]+?)\}\}\}/g,
+	}
 	
 	// ------------------------------------
 	//	Models
@@ -368,27 +372,20 @@
 			
 			// Add in new one
 			var view = new CustomQuestionView({model: new QuestionModel()});
-			//self.$el.append(view.el);
+			self.$el.append(view.el);
 			
 			// Remove old when new present
-			var t = setInterval(function() {
-				console.log(view.el.nodeName);
-				if(view.el.nodeName) {
-					clearInterval(t);
+			var i = setInterval(function() {
+				if(jQuery.contains(self.el, view.el)) {
+					clearInterval(i);
+					
+					current.remove();
 					
 					// Cleanup array
 					self.views.pop();
 					self.views.push(view);
 				}
-			}, 100);
-			setTimeout(function() {self.$el.append(view.el);console.log("entered")}, 2000);
-			/*current.$el.fadeOut(500, function() {
-				current.remove();
-				
-				// Cleanup array
-				self.views.pop();
-				self.views.push(view);
-			});*/
+			}, 1);
 		}
 	});
 	
@@ -544,9 +541,10 @@
 
 			// To be sent to API
 			var requestData = {
-//				"id": person.model.get("id"),
-				"id": 1,
-				"question": question.model.get("text")
+//				"personID": person.model.get("id"),
+				"personID": 1,
+				"questionID": question.model.get("id"),
+				"questionText": question.model.get("text")
 			};
 			
 			// Get the answer

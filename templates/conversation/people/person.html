@@ -12,7 +12,15 @@
 	</div>
 	<div class="sources">
 		<ul>
+			{{# _.each(data, function(a) { }}
+				<li>Data</li>
+			{{# } }}
+			
+			{{# if(data.genetics) { }}
 			<li class="done available">
+			{{# } else { }}
+			<li class="done">
+			{{# } }}
 				<div class="chiclet icon-dna"></div>
 				<span>Genetics</span>
 			</li>
