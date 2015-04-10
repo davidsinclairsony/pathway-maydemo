@@ -267,7 +267,8 @@
 			return self;
 		},
 		events: {
-			"questionClicked": "questionClicked"
+			"questionClicked": "questionClicked",
+			"regenerateCustomQuestion": "regenerateCustomQuestion"
 		},
 		questionClicked: function(event, objects) {
 			if(!this.selectedQuestion) {
@@ -295,15 +296,16 @@
 					var desiredOffset = self.selectedQuestion.$el.offset();
 					
 					// Reset positioning and move question
-					self.selectedQuestion.$el
-						.css("position", "relative")
-						.animate({top: desiredOffset.top - currentOffset.top}, 500, "linear")
-					;
+					self.selectedQuestion.$el.css({
+						position: "relative",
+						transition: ".5s",
+						top: desiredOffset.top - currentOffset.top
+					});
 				} else {
 					// Hide all other questions
 					window.app.cssAnimate.call(view.$el, "fadeOut", function () {
-						view.$el.removeClass("fadeOut");
 						view.$el.css("visibility", "hidden");
+						view.$el.removeClass("fadeOut");
 					});
 				}
 			});
@@ -316,22 +318,77 @@
 				self.$el.trigger("revealedAllQuestions");
 				
 				_.each(this.views, function(view) {
+					// Reset custom question
+					if(view instanceof CustomQuestionView) {
+						view.stale();
+					}
+					
 					if(view == self.selectedQuestion) {
-						// Move question back
-						self.selectedQuestion.$el.animate({top: 0}, 500, "linear");
-	
-						// Clear out the selected quetion
-						self.selectedQuestion = null;
+						// Animate back to position, if needed
+						if(!self.selectedQuestion.$el.is(":first-child")) {
+							// Catch next animation and reset duration
+							self.selectedQuestion.$el.one("transitionend", function() {
+								if(view instanceof CustomQuestionView) {
+									self.regenerateCustomQuestion();
+								}
+								
+								self.selectedQuestion.$el.css("transition", 0);
+								self.selectedQuestion = null;
+							});
+
+							// Move question
+							self.selectedQuestion.$el.css("top", 0);
+						} else {
+							self.selectedQuestion.$el.css("transition", 0);
+							self.selectedQuestion = null;
+						}
 					} else {
+						// Reveal other questions
 						view.$el.css("visibility", "visible");
 						
-						// Reveal other questions
 						window.app.cssAnimate.call(view.$el, "fadeIn", function () {
 							view.$el.removeClass("fadeIn");
 						});
 					}
 				});
 			}
+		},
+		regenerateCustomQuestion: function() {
+			var self = this;
+			
+			// Bring current out of position
+			var current = self.views.slice(-1)[0];
+			current.$el.css({
+				position: "absolute",
+				top: current.$el.position().top,
+				left: current.$el.position().left,
+				width: current.$el.outerWidth(),
+				zIndex: 10
+			});
+			
+			// Add in new one
+			var view = new CustomQuestionView({model: new QuestionModel()});
+			//self.$el.append(view.el);
+			
+			// Remove old when new present
+			var t = setInterval(function() {
+				console.log(view.el.nodeName);
+				if(view.el.nodeName) {
+					clearInterval(t);
+					
+					// Cleanup array
+					self.views.pop();
+					self.views.push(view);
+				}
+			}, 100);
+			setTimeout(function() {self.$el.append(view.el);console.log("entered")}, 2000);
+			/*current.$el.fadeOut(500, function() {
+				current.remove();
+				
+				// Cleanup array
+				self.views.pop();
+				self.views.push(view);
+			});*/
 		}
 	});
 	
@@ -356,7 +413,7 @@
 	var CustomQuestionView = Backbone.View.extend({
 		tagName: "li",
 		className: "custom",
-		status: "empty",
+		status: "stale",
 		initialize: function() {
 			this.render();
 		},
@@ -373,56 +430,68 @@
 			return this;
 		},
 		events: {
-			"click": "routeClick"
+			"click": "router"
 		},
-		routeClick: function(e) {
+		router: function(e) {
 			if($(e.target).is(this.button) && this.input.val() != "") {
-				this.ask();
+				this.selected();
+			} else if(this.status == "selected") {
+				this.$el.trigger("questionClicked", {selectedQuestion: this});
 			} else {
-				switch(this.status) {
-					case "empty":
-						this.getReadyForInput();
-						break;
-					case "selected":
-						this.$el.trigger("questionClicked", {selectedQuestion: this});
-						this.status = "empty";
-						this.input.val("");
-						break;
-				}
+				this.editing();
 			}
 		},
-		getReadyForInput: function() {
+		editing: function() {
 			var self = this;
 			
+			self.status = "editing";
+			
+			// Allow editing
 			self.input.prop("readonly", false).focus();
 			
-			// Animate if not already done
+			// Animate height if not already done
 			if(!self.$el.hasClass("focused")) {
 				self.$el.addClass("focused");
-				self.button.css("display", "inline-block");
-
-				window.app.cssAnimate.call(self.button, "fadeIn", function () {
-					self.button.removeClass("fadeIn");
+				self.$el.css("transition", ".5s");
+				
+				// Remove transition
+				self.$el.one("transitionend", function() {
+					self.$el.css("transition", 0);
 				});
+				
+				self.button.fadeIn(500);
 			}
 		},
-		ask: function() {
+		selected: function() {
 			var self = this;
 			
-			// Update status
 			self.status = "selected";
 			
 			// Save data to moodel
 			self.model.set({"text": self.input.val()});
 			
-			// Disable editing and shrink view
+			// Disable editing and shrink
 			self.input.prop("readonly", true);
+			self.shrink();
+
+			// Fire event to parent
+			self.$el.trigger("questionClicked", {selectedQuestion: self});
+		},
+		stale: function() {
+			this.input.val("");
+			
+			if(this.status == "editing") {
+				this.shrink();
+			}
+			
+			this.status = "stale";
+		},
+		shrink: function() {
+			var self = this;
+			
 			self.$el.removeClass("focused");
 			window.app.cssAnimate.call(self.button, "fadeOut", function () {
 				self.button.removeClass("fadeOut").css("display", "none");
-				
-				// When done hiding, fire event to parent
-				self.$el.trigger("questionClicked", {selectedQuestion: self});
 			});
 		}
 	});
@@ -461,7 +530,7 @@
 			var height = 520 - answer.$el.outerHeight();
 			
 			self.$el.css({
-				//display: "block",
+				display: "block",
 				top: top,
 				height: height
 			});
@@ -475,6 +544,7 @@
 
 			// To be sent to API
 			var requestData = {
+//				"id": person.model.get("id"),
 				"id": 1,
 				"question": question.model.get("text")
 			};
@@ -546,6 +616,11 @@
 						},
 						mapTypeControl: false,
 						streetViewControl: false,
+						zoomControl: true,
+						zoomControlOptions: {
+							style: google.maps.ZoomControlStyle.LARGE,
+							position: google.maps.ControlPosition.LEFT_TOP
+						}
 					};
 					
 					var map = new google.maps.Map(document.getElementById("map"), mapOptions);

@@ -11,8 +11,8 @@
 			"gps": true,
 			"health": false,
 			"fitness": true,
-			"personal": false,
-			"ehr": true
+			"personal": true,
+			"ehr": false
 		},
 		"goals": "Stephen's goals are losing weight and improving heart health."
 	},
@@ -29,7 +29,7 @@
 			"health": true,
 			"fitness": false,
 			"personal": false,
-			"ehr": true
+			"ehr": false
 		},
 		"goals": "Jennifer's goals are maintaining weight and lowering cholesterol."
 	},
@@ -43,10 +43,10 @@
 		"data": {
 			"genetics": true,
 			"gps": true,
-			"health": true,
-			"fitness": false,
+			"health": false,
+			"fitness": true,
 			"personal": true,
-			"ehr": false
+			"ehr": true
 		},
 		"goals": "Ruben's goals are adding muscle and increasing endurance."
 	}

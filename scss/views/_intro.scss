@@ -24,13 +24,13 @@
 		@include animation(fadeIn 1s linear 3.5s 1 normal forwards);
 	}
 	
-	img[src*="panorama.png"] {
+	img[src*="ohm.png"] {
 		width: 500px;
 		margin: 150px 0 40px 0;
 		@include animation(fadeIn 1s linear 1s 1 normal forwards);
 	}
 	
-	img[src*="panorama-byline.png"] {
+	img[src*="ohm-byline.png"] {
 		width: 275px;
 		@include animation(fadeIn 1s linear 2s 1 normal forwards);
 	}

@@ -10,7 +10,7 @@
 		border-radius: 8px;
 		font: normal normal 300 20px/#{$f-1-l-h} $f-1;
 		padding: 15px 20px;
-		background: rgba(255, 255, 255, .3);
+		background: #526672;
 		color: white;
 		position: relative;
 		top: 0;
@@ -25,7 +25,6 @@
 	
 		&.custom {
 			height: 58px;
-			transition: .5s;
 			
 			input {
 				width: 100%;
@@ -34,13 +33,15 @@
 				display: block;
 				font: normal normal 300 20px/#{$f-1-l-h} $f-1;
 				color: white;
-				transition: 1s;
 			}
 			
 			button {
 				position: absolute;
 				height: auto;
-				left: 20px;
+				left: 0;
+				right: 0;
+				margin: auto;
+				width: 150px;
 				bottom: 18px;
 			}
 			

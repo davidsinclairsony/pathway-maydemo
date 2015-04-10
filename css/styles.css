@@ -730,6 +730,11 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 /* line 1, ../scss/_animations.scss */
+.no-transition {
+  transition: none !important;
+}
+
+/* line 5, ../scss/_animations.scss */
 .fadeIn {
   -webkit-animation: fadeIn 0.5s linear 0s 1 normal forwards;
   -moz-animation: fadeIn 0.5s linear 0s 1 normal forwards;
@@ -738,7 +743,7 @@
   animation: fadeIn 0.5s linear 0s 1 normal forwards;
 }
 
-/* line 5, ../scss/_animations.scss */
+/* line 9, ../scss/_animations.scss */
 .fadeOut {
   -webkit-animation: fadeOut 0.5s linear 0s 1 normal forwards;
   -moz-animation: fadeOut 0.5s linear 0s 1 normal forwards;
@@ -1352,7 +1357,7 @@ body {
   animation: fadeIn 1s linear 3.5s 1 normal forwards;
 }
 /* line 27, ../scss/views/_intro.scss */
-#app > .view.intro img[src*="panorama.png"] {
+#app > .view.intro img[src*="ohm.png"] {
   width: 500px;
   margin: 150px 0 40px 0;
   -webkit-animation: fadeIn 1s linear 1s 1 normal forwards;
@@ -1362,7 +1367,7 @@ body {
   animation: fadeIn 1s linear 1s 1 normal forwards;
 }
 /* line 33, ../scss/views/_intro.scss */
-#app > .view.intro img[src*="panorama-byline.png"] {
+#app > .view.intro img[src*="ohm-byline.png"] {
   width: 275px;
   -webkit-animation: fadeIn 1s linear 2s 1 normal forwards;
   -moz-animation: fadeIn 1s linear 2s 1 normal forwards;
@@ -1724,7 +1729,7 @@ body {
   border-radius: 8px;
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.3);
+  background: #526672;
   color: white;
   position: relative;
   top: 0;
@@ -1740,9 +1745,8 @@ body {
 /* line 26, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom {
   height: 58px;
-  transition: .5s;
 }
-/* line 30, ../scss/views/partials/_conversation-questions.scss */
+/* line 29, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom input {
   width: 100%;
   background: none;
@@ -1750,24 +1754,26 @@ body {
   display: block;
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
   color: white;
-  transition: 1s;
 }
-/* line 40, ../scss/views/partials/_conversation-questions.scss */
+/* line 38, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom button {
   position: absolute;
   height: auto;
-  left: 20px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 150px;
   bottom: 18px;
 }
-/* line 47, ../scss/views/partials/_conversation-questions.scss */
+/* line 48, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom.focused {
   height: 113px;
 }
-/* line 50, ../scss/views/partials/_conversation-questions.scss */
+/* line 51, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom.focused input {
   margin-bottom: 10px;
 }
-/* line 54, ../scss/views/partials/_conversation-questions.scss */
+/* line 55, ../scss/views/partials/_conversation-questions.scss */
 #app > .view.conversation > ul.questions li.custom.focused button {
   display: inline-block;
 }
@@ -1929,12 +1935,13 @@ body {
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw {
   line-height: 1em;
   color: black;
+  max-width: 300px;
 }
-/* line 145, ../scss/views/partials/_conversation-response.scss */
+/* line 146, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw * {
   font: normal normal 300 16px/1.4em "Open Sans", sans-serif;
 }
-/* line 149, ../scss/views/partials/_conversation-response.scss */
+/* line 150, ../scss/views/partials/_conversation-response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .title {
   font-weight: bold;
 }
