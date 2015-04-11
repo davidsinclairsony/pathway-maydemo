@@ -12,11 +12,11 @@
 		opacity: 1;
 	}*/
 	
-	@import "partials/conversation-header";
-	@import "partials/conversation-people";
-	@import "partials/conversation-questions";
-	@import "partials/conversation-response";
-	@import "partials/conversation-know";
-	@import "partials/conversation-lower";
-	@import "partials/conversation-footer";
+	@import "conversation/header";
+	@import "conversation/people";
+	@import "conversation/questions";
+	@import "conversation/response";
+	@import "conversation/know";
+	@import "conversation/lower";
+	@import "conversation/footer";
 }

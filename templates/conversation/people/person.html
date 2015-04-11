@@ -9,40 +9,39 @@
 <main>
 	<div class="picture">
 		<img src="images/people/{{ picture }}" />
+		<div class="popup">{{ name }}'s goals are {{ goals }}.</div>
 	</div>
 	<div class="sources">
 		<ul>
-			{{# _.each(data, function(a) { }}
-				<li>Data</li>
-			{{# } }}
-			
-			{{# if(data.genetics) { }}
-			<li class="done available">
-			{{# } else { }}
-			<li class="done">
-			{{# } }}
+			<li class="done {{# if(data.genetics) { }}available{{# } }}">
 				<div class="chiclet icon-dna"></div>
 				<span>Genetics</span>
+				<div class="popup">This user has {{# if(!data.genetics) { }}not{{# } }} uploaded a Genetics report to OME.</div>
 			</li>
-			<li class="done available">
+			<li class="done {{# if(data.gps) { }}available{{# } }}">
 				<div class="chiclet icon-direction"></div>
 				<span>GPS</span>
+				<div class="popup">This user has GPS {{# if(data.gps) { }}enabled{{# } else { }}disabled{{# } }} on their OME app.</div>
 			</li>
-			<li class="done available">
+			<li class="done {{# if(data.health) { }}available{{# } }}">
 				<div class="chiclet icon-md-info"></div>
 				<span>Health Data</span>
+				<div class="popup">This user has {{# if(!data.health) { }}not{{# } }} connected a health tracking app to OME.</div>
 			</li>
-			<li class="done available">
+			<li class="done {{# if(data.fitness) { }}available{{# } }}">
 				<div class="chiclet icon-fit-bit"></div>
 				<span>Fitness Data</span>
+				<div class="popup">This user has {{# if(!data.fitness) { }}not{{# } }} connected a Fitness Tracker to OME.</div>
 			</li>
-			<li class="done available">
+			<li class="done {{# if(data.personal) { }}available{{# } }}">
 				<div class="chiclet icon-info"></div>
 				<span>Personal Info</span>
+				<div class="popup">This user has {{# if(!data.personal) { }}not{{# } }} added their personal health information to OME.</div>
 			</li>
-			<li class="done available">
+			<li class="done {{# if(data.ehr) { }}available{{# } }}">
 				<div class="chiclet icon-ehr"></div>
 				<span>E.H.R.</span>
+				<div class="popup">This user has {{# if(!data.ehr) { }}not{{# } }} added their Electronic Health Record to OME.</div>
 			</li>
 		</ul>
 	</div>

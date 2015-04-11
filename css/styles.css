@@ -1341,39 +1341,39 @@ body {
   height: 100%;
   opacity: 0;
   background: url(../images/splash.png) no-repeat center/cover;
-  -webkit-animation: fadeIn 1s linear 3s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 3s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 3s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 3s 1 normal forwards;
-  animation: fadeIn 1s linear 3s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  animation: fadeIn 0.5s linear 2s 1 normal forwards;
 }
 /* line 22, ../scss/views/_intro.scss */
 #app > .view.intro img[src*="pg.png"] {
   width: 350px;
-  -webkit-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  animation: fadeIn 1s linear 3.5s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  animation: fadeIn 0.5s linear 2s 1 normal forwards;
 }
 /* line 27, ../scss/views/_intro.scss */
-#app > .view.intro img[src*="ohm.png"] {
+#app > .view.intro img[src*="app.png"] {
   width: 500px;
   margin: 150px 0 40px 0;
-  -webkit-animation: fadeIn 1s linear 1s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 1s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 1s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 1s 1 normal forwards;
-  animation: fadeIn 1s linear 1s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  animation: fadeIn 0.5s linear 0s 1 normal forwards;
 }
 /* line 33, ../scss/views/_intro.scss */
-#app > .view.intro img[src*="ohm-byline.png"] {
+#app > .view.intro img[src*="byline.png"] {
   width: 275px;
-  -webkit-animation: fadeIn 1s linear 2s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 2s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 2s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 2s 1 normal forwards;
-  animation: fadeIn 1s linear 2s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 1s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 1s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 1s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 1s 1 normal forwards;
+  animation: fadeIn 0.5s linear 1s 1 normal forwards;
 }
 /* line 38, ../scss/views/_intro.scss */
 #app > .view.intro img[src*="ibm.png"] {
@@ -1381,11 +1381,11 @@ body {
   bottom: 0;
   left: 0;
   padding: 20px;
-  -webkit-animation: fadeIn 1s linear 4s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 4s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 4s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 4s 1 normal forwards;
-  animation: fadeIn 1s linear 4s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  animation: fadeIn 0.5s linear 2s 1 normal forwards;
 }
 /* line 46, ../scss/views/_intro.scss */
 #app > .view.intro p {
@@ -1395,11 +1395,11 @@ body {
   padding: 20px;
   text-align: left;
   color: white;
-  -webkit-animation: fadeIn 1s linear 4s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 4s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 4s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 4s 1 normal forwards;
-  animation: fadeIn 1s linear 4s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  animation: fadeIn 0.5s linear 2s 1 normal forwards;
 }
 
 /* line 1, ../scss/views/_hello.scss */
@@ -1434,54 +1434,115 @@ body {
   text-align: center;
   padding: 110px;
 }
-/* line 21, ../scss/views/_hello.scss */
+/* line 20, ../scss/views/_hello.scss */
+#app > .view.hello .container .item p {
+  opacity: 0;
+}
+/* line 23, ../scss/views/_hello.scss */
 #app > .view.hello .container .item p:nth-child(n + 2) {
   margin-top: 40px;
 }
-/* line 27, ../scss/views/_hello.scss */
+@-webkit-keyframes fadeInAndSlightlyOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .65;
+  }
+}
+@-moz-keyframes fadeInAndSlightlyOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .65;
+  }
+}
+@-ms-keyframes fadeInAndSlightlyOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .65;
+  }
+}
+@-o-keyframes fadeInAndSlightlyOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .65;
+  }
+}
+@keyframes fadeInAndSlightlyOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: .65;
+  }
+}
+/* line 35, ../scss/views/_hello.scss */
 #app > .view.hello .container .item p:nth-child(1) {
-  opacity: 0;
-  -webkit-animation: fadeIn 1s linear 0.5s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 0.5s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 0.5s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 0.5s 1 normal forwards;
-  animation: fadeIn 1s linear 0.5s 1 normal forwards;
+  -webkit-animation: fadeInAndSlightlyOut 2s linear 0s 1 normal forwards;
+  -moz-animation: fadeInAndSlightlyOut 2s linear 0s 1 normal forwards;
+  -ms-animation: fadeInAndSlightlyOut 2s linear 0s 1 normal forwards;
+  -o-animation: fadeInAndSlightlyOut 2s linear 0s 1 normal forwards;
+  animation: fadeInAndSlightlyOut 2s linear 0s 1 normal forwards;
 }
-/* line 27, ../scss/views/_hello.scss */
+/* line 35, ../scss/views/_hello.scss */
 #app > .view.hello .container .item p:nth-child(2) {
-  opacity: 0;
-  -webkit-animation: fadeIn 1s linear 2s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 2s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 2s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 2s 1 normal forwards;
-  animation: fadeIn 1s linear 2s 1 normal forwards;
+  -webkit-animation: fadeInAndSlightlyOut 2s linear 1.5s 1 normal forwards;
+  -moz-animation: fadeInAndSlightlyOut 2s linear 1.5s 1 normal forwards;
+  -ms-animation: fadeInAndSlightlyOut 2s linear 1.5s 1 normal forwards;
+  -o-animation: fadeInAndSlightlyOut 2s linear 1.5s 1 normal forwards;
+  animation: fadeInAndSlightlyOut 2s linear 1.5s 1 normal forwards;
 }
-/* line 27, ../scss/views/_hello.scss */
+/* line 41, ../scss/views/_hello.scss */
 #app > .view.hello .container .item p:nth-child(3) {
-  opacity: 0;
-  -webkit-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 3.5s 1 normal forwards;
-  animation: fadeIn 1s linear 3.5s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  animation: fadeIn 0.5s linear 3s 1 normal forwards;
 }
-/* line 27, ../scss/views/_hello.scss */
+/* line 41, ../scss/views/_hello.scss */
 #app > .view.hello .container .item p:nth-child(4) {
-  opacity: 0;
-  -webkit-animation: fadeIn 1s linear 5s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 5s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 5s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 5s 1 normal forwards;
-  animation: fadeIn 1s linear 5s 1 normal forwards;
-}
-/* line 27, ../scss/views/_hello.scss */
-#app > .view.hello .container .item p:nth-child(5) {
-  opacity: 0;
-  -webkit-animation: fadeIn 1s linear 6.5s 1 normal forwards;
-  -moz-animation: fadeIn 1s linear 6.5s 1 normal forwards;
-  -ms-animation: fadeIn 1s linear 6.5s 1 normal forwards;
-  -o-animation: fadeIn 1s linear 6.5s 1 normal forwards;
-  animation: fadeIn 1s linear 6.5s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 4.5s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 4.5s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 4.5s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 4.5s 1 normal forwards;
+  animation: fadeIn 0.5s linear 4.5s 1 normal forwards;
 }
 
 /* line 1, ../scss/views/_conversation.scss */
@@ -1503,7 +1564,7 @@ body {
   	opacity: 1;
   }*/
 }
-/* line 1, ../scss/views/partials/_conversation-header.scss */
+/* line 1, ../scss/views/conversation/_header.scss */
 #app > .view.conversation > header {
   position: absolute;
   top: 40px;
@@ -1512,13 +1573,13 @@ body {
   width: 768px;
   text-align: center;
 }
-/* line 9, ../scss/views/partials/_conversation-header.scss */
+/* line 9, ../scss/views/conversation/_header.scss */
 #app > .view.conversation > header img {
   height: 25px;
   display: block;
   margin: 0 auto;
 }
-/* line 1, ../scss/views/partials/_conversation-people.scss */
+/* line 1, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people {
   position: absolute;
   top: 105px;
@@ -1527,40 +1588,57 @@ body {
   white-space: nowrap;
   font-size: 0;
 }
-/* line 9, ../scss/views/partials/_conversation-people.scss */
+/* line 9, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li {
   display: inline-block;
   width: 600px;
   color: white;
+  position: relative;
+  white-space: normal;
 }
-/* line 14, ../scss/views/partials/_conversation-people.scss */
+/* line 16, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li:nth-child(n + 2) {
   margin-left: 40px;
 }
-/* line 18, ../scss/views/partials/_conversation-people.scss */
+/* line 20, ../scss/views/conversation/_people.scss */
+#app > .view.conversation ul.people > li .popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background: #e9e9e9;
+  font: normal normal 300 14px/1.4em "Open Sans", sans-serif;
+  color: black;
+  width: 200px;
+  border-radius: 5px;
+  padding: 15px 20px;
+  z-index: 100;
+  text-align: left;
+}
+/* line 35, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header {
   background: rgba(255, 255, 255, 0.3);
   padding: 10px 20px;
   border-radius: 8px 8px 0 0;
   position: relative;
 }
-/* line 24, ../scss/views/partials/_conversation-people.scss */
+/* line 41, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header h2 {
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
 }
-/* line 28, ../scss/views/partials/_conversation-people.scss */
+/* line 45, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header div {
   opacity: .7;
   font: normal normal 300 14px/1.4em "Open Sans", sans-serif;
 }
-/* line 33, ../scss/views/partials/_conversation-people.scss */
+/* line 50, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header aside {
   position: absolute;
   top: 9px;
   right: 0;
   padding: 10px 20px;
 }
-/* line 41, ../scss/views/partials/_conversation-people.scss */
+/* line 58, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main {
   display: -webkit-box;
   display: -moz-box;
@@ -1571,7 +1649,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 0 0 8px 8px;
 }
-/* line 47, ../scss/views/partials/_conversation-people.scss */
+/* line 64, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .picture {
   width: 66px;
   -webkit-box-flex: 0 0 auto;
@@ -1580,13 +1658,13 @@ body {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
-/* line 51, ../scss/views/partials/_conversation-people.scss */
+/* line 68, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .picture img {
   width: 100%;
   border-radius: 4px;
   display: block;
 }
-/* line 58, ../scss/views/partials/_conversation-people.scss */
+/* line 75, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -1595,7 +1673,7 @@ body {
   flex: 1;
   padding: 0 0 0 10px;
 }
-/* line 62, ../scss/views/partials/_conversation-people.scss */
+/* line 79, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul {
   list-style: none;
   display: -webkit-box;
@@ -1604,7 +1682,7 @@ body {
   display: -webkit-flex;
   display: flex;
 }
-/* line 66, ../scss/views/partials/_conversation-people.scss */
+/* line 83, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -1614,7 +1692,7 @@ body {
   text-align: center;
   position: relative;
 }
-/* line 71, ../scss/views/partials/_conversation-people.scss */
+/* line 88, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li:after {
   border-radius: 50%;
   border: 3px solid white;
@@ -1628,7 +1706,7 @@ body {
   left: 20px;
   z-index: 0;
 }
-/* line 85, ../scss/views/partials/_conversation-people.scss */
+/* line 102, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li:last-child {
   width: 78px;
   -webkit-box-flex: 0 0 auto;
@@ -1637,7 +1715,7 @@ body {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
-/* line 90, ../scss/views/partials/_conversation-people.scss */
+/* line 107, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li .chiclet {
   font-size: 45px;
   -webkit-transform: scale(0, 0);
@@ -1645,14 +1723,14 @@ body {
   position: relative;
   z-index: 1;
 }
-/* line 97, ../scss/views/partials/_conversation-people.scss */
+/* line 114, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li span {
   display: block;
   padding-top: 5px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.3);
 }
-/* line 105, ../scss/views/partials/_conversation-people.scss */
+/* line 122, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.waiting:after {
   -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
   -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
@@ -1660,7 +1738,7 @@ body {
   -o-animation: spinner 0.5s linear 0s infinite normal forwards;
   animation: spinner 0.5s linear 0s infinite normal forwards;
 }
-/* line 111, ../scss/views/partials/_conversation-people.scss */
+/* line 128, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done:after {
   -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
   -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
@@ -1668,7 +1746,7 @@ body {
   -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
   animation: spinOut 0.5s linear 0s 1 normal forwards;
 }
-/* line 116, ../scss/views/partials/_conversation-people.scss */
+/* line 133, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet {
   -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
   -moz-animation: pop 0.5s linear 0s 1 normal forwards;
@@ -1676,35 +1754,35 @@ body {
   -o-animation: pop 0.5s linear 0s 1 normal forwards;
   animation: pop 0.5s linear 0s 1 normal forwards;
 }
-/* line 119, ../scss/views/partials/_conversation-people.scss */
+/* line 136, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-dna {
   color: #e74c3c;
 }
-/* line 120, ../scss/views/partials/_conversation-people.scss */
+/* line 137, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-fit-bit {
   color: #9b59b6;
 }
-/* line 121, ../scss/views/partials/_conversation-people.scss */
+/* line 138, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-ehr {
   color: #d35400;
 }
-/* line 122, ../scss/views/partials/_conversation-people.scss */
+/* line 139, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-direction {
   color: #f1c40f;
 }
-/* line 123, ../scss/views/partials/_conversation-people.scss */
+/* line 140, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-info {
   color: #527EC4;
 }
-/* line 124, ../scss/views/partials/_conversation-people.scss */
+/* line 141, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-md-info {
   color: #2ecc71;
 }
-/* line 127, ../scss/views/partials/_conversation-people.scss */
+/* line 144, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available span {
   color: white;
 }
-/* line 133, ../scss/views/partials/_conversation-people.scss */
+/* line 150, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done:not(.available) .chiclet {
   -webkit-transform: scale(1, 1);
   transform: scale(1, 1);
@@ -1715,7 +1793,7 @@ body {
   animation: fadeIn 1s linear 0s 1 normal forwards;
   color: rgba(255, 255, 255, 0.3);
 }
-/* line 1, ../scss/views/partials/_conversation-questions.scss */
+/* line 1, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions {
   position: absolute;
   top: 317px;
@@ -1724,7 +1802,7 @@ body {
   width: 600px;
   list-style: none;
 }
-/* line 9, ../scss/views/partials/_conversation-questions.scss */
+/* line 9, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li {
   border-radius: 8px;
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
@@ -1734,19 +1812,19 @@ body {
   position: relative;
   top: 0;
 }
-/* line 18, ../scss/views/partials/_conversation-questions.scss */
+/* line 18, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li:nth-last-child(n + 2) {
   margin-bottom: 10px;
 }
-/* line 22, ../scss/views/partials/_conversation-questions.scss */
+/* line 22, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li:focus {
   background: red;
 }
-/* line 26, ../scss/views/partials/_conversation-questions.scss */
+/* line 26, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li.custom {
   height: 58px;
 }
-/* line 29, ../scss/views/partials/_conversation-questions.scss */
+/* line 29, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li.custom input {
   width: 100%;
   background: none;
@@ -1755,7 +1833,7 @@ body {
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
   color: white;
 }
-/* line 38, ../scss/views/partials/_conversation-questions.scss */
+/* line 38, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li.custom button {
   position: absolute;
   height: auto;
@@ -1765,19 +1843,19 @@ body {
   width: 150px;
   bottom: 18px;
 }
-/* line 48, ../scss/views/partials/_conversation-questions.scss */
+/* line 48, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li.custom.focused {
   height: 113px;
 }
-/* line 51, ../scss/views/partials/_conversation-questions.scss */
+/* line 51, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li.custom.focused input {
   margin-bottom: 10px;
 }
-/* line 55, ../scss/views/partials/_conversation-questions.scss */
+/* line 55, ../scss/views/conversation/_questions.scss */
 #app > .view.conversation > ul.questions li.custom.focused button {
   display: inline-block;
 }
-/* line 1, ../scss/views/partials/_conversation-response.scss */
+/* line 1, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response {
   position: absolute;
   left: 50%;
@@ -1790,7 +1868,7 @@ body {
   color: white;
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
 }
-/* line 13, ../scss/views/partials/_conversation-response.scss */
+/* line 13, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response:after {
   border-radius: 50%;
   border: 3px solid white;
@@ -1805,7 +1883,7 @@ body {
   margin: -20px 0 0 -20px;
   z-index: 0;
 }
-/* line 29, ../scss/views/partials/_conversation-response.scss */
+/* line 29, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.waiting:after {
   -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
   -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
@@ -1813,7 +1891,7 @@ body {
   -o-animation: spinner 0.5s linear 0s infinite normal forwards;
   animation: spinner 0.5s linear 0s infinite normal forwards;
 }
-/* line 35, ../scss/views/partials/_conversation-response.scss */
+/* line 35, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.done:after {
   -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
   -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
@@ -1821,7 +1899,7 @@ body {
   -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
   animation: spinOut 0.5s linear 0s 1 normal forwards;
 }
-/* line 40, ../scss/views/partials/_conversation-response.scss */
+/* line 40, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response main {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -1829,11 +1907,11 @@ body {
   padding: 12px 0 30px 0;
   position: relative;
 }
-/* line 48, ../scss/views/partials/_conversation-response.scss */
+/* line 48, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response main p:nth-child(n + 2) {
   margin-top: 20px;
 }
-/* line 54, ../scss/views/partials/_conversation-response.scss */
+/* line 54, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response .overlay {
   height: 100%;
   width: 100%;
@@ -1842,7 +1920,7 @@ body {
   left: 0;
   pointer-events: none;
 }
-/* line 62, ../scss/views/partials/_conversation-response.scss */
+/* line 62, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response .overlay:before {
   content: "";
   position: absolute;
@@ -1857,7 +1935,7 @@ body {
   background: linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
   border-radius: 8px 8px 0 0;
 }
-/* line 73, ../scss/views/partials/_conversation-response.scss */
+/* line 73, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response .overlay:after {
   content: "";
   position: absolute;
@@ -1872,7 +1950,7 @@ body {
   background: linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
   border-radius: 0 0 8px 8px;
 }
-/* line 85, ../scss/views/partials/_conversation-response.scss */
+/* line 85, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer {
   width: 100%;
   position: absolute;
@@ -1881,11 +1959,11 @@ body {
   text-align: right;
   padding: 0 15px 12px 0;
 }
-/* line 93, ../scss/views/partials/_conversation-response.scss */
+/* line 93, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div {
   display: inline-block;
 }
-/* line 96, ../scss/views/partials/_conversation-response.scss */
+/* line 96, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div:before {
   border-radius: 1em;
   font-size: 16px;
@@ -1893,19 +1971,19 @@ body {
   transition: .5s;
   padding: 5px;
 }
-/* line 105, ../scss/views/partials/_conversation-response.scss */
+/* line 105, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div.clicked.icon-thumbs-up:before {
   background: #349c42;
 }
-/* line 109, ../scss/views/partials/_conversation-response.scss */
+/* line 109, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div.clicked.icon-thumbs-down:before {
   background: #9c3434;
 }
-/* line 116, ../scss/views/partials/_conversation-response.scss */
+/* line 116, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map {
   padding-bottom: 285px;
 }
-/* line 120, ../scss/views/partials/_conversation-response.scss */
+/* line 120, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .overlay:after {
   bottom: 287px;
   height: 40px;
@@ -1915,7 +1993,7 @@ body {
   background: -ms-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
   background: linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
 }
-/* line 127, ../scss/views/partials/_conversation-response.scss */
+/* line 127, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container {
   position: absolute;
   bottom: 35px;
@@ -1924,28 +2002,28 @@ body {
   height: 270px;
   padding: 18px 20px;
 }
-/* line 135, ../scss/views/partials/_conversation-response.scss */
+/* line 135, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map {
   width: 100%;
   height: 100%;
   border-radius: 0 0 4px 4px;
   overflow: hidden;
 }
-/* line 141, ../scss/views/partials/_conversation-response.scss */
+/* line 141, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw {
   line-height: 1em;
   color: black;
   max-width: 300px;
 }
-/* line 146, ../scss/views/partials/_conversation-response.scss */
+/* line 146, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw * {
   font: normal normal 300 16px/1.4em "Open Sans", sans-serif;
 }
-/* line 150, ../scss/views/partials/_conversation-response.scss */
+/* line 150, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .title {
   font-weight: bold;
 }
-/* line 1, ../scss/views/partials/_conversation-know.scss */
+/* line 1, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know {
   position: absolute;
   z-index: 10;
@@ -1968,7 +2046,7 @@ body {
   justify-content: center;
   display: none;
 }
-/* line 17, ../scss/views/partials/_conversation-know.scss */
+/* line 17, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div {
   color: white;
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
@@ -1978,43 +2056,43 @@ body {
   -ms-flex: 0 1 auto;
   flex: 0 1 auto;
 }
-/* line 22, ../scss/views/partials/_conversation-know.scss */
+/* line 22, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div header {
   font: normal normal normal 30px/1.4em "Open Sans", sans-serif;
   border-radius: 8px 8px 0 0;
   background: rgba(255, 255, 255, 0.3);
   padding: 20px 40px;
 }
-/* line 28, ../scss/views/partials/_conversation-know.scss */
+/* line 28, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div header sup {
   font: normal normal normal 10px/1.4em "Open Sans", sans-serif;
 }
-/* line 33, ../scss/views/partials/_conversation-know.scss */
+/* line 33, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section {
   background: rgba(255, 255, 255, 0.2);
   padding: 40px;
 }
-/* line 37, ../scss/views/partials/_conversation-know.scss */
+/* line 37, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section ul {
   margin-left: 2em;
   margin-top: 5px;
 }
-/* line 41, ../scss/views/partials/_conversation-know.scss */
+/* line 41, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section ul li {
   margin-top: 5px;
 }
-/* line 46, ../scss/views/partials/_conversation-know.scss */
+/* line 46, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section p:nth-child(n + 2) {
   margin-top: 20px;
 }
-/* line 51, ../scss/views/partials/_conversation-know.scss */
+/* line 51, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div footer {
   background: rgba(255, 255, 255, 0.2);
   text-align: center;
   border-radius: 0 0 8px 8px;
   padding: 0 40px 40px 40px;
 }
-/* line 59, ../scss/views/partials/_conversation-know.scss */
+/* line 59, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know.on {
   display: -webkit-box;
   display: -moz-box;
@@ -2027,7 +2105,7 @@ body {
   -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
   animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
 }
-/* line 64, ../scss/views/partials/_conversation-know.scss */
+/* line 64, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know.off {
   display: -webkit-box;
   display: -moz-box;
@@ -2040,7 +2118,7 @@ body {
   -o-animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
   animation: fadeOut 0.5s linear 0s 1 normal forwards, hide 0s linear 0.5s 1 normal forwards;
 }
-/* line 1, ../scss/views/partials/_conversation-lower.scss */
+/* line 1, ../scss/views/conversation/_lower.scss */
 #app > .view.conversation .lower {
   position: absolute;
   bottom: 60px;
@@ -2049,17 +2127,19 @@ body {
   padding: 20px;
   width: 768px;
   text-align: center;
+  opacity: 0;
+  transition: .5s;
 }
-/* line 11, ../scss/views/partials/_conversation-lower.scss */
+/* line 13, ../scss/views/conversation/_lower.scss */
 #app > .view.conversation .lower button.ask {
   left: 0;
   margin-right: 20px;
 }
-/* line 16, ../scss/views/partials/_conversation-lower.scss */
+/* line 18, ../scss/views/conversation/_lower.scss */
 #app > .view.conversation .lower button.how {
   right: 0;
 }
-/* line 1, ../scss/views/partials/_conversation-footer.scss */
+/* line 1, ../scss/views/conversation/_footer.scss */
 #app > .view.conversation > footer {
   position: absolute;
   bottom: 0;
@@ -2068,7 +2148,7 @@ body {
   width: 768px;
   height: 60px;
 }
-/* line 9, ../scss/views/partials/_conversation-footer.scss */
+/* line 9, ../scss/views/conversation/_footer.scss */
 #app > .view.conversation > footer img {
   display: block;
   position: absolute;
@@ -2076,11 +2156,11 @@ body {
   height: 100%;
   padding: 15px;
 }
-/* line 16, ../scss/views/partials/_conversation-footer.scss */
+/* line 16, ../scss/views/conversation/_footer.scss */
 #app > .view.conversation > footer img[src*="ibm.png"] {
   left: 0;
 }
-/* line 20, ../scss/views/partials/_conversation-footer.scss */
+/* line 20, ../scss/views/conversation/_footer.scss */
 #app > .view.conversation > footer img[src*="pg.png"] {
   right: 0;
 }

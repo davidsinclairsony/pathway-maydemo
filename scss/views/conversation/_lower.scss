@@ -6,6 +6,8 @@
 	padding: 20px;
 	width: 768px;
 	text-align: center;
+	opacity: 0;
+	transition: .5s;
 	
 	button {
 		&.ask {

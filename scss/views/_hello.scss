@@ -18,15 +18,28 @@
 			padding: 110px;
 			
 			p {
+				opacity: 0;
+				
 				&:nth-child(n + 2) {
 					margin-top: 40px;
 				}
 				
-				$paragraphs: 6;
-				@for $i from 1 to $paragraphs {
+				@include keyframes(fadeInAndSlightlyOut) {
+					0% {opacity: 0;}
+					25% {opacity: 1;}
+					75% {opacity: 1;}
+					100% {opacity: .65;}
+				}
+				
+				@for $i from 1 to 3 {
 					&:nth-child(#{$i}) {
-						opacity: 0;
-						@include animation(fadeIn 1s linear #{($i * 1.5) - 1}s 1 normal forwards);
+						@include animation(fadeInAndSlightlyOut 2s linear #{($i * 1.5) - 1.5}s 1 normal forwards);
+					}
+				}
+				
+				@for $i from 3 to 5 {
+					&:nth-child(#{$i}) {
+						@include animation(fadeIn .5s linear #{($i * 1.5) - 1.5}s 1 normal forwards);
 					}
 				}
 			}

@@ -132,7 +132,7 @@
 			self.$el.one(
 				"webkitAnimationEnd oanimationend msAnimationEnd animationend",
 				"p",
-				function() {self.trigger("end");}
+				function() {setTimeout(function() {self.trigger("end");}, 2000);}
 			);
 		},
 		render: function() {
@@ -211,6 +211,7 @@
 		},
 		prepareForResponse: function() {
 			this.responseView.prepare(this.questionsView.selectedQuestion);
+			this.$(".lower").css("opacity", 1);
 			
 			// This will start the chiclets loading
 			//this.peeople.selectedPerson.obtainData();
@@ -228,6 +229,7 @@
 		},
 		hideResponse: function() {
 			this.responseView.hide();
+			this.$(".lower").css("opacity", 0);
 		}
 	});
 	
@@ -730,10 +732,65 @@
 			return this;
 		},
 		events: {
-			"click": "clicked"
+			"click .picture": "popupHandler",
+			"click .sources li": "popupHandler"
 		},
-		clicked: function() {
-			console.log("yow!!");
+		popupHandler: function(e) {
+// add chker to make sure it is the current person being viewed
+			e.stopImmediatePropagation();
+			console.log("-------------");
+			var self = this;
+			var $newPopup = $(e.target).siblings(".popup");
+			
+			if(!self.$popup) {
+				this.popupShower($newPopup);
+			} else {
+				var isSameAsCurrent = self.$popup.is($newPopup);
+				
+				// Hide current popup
+				this.popupRemover(self.$popup);
+				/*
+				if(!isSameAsCurrent) {
+					// Show new
+					self.$popup = $newPopup;
+					this.popupShower(self.$popup);
+				}*/
+				
+				
+			}
+			
+		},
+		popupRemover: function($p) {
+			this.$popup = null;
+			
+			if(!$p.hasClass("fadeIn")) {
+				window.app.cssAnimate.call($p, "fadeOut", function () {
+					$p.css("display", "none");
+					
+					$p.removeClass("fadeOut");
+				});
+
+				$("body").off();
+			}
+		},
+		popupShower: function($p) {
+			var self = this;
+			
+			self.$popup = $p;
+			
+			if(!$p.hasClass("fadeOut")) {
+				$p.css("display", "block");
+				
+				window.app.cssAnimate.call($p, "fadeIn", function () {
+					$p.removeClass("fadeIn");
+					$p.css("display", "block");
+					
+				});
+				
+				$("body").one("click", function() {
+					self.popupRemover($p);
+				});
+			}
 		}
 	});
 	
@@ -753,6 +810,9 @@
 	//	Initiation
 	
 	$(function() {
+		// Fast clicks for touch users
+		FastClick.attach(document.body);
+		
 		// Pretty much the controller
 		window.app = new AppView();
 	});

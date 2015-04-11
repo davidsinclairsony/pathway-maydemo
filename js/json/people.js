@@ -14,7 +14,7 @@
 			"personal": true,
 			"ehr": false
 		},
-		"goals": "Stephen's goals are losing weight and improving heart health."
+		"goals": "losing weight and improving heart health"
 	},
 	{
 		"id": 2,
@@ -31,7 +31,7 @@
 			"personal": false,
 			"ehr": false
 		},
-		"goals": "Jennifer's goals are maintaining weight and lowering cholesterol."
+		"goals": "maintaining weight and lowering cholesterol"
 	},
 	{
 		"id": 3,
@@ -48,6 +48,6 @@
 			"personal": true,
 			"ehr": true
 		},
-		"goals": "Ruben's goals are adding muscle and increasing endurance."
+		"goals": "adding muscle and increasing endurance"
 	}
 ]

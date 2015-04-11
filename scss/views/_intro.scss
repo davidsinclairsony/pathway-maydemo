@@ -16,23 +16,23 @@
 		height: 100%;
 		opacity: 0;
 		background: url(../images/splash.png) no-repeat center / cover;
-		@include animation(fadeIn 1s linear 3s 1 normal forwards);
+		@include animation(fadeIn .5s linear 2s 1 normal forwards);
 	}
 	
 	img[src*="pg.png"] {
 		width: 350px;
-		@include animation(fadeIn 1s linear 3.5s 1 normal forwards);
+		@include animation(fadeIn .5s linear 2s 1 normal forwards);
 	}
 	
-	img[src*="ohm.png"] {
+	img[src*="app.png"] {
 		width: 500px;
 		margin: 150px 0 40px 0;
-		@include animation(fadeIn 1s linear 1s 1 normal forwards);
+		@include animation(fadeIn .5s linear 0s 1 normal forwards);
 	}
 	
-	img[src*="ohm-byline.png"] {
+	img[src*="byline.png"] {
 		width: 275px;
-		@include animation(fadeIn 1s linear 2s 1 normal forwards);
+		@include animation(fadeIn .5s linear 1s 1 normal forwards);
 	}
 	
 	img[src*="ibm.png"] {
@@ -40,7 +40,7 @@
 		bottom: 0;
 		left: 0;
 		padding: 20px;
-		@include animation(fadeIn 1s linear 4s 1 normal forwards);
+		@include animation(fadeIn .5s linear 2s 1 normal forwards);
 	}
 	
 	p {
@@ -50,6 +50,6 @@
 		padding: 20px;
 		text-align: left;
 		color: white;
-		@include animation(fadeIn 1s linear 4s 1 normal forwards);
+		@include animation(fadeIn .5s linear 2s 1 normal forwards);
 	}
 }
