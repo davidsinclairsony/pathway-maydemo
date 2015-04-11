@@ -746,15 +746,15 @@
 				this.popupShower($newPopup);
 			} else {
 				var isSameAsCurrent = self.$popup.is($newPopup);
-				
+// test this stuff out!				
 				// Hide current popup
 				this.popupRemover(self.$popup);
-				/*
+				
 				if(!isSameAsCurrent) {
 					// Show new
 					self.$popup = $newPopup;
 					this.popupShower(self.$popup);
-				}*/
+				}
 				
 				
 			}
