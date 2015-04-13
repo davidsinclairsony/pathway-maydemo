@@ -104,8 +104,11 @@
 						// Check if event is significant
 						if(
 							e.originalEvent.animationName == cssClass &&
-							e.target === e.currentTarget
+							e.target === e.currentTarget &&
+							$(e.target).prop("data-animating") != "done"
 						) {
+							$self.prop("data-animating", "fasle");
+							
 							if (_.isFunction(callback)) {
 								callback();
 							}
@@ -116,8 +119,12 @@
 				);
 			};
 			
-			$self.addClass(cssClass);
-			setAnimationListener();
+			// Prevent animating if already doing so
+			if($self.prop("data-animating") != "true") {
+				$self.prop("data-animating", "true");
+				$self.addClass(cssClass);
+				setAnimationListener();
+			}
 		}
 	});
 	
@@ -738,59 +745,57 @@
 		popupHandler: function(e) {
 // add chker to make sure it is the current person being viewed
 			e.stopImmediatePropagation();
-			console.log("-------------");
 			var self = this;
 			var $newPopup = $(e.target).siblings(".popup");
 			
 			if(!self.$popup) {
-				this.popupShower($newPopup);
-			} else {
-				var isSameAsCurrent = self.$popup.is($newPopup);
-// test this stuff out!				
-				// Hide current popup
-				this.popupRemover(self.$popup);
-				
-				if(!isSameAsCurrent) {
-					// Show new
-					self.$popup = $newPopup;
-					this.popupShower(self.$popup);
+				// Check if still animating from a previous close
+				if($newPopup.prop("data-animating") != "true") {
+					this.popupShower($newPopup);
 				}
-				
-				
+			} else {
+				// Check if still animating other popup
+				if(self.$popup.prop("data-animating") != "true") {
+					var isSameAsCurrent = self.$popup.is($newPopup);
+
+					// Hide current popup
+					this.popupRemover(self.$popup);
+					
+					if(!isSameAsCurrent) {
+						// Show new
+						self.$popup = $newPopup;
+						this.popupShower(self.$popup);
+					}
+				}
 			}
-			
 		},
 		popupRemover: function($p) {
 			this.$popup = null;
 			
-			if(!$p.hasClass("fadeIn")) {
-				window.app.cssAnimate.call($p, "fadeOut", function () {
-					$p.css("display", "none");
-					
-					$p.removeClass("fadeOut");
-				});
+			window.app.cssAnimate.call($p, "fadeOut", function () {
+				$p.css("display", "none");
+				
+				$p.removeClass("fadeOut");
+			});
 
-				$("body").off();
-			}
+			$("body").off();
 		},
 		popupShower: function($p) {
 			var self = this;
 			
 			self.$popup = $p;
 			
-			if(!$p.hasClass("fadeOut")) {
+			$p.css("display", "block");
+			
+			window.app.cssAnimate.call($p, "fadeIn", function () {
+				$p.removeClass("fadeIn");
 				$p.css("display", "block");
 				
-				window.app.cssAnimate.call($p, "fadeIn", function () {
-					$p.removeClass("fadeIn");
-					$p.css("display", "block");
-					
-				});
-				
-				$("body").one("click", function() {
-					self.popupRemover($p);
-				});
-			}
+			});
+			
+			$("body").one("click", function() {
+				self.popupRemover($p);
+			});
 		}
 	});
 	
