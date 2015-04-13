@@ -31,7 +31,7 @@
 		}
 	}
 	
-	&.done {
+	&.spinOut {
 		&:after {
 			@include animation(spinOut .5s linear 0s 1 normal forwards);
 		}

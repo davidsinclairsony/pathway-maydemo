@@ -1584,7 +1584,7 @@ body {
   position: absolute;
   top: 105px;
   list-style: none;
-  left: -556px;
+  left: -1196px;
   white-space: nowrap;
   font-size: 0;
 }
@@ -1908,7 +1908,7 @@ body {
   animation: spinner 0.5s linear 0s infinite normal forwards;
 }
 /* line 35, ../scss/views/conversation/_response.scss */
-#app > .view.conversation > .response.done:after {
+#app > .view.conversation > .response.spinOut:after {
   -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
   -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
   -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;

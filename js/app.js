@@ -199,26 +199,19 @@
 		events: {
 			"click .ask": "askAnotherQuestion",
 			"click .how, footer .close": "howToggler",
+			"requestTohideAllExceptSelectedQuestion": "checkIfOkToHideAllExceptSelectedQuestion",
 			"hidAllExceptSelectedQuestion": "prepareForResponse",
 			"revealedAllQuestions": "hideResponse",
 			"dataSourced": "getAndShowResponse",
+			"panstart": "panHandler",
 			"pan": "panHandler",
-			"swipe": "swipeHandler"
+			"swipe": "swipeHandler",
 		},
 		panHandler: function(e) {
-			var threshold = 100;
-			
-			if(
-				(e.gesture.deltaX < -threshold || e.gesture.deltaX > threshold) &&
-				e.gesture.isFinal
-			) {
-				this.$el.trigger("swipe");
-			} else {
-				this.peopleView.pan(e);
-			}
+			this.peopleView.panHandler(e);
 		},
 		swipeHandler: function(e) {
-			console.log("swiped!");
+			this.peopleView.swipeHandler(e);
 		},
 		howToggler: function() {
 			var $know = this.$(".know");
@@ -227,7 +220,13 @@
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
 		askAnotherQuestion: function() {
-			this.questionsView.revealAllQuestions();
+			this.checkIfOkToHideAllExceptSelectedQuestion();
+		},
+		checkIfOkToHideAllExceptSelectedQuestion: function() {
+			// If ok to switch, mainly checking for running animations
+			if(this.responseView.activeAnimations.length === 0) {
+				this.questionsView.revealAllQuestions();
+			}
 		},
 		prepareForResponse: function() {
 			this.responseView.prepare(this.questionsView.selectedQuestion);
@@ -302,7 +301,7 @@
 				this.selectedQuestion = objects.selectedQuestion;
 				this.hideAllExceptSelectedQuestion();
 			} else {
-				this.revealAllQuestions();
+				this.$el.trigger("requestTohideAllExceptSelectedQuestion");
 			}
 		},
 		hideAllExceptSelectedQuestion: function() {
@@ -410,7 +409,7 @@
 			}, 1);
 		}
 	});
-	
+
 	var QuestionView = Backbone.View.extend({
 		tagName: "li",
 		template: _.template("{{ text }}"),
@@ -517,6 +516,7 @@
 	
 	var ResponseView = Backbone.View.extend({
 		className: "response",
+		activeAnimations: [],
 		initialize: function() {
 			this.render();
 			this.setToLoading();
@@ -537,7 +537,7 @@
 			this.$el
 				.empty()
 				.addClass("waiting")
-				.removeClass("done")
+				.removeClass("spinOut")
 				.removeClass("map")
 			;
 		},
@@ -554,8 +554,19 @@
 				height: height
 			});
 			
-			window.app.cssAnimate.call(self.$el, "fadeIn", function () {
-				self.$el.removeClass("fadeIn");
+			// Get ready to animate
+			var cssAnimationClass = "fadeIn";
+			
+			self.activeAnimations.push(cssAnimationClass);
+			
+			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
+				self.$el.removeClass(cssAnimationClass);
+				
+				// Remove from list of animations
+				var index = self.activeAnimations.indexOf(cssAnimationClass);
+				if (index > -1) {
+					self.activeAnimations.splice(index, 1);
+				}
 			});
 		},
 		get: function(person, question) {
@@ -568,7 +579,7 @@
 				"questionID": question.model.get("id"),
 				"questionText": question.model.get("text")
 			};
-			
+						
 			// Get the answer
 			var ajax = $.getJSON(
 				"/js/json/answer-1.js",
@@ -592,8 +603,18 @@
 			// Gracefully hide spinner
 			self.$el.removeClass("waiting");
 			
-			window.app.cssAnimate.call(self.$el, "done", function () {
-				self.$(".spinner").removeClass("spinOut");
+			// Get ready to animate
+			var cssAnimationClass = "spinOut";
+			
+			self.activeAnimations.push(cssAnimationClass);
+			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
+				self.$el.removeClass(cssAnimationClass);
+				
+				// Remove from list of animations
+				var index = self.activeAnimations.indexOf(cssAnimationClass);
+				if (index > -1) {
+					self.activeAnimations.splice(index, 1);
+				}
 			});
 			
 			// Add in all text
@@ -706,6 +727,7 @@
 	var PeopleView = Backbone.View.extend({
 		className: "people",
 		tagName: "ul",
+		swipeThreshold: 125,
 		initialize: function() {
 			var self = this;
 			
@@ -717,6 +739,13 @@
 				self.peopleCollection.each(function(model) {
 					self.views.push(new PersonView({model: model}));
 				});
+				
+				// Create views for outsides, needs at least 5 views
+				self.views.push(new PersonView({model: self.peopleCollection.at(0)}));
+				self.views.push(new PersonView({model: self.peopleCollection.at(1)}));
+				
+				// Set selected person to center
+				self.setSelectedPerson(self.views[2]);
 				
 				self.render();
 			});
@@ -735,11 +764,55 @@
 			
 			return self;
 		},
-		pan: function(e) {
-			var currentLeft = this.$el.position().left;
-			console.log("------");
-			console.log(e.gesture.offsetDirection);
-			this.$el.css("left", currentLeft + e.gesture.deltaX + "px");
+		setSelectedPerson: function(view) {
+			// Turn off current selected person
+			if(this.selectedPerson) {
+				view.selectedPerson = false;
+			}
+			
+			this.selectedPerson = view;
+			view.selectedPerson = true;
+		},
+		panHandler: function(e) {
+			var self = this;
+			
+			// Fix an issue with hammer not triggering ends
+			if(e.gesture.isFinal) {
+				e.type = "panend";
+			}
+			
+			switch(e.type) {
+				case "panend":
+					// Fire event to parent uf swipe, otherwise snap back
+					if(e.gesture.deltaX < -self.swipeThreshold || e.gesture.deltaX > self.swipeThreshold) {
+						self.$el.trigger("swipe",  {event: e});
+					} else {
+						self.$el.animate({left: self.positionLeft}, 100, "linear");
+					}
+					break;
+				case "panstart":
+					// Save initial position then pan
+					self.positionLeft = self.$el.position().left;
+				case "pan":
+					// Find new position and move
+					var newPositionLeft = self.positionLeft + e.gesture.deltaX;
+					self.$el.css("left", newPositionLeft);
+					break;
+			}
+		},
+		swipeHandler: function(e) {
+			var lengthOfPerson = 640;
+			
+			// Set selected question
+			
+			
+			// Move all people
+			
+			
+			// Remove person not needed
+			
+			
+			// Add in person needed
 		}
 	});
 	
@@ -762,28 +835,30 @@
 			"click .sources li": "popupHandler"
 		},
 		popupHandler: function(e) {
-// add chker to make sure it is the current person being viewed
-			e.stopImmediatePropagation();
-			var self = this;
-			var $newPopup = $(e.target).siblings(".popup");
-			
-			if(!self.$popup) {
-				// Check if still animating from a previous close
-				if($newPopup.prop("data-animating") != "true") {
-					this.popupShower($newPopup);
-				}
-			} else {
-				// Check if still animating other popup
-				if(self.$popup.prop("data-animating") != "true") {
-					var isSameAsCurrent = self.$popup.is($newPopup);
-
-					// Hide current popup
-					this.popupRemover(self.$popup);
-					
-					if(!isSameAsCurrent) {
-						// Show new
-						self.$popup = $newPopup;
-						this.popupShower(self.$popup);
+			// Check if current person being clicked on
+			if(this.selectedPerson) {
+				e.stopImmediatePropagation();
+				var self = this;
+				var $newPopup = $(e.target).siblings(".popup");
+				
+				if(!self.$popup) {
+					// Check if still animating from a previous close
+					if($newPopup.prop("data-animating") != "true") {
+						this.popupShower($newPopup);
+					}
+				} else {
+					// Check if still animating other popup
+					if(self.$popup.prop("data-animating") != "true") {
+						var isSameAsCurrent = self.$popup.is($newPopup);
+	
+						// Hide current popup
+						this.popupRemover(self.$popup);
+						
+						if(!isSameAsCurrent) {
+							// Show new
+							self.$popup = $newPopup;
+							this.popupShower(self.$popup);
+						}
 					}
 				}
 			}
