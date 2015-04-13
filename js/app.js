@@ -104,8 +104,7 @@
 						// Check if event is significant
 						if(
 							e.originalEvent.animationName == cssClass &&
-							e.target === e.currentTarget &&
-							$(e.target).prop("data-animating") != "done"
+							e.target === e.currentTarget 
 						) {
 							$self.prop("data-animating", "fasle");
 							
@@ -119,12 +118,8 @@
 				);
 			};
 			
-			// Prevent animating if already doing so
-			if($self.prop("data-animating") != "true") {
-				$self.prop("data-animating", "true");
-				$self.addClass(cssClass);
-				setAnimationListener();
-			}
+			$self.addClass(cssClass);
+			setAnimationListener();
 		}
 	});
 	
@@ -196,6 +191,7 @@
 
 			$.get("/templates/conversation.html", function(data) {
 				self.$el.append(data);
+				self.$el.hammer();
 			});
 			
 			return self;
@@ -205,7 +201,24 @@
 			"click .how, footer .close": "howToggler",
 			"hidAllExceptSelectedQuestion": "prepareForResponse",
 			"revealedAllQuestions": "hideResponse",
-			"dataSourced": "getAndShowResponse"
+			"dataSourced": "getAndShowResponse",
+			"pan": "panHandler",
+			"swipe": "swipeHandler"
+		},
+		panHandler: function(e) {
+			var threshold = 100;
+			
+			if(
+				(e.gesture.deltaX < -threshold || e.gesture.deltaX > threshold) &&
+				e.gesture.isFinal
+			) {
+				this.$el.trigger("swipe");
+			} else {
+				this.peopleView.pan(e);
+			}
+		},
+		swipeHandler: function(e) {
+			console.log("swiped!");
 		},
 		howToggler: function() {
 			var $know = this.$(".know");
@@ -712,7 +725,7 @@
 			this.$el.empty();
 			
 			var container = document.createDocumentFragment();
-
+			
 			// Render each person and add at end
 			_.each(this.views, function(view) {
 				container.appendChild(view.el);
@@ -721,6 +734,12 @@
 			this.$el.append(container);
 			
 			return self;
+		},
+		pan: function(e) {
+			var currentLeft = this.$el.position().left;
+			console.log("------");
+			console.log(e.gesture.offsetDirection);
+			this.$el.css("left", currentLeft + e.gesture.deltaX + "px");
 		}
 	});
 	
@@ -772,10 +791,12 @@
 		popupRemover: function($p) {
 			this.$popup = null;
 			
+			$p.prop("data-animating", "true");
+			
 			window.app.cssAnimate.call($p, "fadeOut", function () {
 				$p.css("display", "none");
-				
 				$p.removeClass("fadeOut");
+				$p.prop("data-animating", "false");
 			});
 
 			$("body").off();
@@ -786,11 +807,12 @@
 			self.$popup = $p;
 			
 			$p.css("display", "block");
+			$p.prop("data-animating", "true");
 			
 			window.app.cssAnimate.call($p, "fadeIn", function () {
 				$p.removeClass("fadeIn");
 				$p.css("display", "block");
-				
+				$p.prop("data-animating", "false");
 			});
 			
 			$("body").one("click", function() {

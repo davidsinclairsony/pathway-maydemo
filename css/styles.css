@@ -1603,8 +1603,9 @@ body {
 /* line 20, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li .popup {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 130%;
+  left: 50%;
+  margin-left: -100px;
   display: none;
   background: #e9e9e9;
   font: normal normal 300 14px/1.4em "Open Sans", sans-serif;
@@ -1616,29 +1617,43 @@ body {
   text-align: left;
 }
 /* line 35, ../scss/views/conversation/_people.scss */
+#app > .view.conversation ul.people > li .popup:after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border-bottom-color: #e9e9e9;
+  margin-left: -12px;
+  border-style: solid;
+  border-width: 0 12px 20px 12px;
+}
+/* line 50, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header {
   background: rgba(255, 255, 255, 0.3);
   padding: 10px 20px;
   border-radius: 8px 8px 0 0;
   position: relative;
 }
-/* line 41, ../scss/views/conversation/_people.scss */
+/* line 56, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header h2 {
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
 }
-/* line 45, ../scss/views/conversation/_people.scss */
+/* line 60, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header div {
   opacity: .7;
   font: normal normal 300 14px/1.4em "Open Sans", sans-serif;
 }
-/* line 50, ../scss/views/conversation/_people.scss */
+/* line 65, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li header aside {
   position: absolute;
   top: 9px;
   right: 0;
   padding: 10px 20px;
 }
-/* line 58, ../scss/views/conversation/_people.scss */
+/* line 73, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main {
   display: -webkit-box;
   display: -moz-box;
@@ -1649,7 +1664,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 0 0 8px 8px;
 }
-/* line 64, ../scss/views/conversation/_people.scss */
+/* line 79, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .picture {
   width: 66px;
   -webkit-box-flex: 0 0 auto;
@@ -1657,14 +1672,15 @@ body {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+  position: relative;
 }
-/* line 68, ../scss/views/conversation/_people.scss */
+/* line 84, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .picture img {
   width: 100%;
   border-radius: 4px;
   display: block;
 }
-/* line 75, ../scss/views/conversation/_people.scss */
+/* line 91, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -1673,7 +1689,7 @@ body {
   flex: 1;
   padding: 0 0 0 10px;
 }
-/* line 79, ../scss/views/conversation/_people.scss */
+/* line 95, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul {
   list-style: none;
   display: -webkit-box;
@@ -1682,7 +1698,7 @@ body {
   display: -webkit-flex;
   display: flex;
 }
-/* line 83, ../scss/views/conversation/_people.scss */
+/* line 99, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
@@ -1692,7 +1708,7 @@ body {
   text-align: center;
   position: relative;
 }
-/* line 88, ../scss/views/conversation/_people.scss */
+/* line 104, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li:after {
   border-radius: 50%;
   border: 3px solid white;
@@ -1706,7 +1722,7 @@ body {
   left: 20px;
   z-index: 0;
 }
-/* line 102, ../scss/views/conversation/_people.scss */
+/* line 118, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li:last-child {
   width: 78px;
   -webkit-box-flex: 0 0 auto;
@@ -1715,7 +1731,7 @@ body {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
-/* line 107, ../scss/views/conversation/_people.scss */
+/* line 123, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li .chiclet {
   font-size: 45px;
   -webkit-transform: scale(0, 0);
@@ -1723,14 +1739,14 @@ body {
   position: relative;
   z-index: 1;
 }
-/* line 114, ../scss/views/conversation/_people.scss */
+/* line 130, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li span {
   display: block;
   padding-top: 5px;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.3);
 }
-/* line 122, ../scss/views/conversation/_people.scss */
+/* line 138, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.waiting:after {
   -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
   -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
@@ -1738,7 +1754,7 @@ body {
   -o-animation: spinner 0.5s linear 0s infinite normal forwards;
   animation: spinner 0.5s linear 0s infinite normal forwards;
 }
-/* line 128, ../scss/views/conversation/_people.scss */
+/* line 144, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done:after {
   -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
   -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
@@ -1746,7 +1762,7 @@ body {
   -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
   animation: spinOut 0.5s linear 0s 1 normal forwards;
 }
-/* line 133, ../scss/views/conversation/_people.scss */
+/* line 149, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet {
   -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
   -moz-animation: pop 0.5s linear 0s 1 normal forwards;
@@ -1754,35 +1770,35 @@ body {
   -o-animation: pop 0.5s linear 0s 1 normal forwards;
   animation: pop 0.5s linear 0s 1 normal forwards;
 }
-/* line 136, ../scss/views/conversation/_people.scss */
+/* line 152, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-dna {
   color: #e74c3c;
 }
-/* line 137, ../scss/views/conversation/_people.scss */
+/* line 153, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-fit-bit {
   color: #9b59b6;
 }
-/* line 138, ../scss/views/conversation/_people.scss */
+/* line 154, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-ehr {
   color: #d35400;
 }
-/* line 139, ../scss/views/conversation/_people.scss */
+/* line 155, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-direction {
   color: #f1c40f;
 }
-/* line 140, ../scss/views/conversation/_people.scss */
+/* line 156, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-info {
   color: #527EC4;
 }
-/* line 141, ../scss/views/conversation/_people.scss */
+/* line 157, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-md-info {
   color: #2ecc71;
 }
-/* line 144, ../scss/views/conversation/_people.scss */
+/* line 160, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done.available span {
   color: white;
 }
-/* line 150, ../scss/views/conversation/_people.scss */
+/* line 166, ../scss/views/conversation/_people.scss */
 #app > .view.conversation ul.people > li main .sources ul li.done:not(.available) .chiclet {
   -webkit-transform: scale(1, 1);
   transform: scale(1, 1);
