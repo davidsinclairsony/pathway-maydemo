@@ -106,8 +106,6 @@
 							e.originalEvent.animationName == cssClass &&
 							e.target === e.currentTarget 
 						) {
-							$self.prop("data-animating", "fasle");
-							
 							if (_.isFunction(callback)) {
 								callback();
 							}
@@ -210,8 +208,8 @@
 		panHandler: function(e) {
 			this.peopleView.panHandler(e);
 		},
-		swipeHandler: function(e) {
-			this.peopleView.swipeHandler(e);
+		swipeHandler: function(event, objects) {
+			this.peopleView.swipeHandler(objects.event);
 		},
 		howToggler: function() {
 			var $know = this.$(".know");
@@ -801,18 +799,37 @@
 			}
 		},
 		swipeHandler: function(e) {
-			var lengthOfPerson = 640;
+			var self = this;
+			var currentIndex = self.views.indexOf(self.selectedPerson);
 			
-			// Set selected question
-			
-			
-			// Move all people
-			
-			
-			// Remove person not needed
-			
-			
-			// Add in person needed
+			// Determine swipe direction
+			if(e.gesture.deltaX < 0) {
+				// Set to forward one
+				self.setSelectedPerson(self.views[currentIndex + 1]);
+				
+				// Remove person to the left
+				_.first(self.views).remove();
+				
+				// Add next person after furthest right person
+				var last = _.last(self.views);
+				console.log(self.peopleCollection);
+				
+				// Move forward
+				self.$el.animate({left: self.positionLeft - 640}, 100, "linear");
+				
+			} else {
+				// Set to back one
+				self.setSelectedPerson(self.views[currentIndex - 1]);
+				
+				// Remove person to the right
+				_.last(self.views).remove();
+				
+				// Add previous person before furthest left person
+				var first = _.first(self.views);
+				
+				// Move back
+				self.$el.animate({left: self.positionLeft + 640}, 100, "linear");
+			}
 		}
 	});
 	
