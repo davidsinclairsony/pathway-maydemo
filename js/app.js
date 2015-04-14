@@ -4,7 +4,7 @@
 		evaluate: /\{\{#([\s\S]+?)\}\}/g,
 		interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,
 		escape: /\{\{\{([\s\S]+?)\}\}\}/g,
-	}
+	};
 	
 	// ------------------------------------
 	//	Models
@@ -203,7 +203,7 @@
 			"dataSourced": "getAndShowResponse",
 			"panstart": "panHandler",
 			"pan": "panHandler",
-			"swipe": "swipeHandler",
+			"swiped": "swipeHandler",
 		},
 		panHandler: function(e) {
 			this.peopleView.panHandler(e);
@@ -449,7 +449,7 @@
 			"click": "router"
 		},
 		router: function(e) {
-			if($(e.target).is(this.button) && this.input.val() != "") {
+			if($(e.target).is(this.button) && this.input.val() !== "") {
 				this.selected();
 			} else if(this.status == "selected") {
 				this.$el.trigger("questionClicked", {selectedQuestion: this});
@@ -572,27 +572,25 @@
 
 			// To be sent to API
 			var requestData = {
-//				"personID": person.model.get("id"),
-				"personID": 1,
-				"questionID": question.model.get("id"),
-				"questionText": question.model.get("text")
+				"userId": 1,//person.model.get("id"),
+				"question": {
+					"text": question.model.get("text")
+				},
+				"fitness": "true"
 			};
-						
+			
 			// Get the answer
-			var ajax = $.getJSON(
-				"/js/json/answer-1.js",
-				requestData,
-				function(data) {
-					self.show(data);
-				}
-			).fail(function(data) {
-				var error = {
-					"text": [
-						"Sorry, the server is currently unreachable."
-					]
-				};
-				
-				self.show(error)
+			$.ajax({
+				//url: "http://puppygifs.tumblr.com/api/read/jsons",
+				url: "http://atldev.pathway.com:3000/ask",
+				data: requestData,
+				dataType: "jsonp",
+				timeout: 1000
+			}).done(function(data, textStatus, jqXHR) {
+				self.show(data);
+			})
+			.fail(function(jqXHR, textStatus, errorThrown) {
+				self.show("<main><p>Sorry, there was an error.</p></main>");
 			});
 		},
 		show: function(data) {
@@ -606,8 +604,6 @@
 			
 			self.activeAnimations.push(cssAnimationClass);
 			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
-				self.$el.removeClass(cssAnimationClass);
-				
 				// Remove from list of animations
 				var index = self.activeAnimations.indexOf(cssAnimationClass);
 				if (index > -1) {
@@ -615,7 +611,10 @@
 				}
 			});
 			
+			self.$el.append(data);
+			
 			// Add in all text
+/*
 			if(data.text) {
 				var container = document.createDocumentFragment();
 			
@@ -637,7 +636,7 @@
 			} else {
 				self.$el.append("<main><p>Sorry, data is unavailable at this time.</p></main>");
 			}
-			
+
 			// Show map if locations are available
 			if(data.locations) {
 				self.$el.addClass("map");
@@ -699,14 +698,14 @@
 							return function() {
 								infowindow.setContent(marker.title);
 								infowindow.open(map, marker);
-							}
+							};
 						})(marker, i));
 					}
 					
 					map.fitBounds(bounds);
 				});
 			}
-			
+*/
 			// Add in thumbs up and down
 			$.get("/templates/conversation/response/footer.html", function(data) {
 				self.$el.append(data);
@@ -733,43 +732,77 @@
 				self.peopleCollection = new PeopleCollection(data);
 				self.views = [];
 				
-				// Create person views
-				self.peopleCollection.each(function(model) {
-					self.views.push(new PersonView({model: model}));
-				});
-				
-				// Create views for outsides, needs at least 5 views
-				self.views.push(new PersonView({model: self.peopleCollection.at(0)}));
-				self.views.push(new PersonView({model: self.peopleCollection.at(1)}));
+				// Create current selected person view
+				self.views.push(new PersonView({model: self.peopleCollection.first()}));
 				
 				// Set selected person to center
-				self.setSelectedPerson(self.views[2]);
+				self.setSelectedPerson(self.views[0]);
 				
+				// Draw people
 				self.render();
 			});
 		},
 		render: function() {
-			this.$el.empty();
-			
-			var container = document.createDocumentFragment();
-			
-			// Render each person and add at end
-			_.each(this.views, function(view) {
-				container.appendChild(view.el);
-			});
-			
-			this.$el.append(container);
+			// Add selected person
+			this.$el.html(this.views[0].el);
+
+			// Add the others around
+			this.pad();
 			
 			return self;
 		},
 		setSelectedPerson: function(view) {
 			// Turn off current selected person
 			if(this.selectedPerson) {
-				view.selectedPerson = false;
+				this.selectedPerson.selected = false;
 			}
 			
 			this.selectedPerson = view;
-			view.selectedPerson = true;
+			view.selected = true;
+		},
+		pad: function() {
+			// Pads to 5 elements total, around the selected person
+			
+			// Get location in views of selected person
+			var indexOfSelectedPerson = this.views.indexOf(this.selectedPerson);
+			var i, modelIndex, model, view;
+			
+			// Generate and add views before the selected person
+			while(indexOfSelectedPerson < 2) {
+				// Get index of first view
+				modelIndex = this.peopleCollection.indexOf(this.views[0].model);
+				
+				// Determine which model to use
+				if(modelIndex === 0) {
+					model =  this.peopleCollection.last();
+				} else {
+					model = this.peopleCollection.at(modelIndex - 1);
+				}
+
+				view = new PersonView({model: model});
+				this.views.unshift(view);
+				this.$el.prepend(view.el);
+				
+				indexOfSelectedPerson = this.views.indexOf(this.selectedPerson)
+			}
+			
+			
+			// Add views for after the selected person
+			while(this.views.length < 5) {
+				// Get index of last view
+				modelIndex = this.peopleCollection.indexOf(_.last(this.views).model);
+				
+				// Determine which model to use
+				if(modelIndex == _.size(this.peopleCollection) - 1) {
+					model =  this.peopleCollection.first();
+				} else {
+					model = this.peopleCollection.at(modelIndex + 1);
+				}
+
+				view = new PersonView({model: model});
+				this.views.push(view);
+				this.$el.append(view.el);
+			}
 		},
 		panHandler: function(e) {
 			var self = this;
@@ -783,7 +816,7 @@
 				case "panend":
 					// Fire event to parent uf swipe, otherwise snap back
 					if(e.gesture.deltaX < -self.swipeThreshold || e.gesture.deltaX > self.swipeThreshold) {
-						self.$el.trigger("swipe",  {event: e});
+						self.$el.trigger("swiped",  {event: e});
 					} else {
 						self.$el.animate({left: self.positionLeft}, 100, "linear");
 					}
@@ -791,7 +824,8 @@
 				case "panstart":
 					// Save initial position then pan
 					self.positionLeft = self.$el.position().left;
-				case "pan":
+					/* falls through */
+				default:
 					// Find new position and move
 					var newPositionLeft = self.positionLeft + e.gesture.deltaX;
 					self.$el.css("left", newPositionLeft);
@@ -807,28 +841,42 @@
 				// Set to forward one
 				self.setSelectedPerson(self.views[currentIndex + 1]);
 				
-				// Remove person to the left
-				_.first(self.views).remove();
-				
-				// Add next person after furthest right person
-				var last = _.last(self.views);
-				console.log(self.peopleCollection);
-				
-				// Move forward
-				self.$el.animate({left: self.positionLeft - 640}, 100, "linear");
-				
+				// Animate to correct position
+				self.$el.animate({left: self.positionLeft - 640}, 100, "linear", function() {
+					// Remove all aspects of edge view
+					_.first(self.views).remove();
+					self.views.shift();
+					
+					// Add in new
+					self.pad();
+					
+					// Reset margins
+					self.$("> li:first-child").css({marginLeft: 0});
+					self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
+					
+					// Adjust positioning
+					self.$el.css({left: self.positionLeft});
+				});
 			} else {
 				// Set to back one
 				self.setSelectedPerson(self.views[currentIndex - 1]);
 				
-				// Remove person to the right
-				_.last(self.views).remove();
-				
-				// Add previous person before furthest left person
-				var first = _.first(self.views);
-				
-				// Move back
-				self.$el.animate({left: self.positionLeft + 640}, 100, "linear");
+				// Animate to correct position
+				self.$el.animate({left: self.positionLeft + 640}, 100, "linear", function() {
+					// Remove all aspects of edge view
+					_.last(self.views).remove();
+					self.views.pop();
+					
+					// Add in new
+					self.pad();
+					
+					// Reset margins
+					self.$("> li:first-child").css({marginLeft: 0});
+					self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
+					
+					// Adjust positioning
+					self.$el.css({left: self.positionLeft});
+				});
 			}
 		}
 	});
@@ -853,7 +901,7 @@
 		},
 		popupHandler: function(e) {
 			// Check if current person being clicked on
-			if(this.selectedPerson) {
+			if(this.selected) {
 				e.stopImmediatePropagation();
 				var self = this;
 				var $newPopup = $(e.target).siblings(".popup");
