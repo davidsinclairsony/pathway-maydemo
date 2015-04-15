@@ -1252,17 +1252,6 @@ body {
   overflow: hidden;
 }
 /* line 9, ../scss/_app.scss */
-#app:after {
-  position: absolute;
-  top: 1004px;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  content: "";
-  z-index: 10;
-}
-/* line 20, ../scss/_app.scss */
 #app > .view {
   min-height: 100%;
   width: 100%;
@@ -1270,6 +1259,37 @@ body {
   top: 0;
   left: 0;
   z-index: 1;
+}
+/* line 18, ../scss/_app.scss */
+#app:after {
+  border-radius: 50%;
+  border: 3px solid white;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+  height: 40px;
+  width: 40px;
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -20px 0 0 -20px;
+  z-index: 0;
+}
+/* line 34, ../scss/_app.scss */
+#app.spinner:after {
+  -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
+  -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
+  -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
+  -o-animation: spinner 0.5s linear 0s infinite normal forwards;
+  animation: spinner 0.5s linear 0s infinite normal forwards;
+}
+/* line 40, ../scss/_app.scss */
+#app.spinOut:after {
+  -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
+  -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
+  -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
+  -o-animation: spinOut 0.5s linear 0s 1 normal forwards;
+  animation: spinOut 0.5s linear 0s 1 normal forwards;
 }
 
 /* line 1, ../scss/partials/_button.scss */
@@ -1310,7 +1330,7 @@ body {
   position: absolute;
   top: 40px;
   left: 50%;
-  margin-left: -378.5px;
+  margin-left: -332.5px;
   background: none;
   z-index: 10;
   cursor: pointer;
@@ -1332,62 +1352,67 @@ body {
   opacity: 0;
 }
 /* line 10, ../scss/views/_intro.scss */
-#app > .view.intro:before {
+#app > .view.intro img[src*="splash.jpg"] {
   position: absolute;
   top: 0;
   left: 0;
-  content: "";
-  width: 100%;
   height: 100%;
-  opacity: 0;
-  background: url(../images/splash.png) no-repeat center/cover;
-  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  width: 100%;
+  -webkit-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  animation: fadeIn 0.5s linear 3s 1 normal forwards;
+  z-index: 0;
 }
-/* line 22, ../scss/views/_intro.scss */
+/* line 20, ../scss/views/_intro.scss */
 #app > .view.intro img[src*="pg.png"] {
   width: 350px;
-  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  position: relative;
+  z-index: 1;
 }
 /* line 27, ../scss/views/_intro.scss */
 #app > .view.intro img[src*="app.png"] {
   width: 500px;
   margin: 150px 0 40px 0;
-  -webkit-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-  -moz-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-  -ms-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-  -o-animation: fadeIn 0.5s linear 0s 1 normal forwards;
-  animation: fadeIn 0.5s linear 0s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 0.5s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 0.5s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 0.5s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 0.5s 1 normal forwards;
+  animation: fadeIn 0.5s linear 0.5s 1 normal forwards;
+  position: relative;
+  z-index: 1;
 }
-/* line 33, ../scss/views/_intro.scss */
+/* line 35, ../scss/views/_intro.scss */
 #app > .view.intro img[src*="byline.png"] {
   width: 275px;
-  -webkit-animation: fadeIn 0.5s linear 1s 1 normal forwards;
-  -moz-animation: fadeIn 0.5s linear 1s 1 normal forwards;
-  -ms-animation: fadeIn 0.5s linear 1s 1 normal forwards;
-  -o-animation: fadeIn 0.5s linear 1s 1 normal forwards;
-  animation: fadeIn 0.5s linear 1s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 1.5s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 1.5s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 1.5s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 1.5s 1 normal forwards;
+  animation: fadeIn 0.5s linear 1.5s 1 normal forwards;
+  position: relative;
+  z-index: 1;
 }
-/* line 38, ../scss/views/_intro.scss */
+/* line 42, ../scss/views/_intro.scss */
 #app > .view.intro img[src*="ibm.png"] {
   position: absolute;
   bottom: 0;
   left: 0;
   padding: 20px;
-  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  z-index: 1;
 }
-/* line 46, ../scss/views/_intro.scss */
+/* line 51, ../scss/views/_intro.scss */
 #app > .view.intro p {
   position: absolute;
   bottom: 0;
@@ -1395,11 +1420,12 @@ body {
   padding: 20px;
   text-align: left;
   color: white;
-  -webkit-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -moz-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -ms-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  -o-animation: fadeIn 0.5s linear 2s 1 normal forwards;
-  animation: fadeIn 0.5s linear 2s 1 normal forwards;
+  -webkit-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -moz-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -ms-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  -o-animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  animation: fadeIn 0.5s linear 2.5s 1 normal forwards;
+  z-index: 1;
 }
 
 /* line 1, ../scss/views/_hello.scss */
@@ -1747,7 +1773,7 @@ body {
   color: rgba(255, 255, 255, 0.3);
 }
 /* line 138, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.waiting:after {
+#app > .view.conversation ul.people > li main .sources ul li.spinner:after {
   -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
   -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
   -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
@@ -1755,7 +1781,7 @@ body {
   animation: spinner 0.5s linear 0s infinite normal forwards;
 }
 /* line 144, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done:after {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut:after {
   -webkit-animation: spinOut 0.5s linear 0s 1 normal forwards;
   -moz-animation: spinOut 0.5s linear 0s 1 normal forwards;
   -ms-animation: spinOut 0.5s linear 0s 1 normal forwards;
@@ -1763,7 +1789,7 @@ body {
   animation: spinOut 0.5s linear 0s 1 normal forwards;
 }
 /* line 149, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available .chiclet {
   -webkit-animation: pop 0.5s linear 0s 1 normal forwards;
   -moz-animation: pop 0.5s linear 0s 1 normal forwards;
   -ms-animation: pop 0.5s linear 0s 1 normal forwards;
@@ -1771,35 +1797,35 @@ body {
   animation: pop 0.5s linear 0s 1 normal forwards;
 }
 /* line 152, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-dna {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available .chiclet.icon-dna {
   color: #e74c3c;
 }
 /* line 153, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-fit-bit {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available .chiclet.icon-fit-bit {
   color: #9b59b6;
 }
 /* line 154, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-ehr {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available .chiclet.icon-ehr {
   color: #d35400;
 }
 /* line 155, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-direction {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available .chiclet.icon-direction {
   color: #f1c40f;
 }
 /* line 156, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-info {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available .chiclet.icon-info {
   color: #527EC4;
 }
 /* line 157, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available .chiclet.icon-md-info {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available .chiclet.icon-md-info {
   color: #2ecc71;
 }
 /* line 160, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done.available span {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut.available span {
   color: white;
 }
 /* line 166, ../scss/views/conversation/_people.scss */
-#app > .view.conversation ul.people > li main .sources ul li.done:not(.available) .chiclet {
+#app > .view.conversation ul.people > li main .sources ul li.spinOut:not(.available) .chiclet {
   -webkit-transform: scale(1, 1);
   transform: scale(1, 1);
   -webkit-animation: fadeIn 1s linear 0s 1 normal forwards;
@@ -1900,7 +1926,7 @@ body {
   z-index: 0;
 }
 /* line 29, ../scss/views/conversation/_response.scss */
-#app > .view.conversation > .response.waiting:after {
+#app > .view.conversation > .response.spinner:after {
   -webkit-animation: spinner 0.5s linear 0s infinite normal forwards;
   -moz-animation: spinner 0.5s linear 0s infinite normal forwards;
   -ms-animation: spinner 0.5s linear 0s infinite normal forwards;
@@ -2081,34 +2107,36 @@ body {
 }
 /* line 28, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div header sup {
-  font: normal normal normal 10px/1.4em "Open Sans", sans-serif;
+  font: normal normal normal 9px/1.4em "Open Sans", sans-serif;
+  position: relative;
+  top: -4px;
 }
-/* line 33, ../scss/views/conversation/_know.scss */
+/* line 35, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section {
   background: #333435;
   padding: 40px;
 }
-/* line 37, ../scss/views/conversation/_know.scss */
+/* line 39, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section ul {
   margin-left: 2em;
   margin-top: 5px;
 }
-/* line 41, ../scss/views/conversation/_know.scss */
+/* line 43, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section ul li {
   margin-top: 5px;
 }
-/* line 46, ../scss/views/conversation/_know.scss */
+/* line 48, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section p:nth-child(n + 2) {
   margin-top: 20px;
 }
-/* line 51, ../scss/views/conversation/_know.scss */
+/* line 53, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div footer {
   background: #333435;
   text-align: center;
   border-radius: 0 0 8px 8px;
   padding: 0 40px 40px 40px;
 }
-/* line 59, ../scss/views/conversation/_know.scss */
+/* line 61, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know.on {
   display: -webkit-box;
   display: -moz-box;
@@ -2121,7 +2149,7 @@ body {
   -o-animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
   animation: show 0s linear 0s 1 normal forwards, fadeIn 0.5s linear 0s 1 normal forwards;
 }
-/* line 64, ../scss/views/conversation/_know.scss */
+/* line 66, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know.off {
   display: -webkit-box;
   display: -moz-box;

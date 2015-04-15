@@ -64,11 +64,14 @@
 				self.goTo(conversationView);
 			});
 			
+			// Set default to be waiting
+			self.$el.addClass("spinner");
+			
 			// Start tracking
 			Backbone.history.start({pushState: true});
 		},
 		events: {
-			"click .refresh": "refresh"
+			"click .refresh": "refresh",
 		},
 		refresh: function() {
 			// For resetting everything
@@ -76,21 +79,40 @@
 		},
 		goTo: function(view) {
 			// Transition from current view to new
+			var self = this;
 			var previous = this.currentView || null;
 			var next = view;
-
+			
 			// Hide the current view
 			if(previous) {
-				this.cssAnimate.call(previous.$el, "fadeOut", function () {
+				self.cssAnimate.call(previous.$el, "fadeOut", function () {
 					previous.remove();
 				});
 			}
-
-			this.$el.append(next.el);
-			this.cssAnimate.call(next.$el, "fadeIn", function() {
-				next.$el.removeClass("fadeIn");
+			
+			// Add and hide
+			self.$el.append(next.el);
+			next.$el.hide();
+			self.currentView = next;
+			
+			self.listenTo(self.currentView, "loaded", function() {
+				self.showNext();
 			});
-			this.currentView = next;
+			
+			// At this point, wait for next to trigger fadeIn
+		},
+		showNext: function() {
+			var self = this;
+			
+			// Wait for ready
+			self.currentView.$el.waitForImages(function() {
+				self.$el.removeClass("spinner").addClass("spinOut");
+				self.currentView.$el.show();
+				
+				self.cssAnimate.call(self.currentView.$el, "fadeIn", function() {
+					self.currentView.$el.removeClass("fadeIn");
+				});
+			});
 		},
 		cssAnimate: function(cssClass, callback) {
 			// Add class for animating and executes callback
@@ -138,8 +160,9 @@
 		render: function() {
 			var self = this;
 
-			$.get("/templates/intro.html", function(data) {
-				self.$el.html(data);
+			self.$el.load("/templates/intro.html", function() {
+				// Signal to parent
+				self.trigger("loaded");
 			});
 			
 			return self;
@@ -161,8 +184,9 @@
 		render: function() {
 			var self = this;
 
-			$.get("/templates/hello.html", function(data) {
-				self.$el.html(data);
+			self.$el.load("/templates/hello.html", function() {
+				// Signal to parent
+				self.trigger("loaded");
 			});
 			
 			return self;
@@ -190,6 +214,7 @@
 			$.get("/templates/conversation.html", function(data) {
 				self.$el.append(data);
 				self.$el.hammer({domEvents: true});
+				self.trigger("loaded");
 			});
 			
 			return self;
@@ -456,7 +481,8 @@
 			return this;
 		},
 		events: {
-			"click": "router"
+			"click": "router",
+			"keyup input": "keyHandler"
 		},
 		router: function(e) {
 			if($(e.target).is(this.button) && this.input.val() !== "") {
@@ -465,6 +491,11 @@
 				this.$el.trigger("questionClicked", {selectedQuestion: this});
 			} else {
 				this.editing();
+			}
+		},
+		keyHandler: function(e) {
+			if(e.keyCode == 13){
+				this.$("button").click();
 			}
 		},
 		editing: function() {
@@ -544,7 +575,7 @@
 		setToLoading: function() {
 			this.$el
 				.empty()
-				.addClass("waiting")
+				.addClass("spinner")
 				.removeClass("spinOut")
 				.removeClass("map")
 			;
@@ -603,7 +634,7 @@
 			var self = this;
 			
 			// Gracefully hide spinner
-			self.$el.removeClass("waiting");
+			self.$el.removeClass("spinner");
 			
 			// Get ready to animate
 			var cssAnimationClass = "spinOut";
@@ -630,7 +661,7 @@
 					showError("no answer");
 				}
 			} else {
-				showError(errorThrown);
+				showError(textStatus);
 			}
 			
 			// Add in all text
@@ -925,11 +956,11 @@
 			self.$("li.available").each(function() {
 				var $this = $(this);
 				
-				$this.removeClass("done").addClass("waiting");
+				$this.removeClass("spinOut").addClass("spinner");
 
 				// Data obtained after random time
 				setTimeout(function() {
-					$this.removeClass("waiting").addClass("done");
+					$this.removeClass("spinner").addClass("spinOut");
 				}, Math.floor(Math.random() * 2000 + 1000));
 			});
 			
@@ -1013,7 +1044,7 @@
 	// ------------------------------------
 	//	Initiation
 	
-	$(function() {
+	$(window).load(function() {
 		// Fast clicks for touch users
 		FastClick.attach(document.body);
 		

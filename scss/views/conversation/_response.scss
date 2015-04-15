@@ -25,7 +25,7 @@
 		z-index: 0;
 	}
 	
-	&.waiting {
+	&.spinner {
 		&:after {
 			@include animation(spinner .5s linear 0s infinite normal forwards);
 		}

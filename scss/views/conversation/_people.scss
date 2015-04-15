@@ -134,13 +134,13 @@ ul.people {
 							color: rgba(255, 255, 255, .3);
 						}
 						
-						&.waiting {
+						&.spinner {
 							&:after {
 								@include animation(spinner .5s linear 0s infinite normal forwards);
 							}
 						}
 						
-						&.done {
+						&.spinOut {
 							&:after {
 								@include animation(spinOut .5s linear 0s 1 normal forwards);
 							}
