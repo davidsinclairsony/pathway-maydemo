@@ -5,7 +5,7 @@
 	width: 600px;
 	overflow: hidden;
 	background: #526571; // rgba(255, 255, 255, .3);
-	padding: 0px 20px 15px 20px;
+	padding: 12px 20px 15px 20px;
 	border-radius: 8px;
 	color: white;
 	font: normal normal 300 20px/#{$f-1-l-h} $f-1;
@@ -38,15 +38,30 @@
 	}
 	
 	main {
-		overflow-y: scroll;
+		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 		height: 100%;
-		padding: 12px 0 30px 0;
+		padding: 0 0 30px 0;
 		position: relative;
+		
+		h1 {
+			font: normal normal bold 20px/#{$f-1-l-h} $f-1;
+			margin-bottom: -5px;
+		}
 		
 		p {
 			&:nth-child(n + 2) {
-				margin-top: 20px;
+				margin-top: 10px;
+			}
+		}
+		
+		ul {
+			list-style: disc inside;
+			margin-left: 30px;
+			text-indent: -20px;
+			
+			&:nth-child(n + 2) {
+				margin-top: 10px;
 			}
 		}
 	}
@@ -59,21 +74,10 @@
 		left: 0;
 		pointer-events: none;
 		
-		&:before {
-			content: "";
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: inherit;
-			height: 20px;
-			@include linear-gradient(to bottom, rgba(82, 101, 113, 1) 70%, rgba(82, 101, 113, 0) 100%);
-			border-radius: 8px 8px 0 0;
-		}
-		
 		&:after {
 			content: "";
 			position: absolute;
-			bottom: 0px;
+			bottom: 0;
 			left: 0;
 			width: inherit;
 			height: 60px;

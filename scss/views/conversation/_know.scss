@@ -7,7 +7,7 @@
 	height: 100%;
 	overflow-y: scroll;
 	padding: 80px;
-	background: rgba(0, 0, 0, .975);
+	background: rgba(0, 0, 0, .9);
 	color: white;
 	@include flex-direction(column);
 	@include align-items(center);
@@ -22,7 +22,7 @@
 		header {
 			font: normal normal normal 30px/#{$f-1-l-h} $f-1;
 			border-radius: 8px 8px 0 0;
-			background: rgba(255, 255, 255, .3);
+			background: #4c4d4d;
 			padding: 20px 40px;
 			
 			sup {
@@ -31,7 +31,7 @@
 		}
 		
 		section {
-			background: rgba(255, 255, 255, .2);
+			background: #333435;
 			padding: 40px;
 
 			ul {
@@ -49,7 +49,7 @@
 		}
 		
 		footer {
-			background: rgba(255, 255, 255, .2);
+			background: #333435;
 			text-align: center;
 			border-radius: 0 0 8px 8px;
 			padding: 0 40px 40px 40px;

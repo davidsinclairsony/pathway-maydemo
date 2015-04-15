@@ -38,7 +38,7 @@
 		"picture": "person-3.jpg",
 		"name": "Ruben",
 		"location": "Sacramento, CA",
-		"age": 32,
+		"age": 42,
 		"sex": "Male",
 		"data": {
 			"genetics": true,

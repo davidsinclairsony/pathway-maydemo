@@ -1879,7 +1879,7 @@ body {
   width: 600px;
   overflow: hidden;
   background: #526571;
-  padding: 0px 20px 15px 20px;
+  padding: 12px 20px 15px 20px;
   border-radius: 8px;
   color: white;
   font: normal normal 300 20px/1.4em "Open Sans", sans-serif;
@@ -1917,17 +1917,32 @@ body {
 }
 /* line 40, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response main {
-  overflow-y: scroll;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
   height: 100%;
-  padding: 12px 0 30px 0;
+  padding: 0 0 30px 0;
   position: relative;
 }
-/* line 48, ../scss/views/conversation/_response.scss */
-#app > .view.conversation > .response main p:nth-child(n + 2) {
-  margin-top: 20px;
+/* line 47, ../scss/views/conversation/_response.scss */
+#app > .view.conversation > .response main h1 {
+  font: normal normal bold 20px/1.4em "Open Sans", sans-serif;
+  margin-bottom: -5px;
 }
-/* line 54, ../scss/views/conversation/_response.scss */
+/* line 53, ../scss/views/conversation/_response.scss */
+#app > .view.conversation > .response main p:nth-child(n + 2) {
+  margin-top: 10px;
+}
+/* line 58, ../scss/views/conversation/_response.scss */
+#app > .view.conversation > .response main ul {
+  list-style: disc inside;
+  margin-left: 30px;
+  text-indent: -20px;
+}
+/* line 63, ../scss/views/conversation/_response.scss */
+#app > .view.conversation > .response main ul:nth-child(n + 2) {
+  margin-top: 10px;
+}
+/* line 69, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response .overlay {
   height: 100%;
   width: 100%;
@@ -1936,26 +1951,11 @@ body {
   left: 0;
   pointer-events: none;
 }
-/* line 62, ../scss/views/conversation/_response.scss */
-#app > .view.conversation > .response .overlay:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: inherit;
-  height: 20px;
-  background: -moz-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
-  background: -webkit-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
-  background: -o-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
-  background: -ms-linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
-  background: linear-gradient(to bottom, #526571 70%, rgba(82, 101, 113, 0) 100%);
-  border-radius: 8px 8px 0 0;
-}
-/* line 73, ../scss/views/conversation/_response.scss */
+/* line 77, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response .overlay:after {
   content: "";
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   left: 0;
   width: inherit;
   height: 60px;
@@ -1966,7 +1966,7 @@ body {
   background: linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
   border-radius: 0 0 8px 8px;
 }
-/* line 85, ../scss/views/conversation/_response.scss */
+/* line 89, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer {
   width: 100%;
   position: absolute;
@@ -1975,11 +1975,11 @@ body {
   text-align: right;
   padding: 0 15px 12px 0;
 }
-/* line 93, ../scss/views/conversation/_response.scss */
+/* line 97, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div {
   display: inline-block;
 }
-/* line 96, ../scss/views/conversation/_response.scss */
+/* line 100, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div:before {
   border-radius: 1em;
   font-size: 16px;
@@ -1987,19 +1987,19 @@ body {
   transition: .5s;
   padding: 5px;
 }
-/* line 105, ../scss/views/conversation/_response.scss */
+/* line 109, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div.clicked.icon-thumbs-up:before {
   background: #349c42;
 }
-/* line 109, ../scss/views/conversation/_response.scss */
+/* line 113, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response footer div.clicked.icon-thumbs-down:before {
   background: #9c3434;
 }
-/* line 116, ../scss/views/conversation/_response.scss */
+/* line 120, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map {
   padding-bottom: 285px;
 }
-/* line 120, ../scss/views/conversation/_response.scss */
+/* line 124, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .overlay:after {
   bottom: 287px;
   height: 40px;
@@ -2009,7 +2009,7 @@ body {
   background: -ms-linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
   background: linear-gradient(to top, #526571 40%, rgba(82, 101, 113, 0) 100%);
 }
-/* line 127, ../scss/views/conversation/_response.scss */
+/* line 131, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container {
   position: absolute;
   bottom: 35px;
@@ -2018,24 +2018,24 @@ body {
   height: 270px;
   padding: 18px 20px;
 }
-/* line 135, ../scss/views/conversation/_response.scss */
+/* line 139, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map {
   width: 100%;
   height: 100%;
   border-radius: 0 0 4px 4px;
   overflow: hidden;
 }
-/* line 141, ../scss/views/conversation/_response.scss */
+/* line 145, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw {
   line-height: 1em;
   color: black;
   max-width: 300px;
 }
-/* line 146, ../scss/views/conversation/_response.scss */
+/* line 150, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw * {
   font: normal normal 300 16px/1.4em "Open Sans", sans-serif;
 }
-/* line 150, ../scss/views/conversation/_response.scss */
+/* line 154, ../scss/views/conversation/_response.scss */
 #app > .view.conversation > .response.map .container #map .gm-style .gm-style-iw .title {
   font-weight: bold;
 }
@@ -2049,7 +2049,7 @@ body {
   height: 100%;
   overflow-y: scroll;
   padding: 80px;
-  background: rgba(0, 0, 0, 0.975);
+  background: rgba(0, 0, 0, 0.9);
   color: white;
   -webkit-justify-content: column;
   -ms-flex-pack: column;
@@ -2076,7 +2076,7 @@ body {
 #app > .view.conversation > .know > div header {
   font: normal normal normal 30px/1.4em "Open Sans", sans-serif;
   border-radius: 8px 8px 0 0;
-  background: rgba(255, 255, 255, 0.3);
+  background: #4c4d4d;
   padding: 20px 40px;
 }
 /* line 28, ../scss/views/conversation/_know.scss */
@@ -2085,7 +2085,7 @@ body {
 }
 /* line 33, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div section {
-  background: rgba(255, 255, 255, 0.2);
+  background: #333435;
   padding: 40px;
 }
 /* line 37, ../scss/views/conversation/_know.scss */
@@ -2103,7 +2103,7 @@ body {
 }
 /* line 51, ../scss/views/conversation/_know.scss */
 #app > .view.conversation > .know > div footer {
-  background: rgba(255, 255, 255, 0.2);
+  background: #333435;
   text-align: center;
   border-radius: 0 0 8px 8px;
   padding: 0 40px 40px 40px;

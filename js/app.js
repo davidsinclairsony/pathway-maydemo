@@ -189,7 +189,7 @@
 
 			$.get("/templates/conversation.html", function(data) {
 				self.$el.append(data);
-				self.$el.hammer();
+				self.$el.hammer({domEvents: true});
 			});
 			
 			return self;
@@ -206,10 +206,25 @@
 			"swiped": "swipeHandler",
 		},
 		panHandler: function(e) {
-			this.peopleView.panHandler(e);
+			// Prevent pan/swipe on response view
+			if(
+				e.originalEvent &&
+				!$(e.target).parents(".response").length &&
+				!$(e.target).hasClass("response")
+			) {
+				this.peopleView.panHandler(e);
+			}
 		},
 		swipeHandler: function(event, objects) {
 			this.peopleView.swipeHandler(objects.event);
+			
+			if(this.questionsView.selectedQuestion) {
+				// Reset response view
+				this.responseView.setToLoading();
+				
+				// Prepare for response
+				this.prepareForResponse();
+			}
 		},
 		howToggler: function() {
 			var $know = this.$(".know");
@@ -231,12 +246,7 @@
 			this.$(".lower").css("opacity", 1);
 			
 			// This will start the chiclets loading
-			//this.peeople.selectedPerson.obtainData();
-			// ...but for now/testing purposes...
-			var self = this;
-			setTimeout(function() {
-				self.getAndShowResponse();
-			}, 500);
+			this.peopleView.selectedPerson.obtainData();
 		},
 		getAndShowResponse: function() {
 			this.responseView.get(
@@ -574,26 +584,22 @@
 			var requestData = {
 				"userId": 1,//person.model.get("id"),
 				"question": {
-					"text": question.model.get("text")
+					"questionText": question.model.get("text")
 				},
 				"fitness": "true"
 			};
 			
 			// Get the answer
 			$.ajax({
-				//url: "http://puppygifs.tumblr.com/api/read/jsons",
 				url: "http://atldev.pathway.com:3000/ask",
 				data: requestData,
 				dataType: "jsonp",
-				timeout: 1000
-			}).done(function(data, textStatus, jqXHR) {
-				self.show(data);
-			})
-			.fail(function(jqXHR, textStatus, errorThrown) {
-				self.show("<main><p>Sorry, there was an error.</p></main>");
+				timeout: 10000,
+			}).always(function(data, textStatus, jqXHR) {
+				self.show(data, textStatus, jqXHR);
 			});
 		},
-		show: function(data) {
+		show: function(data, textStatus, jqXHR) {
 			var self = this;
 			
 			// Gracefully hide spinner
@@ -611,7 +617,21 @@
 				}
 			});
 			
-			self.$el.append(data);
+			
+			var showError = function(error) {
+				self.$el.append("<main><p>Sorry, there was an error: " + error + "</p></main>");
+			};
+			
+			console.log(data);
+			if(textStatus == "success") {
+				if(data.answer.answers[0]) {
+					self.$el.append("<main>" + data.answer.answers[0].formattedText + "</main>");
+				} else {
+					showError("no answer");
+				}
+			} else {
+				showError(errorThrown);
+			}
 			
 			// Add in all text
 /*
@@ -783,7 +803,7 @@
 				this.views.unshift(view);
 				this.$el.prepend(view.el);
 				
-				indexOfSelectedPerson = this.views.indexOf(this.selectedPerson)
+				indexOfSelectedPerson = this.views.indexOf(this.selectedPerson);
 			}
 			
 			
@@ -806,16 +826,16 @@
 		},
 		panHandler: function(e) {
 			var self = this;
-			
+
 			// Fix an issue with hammer not triggering ends
-			if(e.gesture.isFinal) {
+			if(e.originalEvent.gesture.isFinal) {
 				e.type = "panend";
 			}
 			
 			switch(e.type) {
 				case "panend":
 					// Fire event to parent uf swipe, otherwise snap back
-					if(e.gesture.deltaX < -self.swipeThreshold || e.gesture.deltaX > self.swipeThreshold) {
+					if(e.originalEvent.gesture.deltaX < -self.swipeThreshold || e.originalEvent.gesture.deltaX > self.swipeThreshold) {
 						self.$el.trigger("swiped",  {event: e});
 					} else {
 						self.$el.animate({left: self.positionLeft}, 100, "linear");
@@ -827,7 +847,7 @@
 					/* falls through */
 				default:
 					// Find new position and move
-					var newPositionLeft = self.positionLeft + e.gesture.deltaX;
+					var newPositionLeft = self.positionLeft + e.originalEvent.gesture.deltaX;
 					self.$el.css("left", newPositionLeft);
 					break;
 			}
@@ -837,7 +857,7 @@
 			var currentIndex = self.views.indexOf(self.selectedPerson);
 			
 			// Determine swipe direction
-			if(e.gesture.deltaX < 0) {
+			if(e.originalEvent.gesture.deltaX < 0) {
 				// Set to forward one
 				self.setSelectedPerson(self.views[currentIndex + 1]);
 				
@@ -898,6 +918,23 @@
 		events: {
 			"click .picture": "popupHandler",
 			"click .sources li": "popupHandler"
+		},
+		obtainData: function() {
+			var self = this;
+			
+			self.$("li.available").each(function() {
+				var $this = $(this);
+				
+				$this.removeClass("done").addClass("waiting");
+
+				// Data obtained after random time
+				setTimeout(function() {
+					$this.removeClass("waiting").addClass("done");
+				}, Math.floor(Math.random() * 2000 + 1000));
+			});
+			
+			// Signal to parent data is ready
+			self.$el.trigger("dataSourced");
 		},
 		popupHandler: function(e) {
 			// Check if current person being clicked on
