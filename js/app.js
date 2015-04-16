@@ -622,7 +622,7 @@
 			
 			// Get the answer
 			$.ajax({
-				url: "http://atldev.pathway.com:3000/ask",
+				url: "http://"+window.location.hostname+":3000/ask",
 				data: requestData,
 				dataType: "jsonp",
 				timeout: 10000
