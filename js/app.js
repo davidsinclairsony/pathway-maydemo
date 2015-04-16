@@ -56,54 +56,29 @@
 				self.listenTo(helloView, "end", function() {
 					self.router.navigate("conversation", {trigger: true});
 				});
-				
-				self.resetTimer();
 			});
 			
 			this.router.on("route:conversation", function() {
 				var conversationView = new ConversationView();
 				
 				self.goTo(conversationView);
-				
-				self.resetTimer();
 			});
 			
 			// Set default to be waiting
 			self.$el.addClass("spinner");
 			
 			// Start timer for refreshing
-			// self.timer();
 			
 			// Start tracking
 			Backbone.history.start({pushState: true});
 		},
 		events: {
 			"click .refresh": "refresh",
-			"timer": "timer",
-			"resetTimer": "resetTimer"
+			"timer": "timer"
 		},
 		refresh: function() {
 			// For resetting everything
 			window.location.replace("/");
-		},
-		timer: function() {
-			var self = this;
-			self.time = self.time || 0;
-			
-			if(self.time > 90) {
-				self.refresh();
-			} else {
-				self.time++;
-				
-				setTimeout(function() {
-					self.timer();
-				}, 1000);
-			}
-			
-			console.log(self.time);
-		},
-		resetTimer: function() {
-			this.time = 0;
 		},
 		goTo: function(view) {
 			// Transition from current view to new
@@ -259,8 +234,6 @@
 			"swiped": "swipeHandler",
 		},
 		panHandler: function(e) {
-			this.$el.trigger("resetTimer");
-			
 			// Prevent pan/swipe on response view
 			if(
 				e.originalEvent &&
@@ -282,16 +255,12 @@
 			}
 		},
 		howToggler: function() {
-			this.$el.trigger("resetTimer");
-			
 			var $know = this.$(".know");
 			
 			$know.toggleClass("off", $know.hasClass("on"));
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
 		askAnotherQuestion: function() {
-			this.$el.trigger("resetTimer");
-			
 			this.checkIfOkToHideAllExceptSelectedQuestion();
 		},
 		checkIfOkToHideAllExceptSelectedQuestion: function() {
@@ -308,16 +277,13 @@
 			this.peopleView.selectedPerson.obtainData();
 		},
 		getAndShowResponse: function() {
-			this.$el.trigger("resetTimer");
-			
 			this.responseView.get(
 				this.peopleView.selectedPerson,
 				this.questionsView.selectedQuestion
 			);
 		},
 		hideResponse: function() {
-			this.$el.trigger("resetTimer");
-			
+			console.log(1);
 			this.responseView.hide();
 			this.$(".lower").css("opacity", 0);
 		}
@@ -523,8 +489,6 @@
 			"keyup input": "keyHandler"
 		},
 		router: function(e) {
-			this.$el.trigger("resetTimer");
-			
 			if($(e.target).is(this.button) && this.input.val() !== "") {
 				this.selected();
 			} else if(this.status == "selected") {
@@ -662,7 +626,7 @@
 			
 			// Get the answer
 			$.ajax({
-				url: "http://atldev.pathway.com:3000/ask",
+				url: "http://" + window.location.host + ":3000/ask",
 				data: requestData,
 				dataType: "jsonp",
 				timeout: 10000
@@ -688,12 +652,10 @@
 				}
 			});
 			
-			
 			var showError = function(error) {
 				self.$el.append("<main><p>Sorry, there was an error: " + error + "</p></main>");
 			};
 			
-			console.log(data);
 			if(textStatus == "success") {
 				if(data.answer.answers[0]) {
 					self.$el.append("<main>" + data.answer.answers[0].formattedText + "</main>");
@@ -840,6 +802,9 @@
 			// Add the others around
 			this.pad();
 			
+			// Set ending position
+			this.positionLeft = this.$el.position().left;
+
 			return self;
 		},
 		setSelectedPerson: function(view) {
@@ -912,10 +877,6 @@
 						self.$el.animate({left: self.positionLeft}, 100, "linear");
 					}
 					break;
-				case "panstart":
-					// Save initial position then pan
-					self.positionLeft = self.$el.position().left;
-					/* falls through */
 				default:
 					// Find new position and move
 					var newPositionLeft = self.positionLeft + e.originalEvent.gesture.deltaX;
@@ -1008,8 +969,6 @@
 			self.$el.trigger("dataSourced");
 		},
 		popupHandler: function(e) {
-			this.$el.trigger("resetTimer");
-			
 			// Check if current person being clicked on
 			if(this.selected) {
 				e.stopImmediatePropagation();
@@ -1065,7 +1024,7 @@
 				$p.prop("data-animating", "false");
 			});
 			
-			$("body").one("click", function() {
+			$("body").one("touchstart click", function() {
 				self.popupRemover($p);
 			});
 		}
@@ -1087,6 +1046,24 @@
 	//	Initiation
 	
 	$(window).load(function() {
+		// Timer code
+		var refreshTime;
+		var refreshTimer = function() {
+			refreshTime = refreshTime || 0;
+			
+			if(refreshTime > 90) {
+				window.location.replace("/");
+			} else {
+				refreshTime++;
+				
+				setTimeout(function() {
+					refreshTimer();
+				}, 1000);
+			}
+		};
+		
+		// refreshTimer();
+		
 		// Fast clicks for touch users
 		FastClick.attach(document.body);
 		
@@ -1096,6 +1073,9 @@
 		}
 		
 		$(document).on("touchstart", function(e) {
+			// Reset time
+			time = 0;
+			
 			var $scroller;
 			var $target = $(e.target);
 			
