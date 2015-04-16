@@ -56,26 +56,54 @@
 				self.listenTo(helloView, "end", function() {
 					self.router.navigate("conversation", {trigger: true});
 				});
+				
+				self.resetTimer();
 			});
 			
 			this.router.on("route:conversation", function() {
 				var conversationView = new ConversationView();
 				
 				self.goTo(conversationView);
+				
+				self.resetTimer();
 			});
 			
 			// Set default to be waiting
 			self.$el.addClass("spinner");
+			
+			// Start timer for refreshing
+			// self.timer();
 			
 			// Start tracking
 			Backbone.history.start({pushState: true});
 		},
 		events: {
 			"click .refresh": "refresh",
+			"timer": "timer",
+			"resetTimer": "resetTimer"
 		},
 		refresh: function() {
 			// For resetting everything
 			window.location.replace("/");
+		},
+		timer: function() {
+			var self = this;
+			self.time = self.time || 0;
+			
+			if(self.time > 90) {
+				self.refresh();
+			} else {
+				self.time++;
+				
+				setTimeout(function() {
+					self.timer();
+				}, 1000);
+			}
+			
+			console.log(self.time);
+		},
+		resetTimer: function() {
+			this.time = 0;
 		},
 		goTo: function(view) {
 			// Transition from current view to new
@@ -231,6 +259,8 @@
 			"swiped": "swipeHandler",
 		},
 		panHandler: function(e) {
+			this.$el.trigger("resetTimer");
+			
 			// Prevent pan/swipe on response view
 			if(
 				e.originalEvent &&
@@ -252,12 +282,16 @@
 			}
 		},
 		howToggler: function() {
+			this.$el.trigger("resetTimer");
+			
 			var $know = this.$(".know");
 			
 			$know.toggleClass("off", $know.hasClass("on"));
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
 		askAnotherQuestion: function() {
+			this.$el.trigger("resetTimer");
+			
 			this.checkIfOkToHideAllExceptSelectedQuestion();
 		},
 		checkIfOkToHideAllExceptSelectedQuestion: function() {
@@ -274,12 +308,16 @@
 			this.peopleView.selectedPerson.obtainData();
 		},
 		getAndShowResponse: function() {
+			this.$el.trigger("resetTimer");
+			
 			this.responseView.get(
 				this.peopleView.selectedPerson,
 				this.questionsView.selectedQuestion
 			);
 		},
 		hideResponse: function() {
+			this.$el.trigger("resetTimer");
+			
 			this.responseView.hide();
 			this.$(".lower").css("opacity", 0);
 		}
@@ -485,6 +523,8 @@
 			"keyup input": "keyHandler"
 		},
 		router: function(e) {
+			this.$el.trigger("resetTimer");
+			
 			if($(e.target).is(this.button) && this.input.val() !== "") {
 				this.selected();
 			} else if(this.status == "selected") {
@@ -867,7 +907,7 @@
 				case "panend":
 					// Fire event to parent uf swipe, otherwise snap back
 					if(e.originalEvent.gesture.deltaX < -self.swipeThreshold || e.originalEvent.gesture.deltaX > self.swipeThreshold) {
-						self.$el.trigger("swiped",  {event: e});
+						self.$el.trigger("swiped", {event: e});
 					} else {
 						self.$el.animate({left: self.positionLeft}, 100, "linear");
 					}
@@ -968,6 +1008,8 @@
 			self.$el.trigger("dataSourced");
 		},
 		popupHandler: function(e) {
+			this.$el.trigger("resetTimer");
+			
 			// Check if current person being clicked on
 			if(this.selected) {
 				e.stopImmediatePropagation();
