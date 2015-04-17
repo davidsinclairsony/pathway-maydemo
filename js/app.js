@@ -103,33 +103,6 @@
 				});
 			});
 		},
-		cssAnimate: function(cssClass, callback) {
-			// Add class for animating and executes callback
-			var $self = this;
-			
-			// Sets a new listener
-			var setAnimationListener = function() {
-				$self.one(
-					"webkitAnimationEnd oanimationend msAnimationEnd animationend",
-					function(e) {
-						// Check if event is significant
-						if(
-							e.originalEvent.animationName == cssClass &&
-							e.target === e.currentTarget 
-						) {
-							if (_.isFunction(callback)) {
-								callback();
-							}
-						} else {
-							setAnimationListener();
-						}
-					}
-				);
-			};
-			
-			$self.addClass(cssClass);
-			setAnimationListener();
-		}
 	});
 	
 	var IntroView = Backbone.View.extend({
@@ -563,11 +536,9 @@
 			
 			self.activeAnimations.push(cssAnimationClass);
 			
-			TweenMax.to(self.$el, .5, {
+			TweenMax.fromTo(self.$el, .5, {opacity: 0}, {
 				opacity: 1,
 				onComplete: function() {
-					self.$el.removeClass(cssAnimationClass);
-				
 					// Remove from list of animations
 					var index = self.activeAnimations.indexOf(cssAnimationClass);
 					if (index > -1) {
@@ -575,18 +546,6 @@
 					}
 				}
 			});
-			
-			/*
-			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
-				self.$el.removeClass(cssAnimationClass);
-				
-				// Remove from list of animations
-				var index = self.activeAnimations.indexOf(cssAnimationClass);
-				if (index > -1) {
-					self.activeAnimations.splice(index, 1);
-				}
-			});
-			*/
 		},
 		get: function(person, question) {
 			var self = this;
@@ -596,8 +555,7 @@
 				"userId": 1,//person.model.get("id"),
 				"question": {
 					"questionText": question.model.get("text")
-				},
-				"fitness": "true"
+				}
 			};
 			
 			// Get the answer
@@ -605,7 +563,7 @@
 				url: "http://" + window.location.host + ":3000/ask",
 				data: requestData,
 				dataType: "jsonp",
-				timeout: 10000
+				timeout: 15000
 			}).always(function(data, textStatus, jqXHR) {
 				self.show(data, textStatus, jqXHR);
 			});
@@ -614,19 +572,7 @@
 			var self = this;
 			
 			// Gracefully hide spinner
-			self.$el.removeClass("spinner");
-			
-			// Get ready to animate
-			var cssAnimationClass = "spinOut";
-			
-			self.activeAnimations.push(cssAnimationClass);
-			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
-				// Remove from list of animations
-				var index = self.activeAnimations.indexOf(cssAnimationClass);
-				if (index > -1) {
-					self.activeAnimations.splice(index, 1);
-				}
-			});
+			self.$el.removeClass("spinner").addClass("spinOut");
 			
 			var showError = function(error) {
 				self.$el.append("<main><p>Sorry, there was an error: " + error + "</p></main>");
@@ -743,9 +689,12 @@
 		hide: function() {
 			var self = this;
 			
-			window.app.cssAnimate.call(self.$el, "fadeOut", function () {
-				self.$el.removeClass("fadeOut").css("display", "none");
-				self.setToLoading();
+			TweenMax.fromTo(self.$el, .5, {opacity: 1}, {
+				opacity: 0,
+				display: "none",
+				onComplete: function() {
+					self.setToLoading();
+				}
 			});
 		}
 	});
@@ -839,25 +788,20 @@
 		panHandler: function(e) {
 			var self = this;
 
-			// Fix an issue with hammer not triggering ends
 			if(e.originalEvent.gesture.isFinal) {
-				e.type = "panend";
-			}
-			
-			switch(e.type) {
-				case "panend":
-					// Fire event to parent uf swipe, otherwise snap back
-					if(e.originalEvent.gesture.deltaX < -self.swipeThreshold || e.originalEvent.gesture.deltaX > self.swipeThreshold) {
-						self.$el.trigger("swiped", {event: e});
-					} else {
-						self.$el.animate({left: self.positionLeft}, 100, "linear");
-					}
-					break;
-				default:
-					// Find new position and move
-					var newPositionLeft = self.positionLeft + e.originalEvent.gesture.deltaX;
-					self.$el.css("left", newPositionLeft);
-					break;
+				// Fire event to parent if swipe, otherwise snap back
+				if(
+					e.originalEvent.gesture.deltaX < -self.swipeThreshold ||
+					e.originalEvent.gesture.deltaX > self.swipeThreshold)
+				{
+					self.$el.trigger("swiped", {event: e});
+				} else {
+					TweenMax.to(self.$el, .1, {left: self.positionLeft});
+				}
+			} else {
+				// Find new position and move
+				var left = self.positionLeft + e.originalEvent.gesture.deltaX;
+				self.$el.css({left: left});
 			}
 		},
 		swipeHandler: function(e) {
@@ -870,40 +814,46 @@
 				self.setSelectedPerson(self.views[currentIndex + 1]);
 				
 				// Animate to correct position
-				self.$el.animate({left: self.positionLeft - 640}, 100, "linear", function() {
-					// Remove all aspects of edge view
-					_.first(self.views).remove();
-					self.views.shift();
-					
-					// Add in new
-					self.pad();
-					
-					// Reset margins
-					self.$("> li:first-child").css({marginLeft: 0});
-					self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
-					
-					// Adjust positioning
-					self.$el.css({left: self.positionLeft});
+				TweenMax.to(self.$el, .1, {
+					left: self.positionLeft - 640,
+					onComplete: function() {
+						// Remove all aspects of edge view
+						_.first(self.views).remove();
+						self.views.shift();
+						
+						// Add in new
+						self.pad();
+						
+						// Reset margins
+						self.$("> li:first-child").css({marginLeft: 0});
+						self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
+						
+						// Adjust positioning
+						self.$el.css({left: self.positionLeft});
+					}
 				});
 			} else {
 				// Set to back one
 				self.setSelectedPerson(self.views[currentIndex - 1]);
 				
 				// Animate to correct position
-				self.$el.animate({left: self.positionLeft + 640}, 100, "linear", function() {
-					// Remove all aspects of edge view
-					_.last(self.views).remove();
-					self.views.pop();
-					
-					// Add in new
-					self.pad();
-					
-					// Reset margins
-					self.$("> li:first-child").css({marginLeft: 0});
-					self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
-					
-					// Adjust positioning
-					self.$el.css({left: self.positionLeft});
+				TweenMax.to(self.$el, .1, {
+					left: self.positionLeft + 640,
+					onComplete: function() {
+							// Remove all aspects of edge view
+						_.last(self.views).remove();
+						self.views.pop();
+						
+						// Add in new
+						self.pad();
+						
+						// Reset margins
+						self.$("> li:first-child").css({marginLeft: 0});
+						self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
+						
+						// Adjust positioning
+						self.$el.css({left: self.positionLeft});
+					}
 				});
 			}
 		}
@@ -952,23 +902,17 @@
 				var $newPopup = $(e.target).siblings(".popup");
 				
 				if(!self.$popup) {
-					// Check if still animating from a previous close
-					if($newPopup.prop("data-animating") != "true") {
-						this.popupShower($newPopup);
-					}
+					this.popupShower($newPopup);
 				} else {
-					// Check if still animating other popup
-					if(self.$popup.prop("data-animating") != "true") {
-						var isSameAsCurrent = self.$popup.is($newPopup);
-	
-						// Hide current popup
-						this.popupRemover(self.$popup);
-						
-						if(!isSameAsCurrent) {
-							// Show new
-							self.$popup = $newPopup;
-							this.popupShower(self.$popup);
-						}
+					var isSameAsCurrent = self.$popup.is($newPopup);
+
+					// Hide current popup
+					this.popupRemover(self.$popup);
+					
+					if(!isSameAsCurrent) {
+						// Show new
+						self.$popup = $newPopup;
+						this.popupShower(self.$popup);
 					}
 				}
 			}
@@ -976,14 +920,14 @@
 		popupRemover: function($p) {
 			this.$popup = null;
 			
-			$p.prop("data-animating", "true");
-			
-			window.app.cssAnimate.call($p, "fadeOut", function () {
-				$p.css("display", "none");
-				$p.removeClass("fadeOut");
-				$p.prop("data-animating", "false");
+			// Fade and hide popup
+			TweenMax.to($p, .5, {
+				opacity: 0,
+				display: "none",
+				overwrite: "all"
 			});
-
+			
+			// Turn off listener
 			$("body").off();
 		},
 		popupShower: function($p) {
@@ -991,15 +935,13 @@
 			
 			self.$popup = $p;
 			
-			$p.css("display", "block");
-			$p.prop("data-animating", "true");
+			// Show and fade in
+			TweenMax.fromTo($p, .5,
+				{opacity: 0, display: "block"},
+				{opacity: 1, overwrite: "all"}
+			);
 			
-			window.app.cssAnimate.call($p, "fadeIn", function () {
-				$p.removeClass("fadeIn");
-				$p.css("display", "block");
-				$p.prop("data-animating", "false");
-			});
-			
+			// Listen for anything to turn off
 			$("body").one("touchstart click", function() {
 				self.popupRemover($p);
 			});
