@@ -656,8 +656,7 @@
 				"userId": 1,//person.model.get("id"),
 				"question": {
 					"questionText": question.model.get("text")
-				},
-				"fitness": "true"
+				}
 			};
 			
 			// Get the answer
@@ -665,7 +664,7 @@
 				url: "http://"+window.location.hostname+":3000/ask",
 				data: requestData,
 				dataType: "jsonp",
-				timeout: 10000
+				timeout: 15000
 			}).always(function(data, textStatus, jqXHR) {
 				self.show(data, textStatus, jqXHR);
 			});
