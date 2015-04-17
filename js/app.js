@@ -539,24 +539,29 @@
 		},
 		get: function(person, question) {
 			var self = this;
-
-			// To be sent to API
-			var requestData = {
-				"userId": 1,//person.model.get("id"),
-				"question": {
-					"questionText": question.model.get("text")
-				}
-			};
 			
-			// Get the answer
-			$.ajax({
-				url: "http://" + window.location.host + ":3000/ask",
-				data: requestData,
-				dataType: "jsonp",
-				timeout: 15000
-			}).always(function(data, textStatus, jqXHR) {
-				self.show(data, textStatus, jqXHR);
-			});
+			// Check if stored response
+			if(question.model.get("id") < 4) {
+				
+			} else {
+				// To be sent to API
+				var requestData = {
+					"userId": 1,//person.model.get("id"),
+					"question": {
+						"questionText": question.model.get("text")
+					}
+				};
+				
+				// Get the answer
+				$.ajax({
+					url: "http://" + window.location.host + ":3000/ask",
+					data: requestData,
+					dataType: "jsonp",
+					timeout: 15000
+				}).always(function(data, textStatus, jqXHR) {
+					self.show(data, textStatus, jqXHR);
+				});
+			}
 		},
 		show: function(data, textStatus, jqXHR) {
 			var self = this;
