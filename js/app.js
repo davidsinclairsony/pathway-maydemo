@@ -37,23 +37,23 @@
 			
 			// Route actions
 			this.router.on("route:intro", function() {
-				var introView = new IntroView();
+				var view = new IntroView();
 				
-				self.goTo(introView);
+				self.goTo(view);
 				
 				// Listen for end of view
-				self.listenTo(introView, "end", function() {
+				self.listenTo(view, "end", function() {
 					self.router.navigate("hello", {trigger: true});
 				});
 			});
 			
 			this.router.on("route:hello", function() {
-				var helloView = new HelloView();
+				var view = new HelloView();
 				
-				self.goTo(helloView);
+				self.goTo(view);
 				
 				// Listen for end of view
-				self.listenTo(helloView, "end", function() {
+				self.listenTo(view, "end", function() {
 					self.router.navigate("conversation", {trigger: true});
 				});
 			});
@@ -67,53 +67,39 @@
 			// Set default to be waiting
 			self.$el.addClass("spinner");
 			
-			// Start timer for refreshing
-			
 			// Start tracking
 			Backbone.history.start({pushState: true});
 		},
 		events: {
-			"click .refresh": "refresh",
-			"timer": "timer"
+			"click .refresh": "refresh"
 		},
 		refresh: function() {
-			// For resetting everything
 			window.location.replace("/");
 		},
 		goTo: function(view) {
-			// Transition from current view to new
 			var self = this;
 			var previous = this.currentView || null;
 			var next = view;
 			
 			// Hide the current view
 			if(previous) {
-				self.cssAnimate.call(previous.$el, "fadeOut", function () {
-					previous.remove();
+				TweenMax.to(previous.$el, .5, {
+					opacity: 0,
+					onComplete: function() {previous.remove();}
 				});
 			}
 			
-			// Add and hide
+			// Add , hide, and wait until loaded
+			self.currentView = next;
 			self.$el.append(next.el);
 			next.$el.hide();
-			self.currentView = next;
 			
-			self.listenTo(self.currentView, "loaded", function() {
-				self.showNext();
-			});
-			
-			// At this point, wait for next to trigger fadeIn
-		},
-		showNext: function() {
-			var self = this;
-			
-			// Wait for ready
-			self.currentView.$el.waitForImages(function() {
-				self.$el.removeClass("spinner").addClass("spinOut");
-				self.currentView.$el.show();
-				
-				self.cssAnimate.call(self.currentView.$el, "fadeIn", function() {
-					self.currentView.$el.removeClass("fadeIn");
+			self.listenTo(next, "loaded", function() {
+				// Wait for images and reveal
+				next.$el.waitForImages(function() {
+					self.$el.removeClass("spinner").addClass("spinOut");
+					next.$el.show();
+					TweenMax.from(next.$el, .5, {opacity: 0});
 				});
 			});
 		},
@@ -153,12 +139,7 @@
 			
 			self.render();
 			
-			// Fire event when last animation ends
-			self.$el.one(
-				"webkitAnimationEnd oanimationend msAnimationEnd animationend",
-				"p",
-				function() {setTimeout(function() {self.trigger("end");}, 2000);}
-			);
+			setTimeout(function() {self.trigger("end");}, 7000);
 		},
 		render: function() {
 			var self = this;
@@ -204,10 +185,8 @@
 			// Child views
 			this.peopleView = new PeopleView();
 			this.$el.append(this.peopleView.el);
-			
 			this.questionsView = new QuestionsView();
 			this.$el.append(this.questionsView.el);
-			
 			this.responseView = new ResponseView();
 			this.$el.append(this.responseView.el);
 		},
@@ -225,7 +204,7 @@
 		events: {
 			"click .ask": "askAnotherQuestion",
 			"click .how, footer .close": "howToggler",
-			"requestTohideAllExceptSelectedQuestion": "checkIfOkToHideAllExceptSelectedQuestion",
+			"requestToRevealSelectedQuestion": "askAnotherQuestion",
 			"hidAllExceptSelectedQuestion": "prepareForResponse",
 			"revealedAllQuestions": "hideResponse",
 			"dataSourced": "getAndShowResponse",
@@ -261,9 +240,6 @@
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
 		askAnotherQuestion: function() {
-			this.checkIfOkToHideAllExceptSelectedQuestion();
-		},
-		checkIfOkToHideAllExceptSelectedQuestion: function() {
 			// If ok to switch, mainly checking for running animations
 			if(this.responseView.activeAnimations.length === 0) {
 				this.questionsView.revealAllQuestions();
@@ -271,7 +247,7 @@
 		},
 		prepareForResponse: function() {
 			this.responseView.prepare(this.questionsView.selectedQuestion);
-			this.$(".lower").css("opacity", 1);
+			TweenMax.to(this.$(".lower"), .5, {opacity: 1});
 			
 			// This will start the chiclets loading
 			this.peopleView.selectedPerson.obtainData();
@@ -283,9 +259,8 @@
 			);
 		},
 		hideResponse: function() {
-			console.log(1);
 			this.responseView.hide();
-			this.$(".lower").css("opacity", 0);
+			TweenMax.to(this.$(".lower"), .5, {opacity: 0});
 		}
 	});
 	
@@ -304,10 +279,8 @@
 					self.views.push(new QuestionView({model: model}));
 				});
 				
-				// Add in custom view
-				var customQuestionView = new CustomQuestionView({model: new QuestionModel()});
-				
-				self.views.push(customQuestionView);
+				// Add in custom question
+				self.views.push(new CustomQuestionView({model: new QuestionModel()}));
 				
 				self.render();
 			});
@@ -338,7 +311,7 @@
 				this.selectedQuestion = objects.selectedQuestion;
 				this.hideAllExceptSelectedQuestion();
 			} else {
-				this.$el.trigger("requestTohideAllExceptSelectedQuestion");
+				this.$el.trigger("requestToRevealSelectedQuestion");
 			}
 		},
 		hideAllExceptSelectedQuestion: function() {
@@ -350,25 +323,21 @@
 			_.each(this.views, function(view) {
 				if(view == self.selectedQuestion) {
 					// Save current offset
-					var currentOffset = self.selectedQuestion.$el.offset();
+					var currentOffset = view.$el.offset();
 					
-					self.selectedQuestion.$el.css("position", "absolute");
+					view.$el.css("position", "absolute");
 					
 					// Save desired offset
-					var desiredOffset = self.selectedQuestion.$el.offset();
+					var desiredOffset = view.$el.offset();
 					
 					// Reset positioning and move question
-					self.selectedQuestion.$el.css({
+					TweenMax.to(view.$el, .5, {
 						position: "relative",
-						transition: ".5s",
 						top: desiredOffset.top - currentOffset.top
 					});
 				} else {
 					// Hide all other questions
-					window.app.cssAnimate.call(view.$el, "fadeOut", function () {
-						view.$el.css("visibility", "hidden");
-						view.$el.removeClass("fadeOut");
-					});
+					TweenMax.to(view.$el, .5, {autoAlpha: 0});
 				}
 			});
 		},
@@ -386,31 +355,22 @@
 					}
 					
 					if(view == self.selectedQuestion) {
+						self.selectedQuestion = null;
+						
 						// Animate back to position, if needed
-						if(!self.selectedQuestion.$el.is(":first-child")) {
-							// Catch next animation and reset duration
-							self.selectedQuestion.$el.one("transitionend", function() {
-								if(view instanceof CustomQuestionView) {
-									self.regenerateCustomQuestion();
+						if(!view.$el.is(":first-child")) {
+							TweenMax.to(view.$el, .5, {
+								top: 0,
+								onComplete: function() {
+									if(view instanceof CustomQuestionView) {
+										self.regenerateCustomQuestion();
+									}
 								}
-								
-								self.selectedQuestion.$el.css("transition", 0);
-								self.selectedQuestion = null;
 							});
-
-							// Move question
-							self.selectedQuestion.$el.css("top", 0);
-						} else {
-							self.selectedQuestion.$el.css("transition", 0);
-							self.selectedQuestion = null;
 						}
 					} else {
 						// Reveal other questions
-						view.$el.css("visibility", "visible");
-						
-						window.app.cssAnimate.call(view.$el, "fadeIn", function () {
-							view.$el.removeClass("fadeIn");
-						});
+						TweenMax.to(view.$el, .5, {autoAlpha: 1});
 					}
 				});
 			}
@@ -512,8 +472,7 @@
 			
 			// Animate height if not already done
 			if(!self.$el.hasClass("focused")) {
-				self.$el.addClass("focused");
-				self.$el.css("transition", ".5s");
+				self.$el.addClass("focused").css("transition", ".5s");
 				
 				// Remove transition
 				self.$el.one("transitionend", function() {
@@ -551,8 +510,10 @@
 			var self = this;
 			
 			self.$el.removeClass("focused");
-			window.app.cssAnimate.call(self.button, "fadeOut", function () {
-				self.button.removeClass("fadeOut").css("display", "none");
+			
+			TweenMax.to(self.button, .5, {
+				opacity: 0,
+				display: "none"
 			});
 		}
 	});
@@ -602,6 +563,20 @@
 			
 			self.activeAnimations.push(cssAnimationClass);
 			
+			TweenMax.to(self.$el, .5, {
+				opacity: 1,
+				onComplete: function() {
+					self.$el.removeClass(cssAnimationClass);
+				
+					// Remove from list of animations
+					var index = self.activeAnimations.indexOf(cssAnimationClass);
+					if (index > -1) {
+						self.activeAnimations.splice(index, 1);
+					}
+				}
+			});
+			
+			/*
 			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
 				self.$el.removeClass(cssAnimationClass);
 				
@@ -611,6 +586,7 @@
 					self.activeAnimations.splice(index, 1);
 				}
 			});
+			*/
 		},
 		get: function(person, question) {
 			var self = this;
