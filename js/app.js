@@ -215,10 +215,7 @@
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
 		askAnotherQuestion: function() {
-			// If ok to switch, mainly checking for running animations
-			if(this.responseView.activeAnimations.length === 0) {
-				this.questionsView.revealAllQuestions();
-			}
+			this.questionsView.revealAllQuestions();
 		},
 		prepareForResponse: function() {
 			this.responseView.prepare(this.questionsView.selectedQuestion);
@@ -255,7 +252,9 @@
 				});
 				
 				// Add in custom question
-				self.views.push(new CustomQuestionView({model: new QuestionModel()}));
+				self.views.push(new CustomQuestionView({
+					model: new QuestionModel()
+				}));
 				
 				self.render();
 			});
@@ -412,9 +411,9 @@
 			
 			$.get("/templates/conversation/questions/custom.html", function(data) {
 				self.$el.append(data);
-				self.input = self.$("input");
-				self.button = self.$("button");
-				self.button.css("display", "none");
+				self.$input = self.$("input");
+				self.$button = self.$("button");
+				self.$button.css("display", "none");
 			});
 			
 			return this;
@@ -424,7 +423,7 @@
 			"keyup input": "keyHandler"
 		},
 		router: function(e) {
-			if($(e.target).is(this.button) && this.input.val() !== "") {
+			if($(e.target).is(this.$button) && this.$input.val() !== "") {
 				this.selected();
 			} else if(this.status == "selected") {
 				this.$el.trigger("questionClicked", {selectedQuestion: this});
@@ -434,7 +433,7 @@
 		},
 		keyHandler: function(e) {
 			if(e.keyCode == 13){
-				this.$("button").click();
+				this.$button.click();
 			}
 		},
 		editing: function() {
@@ -443,7 +442,7 @@
 			self.status = "editing";
 			
 			// Allow editing
-			self.input.prop("readonly", false).focus();
+			self.$input.prop("readonly", false).focus();
 			
 			// Animate height if not already done
 			if(!self.$el.hasClass("focused")) {
@@ -454,7 +453,10 @@
 					self.$el.css("transition", 0);
 				});
 				
-				self.button.fadeIn(500);
+				TweenMax.fromTo(self.$button, .5,
+					{opacity: 0, display: "block"},
+					{opacity: 1}
+				);
 			}
 		},
 		selected: function() {
@@ -463,17 +465,17 @@
 			self.status = "selected";
 			
 			// Save data to moodel
-			self.model.set({"text": self.input.val()});
+			self.model.set({"text": self.$input.val()});
 			
 			// Disable editing and shrink
-			self.input.prop("readonly", true);
+			self.$input.blur().prop("readonly", true);
 			self.shrink();
 
 			// Fire event to parent
 			self.$el.trigger("questionClicked", {selectedQuestion: self});
 		},
 		stale: function() {
-			this.input.val("");
+			this.$input.val("");
 			
 			if(this.status == "editing") {
 				this.shrink();
@@ -486,7 +488,7 @@
 			
 			self.$el.removeClass("focused");
 			
-			TweenMax.to(self.button, .5, {
+			TweenMax.to(self.$button, .5, {
 				opacity: 0,
 				display: "none"
 			});
@@ -495,14 +497,13 @@
 	
 	var ResponseView = Backbone.View.extend({
 		className: "response",
-		activeAnimations: [],
 		initialize: function() {
 			this.render();
 			this.setToLoading();
 		},
 		render: function() {
 			this.setToLoading();
-			this.$el.css("display", "none");
+			this.$el.hide();
 			return this;
 		},
 		events: {
@@ -533,21 +534,8 @@
 				height: height
 			});
 			
-			// Get ready to animate
-			var cssAnimationClass = "fadeIn";
-			
-			self.activeAnimations.push(cssAnimationClass);
-			
-			TweenMax.fromTo(self.$el, .5, {opacity: 0}, {
-				opacity: 1,
-				onComplete: function() {
-					// Remove from list of animations
-					var index = self.activeAnimations.indexOf(cssAnimationClass);
-					if (index > -1) {
-						self.activeAnimations.splice(index, 1);
-					}
-				}
-			});
+			// Fade in response
+			TweenMax.fromTo(self.$el, .5, {opacity: 0}, {opacity: 1});
 		},
 		get: function(person, question) {
 			var self = this;
@@ -928,9 +916,9 @@
 				display: "none",
 				overwrite: "all"
 			});
-			
+
 			// Turn off listener
-			$("body").off();
+			$("body").off("touchend click");
 		},
 		popupShower: function($p) {
 			var self = this;
@@ -944,7 +932,7 @@
 			);
 			
 			// Listen for anything to turn off
-			$("body").one("touchstart click", function() {
+			$("body").one("touchend click", function() {
 				self.popupRemover($p);
 			});
 		}
