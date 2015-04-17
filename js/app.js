@@ -37,138 +37,72 @@
 			
 			// Route actions
 			this.router.on("route:intro", function() {
-				var introView = new IntroView();
+				var view = new IntroView();
 				
-				self.goTo(introView);
+				self.goTo(view);
 				
 				// Listen for end of view
-				self.listenTo(introView, "end", function() {
+				self.listenTo(view, "end", function() {
 					self.router.navigate("hello", {trigger: true});
 				});
 			});
 			
 			this.router.on("route:hello", function() {
-				var helloView = new HelloView();
+				var view = new HelloView();
 				
-				self.goTo(helloView);
+				self.goTo(view);
 				
 				// Listen for end of view
-				self.listenTo(helloView, "end", function() {
+				self.listenTo(view, "end", function() {
 					self.router.navigate("conversation", {trigger: true});
 				});
-				
-				self.resetTimer();
 			});
 			
 			this.router.on("route:conversation", function() {
 				var conversationView = new ConversationView();
 				
 				self.goTo(conversationView);
-				
-				self.resetTimer();
 			});
 			
 			// Set default to be waiting
 			self.$el.addClass("spinner");
 			
-			// Start timer for refreshing
-			// self.timer();
-			
 			// Start tracking
 			Backbone.history.start({pushState: true});
 		},
 		events: {
-			"click .refresh": "refresh",
-			"timer": "timer",
-			"resetTimer": "resetTimer"
+			"click .refresh": "refresh"
 		},
 		refresh: function() {
-			// For resetting everything
 			window.location.replace("/");
 		},
-		timer: function() {
-			var self = this;
-			self.time = self.time || 0;
-			
-			if(self.time > 90) {
-				self.refresh();
-			} else {
-				self.time++;
-				
-				setTimeout(function() {
-					self.timer();
-				}, 1000);
-			}
-			
-			console.log(self.time);
-		},
-		resetTimer: function() {
-			this.time = 0;
-		},
 		goTo: function(view) {
-			// Transition from current view to new
 			var self = this;
 			var previous = this.currentView || null;
 			var next = view;
 			
 			// Hide the current view
 			if(previous) {
-				self.cssAnimate.call(previous.$el, "fadeOut", function () {
-					previous.remove();
+				TweenMax.to(previous.$el, .5, {
+					opacity: 0,
+					onComplete: function() {previous.remove();}
 				});
 			}
 			
-			// Add and hide
+			// Add , hide, and wait until loaded
+			self.currentView = next;
 			self.$el.append(next.el);
 			next.$el.hide();
-			self.currentView = next;
 			
-			self.listenTo(self.currentView, "loaded", function() {
-				self.showNext();
-			});
-			
-			// At this point, wait for next to trigger fadeIn
-		},
-		showNext: function() {
-			var self = this;
-			
-			// Wait for ready
-			self.currentView.$el.waitForImages(function() {
-				self.$el.removeClass("spinner").addClass("spinOut");
-				self.currentView.$el.show();
-				
-				self.cssAnimate.call(self.currentView.$el, "fadeIn", function() {
-					self.currentView.$el.removeClass("fadeIn");
+			self.listenTo(next, "loaded", function() {
+				// Wait for images and reveal
+				next.$el.waitForImages(function() {
+					self.$el.removeClass("spinner").addClass("spinOut");
+					next.$el.show();
+					TweenMax.from(next.$el, .5, {opacity: 0});
 				});
 			});
 		},
-		cssAnimate: function(cssClass, callback) {
-			// Add class for animating and executes callback
-			var $self = this;
-			
-			// Sets a new listener
-			var setAnimationListener = function() {
-				$self.one(
-					"webkitAnimationEnd oanimationend msAnimationEnd animationend",
-					function(e) {
-						// Check if event is significant
-						if(
-							e.originalEvent.animationName == cssClass &&
-							e.target === e.currentTarget 
-						) {
-							if (_.isFunction(callback)) {
-								callback();
-							}
-						} else {
-							setAnimationListener();
-						}
-					}
-				);
-			};
-			
-			$self.addClass(cssClass);
-			setAnimationListener();
-		}
 	});
 	
 	var IntroView = Backbone.View.extend({
@@ -178,12 +112,7 @@
 			
 			self.render();
 			
-			// Fire event when last animation ends
-			self.$el.one(
-				"webkitAnimationEnd oanimationend msAnimationEnd animationend",
-				"p",
-				function() {setTimeout(function() {self.trigger("end");}, 2000);}
-			);
+			setTimeout(function() {self.trigger("end");}, 7000);
 		},
 		render: function() {
 			var self = this;
@@ -229,10 +158,8 @@
 			// Child views
 			this.peopleView = new PeopleView();
 			this.$el.append(this.peopleView.el);
-			
 			this.questionsView = new QuestionsView();
 			this.$el.append(this.questionsView.el);
-			
 			this.responseView = new ResponseView();
 			this.$el.append(this.responseView.el);
 		},
@@ -250,7 +177,7 @@
 		events: {
 			"click .ask": "askAnotherQuestion",
 			"click .how, footer .close": "howToggler",
-			"requestTohideAllExceptSelectedQuestion": "checkIfOkToHideAllExceptSelectedQuestion",
+			"requestToRevealSelectedQuestion": "askAnotherQuestion",
 			"hidAllExceptSelectedQuestion": "prepareForResponse",
 			"revealedAllQuestions": "hideResponse",
 			"dataSourced": "getAndShowResponse",
@@ -259,8 +186,6 @@
 			"swiped": "swipeHandler",
 		},
 		panHandler: function(e) {
-			this.$el.trigger("resetTimer");
-			
 			// Prevent pan/swipe on response view
 			if(
 				e.originalEvent &&
@@ -282,19 +207,12 @@
 			}
 		},
 		howToggler: function() {
-			this.$el.trigger("resetTimer");
-			
 			var $know = this.$(".know");
 			
 			$know.toggleClass("off", $know.hasClass("on"));
 			$know.toggleClass("on", !$know.hasClass("on"));
 		},
 		askAnotherQuestion: function() {
-			this.$el.trigger("resetTimer");
-			
-			this.checkIfOkToHideAllExceptSelectedQuestion();
-		},
-		checkIfOkToHideAllExceptSelectedQuestion: function() {
 			// If ok to switch, mainly checking for running animations
 			if(this.responseView.activeAnimations.length === 0) {
 				this.questionsView.revealAllQuestions();
@@ -302,24 +220,20 @@
 		},
 		prepareForResponse: function() {
 			this.responseView.prepare(this.questionsView.selectedQuestion);
-			this.$(".lower").css("opacity", 1);
+			TweenMax.to(this.$(".lower"), .5, {opacity: 1});
 			
 			// This will start the chiclets loading
 			this.peopleView.selectedPerson.obtainData();
 		},
 		getAndShowResponse: function() {
-			this.$el.trigger("resetTimer");
-			
 			this.responseView.get(
 				this.peopleView.selectedPerson,
 				this.questionsView.selectedQuestion
 			);
 		},
 		hideResponse: function() {
-			this.$el.trigger("resetTimer");
-			
 			this.responseView.hide();
-			this.$(".lower").css("opacity", 0);
+			TweenMax.to(this.$(".lower"), .5, {opacity: 0});
 		}
 	});
 	
@@ -338,10 +252,8 @@
 					self.views.push(new QuestionView({model: model}));
 				});
 				
-				// Add in custom view
-				var customQuestionView = new CustomQuestionView({model: new QuestionModel()});
-				
-				self.views.push(customQuestionView);
+				// Add in custom question
+				self.views.push(new CustomQuestionView({model: new QuestionModel()}));
 				
 				self.render();
 			});
@@ -372,7 +284,7 @@
 				this.selectedQuestion = objects.selectedQuestion;
 				this.hideAllExceptSelectedQuestion();
 			} else {
-				this.$el.trigger("requestTohideAllExceptSelectedQuestion");
+				this.$el.trigger("requestToRevealSelectedQuestion");
 			}
 		},
 		hideAllExceptSelectedQuestion: function() {
@@ -384,25 +296,21 @@
 			_.each(this.views, function(view) {
 				if(view == self.selectedQuestion) {
 					// Save current offset
-					var currentOffset = self.selectedQuestion.$el.offset();
+					var currentOffset = view.$el.offset();
 					
-					self.selectedQuestion.$el.css("position", "absolute");
+					view.$el.css("position", "absolute");
 					
 					// Save desired offset
-					var desiredOffset = self.selectedQuestion.$el.offset();
+					var desiredOffset = view.$el.offset();
 					
 					// Reset positioning and move question
-					self.selectedQuestion.$el.css({
+					TweenMax.to(view.$el, .5, {
 						position: "relative",
-						transition: ".5s",
 						top: desiredOffset.top - currentOffset.top
 					});
 				} else {
 					// Hide all other questions
-					window.app.cssAnimate.call(view.$el, "fadeOut", function () {
-						view.$el.css("visibility", "hidden");
-						view.$el.removeClass("fadeOut");
-					});
+					TweenMax.to(view.$el, .5, {autoAlpha: 0});
 				}
 			});
 		},
@@ -420,31 +328,22 @@
 					}
 					
 					if(view == self.selectedQuestion) {
+						self.selectedQuestion = null;
+						
 						// Animate back to position, if needed
-						if(!self.selectedQuestion.$el.is(":first-child")) {
-							// Catch next animation and reset duration
-							self.selectedQuestion.$el.one("transitionend", function() {
-								if(view instanceof CustomQuestionView) {
-									self.regenerateCustomQuestion();
+						if(!view.$el.is(":first-child")) {
+							TweenMax.to(view.$el, .5, {
+								top: 0,
+								onComplete: function() {
+									if(view instanceof CustomQuestionView) {
+										self.regenerateCustomQuestion();
+									}
 								}
-								
-								self.selectedQuestion.$el.css("transition", 0);
-								self.selectedQuestion = null;
 							});
-
-							// Move question
-							self.selectedQuestion.$el.css("top", 0);
-						} else {
-							self.selectedQuestion.$el.css("transition", 0);
-							self.selectedQuestion = null;
 						}
 					} else {
 						// Reveal other questions
-						view.$el.css("visibility", "visible");
-						
-						window.app.cssAnimate.call(view.$el, "fadeIn", function () {
-							view.$el.removeClass("fadeIn");
-						});
+						TweenMax.to(view.$el, .5, {autoAlpha: 1});
 					}
 				});
 			}
@@ -523,8 +422,6 @@
 			"keyup input": "keyHandler"
 		},
 		router: function(e) {
-			this.$el.trigger("resetTimer");
-			
 			if($(e.target).is(this.button) && this.input.val() !== "") {
 				this.selected();
 			} else if(this.status == "selected") {
@@ -548,8 +445,7 @@
 			
 			// Animate height if not already done
 			if(!self.$el.hasClass("focused")) {
-				self.$el.addClass("focused");
-				self.$el.css("transition", ".5s");
+				self.$el.addClass("focused").css("transition", ".5s");
 				
 				// Remove transition
 				self.$el.one("transitionend", function() {
@@ -587,8 +483,10 @@
 			var self = this;
 			
 			self.$el.removeClass("focused");
-			window.app.cssAnimate.call(self.button, "fadeOut", function () {
-				self.button.removeClass("fadeOut").css("display", "none");
+			
+			TweenMax.to(self.button, .5, {
+				opacity: 0,
+				display: "none"
 			});
 		}
 	});
@@ -638,13 +536,14 @@
 			
 			self.activeAnimations.push(cssAnimationClass);
 			
-			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
-				self.$el.removeClass(cssAnimationClass);
-				
-				// Remove from list of animations
-				var index = self.activeAnimations.indexOf(cssAnimationClass);
-				if (index > -1) {
-					self.activeAnimations.splice(index, 1);
+			TweenMax.fromTo(self.$el, .5, {opacity: 0}, {
+				opacity: 1,
+				onComplete: function() {
+					// Remove from list of animations
+					var index = self.activeAnimations.indexOf(cssAnimationClass);
+					if (index > -1) {
+						self.activeAnimations.splice(index, 1);
+					}
 				}
 			});
 		},
@@ -661,7 +560,7 @@
 			
 			// Get the answer
 			$.ajax({
-				url: "http://"+window.location.hostname+":3000/ask",
+				url: "http://" + window.location.hostname + ":3000/ask",
 				data: requestData,
 				dataType: "jsonp",
 				timeout: 15000
@@ -673,26 +572,12 @@
 			var self = this;
 			
 			// Gracefully hide spinner
-			self.$el.removeClass("spinner");
-			
-			// Get ready to animate
-			var cssAnimationClass = "spinOut";
-			
-			self.activeAnimations.push(cssAnimationClass);
-			window.app.cssAnimate.call(self.$el, cssAnimationClass, function () {
-				// Remove from list of animations
-				var index = self.activeAnimations.indexOf(cssAnimationClass);
-				if (index > -1) {
-					self.activeAnimations.splice(index, 1);
-				}
-			});
-			
+			self.$el.removeClass("spinner").addClass("spinOut");
 			
 			var showError = function(error) {
 				self.$el.append("<main><p>Sorry, there was an error: " + error + "</p></main>");
 			};
 			
-			console.log(data);
 			if(textStatus == "success") {
 				if(data.answer.answers[0]) {
 					self.$el.append("<main>" + data.answer.answers[0].formattedText + "</main>");
@@ -804,9 +689,12 @@
 		hide: function() {
 			var self = this;
 			
-			window.app.cssAnimate.call(self.$el, "fadeOut", function () {
-				self.$el.removeClass("fadeOut").css("display", "none");
-				self.setToLoading();
+			TweenMax.fromTo(self.$el, .5, {opacity: 1}, {
+				opacity: 0,
+				display: "none",
+				onComplete: function() {
+					self.setToLoading();
+				}
 			});
 		}
 	});
@@ -839,6 +727,9 @@
 			// Add the others around
 			this.pad();
 			
+			// Set ending position
+			this.positionLeft = this.$el.position().left;
+
 			return self;
 		},
 		setSelectedPerson: function(view) {
@@ -897,29 +788,20 @@
 		panHandler: function(e) {
 			var self = this;
 
-			// Fix an issue with hammer not triggering ends
 			if(e.originalEvent.gesture.isFinal) {
-				e.type = "panend";
-			}
-			
-			switch(e.type) {
-				case "panend":
-					// Fire event to parent uf swipe, otherwise snap back
-					if(e.originalEvent.gesture.deltaX < -self.swipeThreshold || e.originalEvent.gesture.deltaX > self.swipeThreshold) {
-						self.$el.trigger("swiped", {event: e});
-					} else {
-						self.$el.animate({left: self.positionLeft}, 100, "linear");
-					}
-					break;
-				case "panstart":
-					// Save initial position then pan
-					self.positionLeft = self.$el.position().left;
-					/* falls through */
-				default:
-					// Find new position and move
-					var newPositionLeft = self.positionLeft + e.originalEvent.gesture.deltaX;
-					self.$el.css("left", newPositionLeft);
-					break;
+				// Fire event to parent if swipe, otherwise snap back
+				if(
+					e.originalEvent.gesture.deltaX < -self.swipeThreshold ||
+					e.originalEvent.gesture.deltaX > self.swipeThreshold)
+				{
+					self.$el.trigger("swiped", {event: e});
+				} else {
+					TweenMax.to(self.$el, .1, {left: self.positionLeft});
+				}
+			} else {
+				// Find new position and move
+				var left = self.positionLeft + e.originalEvent.gesture.deltaX;
+				self.$el.css({left: left});
 			}
 		},
 		swipeHandler: function(e) {
@@ -932,40 +814,46 @@
 				self.setSelectedPerson(self.views[currentIndex + 1]);
 				
 				// Animate to correct position
-				self.$el.animate({left: self.positionLeft - 640}, 100, "linear", function() {
-					// Remove all aspects of edge view
-					_.first(self.views).remove();
-					self.views.shift();
-					
-					// Add in new
-					self.pad();
-					
-					// Reset margins
-					self.$("> li:first-child").css({marginLeft: 0});
-					self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
-					
-					// Adjust positioning
-					self.$el.css({left: self.positionLeft});
+				TweenMax.to(self.$el, .1, {
+					left: self.positionLeft - 640,
+					onComplete: function() {
+						// Remove all aspects of edge view
+						_.first(self.views).remove();
+						self.views.shift();
+						
+						// Add in new
+						self.pad();
+						
+						// Reset margins
+						self.$("> li:first-child").css({marginLeft: 0});
+						self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
+						
+						// Adjust positioning
+						self.$el.css({left: self.positionLeft});
+					}
 				});
 			} else {
 				// Set to back one
 				self.setSelectedPerson(self.views[currentIndex - 1]);
 				
 				// Animate to correct position
-				self.$el.animate({left: self.positionLeft + 640}, 100, "linear", function() {
-					// Remove all aspects of edge view
-					_.last(self.views).remove();
-					self.views.pop();
-					
-					// Add in new
-					self.pad();
-					
-					// Reset margins
-					self.$("> li:first-child").css({marginLeft: 0});
-					self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
-					
-					// Adjust positioning
-					self.$el.css({left: self.positionLeft});
+				TweenMax.to(self.$el, .1, {
+					left: self.positionLeft + 640,
+					onComplete: function() {
+							// Remove all aspects of edge view
+						_.last(self.views).remove();
+						self.views.pop();
+						
+						// Add in new
+						self.pad();
+						
+						// Reset margins
+						self.$("> li:first-child").css({marginLeft: 0});
+						self.$("> li:nth-child(n + 2)").css({marginLeft: "40px"});
+						
+						// Adjust positioning
+						self.$el.css({left: self.positionLeft});
+					}
 				});
 			}
 		}
@@ -1007,8 +895,6 @@
 			self.$el.trigger("dataSourced");
 		},
 		popupHandler: function(e) {
-			this.$el.trigger("resetTimer");
-			
 			// Check if current person being clicked on
 			if(this.selected) {
 				e.stopImmediatePropagation();
@@ -1016,23 +902,17 @@
 				var $newPopup = $(e.target).siblings(".popup");
 				
 				if(!self.$popup) {
-					// Check if still animating from a previous close
-					if($newPopup.prop("data-animating") != "true") {
-						this.popupShower($newPopup);
-					}
+					this.popupShower($newPopup);
 				} else {
-					// Check if still animating other popup
-					if(self.$popup.prop("data-animating") != "true") {
-						var isSameAsCurrent = self.$popup.is($newPopup);
-	
-						// Hide current popup
-						this.popupRemover(self.$popup);
-						
-						if(!isSameAsCurrent) {
-							// Show new
-							self.$popup = $newPopup;
-							this.popupShower(self.$popup);
-						}
+					var isSameAsCurrent = self.$popup.is($newPopup);
+
+					// Hide current popup
+					this.popupRemover(self.$popup);
+					
+					if(!isSameAsCurrent) {
+						// Show new
+						self.$popup = $newPopup;
+						this.popupShower(self.$popup);
 					}
 				}
 			}
@@ -1040,14 +920,14 @@
 		popupRemover: function($p) {
 			this.$popup = null;
 			
-			$p.prop("data-animating", "true");
-			
-			window.app.cssAnimate.call($p, "fadeOut", function () {
-				$p.css("display", "none");
-				$p.removeClass("fadeOut");
-				$p.prop("data-animating", "false");
+			// Fade and hide popup
+			TweenMax.to($p, .5, {
+				opacity: 0,
+				display: "none",
+				overwrite: "all"
 			});
-
+			
+			// Turn off listener
 			$("body").off();
 		},
 		popupShower: function($p) {
@@ -1055,16 +935,14 @@
 			
 			self.$popup = $p;
 			
-			$p.css("display", "block");
-			$p.prop("data-animating", "true");
+			// Show and fade in
+			TweenMax.fromTo($p, .5,
+				{opacity: 0, display: "block"},
+				{opacity: 1, overwrite: "all"}
+			);
 			
-			window.app.cssAnimate.call($p, "fadeIn", function () {
-				$p.removeClass("fadeIn");
-				$p.css("display", "block");
-				$p.prop("data-animating", "false");
-			});
-			
-			$("body").one("click", function() {
+			// Listen for anything to turn off
+			$("body").one("touchstart click", function() {
 				self.popupRemover($p);
 			});
 		}
@@ -1086,6 +964,24 @@
 	//	Initiation
 	
 	$(window).load(function() {
+		// Timer code
+		var refreshTime;
+		var refreshTimer = function() {
+			refreshTime = refreshTime || 0;
+			
+			if(refreshTime > 90) {
+				window.location.replace("/");
+			} else {
+				refreshTime++;
+				
+				setTimeout(function() {
+					refreshTimer();
+				}, 1000);
+			}
+		};
+		
+		// refreshTimer();
+		
 		// Fast clicks for touch users
 		FastClick.attach(document.body);
 		
@@ -1095,6 +991,9 @@
 		}
 		
 		$(document).on("touchstart", function(e) {
+			// Reset time
+			time = 0;
+			
 			var $scroller;
 			var $target = $(e.target);
 			
