@@ -1,3 +1,5 @@
+/*jshint -W008 */
+
 (function($) {
 	// Mustache style templating
 	_.templateSettings = {
@@ -965,67 +967,27 @@
 	
 	$(window).load(function() {
 		// Timer code
-		var refreshTime;
+		var refreshTime = 0;
 		var refreshTimer = function() {
-			refreshTime = refreshTime || 0;
-			
 			if(refreshTime > 90) {
 				window.location.replace("/");
 			} else {
 				refreshTime++;
-				
-				setTimeout(function() {
-					refreshTimer();
-				}, 1000);
+				setTimeout(function() {refreshTimer();}, 1000);
 			}
 		};
+//		refreshTimer();
 		
-		// refreshTimer();
+		$(document).on("touchstart mousedown", function(e) {
+			// Prevent scrolling on any touches to screen
+			$(this).preventScrolling(e);
+			
+			// Reset time
+			refreshTime = 0;
+		});
 		
 		// Fast clicks for touch users
 		FastClick.attach(document.body);
-		
-		// Detects if element has scroll bar
-		$.fn.hasScrollBar = function() {
-			return this.get(0).scrollHeight > this.outerHeight();
-		}
-		
-		$(document).on("touchstart", function(e) {
-			// Reset time
-			time = 0;
-			
-			var $scroller;
-			var $target = $(e.target);
-			
-			// Get which element could have scroll bars
-			if($target.hasScrollBar()) {
-				$scroller = $target;
-			} else {
-				$scroller = $target
-					.parents()
-					.filter(function() {
-						return $(this).hasScrollBar();
-					})
-					.first()
-				;
-			}
-			
-			// Prevent if nothing is scrollable
-			if(!$scroller.length) {
-				e.preventDefault();
-			} else {
-				var top = $scroller[0].scrollTop;
-				var totalScroll = $scroller[0].scrollHeight;
-				var currentScroll = top + $scroller[0].offsetHeight;
-				
-				// If at container edge, add a pixel to prevent outer scrolling
-				if(top === 0) {
-					$scroller[0].scrollTop = 1;
-				} else if(currentScroll === totalScroll) {
-					$scroller[0].scrollTop = top - 1;
-				}
-			}
-		});
 				
 		// Pretty much the controller
 		window.app = new AppView();
