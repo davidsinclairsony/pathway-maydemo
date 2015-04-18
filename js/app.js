@@ -498,8 +498,14 @@
 	var ResponseView = Backbone.View.extend({
 		className: "response",
 		initialize: function() {
-			this.render();
-			this.setToLoading();
+			var self = this;
+			
+			// Get stored responses and setup
+			$.getJSON("/js/json/answers.js", function(data) {
+				self.answers = data;
+				self.render();
+				self.setToLoading();
+			});
 		},
 		render: function() {
 			this.setToLoading();
@@ -539,14 +545,38 @@
 		},
 		get: function(person, question) {
 			var self = this;
+			var questionID = question.model.get("id");
+			var personID = person.model.get("id");
 			
 			// Check if stored response
 			if(question.model.get("id") < 4) {
+				var html = "<p>Sorry, there was an error.</p>";
 				
+				switch(question.model.get("id")) {
+					case 1:
+						html =
+							person.model.get("name") +
+							self.answers[0].parts[0] +
+							"500" +
+							self.answers[0].parts[1] +
+							person.model.get("goals") +
+							self.answers[0].parts[2] +
+							self.answers[0].responses[Math.floor(Math.random() * 6)]
+						;
+						break;
+					case 2:
+						html = 0;
+						break;
+					case 3:
+						html = self.answers[2][personID - 1];
+						break;
+				}
+				
+				setTimeout(function() {self.show(html);}, 3);
 			} else {
 				// To be sent to API
 				var requestData = {
-					"userId": 1,//person.model.get("id"),
+					"userId": 1, // personID,
 					"question": {
 						"questionText": question.model.get("text")
 					}
@@ -558,12 +588,12 @@
 					data: requestData,
 					dataType: "jsonp",
 					timeout: 15000
-				}).always(function(data, textStatus, jqXHR) {
-					self.show(data, textStatus, jqXHR);
+				}).always(function(data, status, jqxhr) {
+					self.show(data, status);
 				});
 			}
 		},
-		show: function(data, textStatus, jqXHR) {
+		show: function(data, status) {
 			var self = this;
 			
 			// Gracefully hide spinner
@@ -573,14 +603,18 @@
 				self.$el.append("<main><p>Sorry, there was an error: " + error + "</p></main>");
 			};
 			
-			if(textStatus == "success") {
-				if(data.answer.answers[0]) {
-					self.$el.append("<main>" + data.answer.answers[0].formattedText + "</main>");
+			if(status) {
+				if(status == "success") {
+					if(data.answer.answers[0]) {
+						self.$el.append("<main>" + data.answer.answers[0].formattedText + "</main>");
+					} else {
+						showError("no answer");
+					}
 				} else {
-					showError("no answer");
+					showError(status);
 				}
 			} else {
-				showError(textStatus);
+				self.$el.append("<main>" + data + "</main>");
 			}
 			
 			// Add in all text

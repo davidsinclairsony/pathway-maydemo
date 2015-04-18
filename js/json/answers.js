@@ -22,24 +22,24 @@
 					"title": "Ollie's Lebanese Cuisine",
 					"description": "Low carb choices: Shish Shrimp Kabob, Veggie Combo, Hummus with Shawarma",
 					"coordinates": {
-						"lattitude": "42.328045",
-						"longitude": "-83.203357"
+						"lattitude": 42.328045,
+						"longitude": -83.203357
 					}
 				},
 				{
 					"title": "Better Health Market",
 					"description": "Low carb choices: Vegetarian Chili Mix, Advantage Nutrition Dark Chocolate Bars, Low Carb Tortillas",
 					"coordinates": {
-						"lattitude": "42.540210",
-						"longitude": "-83.028355"
+						"lattitude": 42.540210,
+						"longitude": -83.028355
 					}
 				},
 				{
 					"title": "Harvard Grill",
 					"description": "Low carb choices: Greek salad, Tilapia, Bowl of Chili",
 					"coordinates": {
-						"lattitude": "42.394155",
-						"longitude": "-82.923453"
+						"lattitude": 42.394155,
+						"longitude": -82.923453
 					}
 				}
 			]
@@ -48,27 +48,27 @@
 			"text": "Several restaurants have foods that match your balanced diet:",
 			"locations": [
 				{
-					"title": "",
-					"description": "",
+					"title": "Kohinoor Dhaba Fine Indian Cuisine",
+					"description": "Low cholesterol choices: Tomato soup, Lamb Biryani, Chicken Tandoori",
 					"coordinates": {
-						"lattitude": 0,
-						"longitude": 0
+						"lattitude": 38.847741,
+						"longitude": -77.053857
 					}
 				},
 				{
-					"title": "",
-					"description": "",
+					"title": "Good Fortune Chinese Restaurant",
+					"description": "Low cholesterol choices: Veggie Shrimp Broccoli, Combo Fried Rice, Steamed Szechuan Chicken",
 					"coordinates": {
-						"lattitude": 0,
-						"longitude": 0
+						"lattitude": 38.861973,
+						"longitude": -77.090384
 					}
 				},
 				{
-					"title": "",
-					"description": "",
+					"title": "The Liberty Tavern",
+					"description": "Low cholesterol choices: Roasted Sea Scallops, Tavern Salad, Fresh Fruit Platter",
 					"coordinates": {
-						"lattitude": 0,
-						"longitude": 0
+						"lattitude": 38.886373,
+						"longitude": -77.096883
 					}
 				}
 			]
@@ -77,27 +77,27 @@
 			"text": "Here are some restaurants have foods that match your low fat diet:",
 			"locations": [
 				{
-					"title": "",
-					"description": "",
+					"title": "Morton's The Steakhouse",
+					"description": "High protein choices: Prime Strip Steak, Chicken Bianco, Lyonnaise Potatoes",
 					"coordinates": {
-						"lattitude": 0,
-						"longitude": 0
+						"lattitude": 38.578855,
+						"longitude": -121.499093
 					}
 				},
 				{
-					"title": "",
-					"description": "",
+					"title": "El Forastero Mexican Food",
+					"description": "High protein choices: Carne Asada Combination Plate, Chorizo Burrito, Chicken Tacos",
 					"coordinates": {
-						"lattitude": 0,
-						"longitude": 0
+						"lattitude": 38.556236,
+						"longitude": -121.369854
 					}
 				},
 				{
-					"title": "",
-					"description": "",
+					"title": "Creekside Cafe",
+					"description": "High protein choices: Cheeseburger, BBQ Beef Sandwich Combo, Chicken Panini",
 					"coordinates": {
-						"lattitude": 0,
-						"longitude": 0
+						"lattitude": 38.609076,
+						"longitude": -121.499715
 					}
 				}
 			]
