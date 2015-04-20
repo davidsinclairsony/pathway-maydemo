@@ -16,7 +16,7 @@
 	},
 	[
 		{
-			"text": "The following restaurants have foods that match your low carb diet:",
+			"html": "<p>The following restaurants have foods that match your low carb diet:</p>",
 			"locations": [
 				{
 					"title": "Ollie's Lebanese Cuisine",
@@ -45,7 +45,7 @@
 			]
 		},
 		{
-			"text": "Several restaurants have foods that match your balanced diet:",
+			"html": "<p>Several restaurants have foods that match your balanced diet:</p>",
 			"locations": [
 				{
 					"title": "Kohinoor Dhaba Fine Indian Cuisine",
@@ -74,7 +74,7 @@
 			]
 		},
 		{
-			"text": "Here are some restaurants have foods that match your low fat diet:",
+			"html": "<p>Here are some restaurants have foods that match your low fat diet:</p>",
 			"locations": [
 				{
 					"title": "Morton's The Steakhouse",

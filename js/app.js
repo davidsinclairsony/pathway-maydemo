@@ -44,7 +44,7 @@
 				self.goTo(view);
 				
 				// Listen for end of view
-				self.listenTo(view, "end", function() {
+				self.listenToOnce(view, "end", function() {
 					self.router.navigate("hello", {trigger: true});
 				});
 			});
@@ -55,7 +55,7 @@
 				self.goTo(view);
 				
 				// Listen for end of view
-				self.listenTo(view, "end", function() {
+				self.listenToOnce(view, "end", function() {
 					self.router.navigate("conversation", {trigger: true});
 				});
 			});
@@ -96,7 +96,7 @@
 			self.$el.append(next.el);
 			next.$el.hide();
 			
-			self.listenTo(next, "loaded", function() {
+			self.listenToOnce(next, "loaded", function() {
 				// Wait for images and reveal
 				next.$el.waitForImages(function() {
 					self.$el.removeClass("spinner").addClass("spinOut");
@@ -225,6 +225,21 @@
 			this.peopleView.selectedPerson.obtainData();
 		},
 		getAndShowResponse: function() {
+			// Listen for when the answer is ready to display
+			this.listenToOnce(this.responseView, "answerReady", function() {
+				// Check if still the current question and person
+				if(
+					!this.responseView.$el.html() &&
+					this.peopleView.selectedPerson &&
+					this.questionsView.selectedQuestion &&
+					this.peopleView.selectedPerson.model.get("id") == this.responseView.answer.personID &&
+					this.questionsView.selectedQuestion.model.get("id") == this.responseView.answer.questionID
+				) {
+					this.responseView.setToLoading();
+					this.responseView.show();
+				}
+			});
+			
 			this.responseView.get(
 				this.peopleView.selectedPerson,
 				this.questionsView.selectedQuestion
@@ -545,34 +560,53 @@
 		},
 		get: function(person, question) {
 			var self = this;
-			var questionID = question.model.get("id");
-			var personID = person.model.get("id");
+			self.answer = {};
+			self.answer.personID = person.model.get("id");
+			self.answer.questionID = question.model.get("id");
 			
 			// Check if stored response
-			if(question.model.get("id") < 4) {
-				var html = "<p>Sorry, there was an error.</p>";
+			if(self.answer.questionID < 4) {
+				var html;
 				
-				switch(question.model.get("id")) {
+				switch(self.answer.questionID) {
 					case 1:
+						// Get fitness data about person
+						var calories = 500;
+						
 						html =
 							person.model.get("name") +
 							self.answers[0].parts[0] +
-							"500" +
+							calories +
 							self.answers[0].parts[1] +
 							person.model.get("goals") +
 							self.answers[0].parts[2] +
 							self.answers[0].responses[Math.floor(Math.random() * 6)]
 						;
+						self.answer.html = html;
+						setTimeout(function() {self.trigger("answerReady");}, 2000);
 						break;
 					case 2:
-						html = 0;
+						self.answer.html = self.answers[1][self.answer.personID - 1].html;
+						
+						var locations = self.answers[1][self.answer.personID - 1].locations;
+						
+						// Add location names to html
+						self.answer.html += "<ul>";
+						
+						for(var i = 0; i < locations.length; i++) {
+							self.answer.html += "<li>" + locations[i].title + "</li>";
+						}
+						
+						self.answer.html += "</ul>";
+						
+						self.answer.locations = locations;
+						setTimeout(function() {self.trigger("answerReady");}, 3000);
 						break;
 					case 3:
-						html = self.answers[2][personID - 1];
+						self.answer.html = self.answers[2][self.answer.personID - 1];
+						setTimeout(function() {self.trigger("answerReady");}, 3000);
 						break;
 				}
-				
-				setTimeout(function() {self.show(html);}, 3);
 			} else {
 				// To be sent to API
 				var requestData = {
@@ -584,65 +618,44 @@
 				
 				// Get the answer
 				$.ajax({
-					url: "http://" + window.location.host + ":3000/ask",
+					// url: "http://" + window.location.host + ":3000/ask",
+					url: "http://atldev.pathway.com:3000/ask",
 					data: requestData,
 					dataType: "jsonp",
 					timeout: 15000
 				}).always(function(data, status, jqxhr) {
-					self.show(data, status);
+					var createErrorMessage = function(error) {
+						self.answer.html = "<p>Sorry, there was an error: " + error + "</p>";
+					};
+					
+					if(status == "success") {
+						if(data.answer.answers[0]) {
+							self.answer.html = data.answer.answers[0].formattedText;
+						} else {
+							createErrorMessage("no answer");
+						}
+					} else {
+						createErrorMessage(status);
+					}
+					
+					self.trigger("answerReady");
 				});
 			}
 		},
-		show: function(data, status) {
+		show: function() {
 			var self = this;
 			
 			// Gracefully hide spinner
 			self.$el.removeClass("spinner").addClass("spinOut");
 			
-			var showError = function(error) {
-				self.$el.append("<main><p>Sorry, there was an error: " + error + "</p></main>");
-			};
-			
-			if(status) {
-				if(status == "success") {
-					if(data.answer.answers[0]) {
-						self.$el.append("<main>" + data.answer.answers[0].formattedText + "</main>");
-					} else {
-						showError("no answer");
-					}
-				} else {
-					showError(status);
-				}
+			if(self.answer.html) {
+				self.$el.append("<main>" + self.answer.html + "</main>");
 			} else {
-				self.$el.append("<main>" + data + "</main>");
+				self.$el.append("<main><p>Sorry, please try again later.</p></main>");
 			}
 			
-			// Add in all text
-/*
-			if(data.text) {
-				var container = document.createDocumentFragment();
-			
-				container.appendChild(document.createElement("main"));
-				
-				_.each(data.text, function(text) {
-					var p = document.createElement("p");
-					p.innerHTML = text;
-					
-					container.childNodes[0].appendChild(p);
-				});
-				
-				self.$el.append(container);
-				
-				// This div is used for fade effect on scrolling text
-				var overlay = document.createElement("div");
-				overlay.className = "overlay";
-				self.$el.append(overlay);
-			} else {
-				self.$el.append("<main><p>Sorry, data is unavailable at this time.</p></main>");
-			}
-
 			// Show map if locations are available
-			if(data.locations) {
+			if(self.answer.locations) {
 				self.$el.addClass("map");
 				self.$el.append("<div class='container'><div id='map'></div></div>");
 				
@@ -674,21 +687,21 @@
 					var infowindow = new google.maps.InfoWindow();  
 					
 					// Add markers
-					for (i = 0; i < data.locations.length; i++) {
+					for (i = 0; i < self.answer.locations.length; i++) {
 						// Format title
 						var content = "";
 						
-						if(data.locations[i].title) {
-							content = "<div class='title'>" + data.locations[i].title + "</div>";
+						if(self.answer.locations[i].title) {
+							content = "<div class='title'>" + self.answer.locations[i].title + "</div>";
 						}
-						if(data.locations[i].description) {
-							content += "<div class='description'>" + data.locations[i].description + "</div>";
+						if(self.answer.locations[i].description) {
+							content += "<div class='description'>" + self.answer.locations[i].description + "</div>";
 						}
 						
 						var marker = new google.maps.Marker({
 							position: new google.maps.LatLng(
-								data.locations[i].coordinates.lattitude,
-								data.locations[i].coordinates.longitude
+								self.answer.locations[i].coordinates.lattitude,
+								self.answer.locations[i].coordinates.longitude
 							),
 							map: map,
 							title: content,
@@ -709,7 +722,7 @@
 					map.fitBounds(bounds);
 				});
 			}
-*/
+
 			// Add in thumbs up and down
 			$.get("/templates/conversation/response/footer.html", function(data) {
 				self.$el.append(data);
