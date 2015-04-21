@@ -225,17 +225,18 @@
 			this.peopleView.selectedPerson.obtainData();
 		},
 		getAndShowResponse: function() {
+			// Clear previous listens
+			this.stopListening(this.responseView, "answerReady");
+			
 			// Listen for when the answer is ready to display
 			this.listenToOnce(this.responseView, "answerReady", function() {
 				// Check if still the current question and person
 				if(
-					!this.responseView.$el.html() &&
 					this.peopleView.selectedPerson &&
 					this.questionsView.selectedQuestion &&
-					this.peopleView.selectedPerson.model.get("id") == this.responseView.answer.personID &&
+					this.peopleView.selectedPerson.cid == this.responseView.answer.cid &&
 					this.questionsView.selectedQuestion.model.get("id") == this.responseView.answer.questionID
 				) {
-					this.responseView.setToLoading();
 					this.responseView.show();
 				}
 			});
@@ -319,9 +320,10 @@
 					// Save desired offset
 					var desiredOffset = view.$el.offset();
 					
+					view.$el.css("position", "relative");
+					
 					// Reset positioning and move question
 					TweenMax.to(view.$el, .5, {
-						position: "relative",
 						top: desiredOffset.top - currentOffset.top
 					});
 				} else {
@@ -560,30 +562,62 @@
 		},
 		get: function(person, question) {
 			var self = this;
+			var requestData;
+			// var url = "http://" + window.location.host + "/ask";
+			 var url = "http://atldev.pathway.com:3000/ask";
+			// var url = "http://ome-demo.pathway.com:8080/ask";
 			self.answer = {};
+			self.answer.cid = person.cid;
 			self.answer.personID = person.model.get("id");
 			self.answer.questionID = question.model.get("id");
+			self.answer.html = "";
+			
+			// Clear old timeouts and requests
+			if(self.jqxhr) {
+				self.jqxhr.abort();
+			}
+			if(self.timeout) {
+				clearTimeout(self.timeout);
+			}
 			
 			// Check if stored response
 			if(self.answer.questionID < 4) {
-				var html;
+				var html = "";
 				
 				switch(self.answer.questionID) {
 					case 1:
 						// Get fitness data about person
-						var calories = 500;
+						requestData = {
+							"userId": 1, // self.answer.personID,
+							"fitness": "true"
+						};
 						
-						html =
-							person.model.get("name") +
-							self.answers[0].parts[0] +
-							calories +
-							self.answers[0].parts[1] +
-							person.model.get("goals") +
-							self.answers[0].parts[2] +
-							self.answers[0].responses[Math.floor(Math.random() * 6)]
-						;
-						self.answer.html = html;
-						setTimeout(function() {self.trigger("answerReady");}, 2000);
+						// Get the answer
+						self.jqxhr = $.ajax({
+							url: url,
+							data: requestData,
+							dataType: "jsonp",
+							timeout: 15000
+						}).always(function(data, status, jqxhr) {
+							if(status == "success" && data.fitness.code === 0) {
+								html =
+									person.model.get("name") +
+									self.answers[0].parts[0] +
+									data.fitness.summary.caloriesOut +
+									self.answers[0].parts[1] +
+									person.model.get("goals") +
+									self.answers[0].parts[2] +
+									self.answers[0].responses[Math.floor(Math.random() * 6)]
+								;
+								self.answer.html = html;
+							} else {
+								self.answer.html = "<p>Sorry, please try again.</p>";
+							}
+
+							self.timeout = setTimeout(function() {self.trigger("answerReady");}, 2500);
+						});
+						
+						
 						break;
 					case 2:
 						self.answer.html = self.answers[1][self.answer.personID - 1].html;
@@ -600,42 +634,37 @@
 						self.answer.html += "</ul>";
 						
 						self.answer.locations = locations;
-						setTimeout(function() {self.trigger("answerReady");}, 3000);
+						self.timeout = setTimeout(function() {self.trigger("answerReady");}, 3000);
 						break;
 					case 3:
 						self.answer.html = self.answers[2][self.answer.personID - 1];
-						setTimeout(function() {self.trigger("answerReady");}, 3000);
+						self.timeout = setTimeout(function() {self.trigger("answerReady");}, 3000);
 						break;
 				}
 			} else {
 				// To be sent to API
-				var requestData = {
-					"userId": 1, // personID,
+				requestData = {
+					"userId": 1, // self.answer.personID,
 					"question": {
 						"questionText": question.model.get("text")
 					}
 				};
 				
 				// Get the answer
-				$.ajax({
-					// url: "http://" + window.location.host + ":3000/ask",
-					url: "http://atldev.pathway.com:3000/ask",
+				self.jqxhr = $.ajax({
+					url: url,
 					data: requestData,
 					dataType: "jsonp",
 					timeout: 15000
 				}).always(function(data, status, jqxhr) {
-					var createErrorMessage = function(error) {
-						self.answer.html = "<p>Sorry, there was an error: " + error + "</p>";
-					};
-					
-					if(status == "success") {
-						if(data.answer.answers[0]) {
-							self.answer.html = data.answer.answers[0].formattedText;
-						} else {
-							createErrorMessage("no answer");
+					if(status == "success" && data.answer.answers[0]) {
+						if(self.answer.questionID == 5 && self.answer.personID == 2) {
+							self.answer.html += self.answers[3];
 						}
+						
+						self.answer.html += data.answer.answers[0].formattedText;
 					} else {
-						createErrorMessage(status);
+						self.answer.html = "<p>Sorry, please try again.</p>";
 					}
 					
 					self.trigger("answerReady");
@@ -644,7 +673,7 @@
 		},
 		show: function() {
 			var self = this;
-			
+
 			// Gracefully hide spinner
 			self.$el.removeClass("spinner").addClass("spinOut");
 			
@@ -770,7 +799,7 @@
 			this.pad();
 			
 			// Set ending position
-			this.positionLeft = this.$el.position().left;
+			this.positionLeft = -1196;
 
 			return self;
 		},

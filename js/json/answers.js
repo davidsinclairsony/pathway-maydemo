@@ -16,7 +16,7 @@
 	},
 	[
 		{
-			"html": "<p>The following restaurants have foods that match your low carb diet:</p>",
+			"html": "<p>These restaurants have foods that match your low carb diet:</p>",
 			"locations": [
 				{
 					"title": "Ollie's Lebanese Cuisine",
@@ -74,7 +74,7 @@
 			]
 		},
 		{
-			"html": "<p>Here are some restaurants have foods that match your low fat diet:</p>",
+			"html": "<p>These locations have foods that match your low fat diet:</p>",
 			"locations": [
 				{
 					"title": "Morton's The Steakhouse",
@@ -108,5 +108,5 @@
 		"<p>Jennifer, with your low carb diet, lean protein should constitute 30% of your daily diet, Healthy Fats should constitute 30% of your diet, and Complex Carbohydrates should cover the remaining 40%. You have a gene variant (MCM6) for lactose intolerance so make sure to limit your intake of milk and foods made with high fat dairy and cream.</p><p>Your super foods include:</p><p>Extra virgin olive oil, Olives, Spinach, Almonds, Canola oil, Broccoli, Eggs, Avocado, Chicken breast, Lentils, Whole grains, Oranges, Fish, Soy milk, Leafy greens</p>",
 		"<p>Ruben, your genetics show a the best response from a low carb diet, low in saturated and trans fats, and high in mono- and poly-unsaturated fats to decrease risks for high LDL cholesterol and heart disease. Include foods high in B vitamins, folate, and vitamins D and E to decrease risks of nutrient deficiencies.</p><p>Here are some guidelines for your low carb diet:</p> <ul> <li>Choose organic seasonal foods whenever possible</li> <li>Choose vegetables from a rainbow of colors</li> <li>Focus on foods that have been minimally processed</li> <li>Avoid trans fats, hydrogenated oils, and fatty cuts of meat high in saturated fat</li> </ul>"
 	],
-	"You have a gene in CYP1A2 which is linked to slow caffeine metabolism. I recommend keeping your total caffeine intake to less than 200mg per day, which is about one to two cups of coffee per day."
+	"<p>You have a gene in CYP1A2 which is linked to slow caffeine metabolism. I recommend keeping your total caffeine intake to less than 200mg per day, which is about one to two cups of coffee per day.</p>"
 ]
