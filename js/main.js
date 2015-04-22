@@ -1,16 +1,32 @@
-require.config({
-	paths: {
-		jquery: "js/libraries/jquery-1.11.0.min.js",
-		underscore: "js/libraries/underscore-min.js",
-		backbone: "js/libraries/backbone-min.js",
-		localStorage: "js/libraries/backbone.localStorage-min.js",
-		hammer: "js/libraries/hammer.min.js"
-	}
-});
+var AppView = require("ome/app");
 
-require([
-	'app',
-], function(App) {
-	// The "app" dependency is passed in as "App"
-	App.initialize();
+//	Initiation
+$(window).load(function() {
+	// Timer code
+	var refreshTime = 0;
+	var refreshTimer = function() {
+		if(refreshTime > 90) {
+			window.location.replace("/");
+		} else {
+			refreshTime++;
+			setTimeout(function() {refreshTimer();}, 1000);
+		}
+	};
+	
+	$(document).on("touchstart mousedown", function(e) {
+		// Prevent scrolling on any touches to screen
+		$(this).preventScrolling(e);
+		
+		// Reset time
+		refreshTime = 0;
+	});
+	
+	// Fast clicks for touch users
+	FastClick.attach(document.body);
+	
+	// Start timer
+	// refreshTimer();
+			
+	// Start!
+	window.app = new AppView();
 });

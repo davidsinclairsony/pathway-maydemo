@@ -24,23 +24,32 @@
 					margin-top: 40px;
 				}
 				
-				@include keyframes(fadeInAndSlightlyOut) {
-					0% {opacity: 0;}
-					25% {opacity: 1;}
-					75% {opacity: 1;}
-					100% {opacity: .65;}
+				&:nth-child(1) {
+					@include keyframes(custom) {
+						0% {opacity: 0;}
+						33% {opacity: 1;}
+						66% {opacity: 1;}
+						100% {opacity: .65;}
+					}
+					@include animation(custom 1.5s linear .5s 1 normal forwards);
 				}
 				
-				@for $i from 1 to 3 {
-					&:nth-child(#{$i}) {
-						@include animation(fadeInAndSlightlyOut 2s linear #{($i * 1.5) - 1.5}s 1 normal forwards);
+				&:nth-child(2) {
+					@include keyframes(custom) {
+						0% {opacity: 0;}
+						11.1% {opacity: 1;}
+						88.9% {opacity: 1;}
+						100% {opacity: .65;}
 					}
+					@include animation(custom 4.5s linear 1.5s 1 normal forwards);
 				}
 				
-				@for $i from 3 to 5 {
-					&:nth-child(#{$i}) {
-						@include animation(fadeIn .5s linear #{($i * 1.5) - 1.5}s 1 normal forwards);
-					}
+				&:nth-child(3) {
+					@include animation(fadeIn .5s linear 5.5s 1 normal forwards);
+				}
+				
+				&:nth-child(4) {
+					@include animation(fadeIn .5s linear 9s 1 normal forwards);
 				}
 			}
 		}
