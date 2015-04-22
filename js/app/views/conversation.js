@@ -1,4 +1,8 @@
-var ConversationView = Backbone.View.extend({
+var Backbone = require('backbone');
+var $ = require('jquery');
+Backbone.$ = $;
+
+module.exports = Backbone.View.extend({
 	className: "view conversation",
 	initialize: function() {
 		this.render();

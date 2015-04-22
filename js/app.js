@@ -1,6 +1,26 @@
-var AppView = Backbone.View.extend({
+var Backbone = require("backbone");
+var $ = require("jquery");
+Backbone.$ = $;
+var TweenMax = require("./libraries/TweenMax");
+
+waitforimages.min.js
+
+// Collections
+var QuestionsCollection = require("./app/collections/questions");
+var PeopleCollection = require("./app/collections/people");
+
+// Views
+var IntroView = require("./app/views/intro");
+var HelloView = require("./app/views/hello");
+var ConversationView = require("./app/views/conversation");
+
+// Router
+var Router = require("./app/router");
+
+module.exports = Backbone.View.extend({
 	el: "#app",
 	initialize: function() {
+		console.log(2);
 		var self = this;
 		
 		// Start router with predefined routes

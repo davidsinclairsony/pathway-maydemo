@@ -1,4 +1,6 @@
-var Router = Backbone.Router.extend({
+var Backbone = require("backbone");
+
+module.exports = Backbone.Router.extend({
 	routes: {
 		"": "intro",
 		"hello": "hello",

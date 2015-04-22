@@ -1,4 +1,8 @@
-var IntroView = Backbone.View.extend({
+var Backbone = require('backbone');
+var $ = require('jquery');
+Backbone.$ = $;
+
+module.exports = Backbone.View.extend({
 	className: "view intro",
 	initialize: function() {
 		var self = this;

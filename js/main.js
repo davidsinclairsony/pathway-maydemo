@@ -1,36 +1,43 @@
-requirejs.config({
-	"baseUrl": "/",
-	"paths": {
-		// "maps": "https://maps.googleapis.com/maps/api/js?key=AIzaSyCAUtCOOD50R0La_672qtmDS0HPz985yE4",
-		"jquery": "js/libraries/jquery-1.11.0.min",
-		"underscore": "js/libraries/underscore-min",
-		"backbone": "js/libraries/backbone-min",
-		/*"localstorage": "js/libraries/backbone.localStorage-min",
-		"waitForImages": "js/libraries/jquery.waitforimages.min",
-		"hammer": "js/libraries/hammer.min",
-		"hammerJquery": "js/libraries/jquery.hammer",
-		"fastclick": "js/libraries/fastclick",
-		"preventScrolling": "js/libraries/jquery.preventScrolling",
-		"tweenMax": "js/libraries/TweenMax.min",*/
-		
-		"router": "js/router",
-		"models": "js/models",
-		"collections": "js/collections",
-		"intro": "js/views/intro",
-		/*"hello": "js/views/hello",
-		"people": "js/views/conversation/people",
-		"questions": "js/views/conversation/questions",
-		"response": "js/views/conversation/response",
-		"conversation": "js/views/conversation",*/
-		"app": "js/app"
-	},
-	"shim": {
-		"underscore": {
-			"exports": "_"
-		},
-		"backbone": {
-			"deps": ["jquery", "underscore"],
-			"exports": "Backbone"
-		}
+var $ = require("jquery");
+var _ = require("underscore");
+var attachFastClick = require("./libraries/fastclick");
+var AppView = require("./app");
+
+// Mustache style templating
+_.templateSettings = {
+	evaluate: /\{\{#([\s\S]+?)\}\}/g,
+	interpolate: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g,
+	escape: /\{\{\{([\s\S]+?)\}\}\}/g,
+};
+
+// Timer code
+var refreshTime = 0;
+var refreshTimer = function() {
+	if(refreshTime > 90) {
+		window.location.replace("/");
+	} else {
+		refreshTime++;
+		setTimeout(function() {refreshTimer();}, 1000);
 	}
+};
+
+//	Initiation
+$(window).load(function() {
+	$(document).on("touchstart mousedown", function(e) {
+		// Prevent scrolling on any touches to screen
+		// $(this).preventScrolling(e);
+		
+		// Reset time
+		refreshTime = 0;
+	});
+	
+	// Fast clicks for touch users
+	attachFastClick(document.body);
+	
+	// Start timer
+	// refreshTimer();
+			
+	// Start!
+	
+	window.app = new AppView();
 });
