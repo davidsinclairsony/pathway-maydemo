@@ -24,11 +24,11 @@
 		"age": 27,
 		"sex": "Female",
 		"data": {
-			"genetics": false,
+			"genetics": true,
 			"gps": true,
 			"health": true,
-			"fitness": false,
-			"personal": false,
+			"fitness": true,
+			"personal": true,
 			"ehr": false
 		},
 		"goals": "maintaining weight and lowering cholesterol"
