@@ -62,9 +62,10 @@
 }
 
 @mixin flex-direction($a...) {
-	-webkit-justify-content: $a;
-	-ms-flex-pack: $a;
-	justify-content: $a;
+	-ms-flex-direction: $a;
+	-webkit-flex-direction: $a;
+	-moz-flex-direction: $a;
+	flex-direction: $a;
 }
 
 @mixin column-count($a...) {
@@ -134,4 +135,21 @@
 @mixin transform($a...) {
 	-webkit-transform: $a;
 	transform: $a;
+}
+
+@mixin placeholder($a...) {
+	::-webkit-input-placeholder {
+		color: $a;
+	}
+	:-moz-placeholder {
+		color: $a;
+		opacity: 1;
+	}
+	::-moz-placeholder {
+		color: $a;
+		opacity: 1;
+	}
+	:-ms-input-placeholder {
+		color: $a;
+	}
 }

@@ -6,7 +6,7 @@
 			", I would recommend "
 		],
 		"responses": [
-			"a 20 minute jog or swim, or 30 minutes of aerobics, to burn 190 calories. Note, you have a common mutation in your MMP3 gene that is related to greater incidents of achilles tendinopathy, so please take care to stretch your ankle for a minute before your exercise.",
+			"a 20 minute jog or swim, or 30 minutes of aerobics, to burn 190 calories. Note, you have a common mutation in your MMP3 gene that is related to greater incidents of achilles tendinopathy, so please take care to stretch your lower calves for a minute before your exercise.",
 			"taking a walk for 45 - 60 minutes, to burn 180-200 calories. Hunter's Park is 2.3 miles away and features a popular walking path.",
 			"an hour of yoga or bicycle riding to burn 712 calories. You can rent a bicycle from Sherwin Sports downtown, their phone number is 212-805-8145.",
 			"30 - 45 minutes of dancing or playing a vigorous sport such as tennis, to burn 340-370 calories. Note that your genetic variant of the FTO gene should cause you to have a greater benefit from physical activity than others, so take advantage of it!",

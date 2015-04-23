@@ -1,1 +1,29 @@
 OME May demo for a vertically oriented iPad
+
+Commands
+	nmp install
+	npm run watch-js
+	compass watch scss/styles.scss
+
+Required
+	Enable timer
+	Change stock photos
+	Switch ajax url to demo path
+	Fix error message when switching too fast
+	Tweak answer text and include map
+	Exercise response: change “340-370” to be “340 - 370” to have consistent spacing with “I would recommend 30 - 45 minutes”
+	Jennifer’s “What foods should I eat" response: change with your low carb diet” to be “with your balanced diet” (to match the balanced diet restaurant locations from another question). Also add a period after “Leafy greens”.
+	Exercise + restaurant responses: on the iPad you’ve given me, it still shows “stretch your ankle” and still shows restaurant content that wraps to the next line. This is not the latest content (we changed “stretch your ankle” to “stretch your lower calves” and we changed the restaurant lines to no longer wrap.
+	Exercise response: Change the stair climbing response: change to “With your current goals of [goals], I would recommend walking on a stair machine or going for a hike for 30 minutes, which will burn 328 calories. You can use stair climbing equipment at Laurel Heights Gymnasium, located at 3845 Wintergarden Drive.”
+	Stephen’s “What foods should I eat” response: Add a colon after “Include” and after “Limit or avoid”.
+	Ruben’s “What foods should I eat” response: 
+		- Change “show a the best response” to “show the best response”
+		- Change “low carb diet” to “high protein diet” in two places
+	Ruben’s Nearby Restaurant responses: 
+		- change “match your low fat diet” to “match your high protein diet”
+
+Desiderata
+	Query to get people data
+	Cache people data in localstorage
+	Load people pictures before showing
+	Load vendor javascript in bundle
