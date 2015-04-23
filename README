@@ -7,11 +7,10 @@ Commands
 
 Required
 	Enable timer
-	Change stock photos
 	Switch ajax url to demo path
 	Fix error message when switching too fast
-	Tweak answer text and include map
-	Exercise response: Change the stair climbing response: change to “With your current goals of [goals], I would recommend walking on a stair machine or going for a hike for 30 minutes, which will burn 328 calories. You can use stair climbing equipment at Laurel Heights Gymnasium, located at 3845 Wintergarden Drive.”
+	Remove H1 tag on backend
+	Verify italics for certain sources is working
 
 Desiderata
 	Query to get people data

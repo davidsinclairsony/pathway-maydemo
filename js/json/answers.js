@@ -7,11 +7,41 @@
 		],
 		"responses": [
 			"a 20 minute jog or swim, or 30 minutes of aerobics, to burn 190 calories. Note, you have a common mutation in your MMP3 gene that is related to greater incidents of achilles tendinopathy, so please take care to stretch your lower calves for a minute before your exercise.",
-			"taking a walk for 45 - 60 minutes, to burn 180-200 calories. Hunter's Park is 2.3 miles away and features a popular walking path.",
+			"taking a walk for 45 - 60 minutes, to burn 180 - 200 calories. Hunter's Park is 2.3 miles away and features a popular walking path.",
 			"an hour of yoga or bicycle riding to burn 712 calories. You can rent a bicycle from Sherwin Sports downtown, their phone number is 212-805-8145.",
 			"30 - 45 minutes of dancing or playing a vigorous sport such as tennis, to burn 340 - 370 calories. Note that your genetic variant of the FTO gene should cause you to have a greater benefit from physical activity than others, so take advantage of it!",
-			"walking upstairs for 15 minutes, and then walking back down, which will burn 164 calories. You can also use stair climbing equipment at Laurel Heights Gymnasium, located at 3845 Wintergarden Drive.",
+			[
+				"walking on a stair machine or going for a hike for 30 minutes, which will burn 328 calories. You can use stair climbing equipment at ",
+				", located at ",
+				"."
+			],
 			"a nice 1 mile hike, or push-ups and sit-ups for 30 minutes which will burn 180 - 200 calories. A popular place to hike near you is Glendora Trails. For hiking, always bring a partner, make sure to drink plenty of water and don't overexert yourself."
+		],
+		"locations": [
+			{
+				"title": "FITNESSWORKS",
+				"address": "6525 2nd Ave, Detroit, MI 48202",
+				"coordinates": {
+					"lattitude": 42.368008,
+					"longitude": -83.076726
+				}
+			},
+			{
+				"title": "Clarendon Fitness",
+				"address": "2907 Wilson Blvd, Arlington, VA 22201",
+				"coordinates": {
+					"lattitude": 38.888754,
+					"longitude": -77.093639
+				}
+			},
+			{
+				"title": "24 Hour Fitness",
+				"address": "1314 Fulton Ave, Sacramento, CA 95825",
+				"coordinates": {
+					"lattitude": 38.589788,
+					"longitude": -121.399577
+				}
+			}
 		]
 	},
 	[
