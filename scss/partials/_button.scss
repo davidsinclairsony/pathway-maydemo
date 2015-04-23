@@ -13,6 +13,12 @@
 		padding: 5px 15px;
 	}
 	
+	&.small {
+		border-radius: 6px;
+		font: normal normal normal 16px/#{$f-1-l-h} $f-1;
+		padding: 5px 10px;
+	}
+	
 	&.blue {
 		background: $c-1;
 	}
@@ -27,5 +33,11 @@
 	
 	&.red {
 		background: $c-4;
+	}
+	
+	&.white {
+		background: white;
+		color: $c-2;
+		font-weight: 600;
 	}
 }

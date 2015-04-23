@@ -14,7 +14,8 @@
 			"personal": true,
 			"ehr": false
 		},
-		"goals": "losing weight and improving heart health"
+		"goals": "losing weight and improving heart health",
+		"report": "report-1.jpg"
 	},
 	{
 		"id": 2,
@@ -31,7 +32,8 @@
 			"personal": true,
 			"ehr": false
 		},
-		"goals": "maintaining weight and lowering cholesterol"
+		"goals": "maintaining weight and lowering cholesterol",
+		"report": "report-2.jpg"
 	},
 	{
 		"id": 3,
@@ -48,6 +50,7 @@
 			"personal": true,
 			"ehr": true
 		},
-		"goals": "adding muscle and increasing endurance"
+		"goals": "adding muscle and increasing endurance",
+		"report": "report-3.jpg"
 	}
 ]

@@ -25,6 +25,7 @@
 	
 		&.custom {
 			height: 58px;
+			@include placeholder(#3fca46);
 			
 			input {
 				width: 100%;

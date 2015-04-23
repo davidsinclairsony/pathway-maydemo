@@ -16,7 +16,12 @@
 			<li class="spinOut <% if(data.genetics) { %>available<% } %>">
 				<div class="chiclet icon-dna"></div>
 				<span>Genetics</span>
-				<div class="popup">This user has <% if(!data.genetics) { %>not<% } %> uploaded a Genetics report to OME.</div>
+				<div class="popup">
+					This user has <% if(!data.genetics) { %>not<% } %> uploaded a Genetics report to OME.
+					<% if(data.genetics) { %>
+						<button class="button small" data-report="<%= report %>">View Report</button>
+					<% } %>
+				</div>
 			</li>
 			<li class="spinOut <% if(data.gps) { %>available<% } %>">
 				<div class="chiclet icon-direction"></div>

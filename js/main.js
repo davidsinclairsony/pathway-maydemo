@@ -13,6 +13,9 @@ $(window).load(function() {
 		}
 	};
 	
+	// Start timer
+	// refreshTimer();
+	
 	$(document).on("touchstart mousedown", function(e) {
 		// Prevent scrolling on any touches to screen
 		$(this).preventScrolling(e);
@@ -24,9 +27,6 @@ $(window).load(function() {
 	// Fast clicks for touch users
 	FastClick.attach(document.body);
 	
-	// Start timer
-	// refreshTimer();
-			
 	// Start!
 	window.app = new AppView();
 });

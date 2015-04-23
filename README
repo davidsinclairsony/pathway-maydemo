@@ -1,1 +1,19 @@
 OME May demo for a vertically oriented iPad
+
+Commands
+	nmp install
+	npm run watch-js
+	compass watch scss/styles.scss
+
+Required
+	Enable timer
+	Switch ajax url to demo path
+	Fix error message when switching too fast
+	Remove H1 tag on backend
+	Verify italics for certain sources is working
+
+Desiderata
+	Query to get people data
+	Cache people data in localstorage
+	Load people pictures before showing
+	Load vendor javascript in bundle
