@@ -49,6 +49,12 @@
 	align-items: $a;
 }
 
+@mixin align-self($a...) {
+	-webkit-align-self: $a;
+	-ms-flex-self: $a;
+	align-self: $a;
+}
+
 @mixin align-content($a...) {
 	-webkit-align-content: $a;
 	-ms-flex-content: $a;

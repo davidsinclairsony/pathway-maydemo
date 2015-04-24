@@ -19,7 +19,7 @@ module.exports = Backbone.View.extend({
 		return this;
 	},
 	events: {
-		"click footer div": "markRated"
+		"click footer div:nth-last-child(-n + 2)": "markRated"
 	},
 	markRated: function(e) {
 		$(e.currentTarget).parent().find("div").removeClass("clicked");
