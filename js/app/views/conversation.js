@@ -1,6 +1,6 @@
-var PeopleView = require("ome/app/views/conversation/people");
-var QuestionsView = require("ome/app/views/conversation/questions");
-var ResponseView = require("ome/app/views/conversation/response");
+var PeopleView = require("./conversation/people");
+var QuestionsView = require("./conversation/questions");
+var ResponseView = require("./conversation/response");
 
 module.exports = Backbone.View.extend({
 	className: "view conversation",
@@ -29,7 +29,7 @@ module.exports = Backbone.View.extend({
 	events: {
 		"click .ask": "askAnotherQuestion",
 		"click .how, footer .close": "howToggler",
-		"requestToRevealSelectedQuestion": "askAnotherQuestion",
+		"revealAllQuestions": "askAnotherQuestion",
 		"hidAllExceptSelectedQuestion": "prepareForResponse",
 		"revealedAllQuestions": "hideResponse",
 		"dataSourced": "getAndShowResponse",
@@ -79,6 +79,14 @@ module.exports = Backbone.View.extend({
 	getAndShowResponse: function() {
 		// Clear previous listens
 		this.stopListening(this.responseView, "answerReady");
+		
+		// Clear old timeouts and requests
+		if(this.responseView.jqxhr) {
+			this.responseView.jqxhr.abort();
+		}
+		if(this.responseView.timeout) {
+			clearTimeout(this.responseView.timeout);
+		}
 		
 		// Listen for when the answer is ready to display
 		this.listenToOnce(this.responseView, "answerReady", function() {

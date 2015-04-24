@@ -1,10 +1,11 @@
 {
 	"devDependencies": {
 		"browserify": "latest",
-		"watchify": "latest"
+		"watchify": "latest",
+		"strictify": "latest"
 	},
 	"scripts": {
-		"build-js": "browserify js/main.js > js/bundle.js -d",
-		"watch-js": "watchify js/main.js -o js/bundle.js -dv"
+		"build-js": "browserify js/main.js > js/bundle.js -d -t strictify",
+		"watch-js": "watchify js/main.js -o js/bundle.js -dv -t strictify"
 	}
 }

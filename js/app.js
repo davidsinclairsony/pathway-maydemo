@@ -1,7 +1,7 @@
-var IntroView = require("ome/app/views/intro");
-var HelloView = require("ome/app/views/hello");
-var ConversationView = require("ome/app/views/conversation");
-var Router = require("ome/app/router");
+var IntroView = require("./app/views/intro");
+var HelloView = require("./app/views/hello");
+var ConversationView = require("./app/views/conversation");
+var Router = require("./app/router");
 
 module.exports = Backbone.View.extend({
 	el: "#app",
