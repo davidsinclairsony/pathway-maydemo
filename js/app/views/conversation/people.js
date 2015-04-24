@@ -1,5 +1,5 @@
-var PeopleCollection = require("ome/app/collections/people");
-var PersonView = require("ome/app/views/conversation/people/person");
+var PeopleCollection = require("../../collections/people");
+var PersonView = require("./people/person");
 
 module.exports = Backbone.View.extend({
 	className: "people",

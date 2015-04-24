@@ -28,13 +28,11 @@ module.exports = Backbone.View.extend({
 		// Create modal if needed, otherwise remove
 		if(!$modal.length) {
 			this.$el.append(this.modalTemplate(this.model.toJSON()));
-			$modal = this.$el.find(".modal");
-			$modalInner = $modal.find("> div");
-			$modalInner.css("visibility", "hidden");
+			$modal = this.$(".modal");
 			
-			$modalInner.waitForImages(function() {
+			$modal.waitForImages(function() {
 				$modal.removeClass("spinner").addClass("spinOut");
-				TweenMax.fromTo($modalInner, .5,
+				TweenMax.fromTo($modal.find("> div"), .5,
 					{opacity: 0, visibility: "visible"},
 					{opacity: 1, onComplete: function() {
 						$modal.removeClass("spinOut");

@@ -1,6 +1,6 @@
 module.exports = Backbone.View.extend({
-	url: "http://" + window.location.host + "/ask",
-	//url: "http://atldev.pathway.com:3000/ask",
+	//url: "http://" + window.location.host + "/ask",
+	url: "http://atldev.pathway.com:3000/ask",
 	//url: "http://ome-demo.pathway.com:8080/ask",
 	className: "response",
 	initialize: function() {
@@ -47,7 +47,7 @@ module.exports = Backbone.View.extend({
 		});
 		
 		// Fade in response
-		TweenMax.fromTo(self.$el, .5, {opacity: 0}, {opacity: 1});
+		TweenMax.fromTo(self.$el, .5, {opacity: 0}, {opacity: 1, overwrite: "all"});
 	},
 	get: function(person, question) {
 		var self = this;
@@ -60,15 +60,7 @@ module.exports = Backbone.View.extend({
 		
 		var numberWithCommas = function(x) {
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-		}
-		
-		// Clear old timeouts and requests
-		if(self.jqxhr) {
-			self.jqxhr.abort();
-		}
-		if(self.timeout) {
-			clearTimeout(self.timeout);
-		}
+		};
 		
 		// Check if stored response
 		if(self.answer.questionID < 4) {
@@ -87,16 +79,17 @@ module.exports = Backbone.View.extend({
 						url: self.url,
 						data: requestData,
 						dataType: "jsonp",
-						timeout: 15000
+						timeout: 3000
 					}).always(function(data, status, jqxhr) {
 						if(status == "success" && data.fitness.code === 0) {
 							var randomNumber = Math.floor(Math.random() * 6);
+							var randomResponse;
 							
 							// Generate random response
 							if(randomNumber != 4) {
-								var randomResponse = self.answers[0].responses[randomNumber]
+								randomResponse = self.answers[0].responses[randomNumber];
 							} else {
-								var randomResponse =
+								randomResponse =
 									self.answers[0].responses[randomNumber][0] +
 									self.answers[0].locations[self.answer.personID - 1].title +
 									self.answers[0].responses[randomNumber][1] +
@@ -224,7 +217,7 @@ module.exports = Backbone.View.extend({
 				var infowindow = new google.maps.InfoWindow();  
 				
 				// Add markers
-				for (i = 0; i < self.answer.locations.length; i++) {
+				for (var i = 0; i < self.answer.locations.length; i++) {
 					// Format title
 					var content = "";
 					

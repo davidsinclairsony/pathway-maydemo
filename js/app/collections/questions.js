@@ -1,4 +1,4 @@
-var QuestionModel = require("ome/app/models/question");
+var QuestionModel = require("../models/question");
 
 module.exports = Backbone.Collection.extend({
 	model: QuestionModel

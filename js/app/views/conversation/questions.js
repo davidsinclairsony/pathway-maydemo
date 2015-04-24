@@ -1,7 +1,7 @@
-var QuestionModel = require("ome/app/models/question");
-var QuestionsCollection = require("ome/app/collections/questions");
-var QuestionView = require("ome/app/views/conversation/questions/question");
-var CustomQuestionView = require("ome/app/views/conversation/questions/customQuestion");
+var QuestionModel = require("../../models/question");
+var QuestionsCollection = require("../../collections/questions");
+var QuestionView = require("./questions/question");
+var CustomQuestionView = require("./questions/customQuestion");
 
 module.exports = Backbone.View.extend({
 	className: "questions",
@@ -52,7 +52,7 @@ module.exports = Backbone.View.extend({
 			this.selectedQuestion = objects.selectedQuestion;
 			this.hideAllExceptSelectedQuestion();
 		} else {
-			this.$el.trigger("requestToRevealSelectedQuestion");
+			this.$el.trigger("revealAllQuestions");
 		}
 	},
 	hideAllExceptSelectedQuestion: function() {

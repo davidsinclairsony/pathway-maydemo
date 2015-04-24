@@ -1,27 +1,29 @@
-var AppView = require("ome/app");
+var AppView = require("./app");
 
 //	Initiation
 $(window).load(function() {
 	// Timer code
-	var refreshTime = 0;
-	var refreshTimer = function() {
-		if(refreshTime > 90) {
-			window.location.replace("/");
+	var resetTimer = function(t) {
+		if(t === 0) {
+			clearTimeout(timer);
+		}
+		if(t > 90) {
+			// window.location.replace("/");
 		} else {
-			refreshTime++;
-			setTimeout(function() {refreshTimer();}, 1000);
+			t++;
+			timer = setTimeout(function() {resetTimer(t);}, 1000);
 		}
 	};
 	
 	// Start timer
-	// refreshTimer();
+	var timer = setTimeout(function() {resetTimer(0);}, 1000);
 	
 	$(document).on("touchstart mousedown", function(e) {
 		// Prevent scrolling on any touches to screen
 		$(this).preventScrolling(e);
 		
-		// Reset time
-		refreshTime = 0;
+		// Reset timer
+		resetTimer(0);
 	});
 	
 	// Fast clicks for touch users

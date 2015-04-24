@@ -8,9 +8,8 @@ Commands
 Required
 	Enable timer
 	Switch ajax url to demo path
-	Fix error message when switching too fast
-	Remove H1 tag on backend
 	Verify italics for certain sources is working
+	If no fitness, add random numbers
 
 Desiderata
 	Query to get people data
