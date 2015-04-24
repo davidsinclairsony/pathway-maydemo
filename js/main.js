@@ -8,7 +8,7 @@ $(window).load(function() {
 			clearTimeout(timer);
 		}
 		if(t > 90) {
-			window.location.replace("/");
+			//window.location.replace("/");
 		} else {
 			t++;
 			timer = setTimeout(function() {resetTimer(t);}, 1000);
