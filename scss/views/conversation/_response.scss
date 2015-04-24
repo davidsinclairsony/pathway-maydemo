@@ -159,4 +159,43 @@
 			}
 		}
 	}
+	
+	&.has-genes {
+		main {
+			width: 79%;
+		}
+		
+		.genes {
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 21%;
+			padding: 15px 20px;
+			
+			height: 89%;
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+			background: rgba(0, 0, 0, .3);
+			
+			h2 {
+				font: normal normal bold 14px/#{$f-1-l-h} $f-1;
+				margin-bottom: 5px;
+			}
+			
+			ul {
+				list-style: none;
+				
+				li {
+					font: normal normal 300 14px/#{$f-1-l-h} $f-1;
+				}
+			}
+		}
+	}
+	
+	&.has-genes.map {
+		.container {
+			width: 79%;
+			padding: 18px 0;
+		}
+	}
 }
