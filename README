@@ -2,8 +2,8 @@ OME May demo for a vertically oriented iPad
 
 Commands
 	npm install
-	npm run watch-js
-	compass watch scss/styles.scss
+	npm run watch
+	npm run build
 
 Required
 	Enable timer

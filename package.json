@@ -10,9 +10,9 @@
 	"scripts": {
 		"watch:scripts": "watchify scripts/main.js -o scripts/bundle.js -dv -t strictify",
 		"watch:styles": "compass watch styles/styles.scss",
-		"watch": "npm run watch:scripts && npm run watch:styles",
+		"watch": "parallelshell 'npm run watch:scripts' 'npm run watch:styles'",
 		"build:bundle": "browserify scripts/main.js > scripts/bundle.js -d -t strictify",
-		"build:min": "uglifyjs scripts/bundle.js -c -o scripts/bundle.min.js",
+		"build:min": "uglifyjs scripts/bundle.js -c -o scripts/bundle.js",
 		"build:scripts": "npm run build:bundle && npm run build:min",
 		"build:styles": "compass compile styles/styles.scss",
 		"build": "npm run build:scripts && npm run build:styles"
