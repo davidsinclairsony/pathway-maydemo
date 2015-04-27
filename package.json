@@ -1,11 +1,20 @@
 {
+	"private": true,
 	"devDependencies": {
 		"browserify": "latest",
 		"watchify": "latest",
-		"strictify": "latest"
+		"strictify": "latest",
+		"uglify-js": "latest",
+		"parallelshell": "latest"
 	},
 	"scripts": {
-		"build-js": "browserify js/main.js > js/bundle.js -d -t strictify",
-		"watch-js": "watchify js/main.js -o js/bundle.js -dv -t strictify"
+		"watch:scripts": "watchify scripts/main.js -o scripts/bundle.js -dv -t strictify",
+		"watch:styles": "compass watch styles/styles.scss",
+		"watch": "npm run watch:scripts && npm run watch:styles",
+		"build:bundle": "browserify scripts/main.js > scripts/bundle.js -d -t strictify",
+		"build:min": "uglifyjs scripts/bundle.js -c -o scripts/bundle.min.js",
+		"build:scripts": "npm run build:bundle && npm run build:min",
+		"build:styles": "compass compile styles/styles.scss",
+		"build": "npm run build:scripts && npm run build:styles"
 	}
 }

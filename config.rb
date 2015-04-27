@@ -1,8 +1,6 @@
 http_path = "/"
-css_dir = "css"
-sass_dir = "scss"
-images_dir = "images"
-javascripts_dir = "js"
+css_dir = "styles"
+sass_dir = "styles"
 environment = :production
 relative_assets = true
 output_style = :compressed

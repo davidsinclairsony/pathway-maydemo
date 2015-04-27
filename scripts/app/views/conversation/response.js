@@ -1,3 +1,5 @@
+/*jshint -W083, -W008 */
+
 var config = require("../../../config");
 
 module.exports = Backbone.View.extend({
@@ -6,8 +8,8 @@ module.exports = Backbone.View.extend({
 		var self = this;
 		
 		// Load data and start
-		var a1 = $.getJSON("/js/json/genes.js");
-		var a2 = $.getJSON("/js/json/answers.js");
+		var a1 = $.getJSON("/scripts/json/genes.js");
+		var a2 = $.getJSON("/scripts/json/answers.js");
 		var a3 = $.get("/templates/conversation/response/genes.html");
 		
 		$.when(a1, a2, a3).done(function(r1, r2, r3) {
@@ -206,7 +208,7 @@ module.exports = Backbone.View.extend({
 			self.$el.addClass("has-map");
 			self.$el.append("<div class='container'><div id='map'></div></div>");
 			
-			$.getJSON("/js/json/map.js", function(styles) {
+			$.getJSON("/scripts/json/map.js", function(styles) {
 				var styledMap = new google.maps.StyledMapType(
 					styles,
 					{name: "Styled"}

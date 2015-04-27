@@ -8,7 +8,7 @@ module.exports = Backbone.View.extend({
 	initialize: function() {
 		var self = this;
 		
-		$.getJSON("/js/json/people.js", function(data) {
+		$.getJSON("/scripts/json/people.js", function(data) {
 			self.peopleCollection = new PeopleCollection(data);
 			self.views = [];
 			
@@ -48,7 +48,7 @@ module.exports = Backbone.View.extend({
 		
 		// Get location in views of selected person
 		var indexOfSelectedPerson = this.views.indexOf(this.selectedPerson);
-		var i, modelIndex, model, view;
+		var modelIndex, model, view;
 		
 		// Generate and add views before the selected person
 		while(indexOfSelectedPerson < 2) {

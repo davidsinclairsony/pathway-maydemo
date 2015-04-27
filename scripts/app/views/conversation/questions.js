@@ -9,7 +9,7 @@ module.exports = Backbone.View.extend({
 	initialize: function() {
 		var self = this;
 		
-		$.getJSON("/js/json/questions.js", function(data) {
+		$.getJSON("/scripts/json/questions.js", function(data) {
 			self.questionsCollection = new QuestionsCollection(data);
 			self.views = [];
 
