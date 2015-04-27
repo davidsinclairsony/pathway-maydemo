@@ -1,16 +1,5 @@
 #app > .view.conversation {
 	@include linear-gradient(to bottom, #12204f 0%, #052a38 37%, #131933 100%);
-	/*background: black;
-	&:before{
-		@include linear-gradient(to bottom, #22294c 0%,#052e3a 49%,#150b3a 100%);
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		content: "";
-		opacity: 1;
-	}*/
 	
 	@import "conversation/header";
 	@import "conversation/people";

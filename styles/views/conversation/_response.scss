@@ -4,8 +4,8 @@
 	margin-left: -300px;
 	width: 600px;
 	overflow: hidden;
-	background: #526571; // rgba(255, 255, 255, .3);
-	padding: 15px 20px 75px 20px;
+	background: #526571;
+	padding: 15px 0 58px 0;
 	border-radius: 8px;
 	color: white;
 	font: normal normal 300 20px/#{$f-1-l-h} $f-1;
@@ -41,7 +41,7 @@
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
 		height: 100%;
-		padding: 0 0 40px 0;
+		padding: 0 20px 60px 20px;
 		position: relative;
 		
 		> * {
@@ -67,23 +67,18 @@
 		}
 	}
 	
-	.overlay {
-		height: 100%;
+	> .overlay {
+		pointer-events: none;
+		bottom: 58px;
+		left: 0;
+		height: 60px;
 		width: 100%;
 		position: absolute;
-		top: 0;
-		left: 0;
-		pointer-events: none;
-		
-		&:after {
-			content: "";
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: inherit;
-			height: 105px;
-			@include linear-gradient(to top, rgba(82, 101, 113, 1) 60%, rgba(82, 101, 113, 0) 100%);
-		}
+		@include linear-gradient(
+			to top,#526571 0%,
+			rgba(82, 101, 113, .9) 33%,
+			rgba(82,101,113,0) 100%
+		);
 	}
 	
 	footer {
@@ -157,15 +152,11 @@
 		}
 	}
 	
-	&.map {
-		padding-bottom: 287px;
+	&.has-map {
+		padding-bottom: 290px;
 		
-		.overlay {
-			&:after {
-				bottom: 287px;
-				height: 45px;
-				@include linear-gradient(to top, rgba(82, 101, 113, 1) 50%, rgba(82, 101, 113, 0) 100%);
-			}
+		> .overlay {
+			bottom: 290px;
 		}
 		
 		.container {
@@ -173,7 +164,7 @@
 			bottom: 58px;
 			left: 0;
 			width: 100%;
-			height: 234px;
+			height: 232px;
 			padding: 0;
 			
 			#map {
@@ -195,6 +186,86 @@
 					}
 				}
 			}
+		}
+	}
+	
+	&.has-genes {
+		width: 475px;
+		overflow: inherit;
+		
+		&:before {
+			background: #526571;
+			border-radius: 8px;
+		}
+		
+		> .overlay {
+			border-radius: 0 0 8px 8px;
+			overflow: hidden;
+		}
+		
+		footer {
+			border-radius: 0 0 8px 8px;
+			overflow: hidden;
+		}
+		
+		.genes {
+			position: absolute;
+			top: 0;
+			right: -125px;
+			width: 115px;
+			padding: 10px 15px;
+			border-radius: 8px;
+			overflow: hidden;
+			height: 100%;
+			background: #526571;
+			
+			* {
+				font: normal normal 300 13px/#{$f-1-l-h} $f-1;
+			}
+			
+			h2 {
+				font-weight: bold;
+				margin-bottom: 5px;
+				
+				span {
+					color: $c-5;
+					font-weight: bold;
+				}
+			}
+			
+			ul {
+				list-style: none;
+				overflow: auto;
+				-webkit-overflow-scrolling: touch;
+				max-height: 90%;
+				padding-bottom: 35px;
+				
+				li {
+					font: normal normal 300 14px/#{$f-1-l-h} $f-1;
+				}
+			}
+			
+			.overlay {
+				width: 100%;
+				pointer-events: none;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				height: 35px;
+				@include linear-gradient(to top, rgba(82, 101, 113, 1) 40%, rgba(82, 101, 113, 0) 100%);
+			}
+		}
+	}
+	
+	&.has-genes.has-map {
+		padding-bottom: 258px;
+		
+		.container {
+			height: 200px;
+		}
+		
+		> .overlay {
+			bottom: 258px;
 		}
 	}
 }
