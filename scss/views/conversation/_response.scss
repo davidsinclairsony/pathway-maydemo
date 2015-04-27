@@ -4,7 +4,7 @@
 	margin-left: -300px;
 	width: 600px;
 	overflow: hidden;
-	background: #526571; // rgba(255, 255, 255, .3);
+	background: #526571;
 	padding: 15px 20px 75px 20px;
 	border-radius: 8px;
 	color: white;
@@ -198,20 +198,46 @@
 		}
 	}
 	
-	&.has-genes {
+	&.showing-genes {
+		width: 475px;
+		overflow: inherit;
 		
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #526571;
+			border-radius: 8px;
+		}
+		
+		.overlay {
+			border-radius: 0 0 8px 8px;
+			overflow: hidden;
+		}
+		
+		main {
+			
+		}
+		
+		footer {
+			border-radius: 0 0 8px 8px;
+			overflow: hidden;
+		}
 		
 		.genes {
 			position: absolute;
 			top: 0;
-			right: 0;
-			width: 21%;
-			padding: 15px 20px;
-			
-			height: 89%;
+			right: -125px;
+			width: 115px;
+			padding: 10px 15px;
+			border-radius: 8px;
+			height: 100%;
 			overflow: auto;
 			-webkit-overflow-scrolling: touch;
-			background: rgba(0, 0, 0, .3);
+			background: #526571;
 			
 			h2 {
 				font: normal normal bold 14px/#{$f-1-l-h} $f-1;
@@ -228,7 +254,7 @@
 		}
 	}
 	
-	&.has-genes.map {
+	&.showing-genes.map {
 		
 	}
 }

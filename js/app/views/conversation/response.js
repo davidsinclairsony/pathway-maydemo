@@ -2,7 +2,7 @@ module.exports = Backbone.View.extend({
 	//url: "http://" + window.location.host + "/ask",
 	url: "http://atldev.pathway.com:3000/ask",
 	//url: "http://ome-demo.pathway.com:8080/ask",
-	className: "response show-genes",
+	className: "response",
 	initialize: function() {
 		var self = this;
 		
@@ -174,6 +174,16 @@ module.exports = Backbone.View.extend({
 	},
 	show: function() {
 		var self = this;
+		
+		self.$el.addClass("showing-genes");
+		$.get("/templates/conversation/response/genes.html", function(data) {
+			self.$el.append(data);
+		});
+		
+		
+		
+		
+		
 
 		// Gracefully hide spinner
 		self.$el.removeClass("spinner").addClass("spinOut");
