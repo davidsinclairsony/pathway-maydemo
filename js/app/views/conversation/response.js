@@ -4,9 +4,16 @@ module.exports = Backbone.View.extend({
 	className: "response",
 	initialize: function() {
 		var self = this;
-		// Get stored responses and setup
-		$.getJSON("/js/json/answers.js", function(data) {
-			self.answers = data;
+		
+		// Load data and start
+		var a1 = $.getJSON("/js/json/genes.js");
+		var a2 = $.getJSON("/js/json/answers.js");
+		var a3 = $.get("/templates/conversation/response/genes.html");
+		
+		$.when(a1, a2, a3).done(function(r1, r2, r3) {
+			self.genes = r1[0];
+			self.answers = r2[0];
+			self.genesTemplate = _.template(r3[0]);
 			self.render();
 			self.setToLoading();
 		});
@@ -28,7 +35,8 @@ module.exports = Backbone.View.extend({
 			.empty()
 			.addClass("spinner")
 			.removeClass("spinOut")
-			.removeClass("map")
+			.removeClass("has-map")
+			.removeClass("has-genes")
 		;
 	},
 	prepare: function(answer) {
@@ -60,7 +68,12 @@ module.exports = Backbone.View.extend({
 			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		};
 		
-		// Check if stored response
+		// Gene list
+		if([1, 2, 3].indexOf(self.answer.questionID) > -1) {
+			self.answer.genes = self.genesTemplate(self.genes[question.model.get("genes")]);
+		}
+		
+		// Get answer and map, depending on stored response
 		if(self.answer.questionID < 4) {
 			var html = "";
 			
@@ -172,7 +185,7 @@ module.exports = Backbone.View.extend({
 	},
 	show: function() {
 		var self = this;
-
+		
 		// Gracefully hide spinner
 		self.$el.removeClass("spinner").addClass("spinOut");
 		
@@ -182,9 +195,15 @@ module.exports = Backbone.View.extend({
 			self.$el.append("<main><p>Sorry, please try again later.</p></main>");
 		}
 		
+		// Show genes if so
+		if(self.answer.genes) {
+			self.$el.addClass("has-genes");
+			self.$el.append(self.answer.genes);
+		}
+		
 		// Show map if locations are available
 		if(self.answer.locations) {
-			self.$el.addClass("map");
+			self.$el.addClass("has-map");
 			self.$el.append("<div class='container'><div id='map'></div></div>");
 			
 			$.getJSON("/js/json/map.js", function(styles) {
