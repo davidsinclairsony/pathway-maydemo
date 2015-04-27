@@ -1,4 +1,5 @@
 var AppView = require("./app");
+var config = require("./config");
 
 //	Initiation
 $(window).load(function() {
@@ -8,7 +9,7 @@ $(window).load(function() {
 			clearTimeout(timer);
 		}
 		if(t > 90) {
-			//window.location.replace("/");
+			window.location.replace("/");
 		} else {
 			t++;
 			timer = setTimeout(function() {resetTimer(t);}, 1000);
@@ -16,7 +17,9 @@ $(window).load(function() {
 	};
 	
 	// Start timer
-	var timer = setTimeout(function() {resetTimer(0);}, 1000);
+	if(config.timer) {
+		var timer = setTimeout(function() {resetTimer(0);}, 1000);
+	}
 	
 	$(document).on("touchstart mousedown", function(e) {
 		// Prevent scrolling on any touches to screen
