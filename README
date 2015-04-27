@@ -8,7 +8,6 @@ Commands
 Required
 	Enable timer
 	Switch ajax url to demo path
-	Verify italics for certain sources is working
 	If no fitness, show last known number or 0
 
 Desiderata
