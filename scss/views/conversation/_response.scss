@@ -198,6 +198,7 @@
 		}
 	}
 	
+<<<<<<< HEAD
 	&.showing-genes {
 		width: 475px;
 		overflow: inherit;
@@ -225,11 +226,17 @@
 		footer {
 			border-radius: 0 0 8px 8px;
 			overflow: hidden;
+=======
+	&.has-genes {
+		main {
+			width: 79%;
+>>>>>>> d0f3d57427378b47e8e74986b549b098e4f3411e
 		}
 		
 		.genes {
 			position: absolute;
 			top: 0;
+<<<<<<< HEAD
 			right: -125px;
 			width: 115px;
 			padding: 10px 15px;
@@ -238,6 +245,16 @@
 			overflow: auto;
 			-webkit-overflow-scrolling: touch;
 			background: #526571;
+=======
+			right: 0;
+			width: 21%;
+			padding: 15px 20px;
+			
+			height: 89%;
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+			background: rgba(0, 0, 0, .3);
+>>>>>>> d0f3d57427378b47e8e74986b549b098e4f3411e
 			
 			h2 {
 				font: normal normal bold 14px/#{$f-1-l-h} $f-1;
@@ -254,7 +271,15 @@
 		}
 	}
 	
+<<<<<<< HEAD
 	&.showing-genes.map {
 		
+=======
+	&.has-genes.map {
+		.container {
+			width: 79%;
+			padding: 18px 0;
+		}
+>>>>>>> d0f3d57427378b47e8e74986b549b098e4f3411e
 	}
 }
