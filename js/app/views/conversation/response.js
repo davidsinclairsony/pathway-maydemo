@@ -1,11 +1,9 @@
+var config = require("../../../config");
+
 module.exports = Backbone.View.extend({
-	url: "http://" + window.location.host + "/ask",
-	//url: "http://atldev.pathway.com:3000/ask",
-	//url: "http://ome-demo.pathway.com:8080/ask",
 	className: "response",
 	initialize: function() {
 		var self = this;
-		
 		// Get stored responses and setup
 		$.getJSON("/js/json/answers.js", function(data) {
 			self.answers = data;
@@ -76,7 +74,7 @@ module.exports = Backbone.View.extend({
 					
 					// Get the answer
 					self.jqxhr = $.ajax({
-						url: self.url,
+						url: config.url,
 						data: requestData,
 						dataType: "jsonp",
 						timeout: 3000
@@ -153,7 +151,7 @@ module.exports = Backbone.View.extend({
 			
 			// Get the answer
 			self.jqxhr = $.ajax({
-				url: self.url,
+				url: config.url,
 				data: requestData,
 				dataType: "jsonp",
 				timeout: 15000
