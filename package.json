@@ -5,7 +5,8 @@
 		"watchify": "latest",
 		"strictify": "latest",
 		"uglify-js": "latest",
-		"parallelshell": "latest"
+		"parallelshell": "latest",
+		"node-sass": "latest"
 	},
 	"scripts": {
 		"watch:scripts": "watchify scripts/main.js -o scripts/bundle.js -dv -t strictify",
@@ -14,7 +15,7 @@
 		"build:bundle": "browserify scripts/main.js > scripts/bundle.js -d -t strictify",
 		"build:min": "uglifyjs scripts/bundle.js -c -o scripts/bundle.js",
 		"build:scripts": "npm run build:bundle && npm run build:min",
-		"build:styles": "compass compile styles/styles.scss",
+		"build:styles": "node-sass --stdout --output-style compressed styles/styles.scss > styles/styles.css 2>&1",
 		"build": "npm run build:scripts && npm run build:styles"
 	}
 }
